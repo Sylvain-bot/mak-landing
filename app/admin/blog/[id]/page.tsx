@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { BlockEditor, parseHtmlToBlocks, parseTxtToBlocks } from "@/components/admin/BlockEditor";
+import { BlockEditor, parseHtmlToBlocks, parseTxt } from "@/components/admin/BlockEditor";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 import { Save, ArrowLeft, RefreshCw, FileText } from "lucide-react";
 import Link from "next/link";
@@ -74,22 +74,25 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = (e.target?.result as string) ?? "";
-      const parsed = parseTxtToBlocks(text);
+      const { blocks: parsed, meta } = parseTxt(text);
       const html = blocksToHtml(parsed);
+
+      // Fallback: extract from body if not in metadata
       const firstTitle = parsed.find((b) => b.type === "h2");
       const firstParagraph = parsed.find((b) => b.type === "paragraph");
-      const titre = firstTitle?.content ?? "";
-      const extrait = firstParagraph?.content.slice(0, 200) ?? "";
+      const titre = meta.titre || firstTitle?.content || "";
+      const extrait = meta.extrait || firstParagraph?.content.slice(0, 200) || "";
 
       setBlocks(parsed);
       setArticle((prev) => ({
         ...prev,
         corps: html,
         titre: titre || prev.titre,
-        slug: titre ? slugify(titre) : prev.slug,
+        slug: meta.slug || (titre ? slugify(titre) : prev.slug),
         extrait: extrait || prev.extrait,
-        meta_titre: titre || prev.meta_titre,
-        meta_description: extrait ? extrait.slice(0, 160) : prev.meta_description,
+        categorie: meta.categorie || prev.categorie,
+        meta_titre: meta.meta_titre || titre || prev.meta_titre,
+        meta_description: (meta.meta_description || extrait).slice(0, 160) || prev.meta_description,
       }));
     };
     reader.readAsText(file, "utf-8");

@@ -34,9 +34,50 @@ export function htmlToBlocks(html: string): Block[] {
   return blocks.length ? blocks : [{ id: uid(), type: "paragraph", content: "" }];
 }
 
-// Parse a .txt file with # / ## / plain text conventions → blocks
+export type TxtMeta = {
+  titre?: string;
+  slug?: string;
+  extrait?: string;
+  categorie?: string;
+  meta_titre?: string;
+  meta_description?: string;
+};
+
+// Parse a .txt file → blocks + metadata
+// Metadata lines at the top: TITRE: ... / SLUG: ... / EXTRAIT: ... etc.
+// Body lines: # Titre section / ## Sous-titre / plain text paragraph
 export function parseTxtToBlocks(text: string): Block[] {
+  return parseTxt(text).blocks;
+}
+
+export function parseTxt(text: string): { blocks: Block[]; meta: TxtMeta } {
   const lines = text.split(/\r?\n/);
+  const meta: TxtMeta = {};
+  const META_KEYS = ["TITRE", "SLUG", "EXTRAIT", "CATEGORIE", "META_TITRE", "META_DESCRIPTION"];
+  let bodyStart = 0;
+
+  // Read metadata lines at the top (KEY: value)
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    const colonIdx = line.indexOf(":");
+    if (colonIdx === -1) { bodyStart = i; break; }
+    const key = line.slice(0, colonIdx).trim().toUpperCase().replace(/ /g, "_");
+    const value = line.slice(colonIdx + 1).trim();
+    if (META_KEYS.includes(key)) {
+      if (key === "TITRE") meta.titre = value;
+      else if (key === "SLUG") meta.slug = value;
+      else if (key === "EXTRAIT") meta.extrait = value;
+      else if (key === "CATEGORIE") meta.categorie = value;
+      else if (key === "META_TITRE") meta.meta_titre = value;
+      else if (key === "META_DESCRIPTION") meta.meta_description = value;
+      bodyStart = i + 1;
+    } else {
+      bodyStart = i;
+      break;
+    }
+  }
+
+  // Parse body into blocks
   const blocks: Block[] = [];
   let paragraphBuffer: string[] = [];
 
@@ -46,8 +87,8 @@ export function parseTxtToBlocks(text: string): Block[] {
     paragraphBuffer = [];
   }
 
-  for (const raw of lines) {
-    const line = raw.trim();
+  for (let i = bodyStart; i < lines.length; i++) {
+    const line = lines[i].trim();
     if (line.startsWith("## ")) {
       flushParagraph();
       blocks.push({ id: uid(), type: "h3", content: line.slice(3).trim() });
@@ -62,7 +103,10 @@ export function parseTxtToBlocks(text: string): Block[] {
   }
   flushParagraph();
 
-  return blocks.length ? blocks : [{ id: uid(), type: "paragraph", content: "" }];
+  return {
+    blocks: blocks.length ? blocks : [{ id: uid(), type: "paragraph", content: "" }],
+    meta,
+  };
 }
 
 // Convert blocks → HTML string
