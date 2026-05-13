@@ -117,8 +117,7 @@ export default async function ArticlePage({ params }: Props) {
 
             {article.corps && (
               <div
-                className="prose prose-slate max-w-none"
-                style={{ color: "#334155" }}
+                className="article-body"
                 dangerouslySetInnerHTML={{ __html: article.corps }}
               />
             )}

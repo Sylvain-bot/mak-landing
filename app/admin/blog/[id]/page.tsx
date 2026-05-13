@@ -2,12 +2,14 @@
 
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
-import { TiptapEditor } from "@/components/admin/TiptapEditor";
+import { BlockEditor, parseHtmlToBlocks } from "@/components/admin/BlockEditor";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 import { Save, ArrowLeft, RefreshCw } from "lucide-react";
 import Link from "next/link";
 
 const CATEGORIES = ["IA clinique", "Bibliographie", "Bilans", "Pratique libérale"];
+
+type Block = { id: string; type: "h2" | "h3" | "paragraph" | "image"; content: string };
 
 type Article = {
   id?: string;
@@ -34,11 +36,16 @@ function slugify(str: string) {
     .replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
 }
 
+function stripHtml(html: string) {
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export default function ArticleEditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const isNew = id === "new";
   const router = useRouter();
   const [article, setArticle] = useState<Article>(empty);
+  const [blocks, setBlocks] = useState<Block[]>([{ id: "1", type: "paragraph", content: "" }]);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -46,31 +53,29 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
     if (isNew) return;
     fetch(`/api/admin/articles/${id}`)
       .then((r) => r.json())
-      .then((data) => setArticle({ ...empty, ...data }));
+      .then((data) => {
+        setArticle({ ...empty, ...data });
+        setBlocks(parseHtmlToBlocks(data.corps ?? ""));
+      });
   }, [id, isNew]);
-
-  function stripHtml(html: string) {
-    return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-  }
 
   function set(key: keyof Article, value: string) {
     setArticle((prev) => {
       const next = { ...prev, [key]: value };
-
-      // Auto-generate slug from title (only when new)
       if (key === "titre" && isNew) next.slug = slugify(value);
-
-      // Auto-fill meta titre from titre if empty
       if (key === "titre" && !prev.meta_titre) next.meta_titre = value;
-
-      // Auto-fill meta description from extrait if empty
       if (key === "extrait" && !prev.meta_description) next.meta_description = value.slice(0, 160);
+      return next;
+    });
+  }
 
-      // Auto-fill meta description from article body if extrait is empty
-      if (key === "corps" && !prev.meta_description && !prev.extrait) {
-        next.meta_description = stripHtml(value).slice(0, 160);
+  function handleBlocksChange(newBlocks: Block[], html: string) {
+    setBlocks(newBlocks);
+    setArticle((prev) => {
+      const next = { ...prev, corps: html };
+      if (!prev.meta_description && !prev.extrait) {
+        next.meta_description = stripHtml(html).slice(0, 160);
       }
-
       return next;
     });
   }
@@ -108,9 +113,7 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
           <Link href="/admin/blog" className="w-8 h-8 rounded-lg flex items-center justify-center text-[#64748b] hover:text-[#3899aa] hover:bg-[#eef7f6] transition-all">
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <div>
-            <h1 className="text-[#0f172a] font-bold text-xl">{isNew ? "Nouvel article" : "Modifier l'article"}</h1>
-          </div>
+          <h1 className="text-[#0f172a] font-bold text-xl">{isNew ? "Nouvel article" : "Modifier l'article"}</h1>
         </div>
         <button
           onClick={handleSave}
@@ -124,33 +127,39 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
       </div>
 
       <div className="flex flex-col gap-5">
+        {/* Infos principales */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
-          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Contenu</h2>
+          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Informations</h2>
           <div className="flex flex-col gap-4">
-            <Field label="Titre" value={article.titre} onChange={(v) => set("titre", v)} />
-            <Field label="Slug (URL)" value={article.slug} onChange={(v) => set("slug", v)} mono />
+            <Field label="Titre de l'article" value={article.titre} onChange={(v) => set("titre", v)} />
+            <Field label="Slug (URL générée automatiquement)" value={article.slug} onChange={(v) => set("slug", v)} mono />
             <label className="flex flex-col gap-1.5">
-              <span className="text-[#64748b] text-xs font-medium">Extrait</span>
+              <span className="text-[#64748b] text-xs font-medium">Extrait <span className="text-[#94a3b8] font-normal">(affiché dans la liste du blog)</span></span>
               <textarea
                 rows={2}
                 value={article.extrait}
                 onChange={(e) => set("extrait", e.target.value)}
+                placeholder="Résumé court de l'article…"
                 className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none resize-none"
                 style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }}
               />
             </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="text-[#64748b] text-xs font-medium">Corps de l'article</span>
-              <TiptapEditor content={article.corps} onChange={(v) => set("corps", v)} />
-            </label>
           </div>
         </div>
 
+        {/* Corps de l'article */}
+        <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
+          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Corps de l'article</h2>
+          <BlockEditor blocks={blocks} onChange={handleBlocksChange} />
+        </div>
+
+        {/* Image de couverture */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Image de couverture</h2>
           <ImageUpload value={article.photo_url} onChange={(v) => set("photo_url", v)} />
         </div>
 
+        {/* Paramètres */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Paramètres</h2>
           <div className="flex flex-col gap-4">
@@ -171,6 +180,7 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
           </div>
         </div>
 
+        {/* SEO */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-[#0f172a] font-semibold text-sm">SEO</h2>
@@ -191,9 +201,7 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
             <label className="flex flex-col gap-1.5">
               <span className="text-[#64748b] text-xs font-medium">
                 Meta description
-                <span className="ml-2 text-[#94a3b8] font-normal">
-                  ({article.meta_description.length}/160)
-                </span>
+                <span className="ml-2 text-[#94a3b8] font-normal">({article.meta_description.length}/160)</span>
               </span>
               <textarea
                 rows={2}
@@ -211,7 +219,9 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
   );
 }
 
-function Field({ label, value, onChange, mono, type = "text" }: { label: string; value: string; onChange: (v: string) => void; mono?: boolean; type?: string }) {
+function Field({ label, value, onChange, mono, type = "text" }: {
+  label: string; value: string; onChange: (v: string) => void; mono?: boolean; type?: string;
+}) {
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-[#64748b] text-xs font-medium">{label}</span>
