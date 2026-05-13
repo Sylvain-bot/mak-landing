@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "badge": "Bêta ouverte — Offre Pionniers disponible",
+    "headline": "L'assistant IA pensé pour les kinés libéraux",
+    "subheadline": "Bilans, bibliographie clinique et suivi patient. En quelques secondes, pas en heures.",
+    "cta_primary": "Essayer gratuitement",
+    "cta_secondary": "Voir la démo"
+  },
+  "urgency": {
+    "label": "Offre Pionniers",
+    "text": "Les 50 premiers kinés bénéficient d'un tarif bloqué à vie.",
+    "spots_left": 37
+  },
+  "chiffres": [
+    { "value": "3 min", "label": "par bilan complet", "before": "20 min", "afterRatio": 15, "icon": "📋" },
+    { "value": "30 sec", "label": "pour une recherche biblio", "before": "1-2h sur PubMed", "afterRatio": 4, "icon": "📚" },
+    { "value": "+2h", "label": "par semaine dégagées", "before": "Perdues en admin", "afterRatio": 0, "icon": "⏱️", "highlight": true }
+  ],
+  "testimonials": [
+    {
+      "name": "Amandine S.",
+      "role": "Kiné libérale, Toulouse",
+      "module": "IA Clinique",
+      "quote": "En 30 secondes j'avais une orientation clinique structurée, avec les points à vérifier en bilan.",
+      "avatar": { "bg": "#eef7f6", "color": "#3899aa" }
+    },
+    {
+      "name": "Pierre L.",
+      "role": "Kiné libéral, Quimper",
+      "module": "Bibliographie",
+      "quote": "Le module biblio à lui seul vaut l'abonnement.",
+      "avatar": { "bg": "#eff6ff", "color": "#3b82f6" }
+    },
+    {
+      "name": "Marion D.",
+      "role": "Kiné libérale, Biot",
+      "module": "Bilans",
+      "quote": "Je le génère en 3-4 minutes pendant la consultation. Mes soirées m'appartiennent à nouveau.",
+      "avatar": { "bg": "#fef3c7", "color": "#d97706" }
+    },
+    {
+      "name": "Clément B.",
+      "role": "Kiné libéral, Lyon",
+      "module": "Chatbot patient",
+      "quote": "Mes patients se sentent mieux suivis et je vois la différence sur l'observance.",
+      "avatar": { "bg": "#fce7f3", "color": "#db2777" }
+    }
+  ]
+}
