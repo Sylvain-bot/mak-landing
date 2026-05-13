@@ -64,7 +64,7 @@ export function Founders() {
                 </div>
                 <div>
                   <p className="text-[#0f172a] font-semibold text-sm">{founder.name}</p>
-                  <p className="text-[#94a3b8] text-xs">{founder.role} · Co-fondateur MAK</p>
+                  <p className="text-[#94a3b8] text-xs">{founder.role} · Co-fondateur de Mon Assistant Kiné</p>
                 </div>
               </motion.div>
             ))}

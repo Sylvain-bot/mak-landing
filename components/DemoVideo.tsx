@@ -25,7 +25,7 @@ export function DemoVideo() {
             Démo live
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
-            Vois MAK en action en 3 minutes
+            Vois Mon Assistant Kiné en action en 3 minutes
           </h2>
           <p className="text-[#475569] text-base mb-9 max-w-2xl mx-auto">
             De la question clinique au bilan complet — découvre comment des kinés

@@ -61,7 +61,7 @@ function MetricCard({ metric, index }: { metric: typeof METRICS[0]; index: numbe
           <span className="text-xs text-[#94a3b8] w-20 shrink-0 text-right">{metric.before}</span>
         </div>
         <div className="flex items-center gap-2.5">
-          <span className="text-xs text-[#3899aa] w-14 shrink-0 font-medium">MAK</span>
+          <span className="text-xs text-[#3899aa] w-14 shrink-0 font-medium">Après</span>
           <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "#eef7f6" }}>
             <motion.div
               className="h-full rounded-full"
@@ -112,7 +112,7 @@ export function Results() {
             </div>
             <div className="flex-1 text-center sm:text-left">
               <p className="text-[#0f172a] font-bold text-base">100h récupérées par an.</p>
-              <p className="text-[#64748b] text-sm mt-0.5">Des kinés MAK gagnent 2h par semaine dès le premier jour d&apos;utilisation.</p>
+              <p className="text-[#64748b] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés gagnent 2h par semaine dès le premier jour.</p>
             </div>
             <div className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0">
               <span>Voir comment</span>

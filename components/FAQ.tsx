@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 const FAQS = [
   {
     q: "Est-ce que l'abonnement est vraiment rentable ?",
-    a: "Calcul rapide : MAK te dégage +2h à 3h par semaine. À 35-50€ de l'heure, c'est 270 à 680€ récupérés chaque mois. L'abonnement se rembourse à la première séance supplémentaire.",
+    a: "Calcul rapide : Mon Assistant Kiné te dégage +2h à 3h par semaine. À 35-50€ de l'heure, c'est 270 à 680€ récupérés chaque mois. L'abonnement se rembourse à la première séance supplémentaire.",
   },
   {
     q: "Pourquoi un abonnement et pas une licence ?",
@@ -16,15 +16,15 @@ const FAQS = [
   },
   {
     q: "L'IA est-elle fiable pour la clinique ?",
-    a: "MAK s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
+    a: "Mon Assistant Kiné s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
   },
   {
     q: "Dois-je installer un logiciel ?",
-    a: "Non. MAK est 100% en ligne, accessible depuis ton navigateur, que ce soit sur ordi ou tablette. Rien à télécharger, rien à configurer.",
+    a: "Non. Mon Assistant Kiné est 100% en ligne, accessible depuis ton navigateur, que ce soit sur ordi ou tablette. Rien à télécharger, rien à configurer.",
   },
   {
     q: "Dois-je être à l'aise avec l'informatique ?",
-    a: "Si tu sais écrire une phrase, tu sais utiliser MAK. L'interface est volontairement simple. La prise en main prend moins de 5 minutes.",
+    a: "Si tu sais écrire une phrase, tu sais utiliser Mon Assistant Kiné. L'interface est volontairement simple. La prise en main prend moins de 5 minutes.",
   },
   {
     q: "Mes données sont-elles protégées ?",
