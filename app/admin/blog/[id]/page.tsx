@@ -150,7 +150,20 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
         {/* Corps de l'article */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Corps de l'article</h2>
-          <BlockEditor blocks={blocks} onChange={handleBlocksChange} />
+          <BlockEditor
+            blocks={blocks}
+            onChange={handleBlocksChange}
+            onMetaImport={({ titre, extrait }) => {
+              setArticle((prev) => ({
+                ...prev,
+                titre: titre || prev.titre,
+                slug: titre ? slugify(titre) : prev.slug,
+                extrait: extrait || prev.extrait,
+                meta_titre: titre || prev.meta_titre,
+                meta_description: extrait ? extrait.slice(0, 160) : prev.meta_description,
+              }));
+            }}
+          />
         </div>
 
         {/* Image de couverture */}

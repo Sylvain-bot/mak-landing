@@ -103,6 +103,7 @@ export function parseHtmlToBlocks(html: string): Block[] {
 type Props = {
   blocks: Block[];
   onChange: (blocks: Block[], html: string) => void;
+  onMetaImport?: (meta: { titre: string; extrait: string }) => void;
 };
 
 const BLOCK_LABELS: Record<BlockType, string> = {
@@ -119,7 +120,7 @@ const BLOCK_STYLES: Record<BlockType, React.CSSProperties> = {
   image: {},
 };
 
-export function BlockEditor({ blocks, onChange }: Props) {
+export function BlockEditor({ blocks, onChange, onMetaImport }: Props) {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const imageTargetBlock = useRef<string | null>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
@@ -178,6 +179,16 @@ export function BlockEditor({ blocks, onChange }: Props) {
       const text = (e.target?.result as string) ?? "";
       const parsed = parseTxtToBlocks(text);
       emit(parsed);
+
+      // Auto-fill titre and extrait from content
+      if (onMetaImport) {
+        const firstTitle = parsed.find((b) => b.type === "h2");
+        const firstParagraph = parsed.find((b) => b.type === "paragraph");
+        onMetaImport({
+          titre: firstTitle?.content ?? "",
+          extrait: firstParagraph?.content.slice(0, 200) ?? "",
+        });
+      }
     };
     reader.readAsText(file, "utf-8");
   }
