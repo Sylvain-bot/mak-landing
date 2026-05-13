@@ -61,7 +61,7 @@ export function SocialProof() {
           <p className="text-[#64748b] text-sm sm:text-base text-center sm:text-left">
             Rejoins les{" "}
             <span className="text-[#0f172a] font-semibold">200+ kinés libéraux</span>{" "}
-            qui sont abonnés à Mon Assistant Kiné
+            qui suivent Mon Assistant Kiné
           </p>
         </motion.div>
       </div>
