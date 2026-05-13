@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { BlockEditor, parseHtmlToBlocks } from "@/components/admin/BlockEditor";
+import { BlockEditor, parseHtmlToBlocks, parseTxtToBlocks } from "@/components/admin/BlockEditor";
 import { ImageUpload } from "@/components/admin/ImageUpload";
-import { Save, ArrowLeft, RefreshCw } from "lucide-react";
+import { Save, ArrowLeft, RefreshCw, FileText } from "lucide-react";
 import Link from "next/link";
 
 const CATEGORIES = ["IA clinique", "Bibliographie", "Bilans", "Pratique libérale"];
@@ -40,6 +40,16 @@ function stripHtml(html: string) {
   return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+function blocksToHtml(blocks: Block[]): string {
+  return blocks.map((b) => {
+    const safe = b.content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    if (b.type === "h2") return `<h2>${safe}</h2>`;
+    if (b.type === "h3") return `<h3>${safe}</h3>`;
+    if (b.type === "image") return b.content ? `<img src="${b.content}" alt="" />` : "";
+    return `<p>${safe}</p>`;
+  }).join("\n");
+}
+
 export default function ArticleEditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const isNew = id === "new";
@@ -48,6 +58,7 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
   const [blocks, setBlocks] = useState<Block[]>([{ id: "1", type: "paragraph", content: "" }]);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const txtInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isNew) return;
@@ -58,6 +69,31 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
         setBlocks(parseHtmlToBlocks(data.corps ?? ""));
       });
   }, [id, isNew]);
+
+  function handleTxtImport(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = (e.target?.result as string) ?? "";
+      const parsed = parseTxtToBlocks(text);
+      const html = blocksToHtml(parsed);
+      const firstTitle = parsed.find((b) => b.type === "h2");
+      const firstParagraph = parsed.find((b) => b.type === "paragraph");
+      const titre = firstTitle?.content ?? "";
+      const extrait = firstParagraph?.content.slice(0, 200) ?? "";
+
+      setBlocks(parsed);
+      setArticle((prev) => ({
+        ...prev,
+        corps: html,
+        titre: titre || prev.titre,
+        slug: titre ? slugify(titre) : prev.slug,
+        extrait: extrait || prev.extrait,
+        meta_titre: titre || prev.meta_titre,
+        meta_description: extrait ? extrait.slice(0, 160) : prev.meta_description,
+      }));
+    };
+    reader.readAsText(file, "utf-8");
+  }
 
   function set(key: keyof Article, value: string) {
     setArticle((prev) => {
@@ -108,7 +144,8 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
 
   return (
     <div className="max-w-3xl">
-      <div className="flex items-center justify-between mb-8">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <Link href="/admin/blog" className="w-8 h-8 rounded-lg flex items-center justify-center text-[#64748b] hover:text-[#3899aa] hover:bg-[#eef7f6] transition-all">
             <ArrowLeft className="w-4 h-4" />
@@ -126,13 +163,36 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
         </button>
       </div>
 
+      {/* TXT import — prominent entry point */}
+      <button
+        type="button"
+        onClick={() => txtInputRef.current?.click()}
+        className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl mb-6 transition-all hover:opacity-90 group"
+        style={{ background: "linear-gradient(135deg, #f0fdf4, #dcfce7)", border: "2px dashed #86efac" }}
+      >
+        <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "white", border: "1px solid #bbf7d0" }}>
+          <FileText className="w-4 h-4 text-[#16a34a]" />
+        </div>
+        <div className="text-left">
+          <p className="text-[#15803d] font-semibold text-sm">Importer un fichier .txt</p>
+          <p className="text-[#16a34a] text-xs opacity-80">Remplit automatiquement le titre, l'extrait, le corps et le SEO</p>
+        </div>
+      </button>
+      <input
+        ref={txtInputRef}
+        type="file"
+        accept=".txt,text/plain"
+        className="hidden"
+        onChange={(e) => { const f = e.target.files?.[0]; if (f) { handleTxtImport(f); e.target.value = ""; } }}
+      />
+
       <div className="flex flex-col gap-5">
         {/* Infos principales */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Informations</h2>
           <div className="flex flex-col gap-4">
             <Field label="Titre de l'article" value={article.titre} onChange={(v) => set("titre", v)} />
-            <Field label="Slug (URL générée automatiquement)" value={article.slug} onChange={(v) => set("slug", v)} mono />
+            <Field label="Slug (URL)" value={article.slug} onChange={(v) => set("slug", v)} mono />
             <label className="flex flex-col gap-1.5">
               <span className="text-[#64748b] text-xs font-medium">Extrait <span className="text-[#94a3b8] font-normal">(affiché dans la liste du blog)</span></span>
               <textarea
@@ -147,7 +207,7 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
           </div>
         </div>
 
-        {/* Corps de l'article */}
+        {/* Corps */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Corps de l'article</h2>
           <BlockEditor
