@@ -49,10 +49,28 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
       .then((data) => setArticle({ ...empty, ...data }));
   }, [id, isNew]);
 
+  function stripHtml(html: string) {
+    return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  }
+
   function set(key: keyof Article, value: string) {
     setArticle((prev) => {
       const next = { ...prev, [key]: value };
+
+      // Auto-generate slug from title (only when new)
       if (key === "titre" && isNew) next.slug = slugify(value);
+
+      // Auto-fill meta titre from titre if empty
+      if (key === "titre" && !prev.meta_titre) next.meta_titre = value;
+
+      // Auto-fill meta description from extrait if empty
+      if (key === "extrait" && !prev.meta_description) next.meta_description = value.slice(0, 160);
+
+      // Auto-fill meta description from article body if extrait is empty
+      if (key === "corps" && !prev.meta_description && !prev.extrait) {
+        next.meta_description = stripHtml(value).slice(0, 160);
+      }
+
       return next;
     });
   }
@@ -154,12 +172,37 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
         </div>
 
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
-          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">SEO</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-[#0f172a] font-semibold text-sm">SEO</h2>
+            <button
+              type="button"
+              onClick={() => setArticle((prev) => ({
+                ...prev,
+                meta_titre: prev.titre,
+                meta_description: (prev.extrait || stripHtml(prev.corps)).slice(0, 160),
+              }))}
+              className="text-xs text-[#3899aa] hover:underline font-medium"
+            >
+              Remplir automatiquement
+            </button>
+          </div>
           <div className="flex flex-col gap-4">
             <Field label="Meta titre" value={article.meta_titre} onChange={(v) => set("meta_titre", v)} />
             <label className="flex flex-col gap-1.5">
-              <span className="text-[#64748b] text-xs font-medium">Meta description</span>
-              <textarea rows={2} value={article.meta_description} onChange={(e) => set("meta_description", e.target.value)} className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none resize-none" style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }} />
+              <span className="text-[#64748b] text-xs font-medium">
+                Meta description
+                <span className="ml-2 text-[#94a3b8] font-normal">
+                  ({article.meta_description.length}/160)
+                </span>
+              </span>
+              <textarea
+                rows={2}
+                maxLength={160}
+                value={article.meta_description}
+                onChange={(e) => set("meta_description", e.target.value)}
+                className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none resize-none"
+                style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }}
+              />
             </label>
           </div>
         </div>

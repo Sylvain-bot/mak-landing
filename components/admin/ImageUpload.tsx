@@ -11,16 +11,21 @@ type Props = {
 
 export function ImageUpload({ value, onChange }: Props) {
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleFile(file: File) {
     setUploading(true);
+    setError("");
     try {
       const form = new FormData();
       form.append("file", file);
       const res = await fetch("/api/admin/upload", { method: "POST", body: form });
-      const { url } = await res.json();
-      if (url) onChange(url);
+      const data = await res.json();
+      if (!res.ok) { setError(data.error ?? "Erreur upload"); return; }
+      if (data.url) onChange(data.url);
+    } catch {
+      setError("Erreur réseau lors de l'upload");
     } finally {
       setUploading(false);
     }
@@ -28,6 +33,7 @@ export function ImageUpload({ value, onChange }: Props) {
 
   return (
     <div>
+      {error && <p className="text-[#ef4444] text-xs mb-2">{error}</p>}
       {value ? (
         <div className="relative rounded-xl overflow-hidden h-40 w-full" style={{ border: "1px solid #d4ecea" }}>
           <Image src={value} alt="Photo article" fill className="object-cover" />
