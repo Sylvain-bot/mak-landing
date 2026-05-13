@@ -12,36 +12,22 @@ export function DemoVideo() {
 
   return (
     <section
-      className="relative overflow-hidden py-24 sm:py-32 px-4 sm:px-6"
-      style={{ background: "#0d1424", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="relative overflow-hidden py-20 sm:py-28 px-4 sm:px-6"
+      style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
     >
-      {/* Aurora orbs */}
-      <div
-        aria-hidden
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(56,153,170,0.12) 0%, transparent 100%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(56,153,170,0.07) 0%, transparent 70%)" }}
-      />
-
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[#5bc4d6] text-sm font-semibold mb-6"
-            style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[#3899aa] text-sm font-semibold mb-5"
+            style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
           >
-            <Play className="w-3.5 h-3.5 fill-[#5bc4d6]" />
+            <Play className="w-3.5 h-3.5 fill-[#3899aa]" />
             Démo live
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
             Vois MAK en action en 3 minutes
           </h2>
-          <p className="text-white/50 text-lg mb-10 max-w-2xl mx-auto">
+          <p className="text-[#475569] text-base mb-9 max-w-2xl mx-auto">
             De la question clinique au bilan complet — découvre comment des kinés
             gagnent 2h par semaine dès le premier jour.
           </p>
@@ -49,17 +35,17 @@ export function DemoVideo() {
 
         <motion.div
           ref={videoRef}
-          initial={{ opacity: 0, scale: 0.95, y: 24 }}
+          initial={{ opacity: 0, scale: 0.96, y: 20 }}
           animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-8"
+          className="mb-7"
         >
           <div
-            className="relative rounded-2xl overflow-hidden shadow-2xl"
+            className="relative rounded-2xl overflow-hidden"
             style={{
               paddingBottom: "56.25%",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
+              border: "1px solid #d4ecea",
+              boxShadow: "0 8px 40px rgba(56,153,170,0.1), 0 2px 8px rgba(0,0,0,0.06)",
             }}
           >
             <iframe
@@ -77,7 +63,7 @@ export function DemoVideo() {
             href="https://www.monassistantkine.fr/replay"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-all"
+            className="inline-flex items-center gap-2 text-[#94a3b8] hover:text-[#3899aa] text-sm font-medium underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
           >
             <ExternalLink className="w-4 h-4" />
             Voir le replay complet sur monassistantkine.fr

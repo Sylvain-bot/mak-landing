@@ -73,8 +73,6 @@ const FEATURES = [
   },
 ];
 
-// ─── Lightbox ─────────────────────────────────────────────────────────────────
-
 function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -93,7 +91,7 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 cursor-zoom-out"
-      style={{ background: "rgba(4,8,18,0.92)", backdropFilter: "blur(8px)" }}
+      style={{ background: "rgba(15,23,42,0.88)", backdropFilter: "blur(8px)" }}
       onClick={onClose}
     >
       <motion.div
@@ -104,13 +102,13 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
         className="relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl cursor-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-4 py-2.5 flex items-center gap-2.5" style={{ background: "#0d1424", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="px-4 py-2.5 flex items-center gap-2.5" style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}>
           <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-            <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
           </div>
-          <div className="flex-1 mx-2 rounded-md px-3 py-1 text-xs truncate" style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.4)" }}>
+          <div className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium truncate" style={{ background: "white", border: "1px solid #e4e4e5" }}>
             app.monassistantkine.fr
           </div>
         </div>
@@ -119,7 +117,7 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       <button
         onClick={onClose}
         className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-colors cursor-pointer"
-        style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
+        style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
         aria-label="Fermer"
       >
         <X className="w-5 h-5" />
@@ -128,51 +126,47 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
   );
 }
 
-// ─── Browser frame ─────────────────────────────────────────────────────────────
-
 function BrowserFrame({ screenshot, title, onZoom }: { screenshot: string; title: string; onZoom: () => void }) {
   return (
     <div
       className="rounded-2xl overflow-hidden group cursor-zoom-in"
-      style={{ border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
+      style={{ border: "1px solid #d4ecea", boxShadow: "0 8px 32px rgba(56,153,170,0.08), 0 2px 8px rgba(0,0,0,0.06)" }}
       onClick={onZoom}
     >
-      <div className="px-4 py-2.5 flex items-center gap-2.5" style={{ background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      <div className="px-4 py-2.5 flex items-center gap-2.5" style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}>
         <div className="flex gap-1.5 shrink-0">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
         </div>
-        <div className="flex-1 mx-2 rounded-md px-3 py-1 text-xs truncate" style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium truncate" style={{ background: "white", border: "1px solid #e4e4e5" }}>
           app.monassistantkine.fr
         </div>
-        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" style={{ color: "#5bc4d6" }}>
+        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 text-[#3899aa]">
           <ZoomIn className="w-3.5 h-3.5" />
           <span className="text-[10px] font-medium">Agrandir</span>
         </div>
       </div>
-      <div className="relative" style={{ aspectRatio: "16/9", background: "#0d1424" }}>
+      <div className="relative" style={{ aspectRatio: "16/9", background: "#f0f9fa" }}>
         <Image
           src={screenshot}
           alt={title}
           fill
           className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
         />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+        <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 flex items-center justify-center">
           <div
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl px-4 py-2 flex items-center gap-2 shadow-xl"
-            style={{ background: "rgba(13,20,36,0.9)", border: "1px solid rgba(56,153,170,0.3)" }}
+            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl px-4 py-2 flex items-center gap-2 shadow-lg"
+            style={{ background: "rgba(255,255,255,0.95)", border: "1px solid #d4ecea" }}
           >
-            <ZoomIn className="w-4 h-4 text-[#5bc4d6]" />
-            <span className="text-sm font-medium text-white">Voir en plein écran</span>
+            <ZoomIn className="w-4 h-4 text-[#3899aa]" />
+            <span className="text-sm font-medium text-[#0f172a]">Voir en plein écran</span>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-// ─── Features ─────────────────────────────────────────────────────────────────
 
 export function Features() {
   const [activeTab, setActiveTab] = useState(0);
@@ -188,8 +182,8 @@ export function Features() {
 
   return (
     <section
-      className="py-24 sm:py-32 px-4 sm:px-6"
-      style={{ background: "#080f1a", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-20 sm:py-28 px-4 sm:px-6"
+      style={{ background: "white", borderTop: "1px solid #d4ecea" }}
     >
       <AnimatePresence>
         {lightbox && (
@@ -198,14 +192,14 @@ export function Features() {
       </AnimatePresence>
 
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal className="text-center mb-12">
-          <p className="text-[#5bc4d6] text-sm font-semibold uppercase tracking-widest mb-4">Fonctionnalités</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+        <ScrollReveal className="text-center mb-10">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Fonctionnalités</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
             Ce que Mon Assistant Kiné fait concrètement pour toi
           </h2>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto">
+          <p className="text-base text-[#475569] max-w-2xl mx-auto">
             Chaque module résout un problème réel du cabinet.{" "}
-            <span className="text-white/80 font-medium">Pas du gadget — de la pratique.</span>
+            <span className="text-[#0f172a] font-medium">Pas du gadget — de la pratique.</span>
           </p>
         </ScrollReveal>
 
@@ -215,10 +209,10 @@ export function Features() {
               <button
                 key={f.id}
                 onClick={() => handleTab(i)}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
                 style={activeTab === i
-                  ? { background: "#3899aa", color: "white", boxShadow: "0 4px 16px rgba(56,153,170,0.3)" }
-                  : { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.08)" }
+                  ? { background: "#3899aa", color: "white", boxShadow: "0 4px 12px rgba(56,153,170,0.25)" }
+                  : { background: "white", color: "#64748b", border: "1px solid #d4ecea" }
                 }
               >
                 <span>{f.icon}</span>
@@ -243,22 +237,22 @@ export function Features() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
                 className="flex flex-col"
               >
-                <div className="text-4xl mb-5">{feature.icon}</div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{feature.title}</h3>
-                <p className="text-[#5bc4d6] font-medium mb-6">{feature.subtitle}</p>
-                <ul className="space-y-3 mb-8">
+                <div className="text-3xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a] mb-1.5">{feature.title}</h3>
+                <p className="text-[#3899aa] font-medium mb-5 text-sm">{feature.subtitle}</p>
+                <ul className="space-y-3 mb-7">
                   {feature.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3 text-white/55">
-                      <CheckCircle2 className="w-5 h-5 text-[#3899aa] shrink-0 mt-0.5" />
+                    <li key={b} className="flex items-start gap-3 text-[#475569] text-sm">
+                      <CheckCircle2 className="w-4 h-4 text-[#3899aa] shrink-0 mt-0.5" />
                       {b}
                     </li>
                   ))}
                 </ul>
-                <div className="pl-4" style={{ borderLeft: "2px solid #3899aa" }}>
-                  <p className="text-white/45 italic text-sm leading-relaxed mb-1.5">
+                <div className="pl-4" style={{ borderLeft: "2px solid #d4ecea" }}>
+                  <p className="text-[#94a3b8] italic text-sm leading-relaxed mb-1.5">
                     &ldquo;{feature.quote}&rdquo;
                   </p>
-                  <p className="text-xs text-white/25">— {feature.author}</p>
+                  <p className="text-xs text-[#cbd5e1]">— {feature.author}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -291,7 +285,7 @@ export function Features() {
                   key={i}
                   onClick={() => handleTab(i)}
                   className="h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: activeTab === i ? "1.5rem" : "0.375rem", background: activeTab === i ? "#3899aa" : "rgba(255,255,255,0.15)" }}
+                  style={{ width: activeTab === i ? "1.5rem" : "0.375rem", background: activeTab === i ? "#3899aa" : "#d4ecea" }}
                 />
               ))}
             </div>

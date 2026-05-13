@@ -20,15 +20,15 @@ const NO_ITEMS = [
 export function ForWho() {
   return (
     <section
-      className="py-24 sm:py-32 px-4 sm:px-6"
-      style={{ background: "#080f1a", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-20 sm:py-28 px-4 sm:px-6"
+      style={{ background: "white", borderTop: "1px solid #d4ecea" }}
     >
       <div className="max-w-5xl mx-auto">
-        <ScrollReveal className="text-center mb-16">
-          <p className="text-[#5bc4d6] text-sm font-semibold uppercase tracking-widest mb-4">
+        <ScrollReveal className="text-center mb-12">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">
             Pour qui
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight">
             Est-ce fait pour toi ?
           </h2>
         </ScrollReveal>
@@ -37,20 +37,20 @@ export function ForWho() {
           <ScrollReveal delay={0.1}>
             <div
               className="rounded-2xl p-6 sm:p-8 h-full"
-              style={{ background: "rgba(56,153,170,0.08)", border: "1px solid rgba(56,153,170,0.2)" }}
+              style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
             >
-              <div className="flex items-center gap-3 mb-7">
+              <div className="flex items-center gap-3 mb-6">
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(56,153,170,0.15)", border: "1px solid rgba(56,153,170,0.25)" }}
+                  style={{ background: "white", border: "1px solid #d4ecea" }}
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#5bc4d6]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#3899aa]" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Oui, si tu veux :</h3>
+                <h3 className="text-base font-bold text-[#0f172a]">Oui, si tu veux :</h3>
               </div>
-              <ul className="space-y-4">
+              <ul className="space-y-3.5">
                 {YES_ITEMS.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-white/60">
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#475569]">
                     <CheckCircle2 className="w-4 h-4 text-[#3899aa] shrink-0 mt-0.5" />
                     {item}
                   </li>
@@ -61,22 +61,22 @@ export function ForWho() {
 
           <ScrollReveal delay={0.2}>
             <div
-              className="rounded-2xl p-6 sm:p-8 h-full"
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+              className="rounded-2xl p-6 sm:p-8 h-full bg-white"
+              style={{ border: "1px solid #e5f2f4" }}
             >
-              <div className="flex items-center gap-3 mb-7">
+              <div className="flex items-center gap-3 mb-6">
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+                  style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}
                 >
-                  <XCircle className="w-4 h-4 text-white/30" />
+                  <XCircle className="w-4 h-4 text-[#94a3b8]" />
                 </div>
-                <h3 className="text-lg font-bold text-white/50">Non, si tu :</h3>
+                <h3 className="text-base font-bold text-[#94a3b8]">Non, si tu :</h3>
               </div>
-              <ul className="space-y-4">
+              <ul className="space-y-3.5">
                 {NO_ITEMS.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-white/30">
-                    <XCircle className="w-4 h-4 text-white/20 shrink-0 mt-0.5" />
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#94a3b8]">
+                    <XCircle className="w-4 h-4 text-[#cbd5e1] shrink-0 mt-0.5" />
                     {item}
                   </li>
                 ))}

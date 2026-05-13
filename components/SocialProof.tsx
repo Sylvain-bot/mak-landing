@@ -17,8 +17,8 @@ const AVATARS = [
 export function SocialProof() {
   return (
     <section
-      className="py-5 overflow-hidden"
-      style={{ background: "#0d1424", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-4 overflow-hidden"
+      style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea", borderBottom: "1px solid #d4ecea" }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
@@ -37,9 +37,9 @@ export function SocialProof() {
                   transition={{ duration: 0.3, delay: 0.9 + i * 0.06 }}
                   className="w-9 h-9 rounded-full border-2 flex items-center justify-center text-xs font-semibold"
                   style={{
-                    background: `hsl(${a.hue}deg 30% 25%)`,
-                    color: `hsl(${a.hue}deg 60% 70%)`,
-                    borderColor: "#0d1424",
+                    background: `hsl(${a.hue}deg 50% 88%)`,
+                    color: `hsl(${a.hue}deg 60% 35%)`,
+                    borderColor: "#f0f9fa",
                   }}
                 >
                   {a.initials}
@@ -52,16 +52,16 @@ export function SocialProof() {
                   <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <span className="text-[11px] text-white/35 font-medium">4.9 / 5</span>
+              <span className="text-[11px] text-[#94a3b8] font-medium">4.9 / 5</span>
             </div>
           </div>
 
-          <div className="hidden sm:block w-px h-8" style={{ background: "rgba(255,255,255,0.1)" }} />
+          <div className="hidden sm:block w-px h-8" style={{ background: "#d4ecea" }} />
 
-          <p className="text-white/45 text-sm sm:text-base text-center sm:text-left">
+          <p className="text-[#64748b] text-sm sm:text-base text-center sm:text-left">
             Rejoins les{" "}
-            <span className="text-white font-semibold">200+ kinés libéraux</span>{" "}
-            déjà abonnés à Mon Assistant Kiné
+            <span className="text-[#0f172a] font-semibold">200+ kinés libéraux</span>{" "}
+            qui sont abonnés à Mon Assistant Kiné
           </p>
         </motion.div>
       </div>

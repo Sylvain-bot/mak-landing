@@ -11,17 +11,17 @@ const LINKS = [
 export function Footer() {
   return (
     <footer
-      className="py-10 px-4 sm:px-6"
-      style={{ background: "#040810", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-8 px-4 sm:px-6 bg-white"
+      style={{ borderTop: "1px solid #d4ecea" }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
         <div className="flex items-center">
           <Image
             src="/logo-mak.webp"
             alt="Mon Assistant Kiné"
             width={100}
             height={30}
-            className="h-7 w-auto object-contain brightness-0 invert opacity-35"
+            className="h-7 w-auto object-contain opacity-60"
           />
         </div>
 
@@ -30,14 +30,14 @@ export function Footer() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-xs text-white/25 hover:text-white/55 transition-colors"
+              className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <p className="text-xs text-white/18">
+        <p className="text-xs text-[#cbd5e1]">
           © 2026 Mon Assistant Kiné — Tous droits réservés
         </p>
       </div>

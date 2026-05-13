@@ -41,12 +41,12 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 
   return (
     <ScrollReveal delay={index * 0.04}>
-      <div style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      <div style={{ borderBottom: "1px solid #e5f2f4" }}>
         <button
           onClick={() => setOpen(!open)}
-          className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+          className="w-full flex items-center justify-between gap-4 py-4 text-left group"
         >
-          <span className="text-white/60 group-hover:text-white/90 transition-colors text-sm sm:text-base font-medium leading-snug">
+          <span className="text-[#475569] group-hover:text-[#0f172a] transition-colors text-sm font-medium leading-snug">
             {q}
           </span>
           <motion.div
@@ -54,7 +54,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="shrink-0"
           >
-            <ChevronDown className="w-5 h-5 text-white/25 group-hover:text-white/50 transition-colors" />
+            <ChevronDown className="w-4 h-4 text-[#94a3b8] group-hover:text-[#64748b] transition-colors" />
           </motion.div>
         </button>
 
@@ -67,7 +67,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
               transition={{ duration: 0.28, ease: "easeOut" }}
               style={{ overflow: "hidden" }}
             >
-              <p className="text-white/45 text-sm leading-relaxed pb-5 pr-8">{a}</p>
+              <p className="text-[#64748b] text-sm leading-relaxed pb-4 pr-8">{a}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -79,22 +79,22 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 export function FAQ() {
   return (
     <section
-      className="py-24 sm:py-32 px-4 sm:px-6"
-      style={{ background: "#0f172a", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-20 sm:py-28 px-4 sm:px-6"
+      style={{ background: "white", borderTop: "1px solid #d4ecea" }}
     >
       <div className="max-w-3xl mx-auto">
-        <ScrollReveal className="text-center mb-14">
-          <p className="text-[#5bc4d6] text-sm font-semibold uppercase tracking-widest mb-4">
+        <ScrollReveal className="text-center mb-10">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">
             FAQ
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] leading-tight">
             Questions fréquentes
           </h2>
         </ScrollReveal>
 
         <div
-          className="rounded-2xl px-6 sm:px-8"
-          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+          className="rounded-2xl px-6 sm:px-8 bg-white"
+          style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 12px rgba(56,153,170,0.06)" }}
         >
           {FAQS.map((faq, i) => (
             <FAQItem key={faq.q} q={faq.q} a={faq.a} index={i} />

@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-// ─── Counter hook ─────────────────────────────────────────────────────────────
-
 function useCountUp(target: number, duration: number, active: boolean): number {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -39,15 +37,13 @@ function StatItem({
   const display = frenchFormat ? count.toLocaleString("fr-FR") : count.toString();
   return (
     <div className={cn("text-center", className)}>
-      <div className="text-4xl md:text-5xl font-bold text-white tabular-nums">
-        {display}<span className="text-[#5bc4d6]">{suffix}</span>
+      <div className="text-3xl md:text-4xl font-bold text-[#0f172a] tabular-nums">
+        {display}<span className="text-[#3899aa]">{suffix}</span>
       </div>
-      <p className="mt-2 text-sm text-white/40 max-w-[150px] mx-auto leading-snug">{label}</p>
+      <p className="mt-1.5 text-xs text-[#94a3b8] max-w-[150px] mx-auto leading-snug">{label}</p>
     </div>
   );
 }
-
-// ─── Floating badge ───────────────────────────────────────────────────────────
 
 function FloatingBadge({
   delay, floatY = 10, floatDuration = 5, className, children,
@@ -71,21 +67,19 @@ function FloatingBadge({
         },
       }}
       className={cn(
-        "flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20 backdrop-blur-md",
+        "flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20 backdrop-blur-sm",
         className
       )}
       style={{
-        background: "rgba(13,20,36,0.82)",
-        border: "1px solid rgba(56,153,170,0.35)",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)",
+        background: "rgba(255,255,255,0.95)",
+        border: "1px solid rgba(56,153,170,0.2)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04)",
       }}
     >
       {children}
     </motion.div>
   );
 }
-
-// ─── Hero ─────────────────────────────────────────────────────────────────────
 
 const TRUST = ["Sans carte bancaire", "Accès immédiat", "5 min de prise en main"];
 
@@ -94,7 +88,7 @@ export function Hero() {
   const inView = useInView(statsRef, { once: true });
 
   return (
-    <section className="relative overflow-hidden bg-[#080f1a] pt-24 pb-0 px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-white pt-24 pb-0 px-4 sm:px-6">
       <style>{`
         @keyframes hero-zoom {
           0%, 100% { transform: scale(1);     transform-origin: 58% 42%; }
@@ -115,60 +109,47 @@ export function Hero() {
         .aurora-2 { animation: aurora-2 15s ease-in-out infinite; }
       `}</style>
 
-      {/* ── Background layers ── */}
-
       {/* Dot grid */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(56,153,170,0.18) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(56,153,170,0.09) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
           maskImage: "radial-gradient(ellipse 100% 80% at 50% 0%, black 0%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(ellipse 100% 80% at 50% 0%, black 0%, transparent 100%)",
         }}
       />
 
-      {/* Aurora — teal, top centre */}
+      {/* Aurora — very light teal */}
       <div
         aria-hidden
         className="aurora-1 absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none rounded-full"
         style={{
-          background: "radial-gradient(ellipse 65% 55% at 50% 20%, rgba(56,153,170,0.22) 0%, transparent 70%)",
-          filter: "blur(1px)",
+          background: "radial-gradient(ellipse 65% 55% at 50% 20%, rgba(56,153,170,0.07) 0%, transparent 70%)",
         }}
       />
-      {/* Aurora — purple, top right */}
       <div
         aria-hidden
         className="aurora-2 absolute -top-20 -right-40 w-[700px] h-[600px] pointer-events-none rounded-full"
         style={{
-          background: "radial-gradient(ellipse 60% 50% at 70% 30%, rgba(99,102,241,0.1) 0%, transparent 70%)",
-          filter: "blur(2px)",
-        }}
-      />
-      {/* Aurora — bottom left */}
-      <div
-        aria-hidden
-        className="absolute -bottom-20 -left-20 w-[500px] h-[500px] pointer-events-none rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(56,153,170,0.08) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse 60% 50% at 70% 30%, rgba(56,153,170,0.04) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative z-10 max-w-6xl mx-auto">
 
-        {/* ── Centered text ── */}
+        {/* Centered text */}
         <div className="text-center max-w-3xl mx-auto">
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="mb-7"
+            className="mb-6"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#3899aa]/30 bg-[#3899aa]/10 text-[#5bc4d6] text-sm font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#5bc4d6] animate-pulse" />
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
               Offre fondateurs — 100 premières inscriptions
             </span>
           </motion.div>
@@ -177,10 +158,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.06] text-white mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-[#0f172a] mb-5"
           >
             Tes bilans en{" "}
-            <span className="bg-gradient-to-r from-[#3899aa] via-[#5bc4d6] to-[#3899aa] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
               3 minutes.
             </span>
             <br />
@@ -194,11 +175,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="text-lg sm:text-xl text-white/55 mb-9 leading-relaxed"
+            className="text-base sm:text-lg text-[#475569] mb-8 leading-relaxed"
           >
             Mon Assistant Kiné assiste ton raisonnement clinique, génère tes bilans
             et accompagne tes patients —{" "}
-            <span className="text-white/90 font-semibold">
+            <span className="text-[#0f172a] font-semibold">
               conçu par des kinés, pour des kinés.
             </span>
           </motion.p>
@@ -207,13 +188,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-3 justify-center mb-7"
+            className="flex flex-col sm:flex-row gap-3 justify-center mb-6"
           >
             <Link
               href="https://monassistantkine.vercel.app/signup"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-xl shadow-[#3899aa]/40 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/60"
+                "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40"
               )}
             >
               Créer mon compte gratuitement
@@ -221,7 +202,7 @@ export function Hero() {
             </Link>
             <Link
               href="https://www.monassistantkine.fr/replay"
-              className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-white/12 bg-white/6 text-white/80 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all gap-2 backdrop-blur-sm"
+              className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all gap-2"
             >
               Voir la démo
             </Link>
@@ -234,7 +215,7 @@ export function Hero() {
             className="flex flex-wrap gap-x-5 gap-y-2 justify-center"
           >
             {TRUST.map((item) => (
-              <span key={item} className="flex items-center gap-1.5 text-sm text-white/45">
+              <span key={item} className="flex items-center gap-1.5 text-sm text-[#64748b]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
                 {item}
               </span>
@@ -242,19 +223,19 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* ── Browser mockup ── */}
+        {/* Browser mockup */}
         <motion.div
           initial={{ opacity: 0, y: 52, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="relative mt-14 max-w-5xl mx-auto"
         >
-          {/* Diffuse glow beneath window */}
+          {/* Subtle glow */}
           <div
             aria-hidden
             className="absolute -inset-2 rounded-3xl pointer-events-none"
             style={{
-              background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(56,153,170,0.25) 0%, transparent 70%)",
+              background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(56,153,170,0.12) 0%, transparent 70%)",
               filter: "blur(24px)",
             }}
           />
@@ -263,34 +244,34 @@ export function Hero() {
           <div
             className="rounded-2xl p-px"
             style={{
-              background: "linear-gradient(135deg, rgba(56,153,170,0.7) 0%, rgba(56,153,170,0.15) 40%, rgba(56,153,170,0.05) 100%)",
+              background: "linear-gradient(135deg, #3899aa 0%, rgba(56,153,170,0.3) 50%, rgba(56,153,170,0.1) 100%)",
             }}
           >
-            <div className="rounded-[15px] overflow-hidden bg-[#0d1424]">
+            <div className="rounded-[15px] overflow-hidden bg-white">
 
-              {/* Chrome bar — dark */}
+              {/* Chrome bar — light */}
               <div
                 className="px-4 py-3 flex items-center gap-2.5"
-                style={{ background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
               >
                 <div className="flex gap-1.5 shrink-0">
-                  <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c941]" />
                 </div>
                 <div
-                  className="flex-1 mx-3 rounded-md px-4 py-1.5 text-sm text-white/35 truncate"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
+                  className="flex-1 mx-3 rounded-md px-4 py-1.5 text-sm text-[#3899aa] font-medium truncate"
+                  style={{ background: "white", border: "1px solid #e4e4e5" }}
                 >
                   app.monassistantkine.fr
                 </div>
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs text-emerald-400/80 font-semibold">Live</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs text-emerald-600 font-semibold">Live</span>
                 </div>
               </div>
 
-              {/* GIF with slow zoom into modal area */}
+              {/* GIF */}
               <div className="overflow-hidden w-full">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -304,31 +285,31 @@ export function Hero() {
 
           {/* Badge — top right */}
           <FloatingBadge delay={1.1} floatY={8} floatDuration={4.8} className="absolute -top-5 right-4 sm:right-0 sm:-translate-x-8">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-            <span className="text-xs font-semibold text-white whitespace-nowrap">56 000+ études intégrées</span>
+            <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">56 000+ études intégrées</span>
           </FloatingBadge>
 
-          {/* Badge — right side, middle-upper */}
+          {/* Badge — right, middle-upper */}
           <FloatingBadge delay={1.3} floatY={12} floatDuration={5.6} className="absolute top-[22%] -right-3 sm:-right-12">
             <span className="text-sm">🔬</span>
-            <span className="text-xs font-semibold text-white whitespace-nowrap">Sources vérifiables</span>
+            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Sources vérifiables</span>
           </FloatingBadge>
 
-          {/* Badge — right side, middle-lower */}
+          {/* Badge — right, middle-lower */}
           <FloatingBadge delay={1.6} floatY={9} floatDuration={6.2} className="absolute top-[52%] -right-3 sm:-right-14">
             <span className="text-sm">📈</span>
             <div>
-              <p className="text-[10px] text-white/40 leading-none mb-0.5">Base de données</p>
-              <p className="text-xs font-semibold text-white">enrichie en continu</p>
+              <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">Base de données</p>
+              <p className="text-xs font-semibold text-[#0f172a]">enrichie en continu</p>
             </div>
           </FloatingBadge>
 
-          {/* Badge — left side, middle */}
+          {/* Badge — left, middle */}
           <FloatingBadge delay={1.4} floatY={11} floatDuration={5.1} className="absolute top-[35%] -left-3 sm:-left-14">
             <span className="text-sm">📚</span>
             <div>
-              <p className="text-[10px] text-white/40 leading-none mb-0.5">Recherche biblio</p>
-              <p className="text-xs font-bold text-[#5bc4d6]">PubMed · Cleland · Guidelines</p>
+              <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">Recherche biblio</p>
+              <p className="text-xs font-bold text-[#3899aa]">PubMed · Cleland · Guidelines</p>
             </div>
           </FloatingBadge>
 
@@ -336,13 +317,13 @@ export function Hero() {
           <FloatingBadge delay={1.8} floatY={7} floatDuration={4.5} className="absolute -bottom-5 left-4 sm:left-0 sm:translate-x-8">
             <span className="text-base">⚡</span>
             <div>
-              <p className="text-[10px] text-white/40 leading-none">Résultat en</p>
-              <p className="text-xs font-bold text-[#5bc4d6]">30 sec chrono</p>
+              <p className="text-[10px] text-[#94a3b8] leading-none">Résultat en</p>
+              <p className="text-xs font-bold text-[#3899aa]">30 sec chrono</p>
             </div>
           </FloatingBadge>
         </motion.div>
 
-        {/* ── Stats card ── */}
+        {/* Stats card */}
         <motion.div
           ref={statsRef}
           initial={{ opacity: 0, y: 32 }}
@@ -351,13 +332,10 @@ export function Hero() {
           className="mt-14 pb-16"
         >
           <div
-            className="rounded-2xl p-8 sm:p-10"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
+            className="rounded-2xl p-7 sm:p-9"
+            style={{ background: "#f0f9fa", border: "1px solid #d4ecea" }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-7">
               <StatItem
                 target={56000} suffix="+" label="études scientifiques intégrées"
                 frenchFormat active={inView}
@@ -365,12 +343,12 @@ export function Hero() {
               <StatItem
                 target={3} suffix=" min" label="pour un bilan complet"
                 active={inView}
-                className="sm:border-l sm:border-white/10 sm:pl-8"
+                className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
               <StatItem
                 target={5} suffix=" min" label="pour prendre l'app en main"
                 active={inView}
-                className="sm:border-l sm:border-white/10 sm:pl-8"
+                className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
             </div>
           </div>

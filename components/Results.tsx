@@ -18,51 +18,51 @@ function MetricCard({ metric, index }: { metric: typeof METRICS[0]; index: numbe
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55, delay: index * 0.12, ease: "easeOut" }}
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
-      className="rounded-2xl p-7 sm:p-8 flex flex-col gap-5 cursor-default group"
-      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className="rounded-2xl p-6 sm:p-7 flex flex-col gap-4 cursor-default group bg-white"
+      style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
     >
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300"
-        style={{ background: "rgba(56,153,170,0.12)", border: "1px solid rgba(56,153,170,0.2)" }}
+        className="w-11 h-11 rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300"
+        style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
       >
         {metric.icon}
       </div>
 
       <div>
         <div
-          className="text-5xl sm:text-6xl font-bold tabular-nums leading-none mb-2"
+          className="text-4xl sm:text-5xl font-bold tabular-nums leading-none mb-1.5"
           style={metric.highlight
-            ? { background: "linear-gradient(135deg, #5bc4d6 0%, #3899aa 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }
-            : { color: "white" }
+            ? { background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }
+            : { color: "#0f172a" }
           }
         >
           {metric.value}
         </div>
-        <p className="text-white/50 text-base font-medium">{metric.label}</p>
+        <p className="text-[#64748b] text-sm font-medium">{metric.label}</p>
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center gap-2.5">
-          <span className="text-xs text-white/30 w-14 shrink-0 font-medium">Avant</span>
-          <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(239,68,68,0.15)" }}>
+          <span className="text-xs text-[#94a3b8] w-14 shrink-0 font-medium">Avant</span>
+          <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(239,68,68,0.1)" }}>
             <motion.div
               className="h-full rounded-full"
-              style={{ background: "rgba(239,68,68,0.6)" }}
+              style={{ background: "rgba(239,68,68,0.5)" }}
               initial={{ width: 0 }}
               animate={inView ? { width: "100%" } : { width: 0 }}
               transition={{ duration: 0.8, delay: index * 0.12 + 0.3, ease: "easeOut" }}
             />
           </div>
-          <span className="text-xs text-white/30 w-20 shrink-0 text-right">{metric.before}</span>
+          <span className="text-xs text-[#94a3b8] w-20 shrink-0 text-right">{metric.before}</span>
         </div>
         <div className="flex items-center gap-2.5">
-          <span className="text-xs text-[#5bc4d6] w-14 shrink-0 font-medium">MAK</span>
-          <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(56,153,170,0.12)" }}>
+          <span className="text-xs text-[#3899aa] w-14 shrink-0 font-medium">MAK</span>
+          <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "#eef7f6" }}>
             <motion.div
               className="h-full rounded-full"
               style={{ background: "linear-gradient(90deg, #3899aa, #5bc4d6)" }}
@@ -71,7 +71,7 @@ function MetricCard({ metric, index }: { metric: typeof METRICS[0]; index: numbe
               transition={{ duration: 0.8, delay: index * 0.12 + 0.5, ease: "easeOut" }}
             />
           </div>
-          <span className="text-xs text-[#5bc4d6] w-20 shrink-0 text-right font-semibold">{metric.value}</span>
+          <span className="text-xs text-[#3899aa] w-20 shrink-0 text-right font-semibold">{metric.value}</span>
         </div>
       </div>
     </motion.div>
@@ -81,40 +81,40 @@ function MetricCard({ metric, index }: { metric: typeof METRICS[0]; index: numbe
 export function Results() {
   return (
     <section
-      className="py-24 sm:py-32 px-4 sm:px-6"
-      style={{ background: "#0d1424", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-20 sm:py-28 px-4 sm:px-6"
+      style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
     >
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal className="text-center mb-16">
-          <p className="text-[#5bc4d6] text-sm font-semibold uppercase tracking-widest mb-4">Résultats</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+        <ScrollReveal className="text-center mb-12">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Résultats</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
             Ce que tu récupères concrètement
           </h2>
-          <p className="text-white/50 text-lg max-w-xl mx-auto">
+          <p className="text-[#475569] text-base max-w-xl mx-auto">
             Chaque minute économisée est une minute rendue à tes patients — ou à toi.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {METRICS.map((m, i) => <MetricCard key={m.label} metric={m} index={i} />)}
         </div>
 
         <ScrollReveal delay={0.4}>
           <div
-            className="rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
-            style={{ background: "rgba(56,153,170,0.08)", border: "1px solid rgba(56,153,170,0.2)" }}
+            className="rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
+            style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
           >
             <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: "rgba(56,153,170,0.15)", border: "1px solid rgba(56,153,170,0.25)" }}
+              className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+              style={{ background: "white", border: "1px solid #d4ecea" }}
             >
-              <Clock className="w-6 h-6 text-[#5bc4d6]" />
+              <Clock className="w-5 h-5 text-[#3899aa]" />
             </div>
             <div className="flex-1 text-center sm:text-left">
-              <p className="text-white font-bold text-lg">100h récupérées par an.</p>
-              <p className="text-white/45 text-sm mt-0.5">Des kinés MAK gagnent 2h par semaine dès le premier jour d&apos;utilisation.</p>
+              <p className="text-[#0f172a] font-bold text-base">100h récupérées par an.</p>
+              <p className="text-[#64748b] text-sm mt-0.5">Des kinés MAK gagnent 2h par semaine dès le premier jour d&apos;utilisation.</p>
             </div>
-            <div className="flex items-center gap-2 text-[#5bc4d6] text-sm font-semibold shrink-0">
+            <div className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0">
               <span>Voir comment</span>
               <ArrowRight className="w-4 h-4" />
             </div>

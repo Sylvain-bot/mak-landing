@@ -16,29 +16,14 @@ const TRUST = [
 export function CtaFinal() {
   return (
     <section
-      className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden"
-      style={{ background: "#080f1a", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      className="py-20 sm:py-28 px-4 sm:px-6"
+      style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
     >
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 50% 40% at 50% 100%, rgba(56,153,170,0.18) 0%, transparent 100%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute top-0 left-1/4 w-[500px] h-[300px] pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 60% 60% at 30% 0%, rgba(56,153,170,0.07) 0%, transparent 100%)",
-        }}
-      />
-
-      <div className="max-w-3xl mx-auto text-center relative z-10">
-        <ScrollReveal className="mb-7">
+      <div className="max-w-2xl mx-auto text-center">
+        <ScrollReveal className="mb-5">
           <span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[#5bc4d6] text-sm font-medium"
-            style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[#3899aa] text-sm font-medium"
+            style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
           >
             <Zap className="w-3.5 h-3.5" />
             Tarif pionnier — Réservé aux 100 premiers inscrits
@@ -46,19 +31,19 @@ export function CtaFinal() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-4 leading-tight">
             Ton prochain bilan en{" "}
-            <span style={{ background: "linear-gradient(135deg, #5bc4d6 0%, #3899aa 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
               3 minutes.
             </span>
             <br />
             Ton premier drapeau rouge{" "}
-            <span className="text-white/40">détecté dès ce soir.</span>
+            <span className="text-[#94a3b8]">détecté dès ce soir.</span>
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <p className="text-white/50 text-lg mb-9">
+          <p className="text-[#475569] text-base mb-8">
             Accès immédiat. Sans carte bancaire. Prise en main en 5 minutes.
           </p>
         </ScrollReveal>
@@ -68,7 +53,7 @@ export function CtaFinal() {
             href="https://monassistantkine.vercel.app/signup"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-10 h-14 text-base gap-2 transition-all hover:scale-[1.02] inline-flex items-center shadow-lg shadow-[#3899aa]/30"
+              "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-10 h-12 text-base gap-2 transition-all hover:scale-[1.02] inline-flex items-center shadow-lg shadow-[#3899aa]/20"
             )}
           >
             Créer mon compte gratuitement
@@ -76,8 +61,8 @@ export function CtaFinal() {
           </Link>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.25} className="mt-5 mb-10">
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/40">
+        <ScrollReveal delay={0.25} className="mt-4 mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[#64748b]">
             {["Sans engagement", "Sans carte bancaire", "Places limitées aux 100 premiers"].map(
               (item) => (
                 <span key={item} className="flex items-center gap-1.5">
@@ -90,14 +75,14 @@ export function CtaFinal() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.3}>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {TRUST.map((badge) => (
               <span
                 key={badge}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-white/40"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-[#64748b] bg-white"
+                style={{ border: "1px solid #d4ecea" }}
               >
-                <Shield className="w-3 h-3 text-[#5bc4d6]" />
+                <Shield className="w-3 h-3 text-[#3899aa]" />
                 {badge}
               </span>
             ))}
