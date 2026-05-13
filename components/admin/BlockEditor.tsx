@@ -34,6 +34,37 @@ export function htmlToBlocks(html: string): Block[] {
   return blocks.length ? blocks : [{ id: uid(), type: "paragraph", content: "" }];
 }
 
+// Parse a .txt file with # / ## / plain text conventions → blocks
+export function parseTxtToBlocks(text: string): Block[] {
+  const lines = text.split(/\r?\n/);
+  const blocks: Block[] = [];
+  let paragraphBuffer: string[] = [];
+
+  function flushParagraph() {
+    const content = paragraphBuffer.join(" ").trim();
+    if (content) blocks.push({ id: uid(), type: "paragraph", content });
+    paragraphBuffer = [];
+  }
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (line.startsWith("## ")) {
+      flushParagraph();
+      blocks.push({ id: uid(), type: "h3", content: line.slice(3).trim() });
+    } else if (line.startsWith("# ")) {
+      flushParagraph();
+      blocks.push({ id: uid(), type: "h2", content: line.slice(2).trim() });
+    } else if (line === "") {
+      flushParagraph();
+    } else {
+      paragraphBuffer.push(line);
+    }
+  }
+  flushParagraph();
+
+  return blocks.length ? blocks : [{ id: uid(), type: "paragraph", content: "" }];
+}
+
 // Convert blocks → HTML string
 function blocksToHtml(blocks: Block[]): string {
   return blocks.map((b) => {
@@ -92,6 +123,7 @@ export function BlockEditor({ blocks, onChange }: Props) {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const imageTargetBlock = useRef<string | null>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
+  const txtInputRef = useRef<HTMLInputElement>(null);
 
   const emit = useCallback((next: Block[]) => {
     onChange(next, blocksToHtml(next));
@@ -140,6 +172,16 @@ export function BlockEditor({ blocks, onChange }: Props) {
     emit(parsed);
   }
 
+  function handleTxtImport(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = (e.target?.result as string) ?? "";
+      const parsed = parseTxtToBlocks(text);
+      emit(parsed);
+    };
+    reader.readAsText(file, "utf-8");
+  }
+
   return (
     <div className="flex flex-col gap-3">
       {/* Toolbar */}
@@ -163,15 +205,26 @@ export function BlockEditor({ blocks, onChange }: Props) {
             {label}
           </button>
         ))}
-        <button
-          type="button"
-          onClick={() => wordInputRef.current?.click()}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80 ml-auto"
-          style={{ background: "#f1f5f9", color: "#64748b", border: "1px solid #e2e8f0" }}
-        >
-          <FileText className="w-3.5 h-3.5" />
-          Importer Word
-        </button>
+        <div className="flex gap-2 ml-auto">
+          <button
+            type="button"
+            onClick={() => txtInputRef.current?.click()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+            style={{ background: "#f0fdf4", color: "#16a34a", border: "1px solid #bbf7d0" }}
+          >
+            <FileText className="w-3.5 h-3.5" />
+            Importer .txt
+          </button>
+          <button
+            type="button"
+            onClick={() => wordInputRef.current?.click()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+            style={{ background: "#f1f5f9", color: "#64748b", border: "1px solid #e2e8f0" }}
+          >
+            <FileText className="w-3.5 h-3.5" />
+            Importer Word
+          </button>
+        </div>
       </div>
 
       {/* Blocks */}
@@ -263,6 +316,9 @@ export function BlockEditor({ blocks, onChange }: Props) {
       />
       <input ref={wordInputRef} type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className="hidden"
         onChange={(e) => { const f = e.target.files?.[0]; if (f) { handleWordImport(f); e.target.value = ""; } }}
+      />
+      <input ref={txtInputRef} type="file" accept=".txt,text/plain" className="hidden"
+        onChange={(e) => { const f = e.target.files?.[0]; if (f) { handleTxtImport(f); e.target.value = ""; } }}
       />
     </div>
   );
