@@ -4,13 +4,15 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const YT_ID = "NQh0eORWvkc";
+const YT_ID = "i4jnfqxYzwQ";
 
-const POINTS = [
-  { icon: "📋", text: "Comment générer un bilan complet en 3 minutes" },
-  { icon: "🧠", text: "L'aide clinique en temps réel — drapeaux rouges et raisonnement structuré" },
-  { icon: "📚", text: "La recherche EBP : 56 000+ études accessibles en 30 secondes" },
-  { icon: "💬", text: "Le chatbot patient pour le suivi entre les séances" },
+const TIMELINE = [
+  { time: "00:00", text: "Introduction — pourquoi Mon Assistant Kiné a été créé" },
+  { time: "03:30", text: "Le problème : la paperasse qui ronge le temps de soin" },
+  { time: "06:00", text: "Démo live des modules — bilans, aide clinique, EBP, chatbot patient" },
+  { time: "28:30", text: "Questions / Réponses en direct" },
+  { time: "35:30", text: "Témoignage d'un bêta-testeur" },
+  { time: "44:00", text: "L'offre Pionnier — détails et inscription" },
 ];
 
 export default function ReplayPage() {
@@ -65,7 +67,7 @@ export default function ReplayPage() {
           padding: "5px 14px", borderRadius: 50, marginBottom: 20,
         }}>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="#3899aa"><path d="M8 5v14l11-7z"/></svg>
-          Replay disponible
+          Live de Lancement — Replay
         </div>
 
         {/* Title */}
@@ -74,12 +76,12 @@ export default function ReplayPage() {
           textAlign: "center", lineHeight: 1.2, letterSpacing: "-0.02em",
           color: "#0f172a", marginBottom: 12,
         }}>
-          Découvre Mon Assistant Kiné<br />
-          <span style={{ color: "#3899aa" }}>en 3 minutes</span>
+          Replay — Live de Lancement<br />
+          <span style={{ color: "#3899aa" }}>Mon Assistant Kiné</span>
         </h1>
 
         <p style={{ fontSize: 15, color: "#475569", textAlign: "center", lineHeight: 1.6, marginBottom: 32, maxWidth: 480 }}>
-          De la question clinique au bilan complet — vois comment des kinés gagnent 2h par semaine dès le premier jour.
+          Tu as manqué le live ? Regarde le replay et découvre l&apos;offre Pionnier réservée aux 100 premiers abonnés.
         </p>
 
         {/* YouTube facade */}
@@ -131,29 +133,39 @@ export default function ReplayPage() {
                 background: "rgba(0,0,0,0.6)", color: "#fff",
                 fontSize: 11, fontWeight: 600, padding: "3px 8px",
                 borderRadius: 6, letterSpacing: "0.03em",
-              }}>3:00</div>
+              }}>49:00</div>
             </>
           )}
         </div>
         <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 36 }}>
-          Clique pour lancer · Démo complète · 3 minutes
+          Clique pour lancer · Replay complet · 49 minutes
         </p>
 
-        {/* What you'll see */}
+        {/* Timeline */}
         <div style={{
           width: "100%", background: "white",
           border: "1px solid #d4ecea", borderRadius: 16,
           padding: "20px 24px", marginBottom: 32,
           boxShadow: "0 2px 12px rgba(56,153,170,0.06)",
         }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: "#3899aa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
-            Dans ce replay
+          <p style={{ fontSize: 11, fontWeight: 700, color: "#3899aa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
+            Timeline du replay
           </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {POINTS.map((p) => (
-              <div key={p.icon} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                <span style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.4 }}>{p.icon}</span>
-                <span style={{ fontSize: 13.5, color: "#334155", lineHeight: 1.5 }}>{p.text}</span>
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {TIMELINE.map((item, i) => (
+              <div key={item.time} style={{
+                display: "flex", alignItems: "flex-start", gap: 12,
+                paddingBottom: i < TIMELINE.length - 1 ? 14 : 0,
+                marginBottom: i < TIMELINE.length - 1 ? 14 : 0,
+                borderBottom: i < TIMELINE.length - 1 ? "1px solid #f0f9fa" : "none",
+              }}>
+                <span style={{
+                  fontSize: 11, fontWeight: 700, color: "#3899aa",
+                  background: "#eef7f6", border: "1px solid #d4ecea",
+                  borderRadius: 6, padding: "2px 7px",
+                  flexShrink: 0, marginTop: 1, letterSpacing: "0.02em",
+                }}>{item.time}</span>
+                <span style={{ fontSize: 13, color: "#334155", lineHeight: 1.5 }}>{item.text}</span>
               </div>
             ))}
           </div>
@@ -173,11 +185,11 @@ export default function ReplayPage() {
           onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.92"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
           onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "none"; }}
         >
-          Créer mon compte gratuitement
+          Rejoindre l&apos;offre Pionnier — 19€/mois
           <span style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>→</span>
         </Link>
         <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 12 }}>
-          Sans carte bancaire · Accès immédiat · Annulable à tout moment
+          Au lieu de 49€/mois · Tarif garanti à vie · Limité aux 100 premiers
         </p>
         <Link href="https://monassistantkine.vercel.app/login" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>
           Déjà un compte ? <span style={{ color: "#3899aa", fontWeight: 600 }}>Se connecter</span>
