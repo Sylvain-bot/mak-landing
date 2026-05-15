@@ -28,6 +28,13 @@ const FOOTER_LINKS = [
 
 export default function BioPage() {
   const [ytLoaded, setYtLoaded] = useState(false);
+  const [pioneerSpots, setPioneerSpots] = useState(87);
+
+  useEffect(() => {
+    fetch("/api/pioneer").then((r) => r.json()).then((d) => {
+      if (typeof d.spots === "number") setPioneerSpots(d.spots);
+    });
+  }, []);
 
   return (
     <main
@@ -79,7 +86,7 @@ export default function BioPage() {
           padding: "5px 14px", borderRadius: 50, marginBottom: 20,
         }}>
           <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#3899aa", display: "inline-block" }} className="animate-pulse" />
-          Offre Pionnier · 87 places restantes · 19€/mois
+          Offre Pionnier · {pioneerSpots} places restantes · 19€/mois
         </div>
 
         {/* Heading */}
@@ -154,11 +161,11 @@ export default function BioPage() {
           </div>
           {/* Progress bar */}
           <div style={{ width: "100%", height: 7, borderRadius: 99, background: "#d4ecea", overflow: "hidden", marginBottom: 8 }}>
-            <div style={{ width: "13%", height: "100%", borderRadius: 99, background: "linear-gradient(90deg, #3899aa, #2a7a8a)" }} />
+            <div style={{ width: `${100 - pioneerSpots}%`, height: "100%", borderRadius: 99, background: "linear-gradient(90deg, #3899aa, #2a7a8a)" }} />
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontSize: 11.5, color: "#6b8f96" }}>
-              <strong style={{ color: "#0f2d35" }}>87 places</strong> restantes sur 100
+              <strong style={{ color: "#0f2d35" }}>{pioneerSpots} places</strong> restantes sur 100
             </span>
             <span style={{ fontSize: 11, color: "#3899aa", fontWeight: 600 }}>Tarif garanti à vie</span>
           </div>

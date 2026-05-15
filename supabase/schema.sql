@@ -30,3 +30,7 @@ ALTER TABLE settings ENABLE ROW LEVEL SECURITY;
 -- Settings are read/written only from server-side (service role key or anon for reads)
 CREATE POLICY "settings are public read" ON settings
   FOR SELECT USING (true);
+
+-- Seed: places Pionnier (mettre à jour via l'admin ou directement ici)
+INSERT INTO settings (key, value) VALUES ('pioneer_spots', '87')
+  ON CONFLICT (key) DO NOTHING;

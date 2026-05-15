@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, FileText, Mail, BarChart2, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, Mail, BarChart2, Flame, LogOut } from "lucide-react";
 
 const LINKS = [
   { href: "/admin/content",    label: "Contenu landing",  icon: LayoutDashboard },
   { href: "/admin/blog",       label: "Blog",             icon: FileText },
   { href: "/admin/newsletter", label: "Newsletter",       icon: Mail },
   { href: "/admin/analytics",  label: "Analytics",        icon: BarChart2 },
+  { href: "/admin/pioneer",    label: "Offre Pionnier",   icon: Flame },
 ];
 
 export function AdminSidebar() {

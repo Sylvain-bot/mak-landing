@@ -67,7 +67,7 @@ const BADGE_STYLE = {
   backdropFilter: "blur(8px)",
 };
 
-export function Hero() {
+export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
   const statsRef = useRef<HTMLDivElement>(null);
   const inView = useInView(statsRef, { once: true });
 
@@ -158,7 +158,7 @@ export function Hero() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-              Offre Pionnier — 87 places restantes sur 100
+              Offre Pionnier — {pioneerSpots} places restantes sur 100
             </span>
           </motion.div>
 
@@ -251,10 +251,10 @@ export function Hero() {
             </div>
             {/* Progress bar */}
             <div className="w-full h-2 rounded-full bg-[#d4ecea] overflow-hidden mb-2">
-              <div className="h-full rounded-full bg-gradient-to-r from-[#3899aa] to-[#2a7a8a]" style={{ width: "13%" }} />
+              <div className="h-full rounded-full bg-gradient-to-r from-[#3899aa] to-[#2a7a8a]" style={{ width: `${100 - pioneerSpots}%` }} />
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[#64748b]"><strong className="text-[#0f172a]">87 places</strong> restantes sur 100</span>
+              <span className="text-xs text-[#64748b]"><strong className="text-[#0f172a]">{pioneerSpots} places</strong> restantes sur 100</span>
               <span className="text-xs text-[#3899aa] font-semibold">Tarif garanti à vie →</span>
             </div>
           </motion.div>

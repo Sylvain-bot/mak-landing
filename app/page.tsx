@@ -12,12 +12,28 @@ import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { CtaFinal } from "@/components/CtaFinal";
 import { Footer } from "@/components/Footer";
+import { supabaseAdmin } from "@/lib/supabase-server";
 
-export default function Home() {
+async function getPioneerSpots(): Promise<number> {
+  try {
+    const { data } = await supabaseAdmin
+      .from("settings")
+      .select("value")
+      .eq("key", "pioneer_spots")
+      .single();
+    return data ? parseInt(data.value, 10) : 87;
+  } catch {
+    return 87;
+  }
+}
+
+export default async function Home() {
+  const pioneerSpots = await getPioneerSpots();
+
   return (
     <main>
       <Navbar />
-      <Hero />
+      <Hero pioneerSpots={pioneerSpots} />
       <SocialProof />
       <DemoVideo />
       <Problem />
