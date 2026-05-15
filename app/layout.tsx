@@ -28,8 +28,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white text-[#0f172a]">
         {children}
 
-        {/* Microsoft Clarity — beforeInteractive injecte dans le <head> pour un tracking fiable */}
-        <Script id="clarity" strategy="beforeInteractive">{`
+        {/* Microsoft Clarity */}
+        <Script id="clarity" strategy="afterInteractive">{`
           (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
