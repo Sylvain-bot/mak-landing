@@ -83,9 +83,52 @@ function FloatingBadge({
 
 const TRUST = ["Sans carte bancaire", "Accès immédiat", "5 min de prise en main"];
 
+// GIF = 9.6s, 7 bulles → 1 bulle toutes les 1.37s
+// Toutes restent visibles jusqu'à la fin du cycle, puis reset ensemble
+const GIF_MS = 9600;
+const BUBBLES = [
+  { icon: "🎙️", label: "Dicte ou écris tes notes",            pos: "top-[35%] -left-3 sm:-left-14" },
+  { icon: "⚡",  label: "Généré en quelques secondes",          pos: "-top-5 right-4 sm:right-0 sm:-translate-x-8" },
+  { icon: "✅",  label: "Conforme NGAP",                        pos: "top-[22%] -right-3 sm:-right-12" },
+  { icon: "🎨",  label: "Templates entièrement personnalisables", pos: "top-[52%] -right-3 sm:-right-16", twoLine: true },
+  { icon: "📄",  label: "Export PDF en un clic",                pos: "-bottom-5 left-4 sm:left-0 sm:translate-x-8" },
+  { icon: "📚",  label: "56 000+ ressources dont Cleland",      pos: "top-[65%] -left-3 sm:-left-14", twoLine: true },
+  { icon: "🚩",  label: "Détection des red flags",              pos: "-top-5 left-4 sm:left-0 sm:translate-x-8" },
+];
+
+const BADGE_STYLE = {
+  background: "rgba(255,255,255,0.95)",
+  border: "1px solid rgba(56,153,170,0.2)",
+  boxShadow: "0 4px 20px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04)",
+  backdropFilter: "blur(8px)",
+};
+
 export function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
   const inView = useInView(statsRef, { once: true });
+
+  // Bulles : apparaissent une par une et restent, puis reset ensemble avec le GIF
+  const [visible, setVisible] = useState(0);
+  useEffect(() => {
+    const SLOT = GIF_MS / BUBBLES.length; // ~1371ms
+    const PAUSE = 450; // pause avant le redémarrage
+    let timers: ReturnType<typeof setTimeout>[] = [];
+
+    function cycle() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      BUBBLES.forEach((_, i) => {
+        timers.push(setTimeout(() => setVisible(i + 1), i * SLOT));
+      });
+      timers.push(setTimeout(() => {
+        setVisible(0);
+        timers.push(setTimeout(cycle, PAUSE));
+      }, GIF_MS));
+    }
+
+    const init = setTimeout(cycle, 900); // attendre que le hero soit visible
+    return () => { clearTimeout(init); timers.forEach(clearTimeout); };
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-white pt-24 pb-0 px-4 sm:px-6">
@@ -108,18 +151,6 @@ export function Hero() {
         .aurora-1 { animation: aurora-1 12s ease-in-out infinite; }
         .aurora-2 { animation: aurora-2 15s ease-in-out infinite; }
 
-        /* GIF = 9.6s, 5 badges → 1.92s/badge (20% each)
-           appear 0→7%, peak 7→15%, exit 15→20%, hidden 20→100% */
-        @keyframes badge-cycle {
-          0%, 2%      { opacity: 0; transform: scale(0.82) translateY(7px); }
-          7%           { opacity: 1; transform: scale(1)    translateY(0); }
-          15%          { opacity: 1; transform: scale(1)    translateY(-5px); }
-          20%, 100%    { opacity: 0; transform: scale(0.88) translateY(-8px); }
-        }
-        .badge-seq {
-          animation: badge-cycle 9.6s ease-in-out infinite both;
-          will-change: opacity, transform;
-        }
       `}</style>
 
       {/* Dot grid */}
@@ -289,94 +320,44 @@ export function Hero() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/gif%20hero.gif"
-                  alt="Recherche bibliographique IA — Mon Assistant Kiné"
+                  alt="Génération de bilan en 3 minutes — Mon Assistant Kiné"
                   className="w-full h-auto block hero-gif"
                 />
               </div>
             </div>
           </div>
 
-          {/* Bulles — apparition cyclique calée sur le GIF (9.6s / 5 = 1.92s par bulle)
-               Ordre d'apparition : Dicte → Généré → NGAP → Templates → PDF
-               Délai initial 0.9s pour laisser le hero s'afficher d'abord          */}
-
-          {/* 1. Dicte ou écris tes notes — gauche milieu */}
-          <div
-            className="badge-seq absolute top-[35%] -left-3 sm:-left-14 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
-            style={{
-              animationDelay: "0.9s",
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(56,153,170,0.2)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <span className="text-sm shrink-0">🎙️</span>
-            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Dicte ou écris tes notes</span>
-          </div>
-
-          {/* 2. Généré en quelques secondes — haut droite */}
-          <div
-            className="badge-seq absolute -top-5 right-4 sm:right-0 sm:-translate-x-8 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
-            style={{
-              animationDelay: "2.82s",
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(56,153,170,0.2)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <span className="text-sm shrink-0">⚡</span>
-            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Généré en quelques secondes</span>
-          </div>
-
-          {/* 3. Conforme NGAP — droite haut */}
-          <div
-            className="badge-seq absolute top-[22%] -right-3 sm:-right-12 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
-            style={{
-              animationDelay: "4.74s",
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(56,153,170,0.2)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <span className="text-sm shrink-0">✅</span>
-            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Conforme NGAP</span>
-          </div>
-
-          {/* 4. Templates entièrement personnalisables — droite bas */}
-          <div
-            className="badge-seq absolute top-[52%] -right-3 sm:-right-14 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
-            style={{
-              animationDelay: "6.66s",
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(56,153,170,0.2)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <span className="text-sm shrink-0">🎨</span>
-            <div>
-              <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">Templates</p>
-              <p className="text-xs font-semibold text-[#0f172a]">entièrement personnalisables</p>
-            </div>
-          </div>
-
-          {/* 5. Export PDF en un clic — bas gauche */}
-          <div
-            className="badge-seq absolute -bottom-5 left-4 sm:left-0 sm:translate-x-8 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
-            style={{
-              animationDelay: "8.58s",
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(56,153,170,0.2)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <span className="text-sm shrink-0">📄</span>
-            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Export PDF en un clic</span>
-          </div>
+          {/* Bulles — restent en place une fois apparues, reset ensemble avec le GIF */}
+          {BUBBLES.map((b, i) => (
+            <motion.div
+              key={b.label}
+              animate={{
+                opacity: i < visible ? 1 : 0,
+                scale:   i < visible ? 1 : 0.82,
+                y:       i < visible ? 0 : 8,
+              }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className={cn(
+                "absolute flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20 pointer-events-none",
+                b.pos
+              )}
+              style={BADGE_STYLE}
+            >
+              <span className="text-sm shrink-0">{b.icon}</span>
+              {b.twoLine ? (
+                <div>
+                  <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">
+                    {b.label.split(" ").slice(0, 2).join(" ")}
+                  </p>
+                  <p className="text-xs font-semibold text-[#0f172a]">
+                    {b.label.split(" ").slice(2).join(" ")}
+                  </p>
+                </div>
+              ) : (
+                <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">{b.label}</span>
+              )}
+            </motion.div>
+          ))}
         </motion.div>
 
         {/* Stats card */}
