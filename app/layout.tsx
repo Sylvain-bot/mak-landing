@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
+import ClarityInit from "@/components/ClarityInit";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -27,15 +28,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white text-[#0f172a]">
         {children}
-
-        {/* Microsoft Clarity */}
-        <Script id="clarity" strategy="afterInteractive">{`
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window,document,"clarity","script","wrdiamqyf8");
-        `}</Script>
+        <ClarityInit />
 
         {/* Meta Pixel */}
         <Script id="fb-pixel" strategy="afterInteractive">{`
