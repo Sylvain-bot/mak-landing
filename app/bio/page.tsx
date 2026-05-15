@@ -79,7 +79,7 @@ export default function BioPage() {
           padding: "5px 14px", borderRadius: 50, marginBottom: 20,
         }}>
           <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#3899aa", display: "inline-block" }} className="animate-pulse" />
-          Accès gratuit · Sans carte bancaire
+          Offre Pionnier · 87 places restantes · 19€/mois
         </div>
 
         {/* Heading */}
@@ -133,6 +133,35 @@ export default function BioPage() {
           <span style={{ fontSize: 12.5, color: "#6b8f96" }}>
             <strong style={{ color: "#0f2d35" }}>200+ kinés</strong> abonnés · conçu par des kinés libéraux
           </span>
+        </div>
+
+        {/* Pionnier offer */}
+        <div style={{
+          width: "100%", background: "#f0f9fa",
+          border: "1px solid #d4ecea", borderRadius: 16,
+          padding: "18px 20px", marginBottom: 16,
+        }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+            <div>
+              <span style={{ fontSize: 13, fontWeight: 700, color: "#0f2d35" }}>Offre Pionnier</span>
+              <span style={{ fontSize: 11, color: "#6b8f96", marginLeft: 8 }}>· lancé le 22/04/2026</span>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <span style={{ fontSize: 20, fontWeight: 800, color: "#3899aa" }}>19€</span>
+              <span style={{ fontSize: 11, color: "#a8c5cc", textDecoration: "line-through", marginLeft: 6 }}>49€</span>
+              <span style={{ fontSize: 11, color: "#6b8f96" }}>/mois</span>
+            </div>
+          </div>
+          {/* Progress bar */}
+          <div style={{ width: "100%", height: 7, borderRadius: 99, background: "#d4ecea", overflow: "hidden", marginBottom: 8 }}>
+            <div style={{ width: "13%", height: "100%", borderRadius: 99, background: "linear-gradient(90deg, #3899aa, #2a7a8a)" }} />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span style={{ fontSize: 11.5, color: "#6b8f96" }}>
+              <strong style={{ color: "#0f2d35" }}>87 places</strong> restantes sur 100
+            </span>
+            <span style={{ fontSize: 11, color: "#3899aa", fontWeight: 600 }}>Tarif garanti à vie</span>
+          </div>
         </div>
 
         {/* CTA */}

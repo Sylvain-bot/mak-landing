@@ -45,42 +45,6 @@ function StatItem({
   );
 }
 
-function FloatingBadge({
-  delay, floatY = 10, floatDuration = 5, className, children,
-}: {
-  delay: number; floatY?: number; floatDuration?: number;
-  className?: string; children: React.ReactNode;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.75, y: 0 }}
-      animate={{ opacity: 1, scale: 1, y: [0, -floatY, 0] }}
-      transition={{
-        opacity: { delay, duration: 0.5, ease: "easeOut" },
-        scale:   { delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-        y: {
-          delay: delay + 0.6,
-          duration: floatDuration,
-          repeat: Infinity,
-          ease: "easeInOut",
-          repeatType: "loop",
-        },
-      }}
-      className={cn(
-        "flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20 backdrop-blur-sm",
-        className
-      )}
-      style={{
-        background: "rgba(255,255,255,0.95)",
-        border: "1px solid rgba(56,153,170,0.2)",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04)",
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 const TRUST = ["Sans carte bancaire", "Accès immédiat", "5 min de prise en main"];
 
 // GIF = 9.6s, 7 bulles → 1 bulle toutes les 1.37s
@@ -194,7 +158,7 @@ export function Hero() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-              Offre fondateurs — 100 premières inscriptions
+              Offre Pionnier — 87 places restantes sur 100
             </span>
           </motion.div>
 
@@ -264,6 +228,35 @@ export function Hero() {
                 {item}
               </span>
             ))}
+          </motion.div>
+
+          {/* Pionnier offer bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            className="mt-7 w-full max-w-md mx-auto rounded-2xl px-5 py-4"
+            style={{ background: "#f0f9fa", border: "1px solid #d4ecea" }}
+          >
+            <div className="flex items-center justify-between mb-2.5">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-[#0f172a]">Offre Pionnier</span>
+                <span className="text-xs text-[#94a3b8] font-medium">· lancé le 22/04/2026</span>
+              </div>
+              <div className="text-right">
+                <span className="text-lg font-bold text-[#3899aa]">19€</span>
+                <span className="text-xs text-[#94a3b8] line-through ml-1.5">49€</span>
+                <span className="text-xs text-[#64748b]">/mois</span>
+              </div>
+            </div>
+            {/* Progress bar */}
+            <div className="w-full h-2 rounded-full bg-[#d4ecea] overflow-hidden mb-2">
+              <div className="h-full rounded-full bg-gradient-to-r from-[#3899aa] to-[#2a7a8a]" style={{ width: "13%" }} />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[#64748b]"><strong className="text-[#0f172a]">87 places</strong> restantes sur 100</span>
+              <span className="text-xs text-[#3899aa] font-semibold">Tarif garanti à vie →</span>
+            </div>
           </motion.div>
         </div>
 
