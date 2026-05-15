@@ -107,6 +107,19 @@ export function Hero() {
         }
         .aurora-1 { animation: aurora-1 12s ease-in-out infinite; }
         .aurora-2 { animation: aurora-2 15s ease-in-out infinite; }
+
+        /* GIF = 9.6s, 5 badges → 1.92s/badge (20% each)
+           appear 0→7%, peak 7→15%, exit 15→20%, hidden 20→100% */
+        @keyframes badge-cycle {
+          0%, 2%      { opacity: 0; transform: scale(0.82) translateY(7px); }
+          7%           { opacity: 1; transform: scale(1)    translateY(0); }
+          15%          { opacity: 1; transform: scale(1)    translateY(-5px); }
+          20%, 100%    { opacity: 0; transform: scale(0.88) translateY(-8px); }
+        }
+        .badge-seq {
+          animation: badge-cycle 9.6s ease-in-out infinite both;
+          will-change: opacity, transform;
+        }
       `}</style>
 
       {/* Dot grid */}
@@ -283,44 +296,87 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Badge — top right */}
-          <FloatingBadge delay={1.1} floatY={8} floatDuration={4.8} className="absolute -top-5 right-4 sm:right-0 sm:-translate-x-8">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">56 000+ études intégrées</span>
-          </FloatingBadge>
+          {/* Bulles — apparition cyclique calée sur le GIF (9.6s / 5 = 1.92s par bulle)
+               Ordre d'apparition : Dicte → Généré → NGAP → Templates → PDF
+               Délai initial 0.9s pour laisser le hero s'afficher d'abord          */}
 
-          {/* Badge — right, middle-upper */}
-          <FloatingBadge delay={1.3} floatY={12} floatDuration={5.6} className="absolute top-[22%] -right-3 sm:-right-12">
-            <span className="text-sm">🔬</span>
-            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Sources vérifiables</span>
-          </FloatingBadge>
+          {/* 1. Dicte ou écris tes notes — gauche milieu */}
+          <div
+            className="badge-seq absolute top-[35%] -left-3 sm:-left-14 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
+            style={{
+              animationDelay: "0.9s",
+              background: "rgba(255,255,255,0.95)",
+              border: "1px solid rgba(56,153,170,0.2)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span className="text-sm shrink-0">🎙️</span>
+            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Dicte ou écris tes notes</span>
+          </div>
 
-          {/* Badge — right, middle-lower */}
-          <FloatingBadge delay={1.6} floatY={9} floatDuration={6.2} className="absolute top-[52%] -right-3 sm:-right-14">
-            <span className="text-sm">📈</span>
+          {/* 2. Généré en quelques secondes — haut droite */}
+          <div
+            className="badge-seq absolute -top-5 right-4 sm:right-0 sm:-translate-x-8 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
+            style={{
+              animationDelay: "2.82s",
+              background: "rgba(255,255,255,0.95)",
+              border: "1px solid rgba(56,153,170,0.2)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span className="text-sm shrink-0">⚡</span>
+            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Généré en quelques secondes</span>
+          </div>
+
+          {/* 3. Conforme NGAP — droite haut */}
+          <div
+            className="badge-seq absolute top-[22%] -right-3 sm:-right-12 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
+            style={{
+              animationDelay: "4.74s",
+              background: "rgba(255,255,255,0.95)",
+              border: "1px solid rgba(56,153,170,0.2)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span className="text-sm shrink-0">✅</span>
+            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Conforme NGAP</span>
+          </div>
+
+          {/* 4. Templates entièrement personnalisables — droite bas */}
+          <div
+            className="badge-seq absolute top-[52%] -right-3 sm:-right-14 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
+            style={{
+              animationDelay: "6.66s",
+              background: "rgba(255,255,255,0.95)",
+              border: "1px solid rgba(56,153,170,0.2)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span className="text-sm shrink-0">🎨</span>
             <div>
-              <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">Base de données</p>
-              <p className="text-xs font-semibold text-[#0f172a]">enrichie en continu</p>
+              <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">Templates</p>
+              <p className="text-xs font-semibold text-[#0f172a]">entièrement personnalisables</p>
             </div>
-          </FloatingBadge>
+          </div>
 
-          {/* Badge — left, middle */}
-          <FloatingBadge delay={1.4} floatY={11} floatDuration={5.1} className="absolute top-[35%] -left-3 sm:-left-14">
-            <span className="text-sm">📚</span>
-            <div>
-              <p className="text-[10px] text-[#94a3b8] leading-none mb-0.5">Recherche biblio</p>
-              <p className="text-xs font-bold text-[#3899aa]">PubMed · Cleland · Guidelines</p>
-            </div>
-          </FloatingBadge>
-
-          {/* Badge — bottom left */}
-          <FloatingBadge delay={1.8} floatY={7} floatDuration={4.5} className="absolute -bottom-5 left-4 sm:left-0 sm:translate-x-8">
-            <span className="text-base">⚡</span>
-            <div>
-              <p className="text-[10px] text-[#94a3b8] leading-none">Résultat en</p>
-              <p className="text-xs font-bold text-[#3899aa]">30 sec chrono</p>
-            </div>
-          </FloatingBadge>
+          {/* 5. Export PDF en un clic — bas gauche */}
+          <div
+            className="badge-seq absolute -bottom-5 left-4 sm:left-0 sm:translate-x-8 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 z-20"
+            style={{
+              animationDelay: "8.58s",
+              background: "rgba(255,255,255,0.95)",
+              border: "1px solid rgba(56,153,170,0.2)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span className="text-sm shrink-0">📄</span>
+            <span className="text-xs font-semibold text-[#0f172a] whitespace-nowrap">Export PDF en un clic</span>
+          </div>
         </motion.div>
 
         {/* Stats card */}
