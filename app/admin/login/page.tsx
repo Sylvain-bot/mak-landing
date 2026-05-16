@@ -19,12 +19,14 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
       });
-      if (!res.ok) {
-        const d = await res.json();
-        setError(d.error ?? "Erreur");
-      } else {
+      if (res.ok) {
         router.push("/admin/content");
+        return;
       }
+      const d = await res.json().catch(() => ({}));
+      setError(d.error ?? `Erreur ${res.status}`);
+    } catch {
+      setError("Erreur réseau — vérifie ta connexion");
     } finally {
       setLoading(false);
     }
