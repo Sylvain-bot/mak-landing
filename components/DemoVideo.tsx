@@ -60,13 +60,23 @@ export function DemoVideo() {
         </motion.div>
 
         <ScrollReveal delay={0.3}>
-          <Link
-            href="https://monassistantkine.vercel.app/signup"
-            className="inline-flex items-center gap-2 text-[#3899aa] hover:text-[#2d8a9a] text-sm font-semibold underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
-          >
-            Essayer gratuitement — sans carte bancaire
-            <ExternalLink className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="https://monassistantkine.vercel.app/signup"
+              className="inline-flex items-center gap-2 text-[#3899aa] hover:text-[#2d8a9a] text-sm font-semibold underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
+            >
+              Essayer gratuitement — sans carte bancaire
+              <ExternalLink className="w-4 h-4" />
+            </Link>
+            <span className="hidden sm:block text-[#d4ecea]">·</span>
+            <Link
+              href="https://www.monassistantkine.fr/replay"
+              className="inline-flex items-center gap-2 text-[#94a3b8] hover:text-[#475569] text-sm transition-colors"
+            >
+              <Play className="w-3.5 h-3.5" />
+              Voir le replay du live de lancement
+            </Link>
+          </div>
         </ScrollReveal>
       </div>
     </section>
