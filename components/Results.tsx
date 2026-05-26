@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
 import { ArrowRight, Clock } from "lucide-react";
+import Link from "next/link";
 
 const METRICS = [
   { value: "3 min", label: "par bilan complet", before: "20 min", afterRatio: 15, icon: "📋" },
@@ -114,10 +115,13 @@ export function Results() {
               <p className="text-[#0f172a] font-bold text-base">100h récupérées par an.</p>
               <p className="text-[#64748b] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés gagnent 2h par semaine dès le premier jour.</p>
             </div>
-            <div className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0">
-              <span>Voir comment</span>
+            <Link
+              href="https://monassistantkine.vercel.app/signup"
+              className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0 hover:text-[#2d8a9a] transition-colors"
+            >
+              <span>Essayer gratuitement</span>
               <ArrowRight className="w-4 h-4" />
-            </div>
+            </Link>
           </div>
         </ScrollReveal>
       </div>

@@ -76,7 +76,7 @@ export function Founders() {
             {[
               { value: "2", label: "kinés libéraux fondateurs" },
               { value: "100%", label: "conçu pour la pratique terrain" },
-              { value: "0", label: "intermédiaire entre vous et l'outil" },
+              { value: "0", label: "intermédiaire entre toi et l'outil" },
             ].map((item) => (
               <div key={item.label} className="flex flex-col items-center gap-1 min-w-[140px]">
                 <span className="text-2xl font-bold text-[#3899aa]">{item.value}</span>

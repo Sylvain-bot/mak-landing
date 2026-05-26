@@ -12,6 +12,7 @@ export function DemoVideo() {
 
   return (
     <section
+      id="demo"
       className="relative overflow-hidden py-20 sm:py-28 px-4 sm:px-6"
       style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
     >
@@ -25,7 +26,7 @@ export function DemoVideo() {
             Démo live
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
-            Découvre Mon Assistant Kiné en 3 minutes
+            Découvre Mon Assistant Kiné en 1 minute
           </h2>
           <p className="text-[#475569] text-base mb-9 max-w-2xl mx-auto">
             De la question clinique au bilan complet — découvre comment des kinés
@@ -60,13 +61,11 @@ export function DemoVideo() {
 
         <ScrollReveal delay={0.3}>
           <Link
-            href="https://www.monassistantkine.fr/replay"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#94a3b8] hover:text-[#3899aa] text-sm font-medium underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
+            href="https://monassistantkine.vercel.app/signup"
+            className="inline-flex items-center gap-2 text-[#3899aa] hover:text-[#2d8a9a] text-sm font-semibold underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
           >
+            Essayer gratuitement — sans carte bancaire
             <ExternalLink className="w-4 h-4" />
-            Voir le replay complet sur monassistantkine.fr
           </Link>
         </ScrollReveal>
       </div>

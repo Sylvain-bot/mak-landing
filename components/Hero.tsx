@@ -166,18 +166,26 @@ export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-[#0f172a] mb-5"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-[#0f172a] mb-4"
           >
-            Tes bilans en{" "}
-            <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-              3 minutes.
-            </span>
+            L&apos;assistant IA des kinésithérapeutes —
             <br />
-            Tes drapeaux rouges{" "}
-            <span className="bg-gradient-to-r from-[#5bc4d6] to-[#3899aa] bg-clip-text text-transparent">
-              détectés.
+            <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
+              Bilans en 3 minutes
             </span>
           </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="text-sm text-[#64748b] mb-5 leading-relaxed max-w-2xl mx-auto"
+          >
+            Mon Assistant Kiné est un assistant IA conçu exclusivement pour les kinésithérapeutes
+            libéraux. Il génère des bilans cliniques en 3 minutes, détecte les drapeaux rouges en
+            temps réel et donne accès à plus de 56 000 ressources scientifiques validées, dont le
+            Cleland. Développé par deux kinésithérapeutes praticiens.
+          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -208,12 +216,12 @@ export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
               Créer mon compte gratuitement
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link
-              href="https://www.monassistantkine.fr/replay"
+            <a
+              href="#demo"
               className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all gap-2"
             >
               Voir la démo
-            </Link>
+            </a>
           </motion.div>
 
           <motion.div
@@ -312,7 +320,7 @@ export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
               <div className="overflow-hidden w-full">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/gif%20hero.gif"
+                  src="/bilan-kine-ia-3-minutes.gif"
                   alt="Génération de bilan en 3 minutes — Mon Assistant Kiné"
                   className="w-full h-auto block hero-gif"
                 />
