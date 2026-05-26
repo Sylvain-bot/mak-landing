@@ -34,6 +34,10 @@ const FAQS = [
     q: "De nouvelles fonctionnalités seront-elles ajoutées ?",
     a: "Oui, en continu. L'évolution du produit est directement guidée par les retours terrain des kinés qui l'utilisent. Les Pionniers ont un accès prioritaire aux nouvelles fonctionnalités et participent aux décisions produit.",
   },
+  {
+    q: "Comment vous contacter ?",
+    a: "Directement par mail : sylvain@monassistantkine.fr. Je réponds personnellement et rapidement.",
+  },
 ];
 
 function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
