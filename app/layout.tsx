@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
+import ClarityInit from "@/components/ClarityInit";
 import { JsonLd } from "@/components/JsonLd";
 import "./globals.css";
 
@@ -42,18 +43,7 @@ export default function RootLayout({
           "logo": "https://www.monassistantkine.fr/logo-mak.webp",
         }} />
         {children}
-
-        {/* Clarity */}
-        <Script id="clarity" strategy="afterInteractive">{`
-          try {
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];
-              if(y&&y.parentNode){y.parentNode.insertBefore(t,y);}else{document.head.appendChild(t);}
-            })(window,document,"clarity","script","x05aesrw1w");
-          } catch(e) {}
-        `}</Script>
+        <ClarityInit />
 
         {/* Meta Pixel */}
         <Script id="fb-pixel" strategy="afterInteractive">{`
