@@ -51,7 +51,7 @@ export default function RootLayout({
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];
               if(y&&y.parentNode){y.parentNode.insertBefore(t,y);}else{document.head.appendChild(t);}
-            })(window,document,"clarity","script","wrdiamqyf8");
+            })(window,document,"clarity","script","x05aesrw1w");
           } catch(e) {}
         `}</Script>
 
