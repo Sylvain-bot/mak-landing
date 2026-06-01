@@ -59,11 +59,11 @@ export default async function Home() {
       <DemoVideo />
       <Problem />
       <Features />
+      <ContratSection />
       <Results />
       <Testimonials />
       <Founders />
       <ForWho />
-      <ContratSection />
       <Pricing />
       <FAQ />
       <CtaFinal />

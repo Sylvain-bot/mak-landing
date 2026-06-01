@@ -14,7 +14,7 @@ const FEATURES = [
   { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Aide clinique", badge: null },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", badge: null },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", badge: null },
-  { href: "https://monassistantkine.vercel.app/signup", icon: "📑", label: "Contrats de remplacement", badge: "Gratuit" },
+  { href: "/fonctionnalites/contrats-remplacement", icon: "📑", label: "Contrats de remplacement", badge: "Gratuit" },
 ];
 
 export function Navbar() {
