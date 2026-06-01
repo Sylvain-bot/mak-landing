@@ -9,11 +9,12 @@ import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 const FEATURES = [
-  { href: "/fonctionnalites/documentation-bilan-kine", icon: "📋", label: "Bilans NGAP" },
-  { href: "/fonctionnalites/recherche-bibliographique", icon: "📚", label: "Recherche EBP" },
-  { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Aide clinique" },
-  { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient" },
-  { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif" },
+  { href: "/fonctionnalites/documentation-bilan-kine", icon: "📋", label: "Bilans NGAP", badge: null },
+  { href: "/fonctionnalites/recherche-bibliographique", icon: "📚", label: "Recherche EBP", badge: null },
+  { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Aide clinique", badge: null },
+  { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", badge: null },
+  { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", badge: null },
+  { href: "https://monassistantkine.vercel.app/signup", icon: "📑", label: "Contrats de remplacement", badge: "Gratuit" },
 ];
 
 export function Navbar() {
@@ -98,8 +99,14 @@ export function Navbar() {
                         onClick={() => setFeatOpen(false)}
                         className="flex items-center gap-3 px-4 py-2.5 text-sm text-[#475569] hover:text-[#3899aa] hover:bg-[#eef7f6] transition-colors"
                       >
-                        <span className="text-base">{f.icon}</span>
-                        {f.label}
+                        <span className="text-base shrink-0">{f.icon}</span>
+                        <span className="flex-1">{f.label}</span>
+                        {f.badge && (
+                          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
+                            style={{ background: "#dcfce7", color: "#15803d" }}>
+                            {f.badge}
+                          </span>
+                        )}
                       </Link>
                     ))}
                   </motion.div>
@@ -169,8 +176,14 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-3 px-3 py-2.5 text-sm text-[#475569] hover:text-[#3899aa] hover:bg-[#eef7f6] rounded-xl transition-colors"
                 >
-                  <span className="text-base">{f.icon}</span>
-                  {f.label}
+                  <span className="text-base shrink-0">{f.icon}</span>
+                  <span className="flex-1">{f.label}</span>
+                  {f.badge && (
+                    <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
+                      style={{ background: "#dcfce7", color: "#15803d" }}>
+                      {f.badge}
+                    </span>
+                  )}
                 </Link>
               ))}
 
