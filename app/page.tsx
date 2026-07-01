@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { SocialProof } from "@/components/SocialProof";
-import { DemoVideo } from "@/components/DemoVideo";
-import { Problem } from "@/components/Problem";
 import { Features } from "@/components/Features";
-import { Results } from "@/components/Results";
-import { Founders } from "@/components/Founders";
-import { ForWho } from "@/components/ForWho";
 import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { CtaFinal } from "@/components/CtaFinal";
@@ -39,15 +33,17 @@ export default async function Home() {
     <main>
       <JsonLd data={homepageSchema} />
       <Navbar />
+
+      {/* SECTION 1 — Hero (2 colonnes : texte + ChatDemo) */}
       <Hero />
 
-      {/* Témoignages — Constance (principal) + Amandine (secondaire) */}
+      {/* SECTION 2 — Témoignages : Constance (grand) + Amandine (discret dashed) */}
       <section
         className="py-14 sm:py-20 px-4 sm:px-6"
         style={{ background: "white", borderTop: "1px solid #d4ecea" }}
       >
         <div className="max-w-3xl mx-auto flex flex-col gap-6">
-          {/* Constance — grand format */}
+          {/* Constance — principal */}
           <div
             className="rounded-2xl p-8 sm:p-10 flex gap-5 sm:gap-8 items-start"
             style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 20px rgba(56,153,170,0.07)" }}
@@ -66,7 +62,7 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Amandine — format secondaire discret */}
+          {/* Amandine — secondaire */}
           <div
             className="rounded-2xl p-6 sm:p-7 flex gap-5 items-start"
             style={{ border: "1px dashed #d4ecea" }}
@@ -87,19 +83,40 @@ export default async function Home() {
         </div>
       </section>
 
-      <SocialProof />
-      <DemoVideo />
-      <Problem />
+      {/* SECTION 3 — Stat clé : 100h (fond sombre) */}
+      <section
+        className="py-16 sm:py-24 px-4 sm:px-6"
+        style={{ background: "#0f172a" }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 items-center">
+            <div
+              className="text-7xl sm:text-9xl font-bold leading-none tabular-nums"
+              style={{ color: "white", fontFamily: "monospace" }}
+            >
+              100h
+            </div>
+            <div>
+              <p className="text-lg sm:text-xl text-[#94a3b8] leading-relaxed mb-3">
+                C&apos;est le temps que tu perds chaque année sur la recherche biblio et les doutes cliniques non résolus — 1 à 2h par recherche sur PubMed, contre 30 secondes avec MAK.
+              </p>
+              <p className="text-base text-[#64748b] leading-relaxed">
+                Soit un raisonnement clinique mieux sourcé, sans y sacrifier tes soirées.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Comment ça marche */}
+      {/* SECTION 4 — Comment ça marche (3 étapes) */}
       <section
         id="comment"
         className="py-20 sm:py-28 px-4 sm:px-6"
         style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="mb-12">
-            <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">
+          <div className="mb-12 max-w-xl">
+            <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">
               Comment ça marche
             </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight">
@@ -125,10 +142,10 @@ export default async function Home() {
                 desc: "Pas un pavé à trier — une réponse structurée et actionnable, en 30 secondes.",
               },
             ].map((step) => (
-              <div key={step.num} className="flex flex-col gap-4">
+              <div key={step.num} className="flex flex-col gap-4 pt-1.5">
                 <span
-                  className="text-sm font-bold"
-                  style={{ fontFamily: "monospace", color: "#3899aa" }}
+                  className="text-sm font-bold font-mono"
+                  style={{ color: "#3899aa" }}
                 >
                   {step.num}
                 </span>
@@ -140,24 +157,17 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* SECTION 5 — Grille de fonctionnalités condensée (4 cartes + Contrats) */}
       <Features />
-      <Results />
-      <Founders />
-      <ForWho />
-      <Pricing />
-      <FAQ />
-      <CtaFinal />
 
-      <section className="py-10 px-4 sm:px-6" style={{ borderTop: "1px solid #d4ecea" }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <h3 className="text-base font-semibold text-[#0f172a] mb-2">Sécurité &amp; conformité</h3>
-          <p className="text-sm text-[#64748b] leading-relaxed">
-            Mon Assistant Kiné est conçu dans le respect des obligations RGPD applicables aux
-            professionnels de santé. Les données patients ne sont jamais utilisées pour entraîner
-            des modèles IA tiers. Hébergement en Europe.
-          </p>
-        </div>
-      </section>
+      {/* SECTION 6 — Pricing (2 offres + lien /tarifs) */}
+      <Pricing />
+
+      {/* SECTION 7 — FAQ condensée */}
+      <FAQ />
+
+      {/* SECTION 8 — CTA final */}
+      <CtaFinal />
 
       <Footer />
     </main>
