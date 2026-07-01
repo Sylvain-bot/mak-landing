@@ -83,7 +83,39 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SECTION 3 — Stat clé : 2h (angle "kinés ont arrêté de chercher") */}
+      {/* SECTION 3 — Vidéo démo (< 2 min) */}
+      <section
+        className="py-14 sm:py-20 px-4 sm:px-6"
+        style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
+      >
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-2 font-mono">
+              Démo en 2 minutes
+            </p>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#0f172a]">
+              Vois MAK en action
+            </h2>
+          </div>
+          <div
+            className="rounded-2xl overflow-hidden"
+            style={{ border: "1px solid #d4ecea", boxShadow: "0 4px 24px rgba(56,153,170,0.08)" }}
+          >
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                src="https://www.youtube.com/embed/ZrA7d4CvRRE"
+                title="Mon Assistant Kiné — Démo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0 }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4 — Stat clé : 2h */}
       <section
         className="py-16 sm:py-24 px-4 sm:px-6"
         style={{ background: "#0f172a" }}
