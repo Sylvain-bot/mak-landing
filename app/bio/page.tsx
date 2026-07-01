@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FOUNDER_1_NAME, FOUNDER_1_LINKEDIN, FOUNDER_2_NAME, FOUNDER_2_LINKEDIN } from "@/lib/schemas/bio.schema";
 
-const YT_ID = "NQh0eORWvkc";
+const YT_ID = "ZrA7d4CvRRE";
 
 const FEATS = [
   { icon: "📋", label: "Bilans en 3 minutes", detail: "Dicte tes notes, l'IA structure un bilan conforme et exportable" },
@@ -25,19 +25,16 @@ const AVATARS = [
 
 const TESTIMONIALS = [
   {
-    initials: "MD", bg: "#d0ede8", color: "#1a6b5a",
-    name: "Marion D.", role: "Kiné libérale · Biot",
-    quote: "Je remplissais mes bilans le soir, ça prenait 20 minutes chacun. Maintenant je le génère en 3-4 minutes pendant la consultation. Mes soirées m'appartiennent à nouveau.",
+    initials: "C", bg: "#d0ede8", color: "#1a6b5a",
+    name: "Constance", role: "Kinésithérapeute libérale",
+    quote: "Je discute avec l'IA de certains cas et ça m'aide dans mes réflexions — ça rassure de se savoir sur la bonne voie.",
+    primary: true,
   },
   {
-    initials: "PL", bg: "#eff6ff", color: "#3b82f6",
-    name: "Pierre L.", role: "Kiné du sport · Quimper",
-    quote: "Le module biblio à lui seul vaut l'abonnement. En 30 secondes j'ai ce qu'il me fallait chercher 2h sur PubMed.",
-  },
-  {
-    initials: "CB", bg: "#fce7f3", color: "#db2777",
-    name: "Clément B.", role: "Kiné libéral · Lyon",
-    quote: "Mes patients se sentent mieux suivis entre les séances. Je vois la différence sur l'observance.",
+    initials: "AS", bg: "#eef7f6", color: "#2a7a8a",
+    name: "Amandine S.", role: "Kinésithérapeute libérale · Toulouse",
+    quote: "J'avais un doute sur une prise en charge cervicale. En 30 secondes j'avais une orientation structurée.",
+    primary: false,
   },
 ];
 
@@ -66,13 +63,14 @@ export default function BioPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-4">
-            Gagne <em className="not-italic text-[#3899aa]">2h par semaine</em><br />au cabinet.
+            Pose ta question clinique<br />
+            <span className="text-[#3899aa]">comme à un confrère.</span>
           </h1>
           <p className="text-lg text-[#475569] mb-2 leading-relaxed">
-            Pour des patients en plus, du sport, du temps en famille... ou juste souffler.
+            MAK mobilise 56 000+ ressources scientifiques dont le Cleland pour répondre à tes doutes cliniques — en 30 secondes, pendant ou entre les séances.
           </p>
           <p className="text-base text-[#94a3b8] mb-8">
-            Soigne. Mon Assistant Kiné s&apos;occupe du reste.
+            Bilans, administratif, suivi patient à domicile. Un seul outil.
           </p>
 
           {/* Social proof */}
@@ -188,37 +186,37 @@ export default function BioPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}>
-        <div className="max-w-2xl mx-auto">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 text-center">Témoignages</p>
-          <h2 className="text-2xl font-bold text-[#0f172a] mb-8 text-center">Ce que disent les kinés bêta-testeurs</h2>
-          <div className="space-y-4">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="bg-white rounded-2xl p-5"
-                style={{ border: "1px solid #d4ecea", borderLeft: "3px solid #3899aa", boxShadow: "0 1px 6px rgba(56,153,170,0.07)" }}
-              >
-                <div className="flex gap-0.5 mb-3">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-[#3899aa] text-[#3899aa]" />
-                  ))}
-                </div>
-                <p className="text-sm text-[#475569] italic leading-relaxed mb-4">&ldquo;{t.quote}&rdquo;</p>
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                    style={{ background: t.bg, color: t.color }}
-                  >
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-[#0f172a]">{t.name}</div>
-                    <div className="text-xs text-[#94a3b8]">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+      <section className="py-16 px-4 sm:px-6" style={{ background: "white", borderTop: "1px solid #d4ecea" }}>
+        <div className="max-w-2xl mx-auto flex flex-col gap-5">
+          {/* Constance — principal */}
+          <div
+            className="rounded-2xl p-8 flex gap-5 items-start"
+            style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 20px rgba(56,153,170,0.07)" }}
+          >
+            <div className="text-5xl font-bold leading-none shrink-0 select-none" style={{ color: "#d4ecea", fontFamily: "Georgia, serif" }}>
+              &ldquo;
+            </div>
+            <div>
+              <blockquote className="text-lg font-semibold text-[#0f172a] leading-relaxed mb-3">
+                Je discute avec l&apos;IA de certains cas et ça m&apos;aide dans mes réflexions — ça rassure de se savoir sur la bonne voie.
+              </blockquote>
+              <p className="text-sm text-[#94a3b8]">Constance — Kinésithérapeute libérale</p>
+            </div>
+          </div>
+          {/* Amandine — secondaire */}
+          <div
+            className="rounded-2xl p-6 flex gap-4 items-start"
+            style={{ border: "1px dashed #d4ecea" }}
+          >
+            <div className="text-3xl font-bold leading-none shrink-0 select-none" style={{ color: "#d4ecea", fontFamily: "Georgia, serif" }}>
+              &ldquo;
+            </div>
+            <div>
+              <blockquote className="text-base text-[#475569] leading-relaxed mb-2">
+                J&apos;avais un doute sur une prise en charge cervicale. En 30 secondes j&apos;avais une orientation structurée.
+              </blockquote>
+              <p className="text-xs text-[#94a3b8]">Amandine S. — Kinésithérapeute libérale, Toulouse</p>
+            </div>
           </div>
         </div>
       </section>
