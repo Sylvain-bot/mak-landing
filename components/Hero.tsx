@@ -85,7 +85,7 @@ function AppScreenshot() {
       {/* Screenshot — enregistre la capture dans public/hero-copilote-demo.png */}
       <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
         <Image
-          src="/cervic.png?v=2"
+          src="/cervic.png"
           alt="Copilote clinique MAK — cas cervical, réponse clinique sourcée en temps réel"
           width={900}
           height={700}
