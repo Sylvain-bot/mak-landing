@@ -61,10 +61,10 @@ export function Features() {
       <div className="max-w-6xl mx-auto">
         <ScrollReveal className="mb-10">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">
-            Les modules
+            Au-delà du copilote
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight max-w-lg">
-            Un outil. Quatre modules pour ton cabinet.
+            Un outil. Tout ce qu&apos;il faut au cabinet.
           </h2>
         </ScrollReveal>
 
