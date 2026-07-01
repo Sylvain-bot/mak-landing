@@ -52,53 +52,102 @@ function StatItem({
 const TRUST = ["Sans carte bancaire", "HDS · Hébergé en France", "5 min de prise en main"];
 
 function AppScreenshot() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div
-      className="rounded-2xl overflow-hidden"
-      style={{
-        border: "1px solid #d4ecea",
-        boxShadow: "0 8px 40px rgba(56,153,170,0.10), 0 2px 8px rgba(0,0,0,0.06)",
-      }}
-    >
-      {/* Chrome bar */}
+    <>
+      {/* Vignette cliquable */}
       <div
-        className="px-4 py-2.5 flex items-center gap-2.5 shrink-0"
-        style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
+        className="rounded-2xl overflow-hidden cursor-zoom-in"
+        style={{
+          border: "1px solid #d4ecea",
+          boxShadow: "0 8px 40px rgba(56,153,170,0.10), 0 2px 8px rgba(0,0,0,0.06)",
+        }}
+        onClick={() => setOpen(true)}
+        title="Cliquer pour agrandir"
       >
-        <div className="flex gap-1.5 shrink-0">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
-        </div>
+        {/* Chrome bar */}
         <div
-          className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium truncate"
-          style={{ background: "white", border: "1px solid #e4e4e5" }}
+          className="px-4 py-2.5 flex items-center gap-2.5 shrink-0"
+          style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
         >
-          app.monassistantkine.fr — Copilote clinique
+          <div className="flex gap-1.5 shrink-0">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
+          </div>
+          <div
+            className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium truncate"
+            style={{ background: "white", border: "1px solid #e4e4e5" }}
+          >
+            app.monassistantkine.fr — Copilote clinique
+          </div>
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-xs text-emerald-600 font-semibold">Live</span>
+          </div>
         </div>
-        <div className="flex items-center gap-1.5 shrink-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs text-emerald-600 font-semibold">Live</span>
+
+        <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
+          <Image
+            src="/cervic.png"
+            alt="Copilote clinique MAK — cas cervical, réponse clinique sourcée en temps réel"
+            width={900}
+            height={700}
+            className="w-full h-auto object-cover object-top"
+            priority
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, transparent, white)" }}
+          />
+          {/* Hint zoom */}
+          <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold" style={{ background: "rgba(15,23,42,0.55)", color: "white" }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+            Agrandir
+          </div>
         </div>
       </div>
 
-      {/* Screenshot — enregistre la capture dans public/hero-copilote-demo.png */}
-      <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
-        <Image
-          src="/cervic.png"
-          alt="Copilote clinique MAK — cas cervical, réponse clinique sourcée en temps réel"
-          width={900}
-          height={700}
-          className="w-full h-auto object-cover object-top"
-          priority
-        />
-        {/* Dégradé bas pour suggérer que la réponse continue */}
+      {/* Lightbox */}
+      {open && (
         <div
-          className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-          style={{ background: "linear-gradient(to bottom, transparent, white)" }}
-        />
-      </div>
-    </div>
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.85)" }}
+          onClick={() => setOpen(false)}
+        >
+          <div className="relative max-w-5xl w-full max-h-[90vh] overflow-auto rounded-2xl shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* Chrome bar */}
+            <div
+              className="px-4 py-2.5 flex items-center gap-2.5 sticky top-0 z-10"
+              style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
+            >
+              <div className="flex gap-1.5 shrink-0">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
+              </div>
+              <div className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium" style={{ background: "white", border: "1px solid #e4e4e5" }}>
+                app.monassistantkine.fr — Copilote clinique
+              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[#64748b] hover:bg-[#e4e4e5] transition-colors text-lg leading-none"
+              >
+                ×
+              </button>
+            </div>
+            <Image
+              src="/cervic.png"
+              alt="Copilote clinique MAK — vue complète"
+              width={1400}
+              height={1000}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -236,7 +285,7 @@ export function Hero() {
                 frenchFormat active={inView}
               />
               <StatItem
-                target={57} suffix=" sec" label="pour un bilan complet"
+                target={2} suffix=" min" label="pour un bilan complet"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />

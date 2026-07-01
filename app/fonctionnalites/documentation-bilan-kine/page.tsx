@@ -27,12 +27,12 @@ const schema = {
   "operatingSystem": "Web",
   "url": "https://www.monassistantkine.fr",
   "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR" },
-  "description": "Génère des bilans kinésithérapiques conformes NGAP en 5 minutes grâce à l'IA.",
+  "description": "Génère des bilans kinésithérapiques conformes NGAP en 2 minutes grâce à l'IA.",
   "audience": { "@type": "MedicalAudience", "audienceType": "Physiotherapist" },
 };
 
 const STATS = [
-  { icon: "⏱", value: "5 minutes", label: "temps moyen pour un bilan complet" },
+  { icon: "⏱", value: "2 minutes", label: "temps moyen pour un bilan complet" },
   { icon: "📄", value: "Conforme NGAP", label: "validé par des kinés praticiens" },
   { icon: "🔧", value: "Templates", label: "personnalisables selon ta spécialité" },
   { icon: "📨", value: "Envoi 1 clic", label: "directement depuis MAK" },
@@ -81,7 +81,7 @@ export default function DocumentationBilanPage() {
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4">Fonctionnalité</p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Tes bilans kinésithérapiques en 5 minutes.<br />
+            Tes bilans kinésithérapiques en 2 minutes.<br />
             <span className="text-[#3899aa]">Conformes NGAP. Prêts à envoyer.</span>
           </h1>
           <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
