@@ -201,12 +201,35 @@ export function BlockEditor({ blocks, onChange, onMetaImport }: Props) {
   }
 
   async function handleImageUpload(file: File, blockId: string) {
-    const form = new FormData();
-    form.append("file", file);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: form });
-    const data = await res.json();
-    if (data.url) update(blockId, data.url);
-    else alert(data.error ?? "Erreur upload");
+    try {
+      const MAX_PX = 1600;
+      const blob = await new Promise<Blob>((resolve, reject) => {
+        const img = new window.Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const scale = img.width > MAX_PX ? MAX_PX / img.width : 1;
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob(
+            (b) => b ? resolve(b) : reject(new Error("Compression échouée")),
+            "image/jpeg", 0.85
+          );
+        };
+        img.onerror = reject;
+        img.src = url;
+      });
+      const form = new FormData();
+      form.append("file", blob, file.name.replace(/\.[^.]+$/, ".jpg"));
+      const res = await fetch("/api/admin/upload", { method: "POST", body: form });
+      const data = await res.json();
+      if (data.url) update(blockId, data.url);
+      else alert(data.error ?? "Erreur upload");
+    } catch {
+      alert("Erreur lors de la compression ou de l'upload");
+    }
   }
 
   async function handleWordImport(file: File) {
@@ -243,23 +266,32 @@ export function BlockEditor({ blocks, onChange, onMetaImport }: Props) {
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-[#94a3b8] text-xs font-medium mr-1">Ajouter :</span>
         {([
-          { type: "h2" as BlockType, label: "Titre section", icon: <Type className="w-3.5 h-3.5" /> },
-          { type: "h3" as BlockType, label: "Sous-titre", icon: <Type className="w-3 h-3" /> },
-          { type: "paragraph" as BlockType, label: "Paragraphe", icon: <AlignLeft className="w-3.5 h-3.5" /> },
-          { type: "image" as BlockType, label: "Image", icon: <ImagePlus className="w-3.5 h-3.5" /> },
-        ]).map(({ type, label, icon }) => (
+          { type: "h2" as BlockType, label: "Titre section", icon: <Type className="w-3.5 h-3.5" />, style: { background: "#eef7f6", color: "#3899aa", border: "1px solid #d4ecea" } },
+          { type: "h3" as BlockType, label: "Sous-titre", icon: <Type className="w-3 h-3" />, style: { background: "#eef7f6", color: "#3899aa", border: "1px solid #d4ecea" } },
+          { type: "paragraph" as BlockType, label: "Paragraphe", icon: <AlignLeft className="w-3.5 h-3.5" />, style: { background: "#eef7f6", color: "#3899aa", border: "1px solid #d4ecea" } },
+        ]).map(({ type, label, icon, style }) => (
           <button
             key={type}
             type="button"
             onClick={() => addBlock(type)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
-            style={{ background: "#eef7f6", color: "#3899aa", border: "1px solid #d4ecea" }}
+            style={style}
           >
             <Plus className="w-3 h-3" />
             {icon}
             {label}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => addBlock("image")}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+          style={{ background: "#fdf4ff", color: "#a855f7", border: "1px solid #e9d5ff" }}
+        >
+          <Plus className="w-3 h-3" />
+          <ImagePlus className="w-3.5 h-3.5" />
+          Photo dans l&apos;article
+        </button>
         <div className="flex gap-2 ml-auto">
           <button
             type="button"

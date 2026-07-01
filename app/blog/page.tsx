@@ -1,30 +1,19 @@
-"use client";
+import { supabaseAdmin } from "@/lib/supabase-server";
 
-import { useState, useEffect } from "react";
-import { BlogCard, type Article } from "@/components/blog/BlogCard";
-import { CategoryFilter } from "@/components/blog/CategoryFilter";
+export const dynamic = "force-dynamic";
+import { type Article } from "@/components/blog/BlogCard";
+import { BlogClient } from "@/components/blog/BlogClient";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { supabase } from "@/lib/supabase";
 
-export default function BlogPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [category, setCategory] = useState("Tous");
-  const [loading, setLoading] = useState(true);
+export default async function BlogPage() {
+  const { data } = await supabaseAdmin
+    .from("articles")
+    .select("id, titre, slug, extrait, categorie, photo_url, date_publication, created_at")
+    .eq("statut", "publie")
+    .order("date_publication", { ascending: false });
 
-  useEffect(() => {
-    supabase
-      .from("articles")
-      .select("id, titre, slug, extrait, categorie, photo_url, date_publication, created_at")
-      .eq("statut", "publie")
-      .order("date_publication", { ascending: false })
-      .then(({ data }) => {
-        setArticles((data as Article[]) ?? []);
-        setLoading(false);
-      });
-  }, []);
-
-  const filtered = category === "Tous" ? articles : articles.filter((a) => a.categorie === category);
+  const articles = (data as Article[]) ?? [];
 
   return (
     <>
@@ -37,25 +26,18 @@ export default function BlogPage() {
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
                 Ressources pour les kinés libéraux
               </h1>
-              <p className="text-[#475569] text-base max-w-xl mx-auto mb-8">
-                Clinique, pratique libérale, bibliographie et innovation — par Mon Assistant Kiné.
-              </p>
-              <CategoryFilter active={category} onChange={setCategory} />
+              <div className="text-left max-w-2xl mx-auto mb-6 text-[#475569] text-sm leading-relaxed">
+                <p className="mb-2">
+                  Le blog de Mon Assistant Kiné publie des ressources cliniques et pratiques à destination
+                  des kinésithérapeutes libéraux exerçant en France. Chaque article est rédigé ou validé
+                  par des kinésithérapeutes diplômés d&apos;État, en s&apos;appuyant sur la littérature scientifique
+                  internationale (PubMed, Cleland, recommandations HAS).
+                </p>
+                <p className="text-center">Nos thématiques : IA clinique · Bibliographie · Bilans · Pratique libérale</p>
+              </div>
+              <h2 className="sr-only">Catégories</h2>
+              <BlogClient articles={articles} />
             </div>
-
-            {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="rounded-2xl bg-white h-64 animate-pulse" style={{ border: "1px solid #d4ecea" }} />
-                ))}
-              </div>
-            ) : filtered.length === 0 ? (
-              <p className="text-center text-[#94a3b8] py-20">Aucun article dans cette catégorie.</p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filtered.map((a) => <BlogCard key={a.id} article={a} />)}
-              </div>
-            )}
           </div>
         </section>
       </main>

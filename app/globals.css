@@ -1,4 +1,11 @@
 @import "tailwindcss";
+
+/* Bio page CTA — active feedback for Android tap */
+.mak-cta:active { transform: scale(0.97); opacity: 0.85; }
+
+/* Bio page — ROI phrase */
+.mak-roi { font-size: 14px; color: #0f2d35; text-align: center; font-weight: 500; line-height: 1.6; margin-bottom: 20px; padding: 0 8px; }
+.mak-roi strong { color: #3899aa; }
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 

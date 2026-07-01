@@ -10,7 +10,7 @@ const PLANS = [
     name: "Déclic",
     price: "9",
     description: "Pour découvrir l'IA au cabinet sans engagement",
-    features: ["1 programme max", "Gestion patients", "IA Conversationnelle"],
+    features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
     highlighted: false,
     badge: null,
   },
@@ -20,9 +20,7 @@ const PLANS = [
     description: "Pour les kinés qui veulent aller plus loin",
     features: [
       "5 programmes max",
-      "IA Conversationnelle",
-      "IA Bibliographique",
-      "IA Clinique",
+      "Copilote IA Kiné — usage standard",
       "Bilan kiné",
     ],
     highlighted: false,
@@ -34,10 +32,8 @@ const PLANS = [
     description: "Prix bloqué à vie. Accès complet fondateurs.",
     features: [
       "Programmes illimités",
-      "IA Conversationnelle",
-      "IA Bibliographique",
-      "IA Clinique",
-      "IA Administrative",
+      "Copilote IA Kiné — usage illimité",
+      "Module Administratif",
       "Bilan kiné",
       "Communauté privée fondateurs",
       "Badge Pionnier exclusif",
@@ -67,7 +63,7 @@ export function Pricing() {
             Tarifs
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
-            Accès simple — Opérationnel en 3 étapes
+            Simple, transparent. Sans surprise.
           </h2>
         </ScrollReveal>
 
@@ -130,10 +126,21 @@ export function Pricing() {
           ))}
         </div>
 
-        <ScrollReveal delay={0.35} className="mt-5 text-center">
-          <p className="text-[#94a3b8] text-xs">
+        <ScrollReveal delay={0.35} className="mt-5">
+          <p className="text-[#94a3b8] text-xs text-center mb-3">
             Sans engagement. Résiliable à tout moment.
           </p>
+          <div className="flex items-center gap-3 rounded-2xl px-5 py-4" style={{ background: "#f0fdf4", border: "1px solid #86efac" }}>
+            <span className="text-xl shrink-0">📑</span>
+            <div className="flex-1 min-w-0">
+              <span className="text-sm font-semibold text-[#15803d]">Module Contrats de remplacement — 100 % gratuit</span>
+              <span className="text-xs text-[#166534]"> · Signature électronique, déclaration Ordre en 1 clic, archivage. Offert à tous les kinés, même sans abonnement.</span>
+            </div>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0"
+              style={{ background: "#dcfce7", border: "1px solid #86efac", color: "#15803d" }}>
+              Gratuit
+            </span>
+          </div>
         </ScrollReveal>
       </div>
     </section>

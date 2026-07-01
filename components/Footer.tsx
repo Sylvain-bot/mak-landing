@@ -2,9 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const LEGAL_LINKS = [
-  { label: "Mentions légales", href: "https://monassistantkine.vercel.app/legal/mentions-legales.html" },
-  { label: "Politique de confidentialité", href: "https://monassistantkine.vercel.app/legal/politique-confidentialite.html" },
-  { label: "CGU", href: "https://monassistantkine.vercel.app/legal/cgu.html" },
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+  { label: "CGU", href: "/cgu" },
 ];
 
 export function Footer() {
@@ -26,15 +26,13 @@ export function Footer() {
 
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           {LEGAL_LINKS.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a
             href="mailto:sylvain@monassistantkine.fr"

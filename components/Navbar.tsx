@@ -10,8 +10,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 
 const FEATURES = [
   { href: "/fonctionnalites/documentation-bilan-kine", icon: "📋", label: "Bilans NGAP", badge: null },
-  { href: "/fonctionnalites/recherche-bibliographique", icon: "📚", label: "Recherche EBP", badge: null },
-  { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Aide clinique", badge: null },
+  { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Copilote IA Kiné", badge: null },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", badge: null },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", badge: null },
   { href: "/fonctionnalites/contrats-remplacement", icon: "📑", label: "Contrats de remplacement", badge: "Gratuit" },

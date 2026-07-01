@@ -12,7 +12,7 @@ const YES_ITEMS = [
 ];
 
 const NO_ITEMS = [
-  "Cherches une solution gratuite",
+  "N'es pas prêt à investir dans tes outils professionnels",
   "Refuses les outils numériques par principe",
   "N'as pas besoin d'optimiser ta pratique",
 ];

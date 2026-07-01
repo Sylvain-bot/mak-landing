@@ -19,6 +19,10 @@ const FAQS = [
     a: "Mon Assistant Kiné s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
   },
   {
+    q: "Quelle technologie IA utilise Mon Assistant Kiné ?",
+    a: "Mon Assistant Kiné est propulsé par Mistral, un modèle de langage fondé en France, de rang mondial. Les données sont hébergées en Europe — une garantie concrète de conformité RGPD pour les professionnels de santé qui manipulent des données cliniques sensibles. Contrairement aux LLM généralistes, MAK ne cite que des sources réelles et vérifiables.",
+  },
+  {
     q: "Dois-je installer un logiciel ?",
     a: "Non. Mon Assistant Kiné est 100% en ligne, accessible depuis ton navigateur, que ce soit sur ordi ou tablette. Rien à télécharger, rien à configurer.",
   },

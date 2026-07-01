@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { ArrowRight } from "lucide-react";
+import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contrats de remplacement pour kinésithérapeutes | Mon Assistant Kiné",
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
     title: "Contrats de remplacement kiné | Mon Assistant Kiné",
     url: "https://www.monassistantkine.fr/fonctionnalites/contrats-remplacement",
     type: "website",
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: DEFAULT_TWITTER,
 };
 
 const schema = {

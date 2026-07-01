@@ -8,9 +8,15 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 function useCountUp(target: number, duration: number, active: boolean): number {
-  const [count, setCount] = useState(0);
+  // Démarre à la valeur finale : le HTML SSR et le premier rendu client
+  // affichent toujours le chiffre réel (vu par Google et sans JS).
+  // L'animation 0 → target ne se déclenche qu'après montage, côté client.
+  const [count, setCount] = useState(target);
+  const hasAnimated = useRef(false);
   useEffect(() => {
-    if (!active) return;
+    if (!active || hasAnimated.current) return;
+    hasAnimated.current = true;
+    setCount(0);
     let startTs: number | null = null;
     let raf: number;
     const step = (ts: number) => {
@@ -67,7 +73,7 @@ const BADGE_STYLE = {
   backdropFilter: "blur(8px)",
 };
 
-export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
+export function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
   const inView = useInView(statsRef, { once: true });
 
@@ -158,7 +164,7 @@ export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-              Offre Pionnier — {pioneerSpots} places restantes sur 100
+              Offre Pionnier — Pour les 100 premiers · Lancé le 22/04/2026
             </span>
           </motion.div>
 
@@ -257,12 +263,8 @@ export function Hero({ pioneerSpots = 87 }: { pioneerSpots?: number }) {
                 <span className="text-xs text-[#64748b]">/mois</span>
               </div>
             </div>
-            {/* Progress bar */}
-            <div className="w-full h-2 rounded-full bg-[#d4ecea] overflow-hidden mb-2">
-              <div className="h-full rounded-full bg-gradient-to-r from-[#3899aa] to-[#2a7a8a]" style={{ width: `${100 - pioneerSpots}%` }} />
-            </div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[#64748b]"><strong className="text-[#0f172a]">{pioneerSpots} places</strong> restantes sur 100</span>
+              <span className="text-xs text-[#64748b]">Pour les <strong className="text-[#0f172a]">100 premiers</strong> inscrits</span>
               <span className="text-xs text-[#3899aa] font-semibold">Tarif garanti à vie →</span>
             </div>
           </motion.div>

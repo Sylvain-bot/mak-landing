@@ -56,13 +56,13 @@ export function ContratSection() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
 
           {/* Avantages */}
-          <ScrollReveal>
-            <div className="bg-white rounded-2xl p-7" style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 16px rgba(56,153,170,0.07)" }}>
+          <ScrollReveal className="h-full">
+            <div className="h-full bg-white rounded-2xl p-7 flex flex-col" style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 16px rgba(56,153,170,0.07)" }}>
               <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] mb-5">Ce que tu gagnes</p>
-              <div className="space-y-5">
+              <div className="space-y-5 flex-1">
                 {BENEFITS.map((b) => (
                   <div key={b.title} className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
@@ -79,31 +79,29 @@ export function ContratSection() {
             </div>
           </ScrollReveal>
 
-          {/* Comment ça marche + CTA */}
-          <ScrollReveal delay={0.1}>
-            <div className="space-y-5">
-
-              {/* Steps */}
-              <div className="bg-white rounded-2xl p-7" style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 16px rgba(56,153,170,0.07)" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] mb-5">Comment ça marche</p>
-                <div className="space-y-4">
-                  {STEPS.map((s, i) => (
-                    <div key={s.num} className="flex items-center gap-4">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 text-[#3899aa]"
+          {/* Comment ça marche + CTA — une seule carte qui s'étire */}
+          <ScrollReveal delay={0.1} className="h-full">
+            <div className="h-full bg-white rounded-2xl p-7 flex flex-col" style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 16px rgba(56,153,170,0.07)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] mb-5">Comment ça marche</p>
+              <div className="space-y-4 flex-1">
+                {STEPS.map((s, i) => (
+                  <div key={s.num} className="flex items-start gap-4">
+                    <div className="flex flex-col items-center shrink-0">
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-[#3899aa]"
                         style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}>
                         {s.num}
                       </div>
-                      <span className="text-sm text-[#475569] font-medium">{s.label}</span>
                       {i < STEPS.length - 1 && (
-                        <div className="ml-auto w-1 h-1 rounded-full bg-[#d4ecea]" />
+                        <div className="w-px flex-1 mt-1" style={{ background: "#d4ecea", minHeight: 20 }} />
                       )}
                     </div>
-                  ))}
-                </div>
+                    <p className="text-sm text-[#475569] font-medium pt-1.5">{s.label}</p>
+                  </div>
+                ))}
               </div>
 
-              {/* CTA card */}
-              <div className="rounded-2xl p-6" style={{ background: "#3899aa" }}>
+              {/* CTA intégré en bas de la carte */}
+              <div className="rounded-2xl p-5 mt-6" style={{ background: "#3899aa" }}>
                 <div className="flex items-center gap-2 mb-1">
                   <CheckCircle2 className="w-4 h-4 text-white/80 shrink-0" />
                   <span className="text-white/90 text-sm font-medium">Sans carte bancaire</span>
@@ -126,7 +124,6 @@ export function ContratSection() {
                   </a>
                 </p>
               </div>
-
             </div>
           </ScrollReveal>
         </div>

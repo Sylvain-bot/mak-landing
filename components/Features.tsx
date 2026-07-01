@@ -10,34 +10,36 @@ const FEATURES = [
   {
     id: "clinique",
     icon: "🧠",
-    tab: "IA Clinique",
-    title: "IA Clinique",
-    subtitle: "Ton filet de sécurité clinique, en temps réel",
+    tab: "Copilote IA Kiné",
+    title: "Ton copilote IA kiné",
+    subtitle: "Pose ta question comme à un confrère — l'IA identifie si elle est clinique ou bibliographique et mobilise l'expertise adaptée.",
     bullets: [
       "Détection automatique des drapeaux rouges",
-      "Orientation clinique basée sur les sources de la kinésithérapie",
-      "Suggère les tests à ne pas manquer",
-      "Ne remplace pas ton expertise — la complète",
+      "Orientation clinique basée sur le Cleland et les sources EBP",
+      "Suggère les tests cliniques à ne pas manquer",
+      "Accès à 56 000+ ressources scientifiques pour tes questions bibliographiques",
+      "Réponses aux questions pratiques du quotidien du cabinet",
+      "🇪🇺 IA européenne — données hébergées en Europe",
     ],
     quote: "J'avais un doute sur une prise en charge cervicale. En 30 secondes j'avais une orientation structurée.",
     author: "Amandine S., kiné libérale",
-    screenshot: "/clinique.png",
+    screenshot: "/copilote-ia-kine.png",
   },
   {
-    id: "biblio",
-    icon: "📚",
-    tab: "Bibliographie",
-    title: "IA Bibliographique",
-    subtitle: "56 000+ études. Résultat en 30 secondes.",
+    id: "admin",
+    icon: "📨",
+    tab: "Administratif",
+    title: "Ton administratif, en 2 minutes",
+    subtitle: "Courriers, relances, comptes-rendus — générés depuis tes templates ou par l'IA, envoyés en un clic.",
     bullets: [
-      "56 000+ études intégrées",
-      "Base enrichie automatiquement à chaque recherche",
-      "Résultats formatés pour la pratique clinique",
-      "Sources vérifiables en un clic",
+      "Templates pour tous tes documents courants (courriers médecins, relances, certificats)",
+      "L'IA génère le document en langage naturel si tu n'as pas de template",
+      "Envoi direct depuis MAK — avec ton en-tête et ta signature",
+      "Chaque template est modifiable et enregistrable",
     ],
-    quote: "Le module biblio à lui seul vaut l'abonnement.",
-    author: "Pierre L., kiné libéral",
-    screenshot: "/biblio.png",
+    quote: "Fini les courriers médecins en soirée. Je tape ce que je veux, MAK rédige, j'envoie.",
+    author: "Thomas R., kiné libéral",
+    screenshot: "/gestion-administrative.png",
   },
   {
     id: "bilans",
@@ -70,6 +72,23 @@ const FEATURES = [
     quote: "Mes patients se sentent mieux suivis et je vois la différence sur l'observance.",
     author: "Clément B., kiné libéral",
     screenshot: "/chatbot.png",
+  },
+  {
+    id: "contrats",
+    icon: "📑",
+    tab: "Contrats",
+    free: true,
+    title: "Contrats de remplacement",
+    subtitle: "Gère tes remplacements de A à Z — sans impression, sans scanner.",
+    bullets: [
+      "Contrat pré-rempli avec tes infos en 2 minutes",
+      "Invitation du remplaçant par lien — signature électronique horodatée",
+      "Déclaration à l'Ordre générée en 1 clic",
+      "Tous tes contrats archivés, accessibles à vie",
+    ],
+    quote: "J'ai signé mon premier contrat en 5 minutes. Fini les allers-retours par mail.",
+    author: "Sophie M., kiné libérale",
+    screenshot: "/contrats.png",
   },
 ];
 
@@ -211,12 +230,27 @@ export function Features() {
                 onClick={() => handleTab(i)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
                 style={activeTab === i
-                  ? { background: "#3899aa", color: "white", boxShadow: "0 4px 12px rgba(56,153,170,0.25)" }
+                  ? (f as any).free
+                    ? { background: "#16a34a", color: "white", boxShadow: "0 4px 12px rgba(22,163,74,0.25)" }
+                    : { background: "#3899aa", color: "white", boxShadow: "0 4px 12px rgba(56,153,170,0.25)" }
+                  : (f as any).free
+                  ? { background: "white", color: "#15803d", border: "1px solid #86efac" }
                   : { background: "white", color: "#64748b", border: "1px solid #d4ecea" }
                 }
               >
                 <span>{f.icon}</span>
                 {f.tab}
+                {(f as any).free && (
+                  <span
+                    className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                    style={activeTab === i
+                      ? { background: "rgba(255,255,255,0.25)", color: "white" }
+                      : { background: "#dcfce7", border: "1px solid #86efac", color: "#15803d" }
+                    }
+                  >
+                    Gratuit
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -238,17 +272,30 @@ export function Features() {
                 className="flex flex-col"
               >
                 <div className="text-3xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a] mb-1.5">{feature.title}</h3>
-                <p className="text-[#3899aa] font-medium mb-5 text-sm">{feature.subtitle}</p>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a]">{feature.title}</h3>
+                  {(feature as any).free && (
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0"
+                      style={{ background: "#dcfce7", border: "1px solid #86efac", color: "#15803d" }}>
+                      100 % Gratuit
+                    </span>
+                  )}
+                </div>
+                <p className="font-medium mb-5 text-sm" style={{ color: (feature as any).free ? "#15803d" : "#3899aa" }}>
+                  {feature.subtitle}
+                </p>
                 <ul className="space-y-3 mb-7">
                   {feature.bullets.map((b) => (
                     <li key={b} className="flex items-start gap-3 text-[#475569] text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-[#3899aa] shrink-0 mt-0.5" />
+                      <CheckCircle2
+                        className="w-4 h-4 shrink-0 mt-0.5"
+                        style={{ color: (feature as any).free ? "#16a34a" : "#3899aa" }}
+                      />
                       {b}
                     </li>
                   ))}
                 </ul>
-                <div className="pl-4" style={{ borderLeft: "2px solid #d4ecea" }}>
+                <div className="pl-4" style={{ borderLeft: `2px solid ${(feature as any).free ? "#86efac" : "#d4ecea"}` }}>
                   <p className="text-[#94a3b8] italic text-sm leading-relaxed mb-1.5">
                     &ldquo;{feature.quote}&rdquo;
                   </p>

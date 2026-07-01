@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
 import ClarityInit from "@/components/ClarityInit";
+import ClarityRouteTracker from "@/components/ClarityRouteTracker";
 import { JsonLd } from "@/components/JsonLd";
+import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -20,7 +22,9 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     siteName: "Mon Assistant Kiné",
     type: "website",
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: DEFAULT_TWITTER,
 };
 
 export default function RootLayout({
@@ -44,6 +48,7 @@ export default function RootLayout({
         }} />
         {children}
         <ClarityInit />
+        <ClarityRouteTracker />
 
         {/* Meta Pixel */}
         <Script id="fb-pixel" strategy="afterInteractive">{`

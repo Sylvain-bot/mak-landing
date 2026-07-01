@@ -4,9 +4,10 @@ import { JsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CheckCircle2, Zap, ArrowRight } from "lucide-react";
+import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Tarifs Mon Assistant Kiné 2025 — À partir de 9€/mois",
+  title: "Tarifs Mon Assistant Kiné — À partir de 9€/mois",
   description: "Découvrez les formules Mon Assistant Kiné : Déclic 9€, Pratique 29€, Pionnier 19€ (offre limitée 100 kinés), Expert 49€. Sans engagement, résiliable à tout moment.",
   alternates: { canonical: "https://www.monassistantkine.fr/tarifs" },
   openGraph: {
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
     description: "Offre Pionnier réservée aux 100 premiers : accès complet à vie à 19€/mois. Sans engagement.",
     url: "https://www.monassistantkine.fr/tarifs",
     type: "website",
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: DEFAULT_TWITTER,
 };
 
 const schema = {
@@ -30,7 +33,7 @@ const schema = {
       "name": "Déclic",
       "price": "9",
       "priceCurrency": "EUR",
-      "description": "Pour découvrir l'IA au cabinet sans engagement — 1 programme max, Gestion patients, IA Conversationnelle",
+      "description": "Pour découvrir l'IA au cabinet sans engagement — 1 programme max, Copilote IA Kiné usage découverte",
     },
     {
       "@type": "Offer",
@@ -44,7 +47,7 @@ const schema = {
       "name": "Pratique",
       "price": "29",
       "priceCurrency": "EUR",
-      "description": "Pour les kinés qui veulent aller plus loin — 5 programmes max, IA Conversationnelle, IA Bibliographique, IA Clinique, Bilan kiné",
+      "description": "Pour les kinés qui veulent aller plus loin — 5 programmes max, Copilote IA Kiné usage standard, Bilan kiné",
     },
     {
       "@type": "Offer",
@@ -62,7 +65,7 @@ const PLANS = [
     name: "Déclic",
     price: "9",
     description: "Pour découvrir l'IA au cabinet sans engagement",
-    features: ["1 programme max", "Gestion patients", "IA Conversationnelle"],
+    features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
     highlighted: false,
     badge: null,
     cta: "Commencer",
@@ -73,9 +76,7 @@ const PLANS = [
     description: "Pour les kinés qui veulent aller plus loin",
     features: [
       "5 programmes max",
-      "IA Conversationnelle",
-      "IA Bibliographique",
-      "IA Clinique",
+      "Copilote IA Kiné — usage standard",
       "Bilan kiné",
     ],
     highlighted: false,
@@ -88,10 +89,8 @@ const PLANS = [
     description: "Prix bloqué à vie. Accès complet fondateurs.",
     features: [
       "Programmes illimités",
-      "IA Conversationnelle",
-      "IA Bibliographique",
-      "IA Clinique",
-      "IA Administrative",
+      "Copilote IA Kiné — usage illimité",
+      "Module Administratif",
       "Bilan kiné",
       "Communauté privée fondateurs",
       "Badge Pionnier exclusif",
@@ -242,6 +241,24 @@ export default function TarifsPage() {
           </div>
 
           <p className="text-[#94a3b8] text-xs text-center mt-6">Sans engagement · Résiliable à tout moment</p>
+
+          {/* Bandeau contrats gratuits */}
+          <div className="flex items-center gap-4 rounded-2xl px-6 py-4 mt-4" style={{ background: "#f0fdf4", border: "1px solid #86efac" }}>
+            <span className="text-2xl shrink-0">📑</span>
+            <div className="flex-1">
+              <p className="text-sm font-bold text-[#15803d]">Module Contrats de remplacement — 100 % gratuit</p>
+              <p className="text-xs text-[#166534] mt-0.5 leading-relaxed">
+                Signature électronique, invitation par lien, déclaration Ordre en 1 clic, archivage automatique.
+                Offert à toute la communauté des kinés libéraux — abonné ou non, sans limite de durée.
+              </p>
+            </div>
+            <Link
+              href="/fonctionnalites/contrats-remplacement"
+              className="shrink-0 text-xs font-semibold text-[#15803d] hover:text-[#166534] transition-colors whitespace-nowrap"
+            >
+              En savoir plus →
+            </Link>
+          </div>
         </div>
       </section>
 

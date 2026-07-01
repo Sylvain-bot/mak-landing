@@ -4,7 +4,7 @@ import { useEffect, useState, use, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { BlockEditor, parseHtmlToBlocks, parseTxt } from "@/components/admin/BlockEditor";
 import { ImageUpload } from "@/components/admin/ImageUpload";
-import { Save, ArrowLeft, RefreshCw, FileText } from "lucide-react";
+import { Save, ArrowLeft, RefreshCw, FileText, Eraser } from "lucide-react";
 import Link from "next/link";
 
 const CATEGORIES = ["IA clinique", "Bibliographie", "Bilans", "Pratique libérale"];
@@ -119,6 +119,13 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
     });
   }
 
+  function handleClearContent() {
+    if (!confirm("Vider tout le corps de l'article ? Cette action est irréversible.")) return;
+    const fresh = { id: Math.random().toString(36).slice(2), type: "paragraph" as const, content: "" };
+    setBlocks([fresh]);
+    setArticle((prev) => ({ ...prev, corps: "" }));
+  }
+
   async function handleSave() {
     setSaving(true);
     const payload = {
@@ -155,15 +162,27 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
           </Link>
           <h1 className="text-[#0f172a] font-bold text-xl">{isNew ? "Nouvel article" : "Modifier l'article"}</h1>
         </div>
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-60"
-          style={{ background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)" }}
-        >
-          {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-          {saved ? "Sauvegardé !" : "Sauvegarder"}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleClearContent}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-all hover:opacity-90"
+            style={{ background: "#fef2f2", color: "#ef4444", border: "1px solid #fecaca" }}
+            title="Vider tout le corps de l'article"
+          >
+            <Eraser className="w-4 h-4" />
+            Vider le contenu
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-60"
+            style={{ background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)" }}
+          >
+            {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {saved ? "Sauvegardé !" : "Sauvegarder"}
+          </button>
+        </div>
       </div>
 
       {/* TXT import — prominent entry point */}
@@ -190,6 +209,27 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
       />
 
       <div className="flex flex-col gap-5">
+        {/* Paramètres */}
+        <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
+          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Paramètres</h2>
+          <div className="flex flex-col gap-4">
+            <label className="flex flex-col gap-1.5">
+              <span className="text-[#64748b] text-xs font-medium">Catégorie</span>
+              <select value={article.categorie} onChange={(e) => set("categorie", e.target.value)} className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none" style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }}>
+                {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
+              </select>
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className="text-[#64748b] text-xs font-medium">Statut</span>
+              <select value={article.statut} onChange={(e) => set("statut", e.target.value)} className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none" style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }}>
+                <option value="brouillon">Brouillon</option>
+                <option value="publie">Publié</option>
+              </select>
+            </label>
+            <Field label="Date de publication" value={article.date_publication} onChange={(v) => set("date_publication", v)} type="date" />
+          </div>
+        </div>
+
         {/* Infos principales */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Informations</h2>
@@ -210,6 +250,12 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
           </div>
         </div>
 
+        {/* Image de couverture */}
+        <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
+          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Image de couverture</h2>
+          <ImageUpload value={article.photo_url} onChange={(v) => set("photo_url", v)} />
+        </div>
+
         {/* Corps */}
         <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Corps de l'article</h2>
@@ -227,33 +273,6 @@ export default function ArticleEditPage({ params }: { params: Promise<{ id: stri
               }));
             }}
           />
-        </div>
-
-        {/* Image de couverture */}
-        <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
-          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Image de couverture</h2>
-          <ImageUpload value={article.photo_url} onChange={(v) => set("photo_url", v)} />
-        </div>
-
-        {/* Paramètres */}
-        <div className="rounded-2xl p-6 bg-white" style={{ border: "1px solid #d4ecea" }}>
-          <h2 className="text-[#0f172a] font-semibold text-sm mb-4">Paramètres</h2>
-          <div className="flex flex-col gap-4">
-            <label className="flex flex-col gap-1.5">
-              <span className="text-[#64748b] text-xs font-medium">Catégorie</span>
-              <select value={article.categorie} onChange={(e) => set("categorie", e.target.value)} className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none" style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }}>
-                {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
-              </select>
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="text-[#64748b] text-xs font-medium">Statut</span>
-              <select value={article.statut} onChange={(e) => set("statut", e.target.value)} className="px-3 py-2 rounded-lg text-sm text-[#0f172a] outline-none" style={{ border: "1px solid #d4ecea", background: "#f8fcfd" }}>
-                <option value="brouillon">Brouillon</option>
-                <option value="publie">Publié</option>
-              </select>
-            </label>
-            <Field label="Date de publication" value={article.date_publication} onChange={(v) => set("date_publication", v)} type="date" />
-          </div>
         </div>
 
         {/* SEO */}

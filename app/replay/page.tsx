@@ -201,9 +201,9 @@ export default function ReplayPage() {
         <p style={{ fontSize: 11.5, color: "#94a3b8", marginBottom: 8 }}>© 2026 Mon Assistant Kiné</p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
           {[
-            { label: "CGU", href: "https://monassistantkine.vercel.app/legal/cgu.html" },
-            { label: "Confidentialité", href: "https://monassistantkine.vercel.app/legal/politique-confidentialite.html" },
-            { label: "Mentions légales", href: "https://monassistantkine.vercel.app/legal/mentions-legales.html" },
+            { label: "CGU", href: "/cgu" },
+            { label: "Confidentialité", href: "/politique-confidentialite" },
+            { label: "Mentions légales", href: "/mentions-legales" },
           ].map((l) => (
             <Link key={l.label} href={l.href} style={{ fontSize: 11, color: "#94a3b8", textDecoration: "none" }}>{l.label}</Link>
           ))}

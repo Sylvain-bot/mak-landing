@@ -31,7 +31,7 @@ export function BlogCard({ article }: { article: Article }) {
       className="group flex flex-col rounded-2xl overflow-hidden bg-white transition-all hover:-translate-y-1"
       style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 12px rgba(56,153,170,0.06)" }}
     >
-      <div className="relative h-44 bg-[#f0f9fa] overflow-hidden">
+      <div className="relative aspect-[3/2] bg-[#f0f9fa] overflow-hidden">
         {article.photo_url ? (
           <Image src={article.photo_url} alt={article.titre} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
         ) : (

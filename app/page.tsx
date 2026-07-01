@@ -16,8 +16,7 @@ import { CtaFinal } from "@/components/CtaFinal";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { homepageSchema } from "@/lib/schemas/homepage.schema";
-import { supabaseAdmin } from "@/lib/supabase-server";
-
+import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Mon Assistant Kiné | Bilans en 3 min — IA pour Kinésithérapeutes",
   description: "Gagnez 2h/semaine : bilans en 3 minutes, drapeaux rouges détectés, 56 000+ études intégrées. Essayez Mon Assistant Kiné gratuitement.",
@@ -31,30 +30,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: "Mon Assistant Kiné",
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: DEFAULT_TWITTER,
 };
 
-async function getPioneerSpots(): Promise<number> {
-  try {
-    const { data } = await supabaseAdmin
-      .from("settings")
-      .select("value")
-      .eq("key", "pioneer_spots")
-      .single();
-    return data ? parseInt(data.value, 10) : 87;
-  } catch {
-    return 87;
-  }
-}
-
 export default async function Home() {
-  const pioneerSpots = await getPioneerSpots();
-
   return (
     <main>
       <JsonLd data={homepageSchema} />
       <Navbar />
-      <Hero pioneerSpots={pioneerSpots} />
+      <Hero />
       <SocialProof />
       <DemoVideo />
       <Problem />

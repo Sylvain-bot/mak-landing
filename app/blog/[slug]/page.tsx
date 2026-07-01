@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 import { Metadata } from "next";
 import { supabase } from "@/lib/supabase";
 import { Navbar } from "@/components/Navbar";
@@ -7,6 +9,7 @@ import { BlogCta } from "@/components/blog/BlogCta";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,17 +28,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getArticle(slug);
   if (!article) return {};
 
-  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://monassistantkine.fr";
+  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.monassistantkine.fr";
   return {
     title: article.meta_titre ?? article.titre,
     description: article.meta_description ?? article.extrait ?? undefined,
     openGraph: {
       title: article.meta_titre ?? article.titre,
       description: article.meta_description ?? article.extrait ?? undefined,
-      images: article.photo_url ? [article.photo_url] : [],
+      images: article.photo_url ? [article.photo_url] : [DEFAULT_OG_IMAGE],
       url: `${site}/blog/${slug}`,
       type: "article",
     },
+    twitter: DEFAULT_TWITTER,
     alternates: { canonical: `${site}/blog/${slug}` },
   };
 }
@@ -91,7 +95,7 @@ export default async function ArticlePage({ params }: Props) {
             </Link>
 
             {article.photo_url && (
-              <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden mb-8" style={{ border: "1px solid #d4ecea" }}>
+              <div className="relative aspect-[3/2] rounded-2xl overflow-hidden mb-8" style={{ border: "1px solid #d4ecea" }}>
                 <Image src={article.photo_url} alt={article.titre} fill className="object-cover" />
               </div>
             )}

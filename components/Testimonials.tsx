@@ -9,15 +9,15 @@ const TESTIMONIALS = [
   {
     name: "Amandine S.",
     role: "Kiné libérale, Toulouse",
-    module: "IA Clinique",
+    module: "Copilote IA Kiné",
     quote: "En 30 secondes j'avais une orientation clinique structurée, avec les points à vérifier en bilan.",
     avatar: { bg: "#eef7f6", color: "#3899aa" },
   },
   {
     name: "Pierre L.",
     role: "Kiné libéral, Quimper",
-    module: "Bibliographie",
-    quote: "Le module biblio à lui seul vaut l'abonnement.",
+    module: "Copilote IA Kiné",
+    quote: "La recherche biblio intégrée à elle seule vaut l'abonnement.",
     avatar: { bg: "#eff6ff", color: "#3b82f6" },
   },
   {
