@@ -85,6 +85,7 @@ export default async function Home() {
 
       {/* SECTION 3 — Vidéo démo (< 2 min) */}
       <section
+        id="demo"
         className="py-14 sm:py-20 px-4 sm:px-6"
         style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
       >
@@ -115,7 +116,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SECTION 4 — Stat clé : 2h */}
+      {/* SECTION 4 — Stat clé : 2h synthèse biblio */}
       <section
         className="py-16 sm:py-24 px-4 sm:px-6"
         style={{ background: "#0f172a" }}
@@ -130,15 +131,15 @@ export default async function Home() {
                 2h
               </div>
               <div className="text-xs font-mono mt-2" style={{ color: "#3899aa" }}>
-                par recherche PubMed
+                de synthèse bibliographique
               </div>
             </div>
             <div>
               <p className="text-lg sm:text-xl leading-relaxed mb-4" style={{ color: "#94a3b8" }}>
-                C&apos;est pourquoi la plupart des kinés ont arrêté de chercher. Pas par manque de rigueur — parce que 2h pour une réponse incertaine en anglais, ce n&apos;est pas tenable en libéral.
+                C&apos;est ce qu&apos;il faut pour produire une vraie synthèse de la littérature sur un thème clinique — pas une recherche Google, mais un état des lieux des données exploitable en pratique.
               </p>
               <p className="text-base leading-relaxed" style={{ color: "#475569" }}>
-                MAK fait la même chose en 30 secondes. Tu redeviens un kiné qui consulte les données — sans y sacrifier ta soirée.
+                MAK le fait à la demande, en quelques secondes. 56 000+ ressources mobilisées, résultat structuré, sources citées.
               </p>
             </div>
           </div>

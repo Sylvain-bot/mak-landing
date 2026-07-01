@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 function useCountUp(target: number, duration: number, active: boolean): number {
   const [count, setCount] = useState(target);
@@ -50,7 +51,7 @@ function StatItem({
 
 const TRUST = ["Sans carte bancaire", "HDS · Hébergé en France", "5 min de prise en main"];
 
-function ChatDemo() {
+function AppScreenshot() {
   return (
     <div
       className="rounded-2xl overflow-hidden"
@@ -61,7 +62,7 @@ function ChatDemo() {
     >
       {/* Chrome bar */}
       <div
-        className="px-4 py-2.5 flex items-center gap-2.5"
+        className="px-4 py-2.5 flex items-center gap-2.5 shrink-0"
         style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
       >
         <div className="flex gap-1.5 shrink-0">
@@ -81,65 +82,21 @@ function ChatDemo() {
         </div>
       </div>
 
-      {/* Chat content */}
-      <div className="p-5 flex flex-col gap-4 bg-white">
-        {/* User question */}
-        <div className="flex justify-end">
-          <div
-            className="max-w-[88%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed"
-            style={{ background: "#0f172a", color: "white" }}
-          >
-            &ldquo;Doute sur une prise en charge cervicale — patient avec ATCD hernie C5-C6 2019, EVA 6. Dois-je orienter ?&rdquo;
-          </div>
-        </div>
-
-        {/* AI answer */}
+      {/* Screenshot — enregistre la capture dans public/hero-copilote-demo.png */}
+      <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
+        <Image
+          src="/cervic.png"
+          alt="Copilote clinique MAK — cas cervical, réponse clinique sourcée en temps réel"
+          width={900}
+          height={700}
+          className="w-full h-auto object-cover object-top"
+          priority
+        />
+        {/* Dégradé bas pour suggérer que la réponse continue */}
         <div
-          className="rounded-2xl rounded-tl-sm p-4"
-          style={{ background: "#f0f9fa", border: "1px solid #d4ecea" }}
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-[#94a3b8]">
-              Orientation clinique
-            </span>
-            <span
-              className="text-xs font-semibold px-2.5 py-1 rounded-full"
-              style={{ background: "#eef7f6", border: "1px solid #d4ecea", color: "#3899aa" }}
-            >
-              30 sec
-            </span>
-          </div>
-          <div className="space-y-2.5">
-            <div className="flex items-start gap-2 text-xs font-semibold" style={{ color: "#ef4444" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0" />
-              ATCD hernie C5-C6 — à réévaluer avant mobilisation forcée
-            </div>
-            <div className="flex items-start gap-2 text-xs text-[#475569]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] mt-1.5 shrink-0" />
-              3 tests cliniques suggérés pour objectiver la radiculopathie
-            </div>
-            <div className="flex items-start gap-2 text-xs text-[#475569]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] mt-1.5 shrink-0" />
-              Orientation médicale recommandée si aggravation sous 2 séances
-            </div>
-          </div>
-          <div
-            className="mt-3 pt-3 flex items-center gap-1.5 text-xs text-[#64748b]"
-            style={{ borderTop: "1px dashed #d4ecea" }}
-          >
-            Basé sur{" "}
-            <span className="font-semibold text-[#3899aa]">56 000+ sources EBP</span>
-            {" "}— dont Cleland, 4<sup>e</sup> éd.
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="px-5 py-3 text-center text-xs text-[#94a3b8]"
-        style={{ background: "#f8fafc", borderTop: "1px solid #d4ecea" }}
-      >
-        D&apos;un doute clinique à une orientation structurée en{" "}
-        <strong className="text-[#0f172a]">30 secondes</strong>, sources incluses.
+          className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, transparent, white)" }}
+        />
       </div>
     </div>
   );
@@ -229,7 +186,7 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="#comment"
+                href="#demo"
                 className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
               >
                 Voir comment ça marche
@@ -257,7 +214,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 1.0, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <ChatDemo />
+            <AppScreenshot />
           </motion.div>
         </div>
 
