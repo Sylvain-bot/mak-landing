@@ -6,12 +6,10 @@ import { DemoVideo } from "@/components/DemoVideo";
 import { Problem } from "@/components/Problem";
 import { Features } from "@/components/Features";
 import { Results } from "@/components/Results";
-import { Testimonials } from "@/components/Testimonials";
 import { Founders } from "@/components/Founders";
 import { ForWho } from "@/components/ForWho";
 import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
-import { ContratSection } from "@/components/ContratSection";
 import { CtaFinal } from "@/components/CtaFinal";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -41,13 +39,41 @@ export default async function Home() {
       <JsonLd data={homepageSchema} />
       <Navbar />
       <Hero />
+
+      {/* Témoignage principal — Constance (valide directement la promesse du copilote) */}
+      <section
+        className="py-8 px-4 sm:px-6"
+        style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
+      >
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-[#0f172a] text-base sm:text-lg font-medium italic leading-relaxed mb-3">
+            &ldquo;Je discute avec l&apos;IA de certains cas et ça m&apos;aide dans mes réflexions — ça rassure de se savoir sur la bonne voie.&rdquo;
+          </p>
+          <p className="text-sm text-[#94a3b8]">— Constance, kinésithérapeute libérale</p>
+        </div>
+      </section>
+
       <SocialProof />
       <DemoVideo />
       <Problem />
       <Features />
-      <ContratSection />
       <Results />
-      <Testimonials />
+
+      {/* Témoignage secondaire — Amandine (plus discret, ancrage Copilote) */}
+      <div
+        className="py-6 px-4 sm:px-6"
+        style={{ background: "white", borderTop: "1px solid #d4ecea" }}
+      >
+        <div className="max-w-xl mx-auto">
+          <div className="pl-4" style={{ borderLeft: "2px solid #d4ecea" }}>
+            <p className="text-[#64748b] text-sm italic leading-relaxed mb-1.5">
+              &ldquo;J&apos;avais un doute sur une prise en charge cervicale. En 30 secondes j&apos;avais une orientation structurée.&rdquo;
+            </p>
+            <p className="text-xs text-[#94a3b8]">— Amandine S., kinésithérapeute libérale, Toulouse</p>
+          </div>
+        </div>
+      </div>
+
       <Founders />
       <ForWho />
       <Pricing />

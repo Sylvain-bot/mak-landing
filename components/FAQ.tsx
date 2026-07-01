@@ -7,36 +7,20 @@ import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    q: "Est-ce que l'abonnement est vraiment rentable ?",
-    a: "Calcul rapide : Mon Assistant Kiné te dégage +2h à 3h par semaine. À 35-50€ de l'heure, c'est 270 à 680€ récupérés chaque mois. L'abonnement se rembourse à la première séance supplémentaire.",
-  },
-  {
-    q: "Pourquoi un abonnement et pas une licence ?",
-    a: "L'abonnement finance les mises à jour continues et l'enrichissement de la base d'études — qui s'alimente chaque semaine. Une licence figée ne peut pas faire ça.",
-  },
-  {
     q: "L'IA est-elle fiable pour la clinique ?",
     a: "Mon Assistant Kiné s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
   },
   {
-    q: "Quelle technologie IA utilise Mon Assistant Kiné ?",
-    a: "Mon Assistant Kiné est propulsé par Mistral, un modèle de langage fondé en France, de rang mondial. Les données sont hébergées en Europe — une garantie concrète de conformité RGPD pour les professionnels de santé qui manipulent des données cliniques sensibles. Contrairement aux LLM généralistes, MAK ne cite que des sources réelles et vérifiables.",
-  },
-  {
-    q: "Dois-je installer un logiciel ?",
-    a: "Non. Mon Assistant Kiné est 100% en ligne, accessible depuis ton navigateur, que ce soit sur ordi ou tablette. Rien à télécharger, rien à configurer.",
-  },
-  {
-    q: "Dois-je être à l'aise avec l'informatique ?",
-    a: "Si tu sais écrire une phrase, tu sais utiliser Mon Assistant Kiné. L'interface est volontairement simple. La prise en main prend moins de 5 minutes.",
+    q: "Est-ce que l'abonnement est vraiment rentable ?",
+    a: "Calcul rapide : Mon Assistant Kiné te dégage +2h à 3h par semaine. À 35-50€ de l'heure, c'est 270 à 680€ récupérés chaque mois. L'abonnement se rembourse à la première séance supplémentaire.",
   },
   {
     q: "Mes données sont-elles protégées ?",
     a: "Oui. Toutes les données sont chiffrées, hébergées en France, et le service est conforme RGPD et HDS (Hébergeur de Données de Santé). Tes données patient ne quittent jamais le territoire français.",
   },
   {
-    q: "De nouvelles fonctionnalités seront-elles ajoutées ?",
-    a: "Oui, en continu. L'évolution du produit est directement guidée par les retours terrain des kinés qui l'utilisent. Les Pionniers ont un accès prioritaire aux nouvelles fonctionnalités et participent aux décisions produit.",
+    q: "Dois-je installer un logiciel ?",
+    a: "Non. Mon Assistant Kiné est 100% en ligne, accessible depuis ton navigateur, que ce soit sur ordi ou tablette. Rien à télécharger, rien à configurer.",
   },
   {
     q: "Comment vous contacter ?",

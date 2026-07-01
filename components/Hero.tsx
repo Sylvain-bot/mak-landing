@@ -57,13 +57,13 @@ const TRUST = ["Sans carte bancaire", "Accès immédiat", "5 min de prise en mai
 // Toutes restent visibles jusqu'à la fin du cycle, puis reset ensemble
 const GIF_MS = 9600;
 const BUBBLES = [
-  { icon: "🎙️", label: "Dicte ou écris tes notes",            pos: "top-[35%] -left-3 sm:-left-14" },
-  { icon: "⚡",  label: "Généré en quelques secondes",          pos: "-top-5 right-4 sm:right-0 sm:-translate-x-8" },
-  { icon: "✅",  label: "Conforme NGAP",                        pos: "top-[22%] -right-3 sm:-right-12" },
-  { icon: "🎨",  label: "Templates entièrement personnalisables", pos: "top-[52%] -right-3 sm:-right-16", twoLine: true },
-  { icon: "📄",  label: "Export PDF en un clic",                pos: "-bottom-5 left-4 sm:left-0 sm:translate-x-8" },
-  { icon: "📚",  label: "56 000+ ressources dont Cleland",      pos: "top-[65%] -left-3 sm:-left-14", twoLine: true },
-  { icon: "🚩",  label: "Détection des red flags",              pos: "-top-5 left-4 sm:left-0 sm:translate-x-8" },
+  { icon: "💬",  label: "Pose ta question clinique",            pos: "top-[35%] -left-3 sm:-left-14" },
+  { icon: "⚡",  label: "Réponse en 30 secondes",               pos: "-top-5 right-4 sm:right-0 sm:-translate-x-8" },
+  { icon: "🚩",  label: "Détection des red flags",              pos: "top-[22%] -right-3 sm:-right-12" },
+  { icon: "📚",  label: "56 000+ ressources dont Cleland",      pos: "top-[52%] -right-3 sm:-right-16", twoLine: true },
+  { icon: "📋",  label: "Bilan généré en 3 minutes",            pos: "-bottom-5 left-4 sm:left-0 sm:translate-x-8" },
+  { icon: "✅",  label: "Sources vérifiables",                  pos: "top-[65%] -left-3 sm:-left-14" },
+  { icon: "🔍",  label: "Tests cliniques suggérés",             pos: "-top-5 left-4 sm:left-0 sm:translate-x-8" },
 ];
 
 const BADGE_STYLE = {
@@ -174,24 +174,12 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-[#0f172a] mb-4"
           >
-            L&apos;assistant IA des kinésithérapeutes —
+            Ton copilote clinique IA —
             <br />
             <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-              Bilans en 3 minutes
+              réponse sourcée en 30 secondes
             </span>
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="text-sm text-[#64748b] mb-5 leading-relaxed max-w-2xl mx-auto"
-          >
-            Mon Assistant Kiné est un assistant IA conçu exclusivement pour les kinésithérapeutes
-            libéraux. Il génère des bilans cliniques en 3 minutes, détecte les drapeaux rouges en
-            temps réel et donne accès à plus de 56 000 ressources scientifiques validées, dont le
-            Cleland. Développé par deux kinésithérapeutes praticiens.
-          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -199,11 +187,12 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="text-base sm:text-lg text-[#475569] mb-8 leading-relaxed"
           >
-            Mon Assistant Kiné assiste ton raisonnement clinique, génère tes bilans
-            et accompagne tes patients —{" "}
+            Pose ta question comme à un confrère — l&apos;IA détecte les drapeaux rouges,
+            suggère les tests cliniques à ne pas manquer et mobilise{" "}
             <span className="text-[#0f172a] font-semibold">
-              conçu par des kinés, pour des kinés.
+              56 000+ ressources scientifiques validées.
             </span>
+            {" "}Conçu par des kinés, pour des kinés.
           </motion.p>
 
           <motion.div
