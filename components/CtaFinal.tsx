@@ -4,14 +4,7 @@ import { ScrollReveal } from "./ScrollReveal";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Shield, Zap } from "lucide-react";
-
-const TRUST = [
-  "Conçu par deux kinés libéraux",
-  "Données chiffrées",
-  "RGPD",
-  "HDS",
-];
+import { ArrowRight, CheckCircle2, Shield } from "lucide-react";
 
 export function CtaFinal() {
   return (
@@ -20,31 +13,18 @@ export function CtaFinal() {
       style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
     >
       <div className="max-w-2xl mx-auto text-center">
-        <ScrollReveal className="mb-5">
-          <span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[#3899aa] text-sm font-medium"
-            style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
-          >
-            <Zap className="w-3.5 h-3.5" />
-            Tarif pionnier — Réservé aux 100 premiers inscrits
-          </span>
-        </ScrollReveal>
-
         <ScrollReveal delay={0.1}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-4 leading-tight">
-            Ton prochain bilan en{" "}
+            La prochaine fois que tu as un doute,{" "}
             <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-              3 minutes.
+              tu auras une réponse.
             </span>
-            <br />
-            Ton premier drapeau rouge{" "}
-            <span className="text-[#94a3b8]">détecté dès ce soir.</span>
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <p className="text-[#475569] text-base mb-8">
-            Accès immédiat. Sans carte bancaire. Prise en main en 5 minutes.
+          <p className="text-[#475569] text-base mb-8 leading-relaxed">
+            Accès immédiat. Sans carte bancaire. 5 minutes pour prendre MAK en main.
           </p>
         </ScrollReveal>
 
@@ -76,7 +56,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.3}>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {TRUST.map((badge) => (
+            {["Conçu par deux kinés libéraux", "RGPD", "HDS · Hébergé en France"].map((badge) => (
               <span
                 key={badge}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-[#64748b] bg-white"

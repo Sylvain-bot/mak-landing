@@ -83,25 +83,30 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SECTION 3 — Stat clé : 100h (fond sombre) */}
+      {/* SECTION 3 — Stat clé : 2h (angle "kinés ont arrêté de chercher") */}
       <section
         className="py-16 sm:py-24 px-4 sm:px-6"
         style={{ background: "#0f172a" }}
       >
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 items-center">
-            <div
-              className="text-7xl sm:text-9xl font-bold leading-none tabular-nums"
-              style={{ color: "white", fontFamily: "monospace" }}
-            >
-              100h
+            <div className="shrink-0">
+              <div
+                className="text-7xl sm:text-9xl font-bold leading-none tabular-nums"
+                style={{ color: "white", fontFamily: "monospace" }}
+              >
+                2h
+              </div>
+              <div className="text-xs font-mono mt-2" style={{ color: "#3899aa" }}>
+                par recherche PubMed
+              </div>
             </div>
             <div>
-              <p className="text-lg sm:text-xl text-[#94a3b8] leading-relaxed mb-3">
-                C&apos;est le temps que tu perds chaque année sur la recherche biblio et les doutes cliniques non résolus — 1 à 2h par recherche sur PubMed, contre 30 secondes avec MAK.
+              <p className="text-lg sm:text-xl leading-relaxed mb-4" style={{ color: "#94a3b8" }}>
+                C&apos;est pourquoi la plupart des kinés ont arrêté de chercher. Pas par manque de rigueur — parce que 2h pour une réponse incertaine en anglais, ce n&apos;est pas tenable en libéral.
               </p>
-              <p className="text-base text-[#64748b] leading-relaxed">
-                Soit un raisonnement clinique mieux sourcé, sans y sacrifier tes soirées.
+              <p className="text-base leading-relaxed" style={{ color: "#475569" }}>
+                MAK fait la même chose en 30 secondes. Tu redeviens un kiné qui consulte les données — sans y sacrifier ta soirée.
               </p>
             </div>
           </div>
