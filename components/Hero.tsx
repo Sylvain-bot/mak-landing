@@ -236,7 +236,7 @@ export function Hero() {
                 frenchFormat active={inView}
               />
               <StatItem
-                target={3} suffix=" min" label="pour un bilan complet"
+                target={57} suffix=" sec" label="pour un bilan complet"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
