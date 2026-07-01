@@ -197,7 +197,40 @@ export default async function Home() {
       {/* SECTION 5 — Grille de fonctionnalités condensée (4 cartes + Contrats) */}
       <Features />
 
-      {/* SECTION 6 — Pricing (2 offres + lien /tarifs) */}
+      {/* SECTION 6 — Ce qui est inclus */}
+      <section
+        className="py-16 sm:py-20 px-4 sm:px-6"
+        style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
+      >
+        <div className="max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_1.6fr] gap-8 sm:gap-14 items-start">
+            <div>
+              <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">
+                Ce qui est inclus
+              </p>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">
+                Un abonnement.<br />Tout ce qu&apos;il faut au cabinet.
+              </h2>
+            </div>
+            <ul className="space-y-3.5">
+              {[
+                "Copilote clinique — doutes cliniques et questions bibliographiques, 56 000+ ressources dont le Cleland, drapeaux rouges détectés automatiquement",
+                "Bilans kinésithérapiques conformes NGAP — dictée vocale, mise en forme automatique, export PDF en 1 clic",
+                "Module administratif — courriers médecins, relances et comptes-rendus depuis tes templates ou rédigés par l'IA",
+                "Suivi patient à domicile — programme d'exercices sur WhatsApp avec vidéos, chatbot guidé par ton protocole, dashboard compliance en temps réel",
+                "Données hébergées en Europe, jamais utilisées pour entraîner des modèles IA tiers",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-[#475569] leading-snug">
+                  <span className="text-[#3899aa] font-bold mt-0.5 shrink-0">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 7 — Pricing (2 offres + lien /tarifs) */}
       <Pricing />
 
       {/* SECTION 7 — FAQ condensée */}
