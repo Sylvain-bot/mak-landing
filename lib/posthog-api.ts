@@ -1,21 +1,26 @@
 const PH_HOST = "https://eu.posthog.com";
-const PH_PROJECT = process.env.POSTHOG_PROJECT_ID ?? "214209";
-const PH_KEY = process.env.POSTHOG_PERSONAL_API_KEY;
 
 async function hogql(sql: string) {
-  if (!PH_KEY) return [];
-  const res = await fetch(`${PH_HOST}/api/projects/${PH_PROJECT}/query/`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${PH_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query: { kind: "HogQLQuery", query: sql } }),
-    next: { revalidate: 300 },
-  });
-  if (!res.ok) return [];
-  const json = await res.json();
-  return (json.results ?? []) as unknown[][];
+  const key = process.env.POSTHOG_PERSONAL_API_KEY;
+  const project = process.env.POSTHOG_PROJECT_ID ?? "214209";
+  if (!key) return [];
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const res = await fetch(`${PH_HOST}/api/projects/${project}/query/`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ query: { kind: "HogQLQuery", query: sql } }),
+      signal: ctrl.signal,
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return (json.results ?? []) as unknown[][];
+  } catch {
+    return [];
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 export async function getAnalytics(days = 30) {

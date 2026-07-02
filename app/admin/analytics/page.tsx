@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { getAnalytics, type Analytics } from "@/lib/posthog-api";
-import { LoginForm } from "./LoginForm";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +25,7 @@ export default async function AnalyticsPage({
   const expected = process.env.ADMIN_PASSWORD;
   const authed = expected ? session === (await sha256(expected)) : false;
 
-  if (!authed) return <LoginForm />;
+  if (!authed) redirect("/admin/login?from=/admin/analytics");
 
   const data = await getAnalytics(period);
 
