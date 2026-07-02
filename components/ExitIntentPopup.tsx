@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const STORAGE_KEY = "mak_newsletter_dismissed";
 const CONTACT_EMAIL = "contact@monassistantkine.fr";
 
 export function ExitIntentPopup() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "success" | "fallback">("idle");
   const triggered = useRef(false);
 
   useEffect(() => {
+    if (pathname.startsWith("/admin")) return;
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
     let mobileTimer: ReturnType<typeof setTimeout>;
