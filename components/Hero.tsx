@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { usePostHog } from "posthog-js/react";
 
 function useCountUp(target: number, duration: number, active: boolean): number {
   const [count, setCount] = useState(target);
@@ -154,6 +155,7 @@ function AppScreenshot() {
 export function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
   const inView = useInView(statsRef, { once: true });
+  const ph = usePostHog();
 
   return (
     <section className="relative overflow-hidden bg-white pt-24 pb-0 px-4 sm:px-6">
@@ -230,6 +232,7 @@ export function Hero() {
                   buttonVariants({ size: "lg" }),
                   "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40"
                 )}
+                onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
                 Créer mon compte gratuitement
                 <ArrowRight className="w-4 h-4" />
@@ -237,6 +240,7 @@ export function Hero() {
               <a
                 href="#demo"
                 className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
+                onClick={() => ph?.capture("cta_demo_click", { location: "hero" })}
               >
                 Voir comment ça marche
               </a>
