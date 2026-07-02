@@ -1,8 +1,8 @@
 const PH_HOST = "https://eu.posthog.com";
 
 async function hogql(sql: string) {
-  const key = process.env.POSTHOG_PERSONAL_API_KEY;
-  const project = process.env.POSTHOG_PROJECT_ID ?? "214209";
+  const key = process.env.POSTHOG_PERSONAL_API_KEY?.trim();
+  const project = (process.env.POSTHOG_PROJECT_ID ?? "214209").trim();
   if (!key) return [];
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 8000);

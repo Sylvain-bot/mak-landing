@@ -27,9 +27,10 @@ export default async function AnalyticsPage({
 
   if (!authed) redirect("/admin/login?from=/admin/analytics");
 
+  const hasKey = !!process.env.POSTHOG_PERSONAL_API_KEY?.trim();
   const data = await getAnalytics(period);
 
-  return <Dashboard data={data} period={period} />;
+  return <Dashboard data={data} period={period} hasKey={hasKey} />;
 }
 
 // ─── Components ──────────────────────────────────────────────────────────────
@@ -73,10 +74,11 @@ function Empty({ text = "Pas encore de données" }: { text?: string }) {
   return <p className="text-xs text-[#94a3b8] italic py-2">{text}</p>;
 }
 
-function Dashboard({ data, period }: { data: Analytics; period: number }) {
+function Dashboard({ data, period, hasKey }: { data: Analytics; period: number; hasKey: boolean }) {
   const { overview, pages, sources, exits, ctas, devices, trend } = data;
   const maxPv = Math.max(...trend.map((t) => t.pv), 1);
   const totalViews = Math.max(overview.pageviews, 1);
+  const hasData = overview.pageviews > 0;
 
   const ctaLabels: Record<string, string> = {
     cta_signup_click: "Clic « Créer mon compte »",
@@ -112,6 +114,18 @@ function Dashboard({ data, period }: { data: Analytics; period: number }) {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+        {/* Warning banners */}
+        {!hasKey && (
+          <div className="rounded-xl px-5 py-3 text-sm font-medium" style={{ background: "#fef3c7", border: "1px solid #fbbf24", color: "#92400e" }}>
+            ⚠️ Variable <code className="font-mono text-xs bg-amber-100 px-1 rounded">POSTHOG_PERSONAL_API_KEY</code> non détectée sur Vercel — les données ne peuvent pas être chargées.
+          </div>
+        )}
+        {hasKey && !hasData && (
+          <div className="rounded-xl px-5 py-3 text-sm font-medium" style={{ background: "#fef3c7", border: "1px solid #fbbf24", color: "#92400e" }}>
+            ⚠️ La clé PostHog est présente mais aucune donnée n&apos;est retournée. Vérifier que la clé est correcte dans Vercel (sans espace ni saut de ligne).
+          </div>
+        )}
 
         {/* Overview */}
         <div className="grid grid-cols-3 gap-4">
