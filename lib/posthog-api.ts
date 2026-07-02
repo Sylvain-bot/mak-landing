@@ -23,10 +23,13 @@ async function hogql(sql: string) {
   }
 }
 
+// Exclude /admin pages from all public analytics
+const NO_ADMIN = `properties.$pathname NOT LIKE '/admin%'`;
+
 export async function getAnalytics(days = 30) {
   const d = Number(days);
 
-  const [overview, pages, sources, exits, ctas, devices, trend] =
+  const [overview, pages, sources, exits, ctas, devices, trend, utms] =
     await Promise.all([
       hogql(`
         SELECT
@@ -35,6 +38,7 @@ export async function getAnalytics(days = 30) {
           count(DISTINCT properties.$session_id) AS sessions
         FROM events
         WHERE event = '$pageview'
+          AND ${NO_ADMIN}
           AND timestamp >= now() - INTERVAL ${d} DAY
       `),
       hogql(`
@@ -43,6 +47,7 @@ export async function getAnalytics(days = 30) {
           count() AS views
         FROM events
         WHERE event = '$pageview'
+          AND ${NO_ADMIN}
           AND timestamp >= now() - INTERVAL ${d} DAY
         GROUP BY page
         ORDER BY views DESC
@@ -54,6 +59,7 @@ export async function getAnalytics(days = 30) {
           count() AS sessions
         FROM events
         WHERE event = '$pageview'
+          AND ${NO_ADMIN}
           AND timestamp >= now() - INTERVAL ${d} DAY
         GROUP BY source
         ORDER BY sessions DESC
@@ -65,6 +71,7 @@ export async function getAnalytics(days = 30) {
           count() AS exits
         FROM events
         WHERE event = '$pageleave'
+          AND ${NO_ADMIN}
           AND timestamp >= now() - INTERVAL ${d} DAY
         GROUP BY page
         ORDER BY exits DESC
@@ -84,6 +91,7 @@ export async function getAnalytics(days = 30) {
           count() AS n
         FROM events
         WHERE event = '$pageview'
+          AND ${NO_ADMIN}
           AND timestamp >= now() - INTERVAL ${d} DAY
         GROUP BY device
         ORDER BY n DESC
@@ -94,9 +102,29 @@ export async function getAnalytics(days = 30) {
           count() AS pageviews
         FROM events
         WHERE event = '$pageview'
+          AND ${NO_ADMIN}
           AND timestamp >= now() - INTERVAL ${d} DAY
         GROUP BY day
         ORDER BY day ASC
+      `),
+      // UTM campaigns — full URL kept to retrouver l'ID créa Facebook
+      hogql(`
+        SELECT
+          coalesce(nullIf(properties.$utm_source, ''), '—')   AS utm_source,
+          coalesce(nullIf(properties.$utm_medium, ''), '—')   AS utm_medium,
+          coalesce(nullIf(properties.$utm_campaign, ''), '—') AS utm_campaign,
+          coalesce(nullIf(properties.$utm_content, ''), '—')  AS utm_content,
+          any(properties.$current_url)                        AS sample_url,
+          count()                                             AS visits,
+          count(DISTINCT distinct_id)                         AS uniq
+        FROM events
+        WHERE event = '$pageview'
+          AND ${NO_ADMIN}
+          AND properties.$utm_source IS NOT NULL
+          AND timestamp >= now() - INTERVAL ${d} DAY
+        GROUP BY utm_source, utm_medium, utm_campaign, utm_content
+        ORDER BY visits DESC
+        LIMIT 30
       `),
     ]);
 
@@ -110,6 +138,15 @@ export async function getAnalytics(days = 30) {
     ctas: ctas.map(([event, n]) => ({ event: String(event), n: Number(n) })),
     devices: devices.map(([device, n]) => ({ device: String(device), n: Number(n) })),
     trend: trend.map(([day, pv]) => ({ day: String(day), pv: Number(pv) })),
+    utms: utms.map(([src, med, camp, content, url, visits, uniq]) => ({
+      source: String(src),
+      medium: String(med),
+      campaign: String(camp),
+      content: String(content),
+      sample_url: url ? String(url) : null,
+      visits: Number(visits),
+      uniq: Number(uniq),
+    })),
   };
 }
 
@@ -133,6 +170,7 @@ export async function getVisitors(days = 30) {
       max(timestamp)                             AS derniere_visite
     FROM events
     WHERE event = '$pageview'
+      AND ${NO_ADMIN}
       AND timestamp >= now() - INTERVAL ${d} DAY
     GROUP BY distinct_id
     ORDER BY derniere_visite DESC
@@ -179,7 +217,12 @@ export async function getVisitorDetail(distinctId: string) {
         event,
         properties.$pathname                    AS page,
         properties.$session_id                  AS session_id,
-        toString(timestamp)                     AS ts
+        toString(timestamp)                     AS ts,
+        properties.$utm_source                  AS utm_source,
+        properties.$utm_medium                  AS utm_medium,
+        properties.$utm_campaign                AS utm_campaign,
+        properties.$utm_content                 AS utm_content,
+        properties.$current_url                 AS full_url
       FROM events
       WHERE distinct_id = '${safe}'
         AND event IN ('$pageview', '$pageleave')
@@ -202,12 +245,22 @@ export async function getVisitorDetail(distinctId: string) {
   };
 
   // Pair pageviews with their matching pageleave to compute duration
-  type RawEvent = { event: string; page: string; session_id: string; ts: string };
-  const raw: RawEvent[] = eventRows.map(([ev, pg, sid, ts]) => ({
+  type RawEvent = {
+    event: string; page: string; session_id: string; ts: string;
+    utm_source: string | null; utm_medium: string | null;
+    utm_campaign: string | null; utm_content: string | null;
+    full_url: string | null;
+  };
+  const raw: RawEvent[] = eventRows.map(([ev, pg, sid, ts, us, um, uc, ucont, url]) => ({
     event: String(ev),
     page: String(pg) || "/",
     session_id: String(sid),
     ts: String(ts),
+    utm_source: us ? String(us) : null,
+    utm_medium: um ? String(um) : null,
+    utm_campaign: uc ? String(uc) : null,
+    utm_content: ucont ? String(ucont) : null,
+    full_url: url ? String(url) : null,
   }));
 
   // Build session→page→[pageleave timestamps] index
@@ -219,12 +272,24 @@ export async function getVisitorDetail(distinctId: string) {
     leaveMap.get(key)!.push(r.ts);
   }
 
+  // First UTM seen per session (entry point)
+  const sessionUtm = new Map<string, { source: string | null; medium: string | null; campaign: string | null; content: string | null; full_url: string | null }>();
+  for (const r of raw) {
+    if (r.event !== "$pageview") continue;
+    if (!sessionUtm.has(r.session_id) && (r.utm_source || r.utm_campaign)) {
+      sessionUtm.set(r.session_id, {
+        source: r.utm_source, medium: r.utm_medium,
+        campaign: r.utm_campaign, content: r.utm_content,
+        full_url: r.full_url,
+      });
+    }
+  }
+
   const views = raw
     .filter((r) => r.event === "$pageview")
     .map((r) => {
       const key = `${r.session_id}||${r.page}`;
       const leaves = leaveMap.get(key) ?? [];
-      // nearest pageleave after this pageview
       const match = leaves.find((l) => l > r.ts);
       const dureeMs = match
         ? new Date(match).getTime() - new Date(r.ts).getTime()
@@ -237,7 +302,7 @@ export async function getVisitorDetail(distinctId: string) {
       };
     });
 
-  return { meta, views };
+  return { meta, views, sessionUtm: Object.fromEntries(sessionUtm) };
 }
 
 export type VisitorDetail = Awaited<ReturnType<typeof getVisitorDetail>>;

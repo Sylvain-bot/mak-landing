@@ -244,6 +244,66 @@ function Dashboard({ data, visitors, period, hasKey }: { data: Analytics; visito
           </Section>
         </div>
 
+        {/* UTM / Campagnes */}
+        <div className="rounded-2xl bg-white overflow-hidden" style={{ border: "1px solid #d4ecea" }}>
+          <div className="px-6 pt-5 pb-3">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3899aa] font-mono">
+              📣 Campagnes & pubs trackées (UTM)
+            </p>
+            <p className="text-[10px] text-[#94a3b8] mt-0.5">
+              Apparaît dès qu&apos;un visiteur arrive via un lien avec <code className="font-mono bg-[#f0f9fa] px-1 rounded">?utm_source=...</code>
+            </p>
+          </div>
+          {data.utms.length === 0 ? (
+            <div className="px-6 pb-5">
+              <p className="text-xs text-[#94a3b8] italic">Aucune campagne trackée pour l&apos;instant.</p>
+              <p className="text-xs text-[#64748b] mt-2">
+                Pour tracker une pub Facebook, ajoute ces paramètres à ton lien de destination :<br />
+                <code className="font-mono text-[10px] bg-[#f0f9fa] px-1.5 py-0.5 rounded mt-1 inline-block break-all">
+                  ?utm_source=facebook&amp;utm_medium=paid&amp;utm_campaign=nom-campagne&amp;utm_content=ID_crea_123
+                </code>
+              </p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr style={{ background: "#f8fcfc", borderBottom: "1px solid #d4ecea" }}>
+                    {["Source", "Medium", "Campagne", "Créa (utm_content)", "Visites", "Uniques", "URL complète"].map((h) => (
+                      <th key={h} className="px-4 py-2.5 text-left font-semibold text-[#64748b] whitespace-nowrap">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.utms.map((u, i) => (
+                    <tr key={i} style={{ borderBottom: i < data.utms.length - 1 ? "1px solid #f0f9fa" : "none" }}>
+                      <td className="px-4 py-3 font-semibold text-[#0f172a]">{u.source}</td>
+                      <td className="px-4 py-3 text-[#475569]">{u.medium}</td>
+                      <td className="px-4 py-3 text-[#475569]">{u.campaign}</td>
+                      <td className="px-4 py-3 font-mono text-[#3899aa] text-[10px]">{u.content}</td>
+                      <td className="px-4 py-3 font-semibold text-[#0f172a]">{u.visits}</td>
+                      <td className="px-4 py-3 text-[#475569]">{u.uniq}</td>
+                      <td className="px-4 py-3 max-w-[200px]">
+                        {u.sample_url ? (
+                          <a
+                            href={u.sample_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-[9px] text-[#94a3b8] hover:text-[#3899aa] truncate block"
+                            title={u.sample_url}
+                          >
+                            {u.sample_url}
+                          </a>
+                        ) : "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
         {/* Devices */}
         <div className="rounded-2xl bg-white p-6" style={{ border: "1px solid #d4ecea" }}>
           <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3899aa] mb-5 font-mono">
@@ -360,7 +420,7 @@ function fmtTs(ts: string) {
 }
 
 function VisitorDetailView({ id, detail, period }: { id: string; detail: VisitorDetail; period: number }) {
-  const { meta, views } = detail;
+  const { meta, views, sessionUtm } = detail;
 
   // Group by session_id keeping insertion order
   const sessionMap = new Map<string, typeof views>();
@@ -442,6 +502,34 @@ function VisitorDetailView({ id, detail, period }: { id: string; detail: Visitor
                 </div>
                 <span className="text-[10px] text-[#94a3b8]">{fmtTs(pages[0].ts)}</span>
               </div>
+
+              {/* UTM banner if this session came from a campaign */}
+              {sessionUtm[sessId] && (
+                <div className="px-5 py-2 flex flex-wrap gap-2 items-center" style={{ background: "#eef7f6", borderBottom: "1px solid #d4ecea" }}>
+                  <span className="text-[10px] font-semibold text-[#3899aa]">📣 Campagne :</span>
+                  {[
+                    { k: "Source", v: sessionUtm[sessId].source },
+                    { k: "Medium", v: sessionUtm[sessId].medium },
+                    { k: "Campagne", v: sessionUtm[sessId].campaign },
+                    { k: "Créa", v: sessionUtm[sessId].content },
+                  ].filter(({ v }) => v && v !== "—").map(({ k, v }) => (
+                    <span key={k} className="text-[10px] px-2 py-0.5 rounded-full font-mono" style={{ background: "white", border: "1px solid #d4ecea", color: "#0f172a" }}>
+                      {k}: <strong>{v}</strong>
+                    </span>
+                  ))}
+                  {sessionUtm[sessId].full_url && (
+                    <a
+                      href={sessionUtm[sessId].full_url!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[9px] font-mono text-[#94a3b8] hover:text-[#3899aa] truncate max-w-[300px]"
+                      title={sessionUtm[sessId].full_url!}
+                    >
+                      {sessionUtm[sessId].full_url}
+                    </a>
+                  )}
+                </div>
+              )}
 
               {/* Pages list */}
               <div className="divide-y" style={{ borderColor: "#f0f9fa" }}>
