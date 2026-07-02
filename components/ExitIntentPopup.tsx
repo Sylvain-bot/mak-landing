@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "mak_newsletter_dismissed";
+const CONTACT_EMAIL = "contact@monassistantkine.fr";
 
 export function ExitIntentPopup() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [state, setState] = useState<"idle" | "loading" | "success" | "fallback">("idle");
   const triggered = useRef(false);
 
   useEffect(() => {
@@ -15,7 +16,6 @@ export function ExitIntentPopup() {
 
     let mobileTimer: ReturnType<typeof setTimeout>;
 
-    // Desktop — souris qui remonte vers les onglets
     function handleMouseLeave(e: MouseEvent) {
       if (triggered.current) return;
       if (e.clientY < 10) {
@@ -24,7 +24,7 @@ export function ExitIntentPopup() {
       }
     }
 
-    // Mobile — après 40 s de navigation sans action
+    // Mobile — 40 s de navigation
     mobileTimer = setTimeout(() => {
       if (triggered.current) return;
       triggered.current = true;
@@ -38,7 +38,6 @@ export function ExitIntentPopup() {
     };
   }, []);
 
-  // Fermer avec Échap
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
@@ -67,10 +66,10 @@ export function ExitIntentPopup() {
         setState("success");
         sessionStorage.setItem(STORAGE_KEY, "1");
       } else {
-        setState("error");
+        setState("fallback");
       }
     } catch {
-      setState("error");
+      setState("fallback");
     }
   }
 
@@ -93,28 +92,49 @@ export function ExitIntentPopup() {
         <div className="bg-white px-7 py-8">
           {state === "success" ? (
             <div className="text-center py-4">
-              <div className="text-4xl mb-4">✓</div>
-              <h2 className="text-xl font-bold text-[#0f172a] mb-2">Tu es inscrit·e !</h2>
-              <p className="text-sm text-[#64748b] mb-6">
-                Première ressource dans ta boîte mail très bientôt.
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "#eef7f6" }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3899aa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h2 className="text-xl font-bold text-[#0f172a] mb-2">Tu es dans la boucle !</h2>
+              <p className="text-sm text-[#64748b] mb-6 leading-relaxed">
+                On te tient au courant des nouveautés MAK et on partage les meilleures ressources cliniques — sans spam.
               </p>
-              <button
-                onClick={dismiss}
-                className="text-sm font-medium text-[#3899aa] hover:underline"
-              >
+              <button onClick={dismiss} className="text-sm font-medium text-[#3899aa] hover:underline">
                 Fermer
               </button>
             </div>
+
+          ) : state === "fallback" ? (
+            <div className="text-center py-2">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "#fef3c7" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <h2 className="text-lg font-bold text-[#0f172a] mb-2">On prépare tout ça !</h2>
+              <p className="text-sm text-[#64748b] mb-5 leading-relaxed">
+                L&apos;inscription automatique n&apos;est pas encore disponible. Envoie-nous un mail et on t&apos;ajoute manuellement — promis, c&apos;est rapide.
+              </p>
+              <a
+                href={`mailto:${CONTACT_EMAIL}?subject=Inscription newsletter MAK&body=Bonjour, je souhaite m'inscrire à la newsletter MAK. Mon email : ${encodeURIComponent(email)}`}
+                className="inline-flex items-center gap-2 px-6 h-11 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02]"
+                style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)" }}
+                onClick={() => sessionStorage.setItem(STORAGE_KEY, "1")}
+              >
+                Envoyer un mail
+              </a>
+              <button onClick={dismiss} className="block mx-auto mt-3 text-xs text-[#94a3b8] hover:underline">
+                Pas maintenant
+              </button>
+            </div>
+
           ) : (
             <>
-              {/* Header */}
               <div className="flex items-start justify-between gap-3 mb-5">
                 <div>
                   <p className="text-[#3899aa] text-[11px] font-semibold uppercase tracking-widest mb-1.5 font-mono">
-                    Avant de partir
+                    Rejoins la communauté MAK
                   </p>
                   <h2 className="text-xl font-bold text-[#0f172a] leading-snug">
-                    1 ressource EBP par semaine,<br />directement dans ta boîte mail.
+                    Les coulisses du projet,<br />les nouveautés et les meilleures ressources cliniques.
                   </h2>
                 </div>
                 <button
@@ -126,12 +146,11 @@ export function ExitIntentPopup() {
                 </button>
               </div>
 
-              {/* Valeur */}
               <ul className="space-y-2 mb-6">
                 {[
-                  "Synthèses cliniques actionnables (Cleland, HAS, PubMed)",
-                  "Cas pratiques : diagnostic différentiel, drapeaux rouges",
-                  "Conseils pratique libérale — pas de spam, désabonnement en 1 clic",
+                  "Les coulisses du projet — décisions produit, ce qui arrive, ce qu'on a testé",
+                  "Ressources EBP actionnables sélectionnées par des kinés praticiens",
+                  "Accès anticipé aux nouvelles fonctionnalités",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5 text-sm text-[#475569]">
                     <span className="text-[#3899aa] font-bold mt-0.5 shrink-0">✓</span>
@@ -140,7 +159,6 @@ export function ExitIntentPopup() {
                 ))}
               </ul>
 
-              {/* Formulaire */}
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input
                   type="email"
@@ -160,16 +178,10 @@ export function ExitIntentPopup() {
                   className="w-full h-11 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02] disabled:opacity-60"
                   style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 14px rgba(56,153,170,0.3)" }}
                 >
-                  {state === "loading" ? "Inscription…" : "Je m'abonne — c'est gratuit"}
+                  {state === "loading" ? "Inscription…" : "Je rejoins la liste — c'est gratuit"}
                 </button>
-                {state === "error" && (
-                  <p className="text-xs text-red-500 text-center">
-                    Une erreur s'est produite. Réessaie dans un instant.
-                  </p>
-                )}
               </form>
 
-              {/* Footer discret */}
               <p className="text-[11px] text-[#94a3b8] text-center mt-4">
                 Réservé aux kinésithérapeutes · Pas de spam · Désabonnement en 1 clic
               </p>

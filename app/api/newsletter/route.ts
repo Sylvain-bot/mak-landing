@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Email invalide" }, { status: 400 });
   }
 
-  const apiKey = process.env.BREVO_API_KEY;
+  const apiKey = process.env.BREVO_API_KEY?.trim();
   if (!apiKey) {
     return NextResponse.json({ error: "Configuration manquante" }, { status: 500 });
   }
