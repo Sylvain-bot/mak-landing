@@ -1,6 +1,10 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { getAnalytics, type Analytics } from "@/lib/posthog-api";
+import {
+  getAnalytics, type Analytics,
+  getVisitors, type Visitor,
+  getVisitorDetail, type VisitorDetail,
+} from "@/lib/posthog-api";
 
 export const dynamic = "force-dynamic";
 
@@ -15,9 +19,9 @@ async function sha256(msg: string) {
 export default async function AnalyticsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ period?: string }>;
+  searchParams: Promise<{ period?: string; visitor?: string }>;
 }) {
-  const { period: rawPeriod } = await searchParams;
+  const { period: rawPeriod, visitor: visitorId } = await searchParams;
   const period = [7, 30, 90].includes(Number(rawPeriod)) ? Number(rawPeriod) : 30;
 
   const cookieStore = await cookies();
@@ -28,9 +32,20 @@ export default async function AnalyticsPage({
   if (!authed) redirect("/admin/login?from=/admin/analytics");
 
   const hasKey = !!process.env.POSTHOG_PERSONAL_API_KEY?.trim();
-  const data = await getAnalytics(period);
 
-  return <Dashboard data={data} period={period} hasKey={hasKey} />;
+  // Visitor detail view
+  if (visitorId) {
+    const detail = await getVisitorDetail(visitorId);
+    return <VisitorDetailView id={visitorId} detail={detail} period={period} />;
+  }
+
+  // Main dashboard
+  const [data, visitors] = await Promise.all([
+    getAnalytics(period),
+    getVisitors(period),
+  ]);
+
+  return <Dashboard data={data} visitors={visitors} period={period} hasKey={hasKey} />;
 }
 
 // ─── Components ──────────────────────────────────────────────────────────────
@@ -74,7 +89,7 @@ function Empty({ text = "Pas encore de données" }: { text?: string }) {
   return <p className="text-xs text-[#94a3b8] italic py-2">{text}</p>;
 }
 
-function Dashboard({ data, period, hasKey }: { data: Analytics; period: number; hasKey: boolean }) {
+function Dashboard({ data, visitors, period, hasKey }: { data: Analytics; visitors: Visitor[]; period: number; hasKey: boolean }) {
   const { overview, pages, sources, exits, ctas, devices, trend } = data;
   const maxPv = Math.max(...trend.map((t) => t.pv), 1);
   const totalViews = Math.max(overview.pageviews, 1);
@@ -255,6 +270,58 @@ function Dashboard({ data, period, hasKey }: { data: Analytics; period: number; 
             )}
         </div>
 
+        {/* Visiteurs récents */}
+        <div className="rounded-2xl bg-white overflow-hidden" style={{ border: "1px solid #d4ecea" }}>
+          <div className="px-6 pt-5 pb-3">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3899aa] font-mono">
+              👤 Visiteurs récents
+            </p>
+            <p className="text-[10px] text-[#94a3b8] mt-0.5">Cliquer sur un visiteur pour voir son parcours détaillé</p>
+          </div>
+          {visitors.length === 0 ? (
+            <div className="px-6 pb-5"><Empty /></div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr style={{ background: "#f8fcfc", borderBottom: "1px solid #d4ecea" }}>
+                    {["Visiteur", "Lieu", "Appareil", "Pages vues", "Dernière visite"].map((h) => (
+                      <th key={h} className="px-4 py-2.5 text-left font-semibold text-[#64748b] whitespace-nowrap">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {visitors.map((v, i) => (
+                    <tr
+                      key={v.id}
+                      style={{ borderBottom: i < visitors.length - 1 ? "1px solid #f0f9fa" : "none" }}
+                    >
+                      <td className="px-4 py-3">
+                        <a
+                          href={`/admin/analytics?visitor=${encodeURIComponent(v.id)}&period=${period}`}
+                          className="font-mono text-[10px] text-[#3899aa] hover:underline"
+                        >
+                          {v.id.slice(0, 8)}…
+                        </a>
+                      </td>
+                      <td className="px-4 py-3 text-[#475569]">
+                        {[v.ville, v.region, v.pays].filter(Boolean).join(", ") || "—"}
+                      </td>
+                      <td className="px-4 py-3 text-[#475569]">
+                        {v.navigateur ?? "—"}{v.appareil ? ` · ${v.appareil}` : ""}
+                      </td>
+                      <td className="px-4 py-3 font-semibold text-[#0f172a]">{v.pages_vues}</td>
+                      <td className="px-4 py-3 text-[#94a3b8] whitespace-nowrap">
+                        {new Date(v.derniere_visite).toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
         {/* Conseils */}
         <div className="rounded-2xl p-5" style={{ background: "#f0f9fa", border: "1px solid #d4ecea" }}>
           <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3899aa] mb-3 font-mono">
@@ -268,8 +335,158 @@ function Dashboard({ data, period, hasKey }: { data: Analytics; period: number; 
         </div>
 
         <p className="text-center text-[10px] text-[#94a3b8] pb-4">
-          Données PostHog EU · Projet {process.env.POSTHOG_PROJECT_ID ?? "214209"} · Mise à jour toutes les 5 min
+          Données PostHog EU · Projet {process.env.POSTHOG_PROJECT_ID ?? "214209"} · Mise à jour à chaque rechargement
         </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── Visitor detail view ──────────────────────────────────────────────────────
+
+function fmtDuree(s: number | null): string {
+  if (s === null) return "—";
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return sec > 0 ? `${m}m ${sec}s` : `${m}m`;
+}
+
+function fmtTs(ts: string) {
+  return new Date(ts).toLocaleString("fr-FR", {
+    day: "2-digit", month: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+  });
+}
+
+function VisitorDetailView({ id, detail, period }: { id: string; detail: VisitorDetail; period: number }) {
+  const { meta, views } = detail;
+
+  // Group by session_id keeping insertion order
+  const sessionMap = new Map<string, typeof views>();
+  for (const v of views) {
+    if (!sessionMap.has(v.session_id)) sessionMap.set(v.session_id, []);
+    sessionMap.get(v.session_id)!.push(v);
+  }
+  const sessions = [...sessionMap.entries()];
+
+  const deviceIcon = (d: string | null) =>
+    d === "Mobile" ? "📱" : d === "Tablet" ? "📲" : "🖥";
+
+  return (
+    <div className="min-h-screen" style={{ background: "#f8fcfc" }}>
+      {/* Header */}
+      <div style={{ background: "#0f172a" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-4">
+          <a
+            href={`/admin/analytics?period=${period}`}
+            className="text-[#3899aa] hover:text-white text-sm font-medium transition-colors flex items-center gap-1.5"
+          >
+            ← Retour
+          </a>
+          <span className="text-white/20">/</span>
+          <span className="text-white font-semibold text-sm">Parcours visiteur</span>
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full ml-auto" style={{ background: "#1e293b", color: "#3899aa" }}>
+            {id.slice(0, 12)}…
+          </span>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+        {/* Visitor info card */}
+        <div className="rounded-2xl bg-white p-6" style={{ border: "1px solid #d4ecea" }}>
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3899aa] mb-4 font-mono">
+            👤 Profil du visiteur
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {[
+              { label: "Ville", value: [meta.ville, meta.region].filter(Boolean).join(", ") || "—" },
+              { label: "Pays", value: meta.pays || "—" },
+              { label: "Appareil", value: `${deviceIcon(meta.appareil)} ${meta.appareil || "—"}` },
+              { label: "Navigateur", value: meta.navigateur || "—" },
+              { label: "OS", value: meta.os || "—" },
+              { label: "Source", value: meta.referrer || "Direct / Typé" },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <div className="text-[10px] font-semibold text-[#94a3b8] uppercase tracking-wider mb-0.5">{label}</div>
+                <div className="text-sm text-[#0f172a] font-medium">{value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sessions */}
+        {sessions.length === 0 ? (
+          <div className="rounded-2xl bg-white p-6 text-center text-sm text-[#94a3b8]" style={{ border: "1px solid #d4ecea" }}>
+            Aucun parcours disponible pour ce visiteur
+          </div>
+        ) : sessions.map(([sessId, pages], si) => {
+          const totalDuree = pages.reduce((acc, p) => acc + (p.duree_s ?? 0), 0);
+          return (
+            <div key={sessId} className="rounded-2xl bg-white overflow-hidden" style={{ border: "1px solid #d4ecea" }}>
+              {/* Session header */}
+              <div className="px-5 py-3 flex items-center justify-between" style={{ background: "#f8fcfc", borderBottom: "1px solid #d4ecea" }}>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-[#3899aa] font-mono">
+                    Session {si + 1}
+                  </span>
+                  <span className="text-[10px] text-[#94a3b8]">·</span>
+                  <span className="text-[10px] text-[#94a3b8]">{pages.length} page{pages.length > 1 ? "s" : ""}</span>
+                  {totalDuree > 0 && (
+                    <>
+                      <span className="text-[10px] text-[#94a3b8]">·</span>
+                      <span className="text-[10px] text-[#94a3b8]">{fmtDuree(totalDuree)} total</span>
+                    </>
+                  )}
+                </div>
+                <span className="text-[10px] text-[#94a3b8]">{fmtTs(pages[0].ts)}</span>
+              </div>
+
+              {/* Pages list */}
+              <div className="divide-y" style={{ borderColor: "#f0f9fa" }}>
+                {pages.map((p, pi) => (
+                  <div key={pi} className="px-5 py-3 flex items-center gap-3">
+                    {/* Step number */}
+                    <div
+                      className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
+                      style={{ background: "#eef7f6", color: "#3899aa" }}
+                    >
+                      {pi + 1}
+                    </div>
+
+                    {/* Page path */}
+                    <div className="flex-1 min-w-0">
+                      <span
+                        className="text-sm font-mono text-[#0f172a] truncate block"
+                        title={p.page}
+                      >
+                        {p.page}
+                      </span>
+                      <span className="text-[10px] text-[#94a3b8]">{fmtTs(p.ts)}</span>
+                    </div>
+
+                    {/* Duration */}
+                    <div className="shrink-0 text-right">
+                      <span
+                        className="text-xs font-semibold px-2 py-0.5 rounded-full"
+                        style={
+                          p.duree_s === null
+                            ? { background: "#f1f5f9", color: "#94a3b8" }
+                            : p.duree_s > 60
+                            ? { background: "#eef7f6", color: "#3899aa" }
+                            : { background: "#f8fcfc", color: "#64748b" }
+                        }
+                      >
+                        {fmtDuree(p.duree_s)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

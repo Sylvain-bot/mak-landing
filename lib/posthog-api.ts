@@ -114,3 +114,130 @@ export async function getAnalytics(days = 30) {
 }
 
 export type Analytics = Awaited<ReturnType<typeof getAnalytics>>;
+
+// ─── Visitors list ────────────────────────────────────────────────────────────
+
+export async function getVisitors(days = 30) {
+  const d = Number(days);
+  const rows = await hogql(`
+    SELECT
+      distinct_id,
+      any(properties.$geoip_city_name)           AS ville,
+      any(properties.$geoip_subdivision_1_name)  AS region,
+      any(properties.$geoip_country_name)        AS pays,
+      any(properties.$browser)                   AS navigateur,
+      any(properties.$device_type)               AS appareil,
+      count()                                    AS pages_vues,
+      count(DISTINCT properties.$session_id)     AS sessions,
+      min(timestamp)                             AS premiere_visite,
+      max(timestamp)                             AS derniere_visite
+    FROM events
+    WHERE event = '$pageview'
+      AND timestamp >= now() - INTERVAL ${d} DAY
+    GROUP BY distinct_id
+    ORDER BY derniere_visite DESC
+    LIMIT 50
+  `);
+  return rows.map(([id, ville, region, pays, navigateur, appareil, pages, sess, first, last]) => ({
+    id: String(id),
+    ville: ville ? String(ville) : null,
+    region: region ? String(region) : null,
+    pays: pays ? String(pays) : null,
+    navigateur: navigateur ? String(navigateur) : null,
+    appareil: appareil ? String(appareil) : null,
+    pages_vues: Number(pages),
+    sessions: Number(sess),
+    premiere_visite: String(first),
+    derniere_visite: String(last),
+  }));
+}
+
+export type Visitor = Awaited<ReturnType<typeof getVisitors>>[number];
+
+// ─── Visitor detail ───────────────────────────────────────────────────────────
+
+export async function getVisitorDetail(distinctId: string) {
+  const safe = distinctId.replace(/[^a-zA-Z0-9\-_]/g, "");
+  const [infoRows, eventRows] = await Promise.all([
+    hogql(`
+      SELECT
+        any(properties.$geoip_city_name)          AS ville,
+        any(properties.$geoip_subdivision_1_name) AS region,
+        any(properties.$geoip_country_name)       AS pays,
+        any(properties.$browser)                  AS navigateur,
+        any(properties.$device_type)              AS appareil,
+        any(properties.$os)                       AS os,
+        any(properties.$referring_domain)         AS referrer,
+        min(timestamp)                            AS premiere_visite
+      FROM events
+      WHERE distinct_id = '${safe}'
+        AND event = '$pageview'
+      LIMIT 1
+    `),
+    hogql(`
+      SELECT
+        event,
+        properties.$pathname                    AS page,
+        properties.$session_id                  AS session_id,
+        toString(timestamp)                     AS ts
+      FROM events
+      WHERE distinct_id = '${safe}'
+        AND event IN ('$pageview', '$pageleave')
+        AND timestamp >= now() - INTERVAL 30 DAY
+      ORDER BY timestamp ASC
+      LIMIT 300
+    `),
+  ]);
+
+  const info = infoRows[0] ?? [];
+  const meta = {
+    ville:    info[0] ? String(info[0]) : null,
+    region:   info[1] ? String(info[1]) : null,
+    pays:     info[2] ? String(info[2]) : null,
+    navigateur: info[3] ? String(info[3]) : null,
+    appareil: info[4] ? String(info[4]) : null,
+    os:       info[5] ? String(info[5]) : null,
+    referrer: info[6] ? String(info[6]) : null,
+    premiere_visite: info[7] ? String(info[7]) : null,
+  };
+
+  // Pair pageviews with their matching pageleave to compute duration
+  type RawEvent = { event: string; page: string; session_id: string; ts: string };
+  const raw: RawEvent[] = eventRows.map(([ev, pg, sid, ts]) => ({
+    event: String(ev),
+    page: String(pg) || "/",
+    session_id: String(sid),
+    ts: String(ts),
+  }));
+
+  // Build session→page→[pageleave timestamps] index
+  const leaveMap = new Map<string, string[]>();
+  for (const r of raw) {
+    if (r.event !== "$pageleave") continue;
+    const key = `${r.session_id}||${r.page}`;
+    if (!leaveMap.has(key)) leaveMap.set(key, []);
+    leaveMap.get(key)!.push(r.ts);
+  }
+
+  const views = raw
+    .filter((r) => r.event === "$pageview")
+    .map((r) => {
+      const key = `${r.session_id}||${r.page}`;
+      const leaves = leaveMap.get(key) ?? [];
+      // nearest pageleave after this pageview
+      const match = leaves.find((l) => l > r.ts);
+      const dureeMs = match
+        ? new Date(match).getTime() - new Date(r.ts).getTime()
+        : null;
+      return {
+        page: r.page,
+        session_id: r.session_id,
+        ts: r.ts,
+        duree_s: dureeMs !== null ? Math.round(dureeMs / 1000) : null,
+      };
+    });
+
+  return { meta, views };
+}
+
+export type VisitorDetail = Awaited<ReturnType<typeof getVisitorDetail>>;
