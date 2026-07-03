@@ -144,44 +144,40 @@ function AppScreenshot() {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox — clic fond = ferme, clic image = zoom */}
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.92)" }}
           onClick={closeLightbox}
+          onWheel={onWheel}
         >
-          {/* × fermer */}
+          {/* × fermer — toujours visible */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors text-2xl leading-none"
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold transition-colors"
+            style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.2)" }}
           >×</button>
 
-          {/* Image zoomable */}
+          {/* Image seule — clic dessus = zoom/dézoom, stopPropagation évite de fermer */}
           <div
-            className="overflow-auto flex items-center justify-center"
-            style={{ width: "100%", height: "100%", cursor: scale > 1 ? "zoom-out" : "zoom-in" }}
-            onWheel={onWheel}
+            ref={imgRef}
+            style={{
+              transform: `scale(${scale})`,
+              transformOrigin: `${origin.x}% ${origin.y}%`,
+              transition: "transform 0.15s ease",
+              cursor: scale > 1 ? "zoom-out" : "zoom-in",
+            }}
             onClick={(e) => { e.stopPropagation(); scale > 1 ? zoomReset() : zoomIn(); }}
           >
-            <div
-              ref={imgRef}
-              style={{
-                transform: `scale(${scale})`,
-                transformOrigin: `${origin.x}% ${origin.y}%`,
-                transition: "transform 0.15s ease",
-                display: "inline-block",
-              }}
-            >
-              <Image
-                src="/Hero.png"
-                alt="Copilote clinique MAK — vue complète"
-                width={1400}
-                height={1000}
-                className="block rounded-xl shadow-2xl"
-                style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
-              />
-            </div>
+            <Image
+              src="/Hero.png"
+              alt="Copilote clinique MAK — vue complète"
+              width={1400}
+              height={1000}
+              className="block rounded-xl shadow-2xl"
+              style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
+            />
           </div>
         </div>
       )}
