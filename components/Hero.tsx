@@ -91,7 +91,7 @@ function AppScreenshot() {
 
         <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
           <Image
-            src="/cervic.png"
+            src="/Hero.png"
             alt="Copilote clinique MAK — cas cervical, réponse clinique sourcée en temps réel"
             width={900}
             height={700}
@@ -139,7 +139,7 @@ function AppScreenshot() {
               </button>
             </div>
             <Image
-              src="/cervic.png"
+              src="/Hero.png"
               alt="Copilote clinique MAK — vue complète"
               width={1400}
               height={1000}
