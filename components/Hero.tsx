@@ -52,8 +52,43 @@ function StatItem({
 
 const TRUST = ["Sans carte bancaire", "HDS · Hébergé en France", "5 min de prise en main"];
 
+const ZOOM_MIN = 1;
+const ZOOM_MAX = 4;
+const ZOOM_STEP = 0.5;
+
 function AppScreenshot() {
   const [open, setOpen] = useState(false);
+  const [scale, setScale] = useState(1);
+  const [origin, setOrigin] = useState({ x: 50, y: 50 }); // transform-origin en %
+  const imgRef = useRef<HTMLDivElement>(null);
+
+  // Escape key + reset zoom on close
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") { setOpen(false); setScale(1); }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Molette → zoom centré sur le curseur
+  function onWheel(e: React.WheelEvent<HTMLDivElement>) {
+    e.preventDefault();
+    const rect = imgRef.current?.getBoundingClientRect();
+    if (rect) {
+      const ox = ((e.clientX - rect.left) / rect.width) * 100;
+      const oy = ((e.clientY - rect.top) / rect.height) * 100;
+      setOrigin({ x: ox, y: oy });
+    }
+    setScale((s) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, s + (e.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP))));
+  }
+
+  function zoomIn()  { setScale((s) => Math.min(ZOOM_MAX, s + ZOOM_STEP)); }
+  function zoomOut() { setScale((s) => Math.max(ZOOM_MIN, s - ZOOM_STEP)); }
+  function zoomReset() { setScale(1); setOrigin({ x: 50, y: 50 }); }
+
+  function closeLightbox() { setOpen(false); setScale(1); setOrigin({ x: 50, y: 50 }); }
 
   return (
     <>
@@ -102,7 +137,6 @@ function AppScreenshot() {
             className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
             style={{ background: "linear-gradient(to bottom, transparent, white)" }}
           />
-          {/* Hint zoom */}
           <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold" style={{ background: "rgba(15,23,42,0.55)", color: "white" }}>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
             Agrandir
@@ -113,38 +147,41 @@ function AppScreenshot() {
       {/* Lightbox */}
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: "rgba(0,0,0,0.85)" }}
-          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.92)" }}
+          onClick={closeLightbox}
         >
-          <div className="relative max-w-5xl w-full max-h-[90vh] overflow-auto rounded-2xl shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            {/* Chrome bar */}
+          {/* × fermer */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors text-2xl leading-none"
+          >×</button>
+
+          {/* Image zoomable */}
+          <div
+            className="overflow-auto flex items-center justify-center"
+            style={{ width: "100%", height: "100%", cursor: scale > 1 ? "zoom-out" : "zoom-in" }}
+            onWheel={onWheel}
+            onClick={(e) => { e.stopPropagation(); scale > 1 ? zoomReset() : zoomIn(); }}
+          >
             <div
-              className="px-4 py-2.5 flex items-center gap-2.5 sticky top-0 z-10"
-              style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
+              ref={imgRef}
+              style={{
+                transform: `scale(${scale})`,
+                transformOrigin: `${origin.x}% ${origin.y}%`,
+                transition: "transform 0.15s ease",
+                display: "inline-block",
+              }}
             >
-              <div className="flex gap-1.5 shrink-0">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
-              </div>
-              <div className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium" style={{ background: "white", border: "1px solid #e4e4e5" }}>
-                app.monassistantkine.fr — Copilote clinique
-              </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[#64748b] hover:bg-[#e4e4e5] transition-colors text-lg leading-none"
-              >
-                ×
-              </button>
+              <Image
+                src="/Hero.png"
+                alt="Copilote clinique MAK — vue complète"
+                width={1400}
+                height={1000}
+                className="block rounded-xl shadow-2xl"
+                style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
+              />
             </div>
-            <Image
-              src="/Hero.png"
-              alt="Copilote clinique MAK — vue complète"
-              width={1400}
-              height={1000}
-              className="w-full h-auto"
-            />
           </div>
         </div>
       )}
