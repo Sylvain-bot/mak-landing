@@ -147,7 +147,7 @@ function AppScreenshot() {
         </div>
       </div>
 
-      {/* Lightbox via Portal — échappe les parents transformés (motion.div) */}
+      {/* Lightbox via Portal */}
       {mounted && open && createPortal(
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center"
@@ -155,30 +155,35 @@ function AppScreenshot() {
           onClick={closeLightbox}
           onWheel={onWheel}
         >
-          <button
-            onClick={closeLightbox}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold"
-            style={{ background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.3)", zIndex: 201 }}
-          >×</button>
+          {/* Wrapper relatif = × positionné sur la photo, pas sur le viewport */}
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
+            {/* × sur la photo — coin haut-droit de l'image */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
+              style={{ background: "rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.35)" }}
+            >×</button>
 
-          <div
-            ref={imgRef}
-            style={{
-              transform: `scale(${scale})`,
-              transformOrigin: `${origin.x}% ${origin.y}%`,
-              transition: "transform 0.15s ease",
-              cursor: scale > 1 ? "zoom-out" : "zoom-in",
-            }}
-            onClick={(e) => { e.stopPropagation(); scale > 1 ? zoomReset() : zoomIn(); }}
-          >
-            <Image
-              src="/Hero.png"
-              alt="Copilote clinique MAK — vue complète"
-              width={1400}
-              height={1000}
-              className="block rounded-xl shadow-2xl"
-              style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
-            />
+            {/* Image avec zoom */}
+            <div
+              ref={imgRef}
+              style={{
+                transform: `scale(${scale})`,
+                transformOrigin: `${origin.x}% ${origin.y}%`,
+                transition: "transform 0.15s ease",
+                cursor: scale > 1 ? "zoom-out" : "zoom-in",
+              }}
+              onClick={(e) => { e.stopPropagation(); scale > 1 ? zoomReset() : zoomIn(); }}
+            >
+              <Image
+                src="/Hero.png"
+                alt="Copilote clinique MAK — vue complète"
+                width={1400}
+                height={1000}
+                className="block rounded-xl shadow-2xl"
+                style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
+              />
+            </div>
           </div>
         </div>,
         document.body
