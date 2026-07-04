@@ -40,15 +40,23 @@ function StatItem({
   target: number; suffix: string; label: string;
   frenchFormat?: boolean; active: boolean; className?: string;
 }) {
-  const count = useCountUp(target, 2000, active);
-  const display = frenchFormat ? count.toLocaleString("fr-FR") : count.toString();
+  // Counting animation only makes sense for large numbers (≥100 distinct steps)
+  const shouldCount = target >= 100;
+  const count = useCountUp(target, 2000, active && shouldCount);
+  const displayed = shouldCount ? count : target;
+  const display = frenchFormat ? displayed.toLocaleString("fr-FR") : displayed.toString();
   return (
-    <div className={cn("text-center", className)}>
+    <motion.div
+      className={cn("text-center", className)}
+      initial={{ opacity: 0, y: 10 }}
+      animate={active ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="text-3xl md:text-4xl font-bold text-[#0f172a] tabular-nums">
         {display}<span className="text-[#3899aa]">{suffix}</span>
       </div>
       <p className="mt-1.5 text-xs text-[#94a3b8] max-w-[150px] mx-auto leading-snug">{label}</p>
-    </div>
+    </motion.div>
   );
 }
 
