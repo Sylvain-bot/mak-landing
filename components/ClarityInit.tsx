@@ -12,7 +12,7 @@ export default function ClarityInit() {
       };
       const t = document.createElement("script");
       t.async = true;
-      t.src = "https://www.clarity.ms/tag/x05aesrw1w";
+      t.src = "https://www.clarity.ms/tag/xg1yps2p58";
       const y = document.getElementsByTagName("script")[0];
       if (y && y.parentNode) {
         y.parentNode.insertBefore(t, y);

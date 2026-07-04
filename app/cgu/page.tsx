@@ -154,7 +154,7 @@ export default function CguPage() {
           </tr>
         </thead>
         <tbody>
-          <tr><td>Déclic</td><td>9€</td><td>1 programme maximum</td><td>Usage de référence</td><td>—</td><td>—</td></tr>
+          <tr><td>Découverte</td><td>9€</td><td>1 programme maximum</td><td>Usage de référence</td><td>—</td><td>—</td></tr>
           <tr><td>Pratique</td><td>29€</td><td>5 programmes maximum</td><td>3× l&apos;usage de référence</td><td>Incluse</td><td>—</td></tr>
           <tr><td>Pionnier</td><td>19€</td><td>Programmes illimités</td><td>10× l&apos;usage de référence</td><td>Incluse</td><td>Inclus</td></tr>
           <tr><td>Expert</td><td>49€</td><td>Programmes illimités</td><td>10× l&apos;usage de référence</td><td>Incluse</td><td>Inclus</td></tr>

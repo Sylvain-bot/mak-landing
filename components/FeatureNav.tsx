@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const FEATURES = [
-  { href: "/fonctionnalites/documentation-bilan-kine", icon: "📋", label: "Bilans NGAP", desc: "en 5 minutes" },
+  { href: "/fonctionnalites/documentation-bilan-kine", icon: "📋", label: "Bilans NGAP", desc: "en 3 minutes" },
   { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Copilote IA Kiné", desc: "clinique & bibliographique" },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", desc: "via WhatsApp" },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", desc: "en 1 clic" },

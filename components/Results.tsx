@@ -113,10 +113,10 @@ export function Results() {
             </div>
             <div className="flex-1 text-center sm:text-left">
               <p className="text-[#0f172a] font-bold text-base">100h récupérées par an.</p>
-              <p className="text-[#64748b] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés gagnent 2h par semaine dès le premier jour.</p>
+              <p className="text-[#64748b] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés récupèrent 45 minutes par jour dès le premier jour.</p>
             </div>
             <Link
-              href="https://monassistantkine.vercel.app/signup"
+              href="https://app.monassistantkine.fr/signup"
               className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0 hover:text-[#2d8a9a] transition-colors"
             >
               <span>Essayer gratuitement</span>

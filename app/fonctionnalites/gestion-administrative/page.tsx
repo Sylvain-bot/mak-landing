@@ -38,16 +38,16 @@ const COSTS = [
 ];
 
 const FEATURES_LIST = [
-  { icon: "📄", title: "Tes templates, personnalisables à l'infini", body: "MAK intègre une bibliothèque de templates pour tous les documents courants du kiné libéral : courriers médecins, comptes-rendus, relances, demandes de prolongation, certificats. Chaque template est modifiable et enregistrable." },
-  { icon: "🤖", title: "L'IA crée le document si tu n'as pas de template", body: "Besoin d'un document inhabituel ? Décris ce que tu veux en quelques mots, MAK génère le document complet. Tu relis, tu valides, tu envoies." },
-  { icon: "📨", title: "Envoi en un clic", body: "Depuis MAK, directement. Pas de copier-coller dans ton client mail, pas de mise en forme manuelle. Le document part avec ton en-tête, ta signature, au bon destinataire." },
+  { icon: "📄", title: "Tes templates, personnalisables à l'infini", body: "Mon Assistant Kiné intègre une bibliothèque de templates pour tous les documents courants du kiné libéral : courriers médecins, comptes-rendus, relances, demandes de prolongation, certificats. Chaque template est modifiable et enregistrable." },
+  { icon: "🤖", title: "L'IA crée le document si tu n'as pas de template", body: "Besoin d'un document inhabituel ? Décris ce que tu veux en quelques mots, Mon Assistant Kiné génère le document complet. Tu relis, tu valides, tu envoies." },
+  { icon: "📨", title: "Envoi en un clic", body: "Depuis Mon Assistant Kiné, directement. Pas de copier-coller dans ton client mail, pas de mise en forme manuelle. Le document part avec ton en-tête, ta signature, au bon destinataire." },
 ];
 
 const STATS = [
   { icon: "📄", value: "Templates inclus", label: "pour tous les documents courants" },
   { icon: "🔧", value: "Personnalisables", label: "adaptés à ton style" },
   { icon: "🤖", value: "Création IA", label: "pour les documents hors template" },
-  { icon: "📨", value: "Envoi direct", label: "depuis MAK, en un clic" },
+  { icon: "📨", value: "Envoi direct", label: "depuis Mon Assistant Kiné, en un clic" },
   { icon: "⏱", value: "2 minutes", label: "pour un courrier médecin complet" },
 ];
 
@@ -80,10 +80,10 @@ export default function GestionAdministrativePage() {
             <span className="text-[#3899aa]">Tes soirées t&apos;appartiennent.</span>
           </h1>
           <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            Courriers médecins, relances, documents administratifs — MAK les génère depuis tes templates ou les crée de zéro si tu n&apos;en as pas. Envoi direct, sans copier-coller.
+            Courriers médecins, relances, documents administratifs — Mon Assistant Kiné les génère depuis tes templates ou les crée de zéro si tu n&apos;en as pas. Envoi direct, sans copier-coller.
           </p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
           >
             Créer mon compte gratuitement <ArrowRight className="w-4 h-4" />
@@ -180,7 +180,7 @@ export default function GestionAdministrativePage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Simplifier mon administratif gratuitement</h2>
           <p className="text-white/80 mb-8">Sans carte bancaire · Accès immédiat</p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
             Créer mon compte <ArrowRight className="w-4 h-4" />

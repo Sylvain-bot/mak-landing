@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
+function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -20,7 +21,8 @@ export default function LoginPage() {
         body: JSON.stringify({ password }),
       });
       if (res.ok) {
-        router.push("/admin/content");
+        const from = searchParams.get("from") ?? "/admin/content";
+        router.push(from);
         return;
       }
       const d = await res.json().catch(() => ({}));
@@ -33,6 +35,31 @@ export default function LoginPage() {
   }
 
   return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all"
+        style={{ border: "1px solid #d4ecea", background: "#f8fcfd", color: "#0f172a" }}
+        required
+      />
+      {error && <p className="text-[#ef4444] text-xs">{error}</p>}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-2.5 rounded-xl text-white text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-60"
+        style={{ background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)" }}
+      >
+        {loading ? "Connexion…" : "Se connecter"}
+      </button>
+    </form>
+  );
+}
+
+export default function LoginPage() {
+  return (
     <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "#f0f9fa" }}>
       <div className="w-full max-w-sm">
         <div
@@ -41,27 +68,9 @@ export default function LoginPage() {
         >
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-1">Mon Assistant Kiné</p>
           <h1 className="text-[#0f172a] font-bold text-xl mb-6">Administration</h1>
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all"
-              style={{ border: "1px solid #d4ecea", background: "#f8fcfd", color: "#0f172a" }}
-              required
-            />
-            {error && <p className="text-[#ef4444] text-xs">{error}</p>}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-2.5 rounded-xl text-white text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-60"
-              style={{ background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)" }}
-            >
-              {loading ? "Connexion…" : "Se connecter"}
-            </button>
-          </form>
+          <Suspense>
+            <LoginForm />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -116,6 +116,16 @@ export function Navbar() {
             <Link href="/tarifs" className="px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]">
               Tarifs
             </Link>
+            <Link
+              href="/fonctionnalites/contrats-remplacement"
+              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-[#15803d] hover:text-[#166534] transition-colors rounded-lg hover:bg-[#f0fdf4]"
+            >
+              Contrats gratuits
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                style={{ background: "#dcfce7", color: "#15803d", border: "1px solid #86efac" }}>
+                Gratuit
+              </span>
+            </Link>
             <Link href="/blog" className="px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]">
               Blog
             </Link>
@@ -127,19 +137,19 @@ export function Navbar() {
           {/* Right side */}
           <div className="flex items-center gap-2">
             <Link
-              href="https://monassistantkine.vercel.app/login"
+              href="https://app.monassistantkine.fr/login"
               className="hidden md:inline-flex px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]"
             >
               Se connecter
             </Link>
             <Link
-              href="https://monassistantkine.vercel.app/signup"
+              href="https://app.monassistantkine.fr/signup"
               className={cn(
                 buttonVariants({ size: "sm" }),
                 "hidden md:inline-flex bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-medium shadow-sm shadow-[#3899aa]/20 transition-all hover:scale-[1.03]"
               )}
             >
-              Créer mon compte
+              Tester gratuitement
             </Link>
 
             {/* Mobile toggle */}
@@ -200,14 +210,14 @@ export function Navbar() {
 
               <div className="pt-2 space-y-2">
                 <Link
-                  href="https://monassistantkine.vercel.app/login"
+                  href="https://app.monassistantkine.fr/login"
                   onClick={() => setMobileOpen(false)}
                   className="block text-center py-3 rounded-xl border border-[#d4ecea] text-[#475569] font-medium text-sm hover:bg-[#eef7f6] transition-all"
                 >
                   Se connecter
                 </Link>
                 <Link
-                  href="https://monassistantkine.vercel.app/signup"
+                  href="https://app.monassistantkine.fr/signup"
                   onClick={() => setMobileOpen(false)}
                   className="block text-center py-3 rounded-xl bg-[#3899aa] text-white font-semibold text-sm hover:bg-[#2d8a9a] transition-all"
                 >

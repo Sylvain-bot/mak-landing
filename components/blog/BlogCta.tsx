@@ -8,7 +8,7 @@ export function BlogCta() {
     >
       <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-2">Mon Assistant Kiné</p>
       <h3 className="text-[#0f172a] font-bold text-xl mb-2 leading-tight">
-        Prêt à gagner 2h par semaine ?
+        Prêt à récupérer 45 minutes par jour ?
       </h3>
       <p className="text-[#475569] text-sm mb-5 max-w-sm mx-auto">
         Rejoins les kinés qui utilisent Mon Assistant Kiné au quotidien.

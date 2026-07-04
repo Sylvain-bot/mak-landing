@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Assistant Kiné — V2 · Copilote clinique en hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pin:#1B2E28;
+    --pin-soft:#2C4238;
+    --paper:#F7F4EC;
+    --paper-raised:#FFFFFF;
+    --line:#DBD5C4;
+    --coral:#C1432A;
+    --sage:#5E7F5E;
+    --sage-soft:#E7EEE3;
+    --ochre:#B8863A;
+    --ink-muted:#6B6355;
+    --radius:14px;
+    --shadow: 0 1px 2px rgba(27,46,40,0.06), 0 8px 24px -8px rgba(27,46,40,0.10);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--pin);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,244,236,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1120px;margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;}
+  .logo-mark{width:26px;height:26px;border-radius:7px;background:var(--pin);position:relative;flex:none;}
+  .logo-mark::after{
+    content:"";position:absolute;inset:7px;
+    background:var(--paper);
+    clip-path:polygon(50% 0%, 61% 38%, 100% 38%, 68% 60%, 80% 100%, 50% 76%, 20% 100%, 32% 60%, 0% 38%, 39% 38%);
+  }
+  .nav-links{display:flex;gap:28px;font-size:0.94rem;color:var(--ink-muted);}
+  .nav-links a{text-decoration:none;}
+  .nav-links a:hover{color:var(--pin);}
+  .nav-cta{
+    background:var(--pin);color:var(--paper);
+    padding:9px 18px;border-radius:100px;
+    font-size:0.9rem;font-weight:600;text-decoration:none;
+    white-space:nowrap;
+  }
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--pin);color:var(--paper);
+    padding:15px 26px;border-radius:100px;
+    font-weight:600;font-size:1rem;text-decoration:none;
+    box-shadow:var(--shadow);
+    transition:transform .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--pin);text-decoration:none;font-weight:600;font-size:0.96rem;
+    border-bottom:1.5px solid var(--line);
+    padding-bottom:2px;
+  }
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;
+    letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--sage);font-weight:600;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sage);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 40px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;gap:48px;} }
+  .hero h1{font-size:clamp(2.1rem,4.2vw,3.35rem);}
+  .hero-sub{
+    margin-top:22px;font-size:1.15rem;color:var(--ink-muted);
+    max-width:46ch;line-height:1.55;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:34px;}
+  .trust-row{
+    margin-top:28px;display:flex;flex-wrap:wrap;gap:18px;
+    font-size:0.85rem;color:var(--ink-muted);
+  }
+  .trust-row span{display:flex;align-items:center;gap:6px;}
+  .trust-row span::before{content:"✓";color:var(--sage);font-weight:700;}
+
+  /* ---------- chat clinique (hero visual) ---------- */
+  .transform-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:26px;
+    box-shadow:var(--shadow);
+  }
+  .chat-card{display:flex;flex-direction:column;gap:14px;}
+  .chat-bubble-q{
+    align-self:flex-end;max-width:88%;
+    background:var(--pin);color:var(--paper);
+    border-radius:14px 14px 3px 14px;
+    padding:14px 16px;font-size:0.9rem;line-height:1.5;
+  }
+  .chat-answer{
+    background:#FBFAF6;border:1px solid var(--line);
+    border-radius:3px 14px 14px 14px;padding:18px;
+  }
+  .chat-answer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:12px;
+  }
+  .chat-answer-label{
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;text-transform:uppercase;
+    letter-spacing:0.05em;color:var(--ink-muted);
+  }
+  .chat-timer{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;font-weight:600;
+    color:var(--sage);background:var(--sage-soft);padding:4px 10px;border-radius:100px;
+  }
+  .chat-item{display:flex;gap:9px;align-items:flex-start;font-size:0.87rem;margin-bottom:10px;color:var(--pin);}
+  .chat-item:last-of-type{margin-bottom:0;}
+  .chat-item.flag{color:var(--coral);font-weight:600;}
+  .chat-dot{width:5px;height:5px;border-radius:50%;background:var(--sage);margin-top:7px;flex:none;}
+  .chat-dot.flag{background:var(--coral);}
+  .chat-sources{
+    margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);
+    display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--ink-muted);
+  }
+  .chat-sources b{color:var(--sage);}
+  .transform-caption{
+    text-align:center;margin-top:16px;font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;color:var(--ink-muted);
+  }
+  .transform-caption b{color:var(--pin);}
+
+  /* ---------- stat section ---------- */
+  .stat-section{background:var(--pin);color:var(--paper);}
+  .stat-grid{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
+  @media (max-width:760px){ .stat-grid{grid-template-columns:1fr;gap:28px;} }
+  .stat-number{
+    font-family:'Fraunces',serif;font-size:clamp(4rem,10vw,7rem);font-weight:700;
+    line-height:0.9; color:var(--paper);
+  }
+  .stat-copy p{font-size:1.15rem;color:#CBD8CF;max-width:44ch;margin:0;}
+  .stat-copy p+p{margin-top:10px;}
+
+  /* ---------- steps ---------- */
+  .section-head{max-width:52ch;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  @media (max-width:840px){ .steps{grid-template-columns:1fr;gap:28px;} }
+  .step{position:relative;padding-top:6px;}
+  .step-num{
+    font-family:'IBM Plex Mono',monospace;font-size:0.82rem;font-weight:600;
+    color:var(--sage);margin-bottom:16px;display:block;
+  }
+  .step h3{font-size:1.2rem;font-weight:600;margin-bottom:10px;}
+  .step p{color:var(--ink-muted);font-size:0.96rem;margin:0;}
+
+  /* ---------- feature overview (secondary modules) ---------- */
+  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  @media (max-width:920px){ .feature-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .feature-grid{grid-template-columns:1fr;} }
+  .feature-card{
+    background:var(--paper-raised);border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px 22px;
+  }
+  .feature-card.primary{
+    background:var(--pin);border-color:var(--pin);color:var(--paper);
+  }
+  .feature-icon{
+    width:38px;height:38px;border-radius:10px;background:var(--sage-soft);
+    color:var(--sage);display:flex;align-items:center;justify-content:center;
+    font-size:1.05rem;margin-bottom:16px;
+  }
+  .feature-card.primary .feature-icon{background:rgba(255,255,255,0.12);color:#9DB5AB;}
+  .feature-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;text-transform:uppercase;
+    letter-spacing:0.05em;color:var(--ink-muted);margin-bottom:6px;display:block;
+  }
+  .feature-card.primary .feature-tag{color:#9DB5AB;}
+  .feature-card h3{font-size:1.02rem;font-weight:600;margin-bottom:8px;font-family:'IBM Plex Sans',sans-serif;}
+  .feature-card p{font-size:0.87rem;color:var(--ink-muted);margin:0;line-height:1.5;}
+  .feature-card.primary p{color:#CBD8CF;}
+  .feature-card.free{border-style:dashed;}
+  .free-badge{
+    display:inline-block;font-size:0.68rem;font-weight:700;color:var(--sage);
+    background:var(--sage-soft);padding:3px 9px;border-radius:100px;margin-bottom:10px;
+  }
+  .feature-quote{
+    margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+    font-family:'Fraunces',serif;font-style:italic;font-size:0.85rem;
+    color:var(--sage);line-height:1.45;
+  }
+  .feature-card.primary .feature-quote{border-top-color:rgba(255,255,255,0.18);color:#B7C9BC;}
+  .feature-quote cite{
+    display:block;margin-top:6px;font-style:normal;font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;color:var(--ink-muted);
+  }
+  .feature-card.primary .feature-quote cite{color:#8FA697;}
+
+  /* ---------- testimonial ---------- */
+  .testimonial-wrap{
+    background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;
+    padding:52px 48px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;
+  }
+  @media (max-width:760px){ .testimonial-wrap{grid-template-columns:1fr;padding:36px 28px;} }
+  .quote-mark{font-family:'Fraunces',serif;font-size:4.5rem;color:var(--line);line-height:0.6;}
+  .testimonial-wrap blockquote{
+    margin:0;font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;
+    line-height:1.35;color:var(--pin);
+  }
+  .testimonial-attr{margin-top:18px;font-size:0.88rem;color:var(--ink-muted);}
+  .testimonial-secondary{
+    margin-top:20px;background:transparent;border:1px dashed var(--line);
+    border-radius:16px;padding:26px 30px;
+    display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+  }
+  @media (max-width:760px){ .testimonial-secondary{grid-template-columns:1fr;padding:22px 24px;} }
+  .testimonial-secondary .quote-mark{font-size:2.6rem;}
+  .testimonial-secondary blockquote{font-size:1.05rem;color:var(--ink-muted);font-weight:400;}
+  .testimonial-secondary .testimonial-attr{margin-top:10px;font-size:0.82rem;}
+
+  /* ---------- pricing ---------- */
+  .pricing-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:26px;align-items:stretch;}
+  @media (max-width:760px){ .pricing-grid{grid-template-columns:1fr;} }
+  .price-card{
+    background:var(--paper-raised);border:1px solid var(--line);
+    border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;
+  }
+  .price-card.featured{
+    background:var(--pin);color:var(--paper);border-color:var(--pin);
+    position:relative;box-shadow:0 20px 44px -18px rgba(27,46,40,0.45);
+  }
+  .price-badge{
+    position:absolute;top:-13px;left:32px;
+    background:var(--coral);color:#fff;font-size:0.72rem;font-weight:700;
+    padding:6px 14px;border-radius:100px;letter-spacing:0.02em;
+  }
+  .price-name{font-family:'IBM Plex Mono',monospace;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-muted);}
+  .price-card.featured .price-name{color:#9DB5AB;}
+  .price-amount{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:600;margin:10px 0 4px;}
+  .price-amount span{font-size:1rem;font-weight:400;font-family:'IBM Plex Sans',sans-serif;color:var(--ink-muted);}
+  .price-card.featured .price-amount span{color:#9DB5AB;}
+  .price-strike{font-size:0.92rem;text-decoration:line-through;color:var(--ink-muted);margin-bottom:6px;}
+  .price-card.featured .price-strike{color:#7C9187;}
+  .price-list{list-style:none;padding:0;margin:22px 0;display:flex;flex-direction:column;gap:11px;font-size:0.92rem;flex:1;}
+  .price-list li{display:flex;gap:9px;align-items:flex-start;}
+  .price-list li::before{content:"✓";color:var(--sage);flex:none;}
+  .price-card.featured .price-list li::before{color:#8FB097;}
+  .price-cta{
+    text-align:center;padding:13px;border-radius:100px;font-weight:600;font-size:0.94rem;
+    text-decoration:none;background:var(--pin);color:var(--paper);margin-top:auto;
+  }
+  .price-card.featured .price-cta{background:var(--paper);color:var(--pin);}
+  .scarcity{margin-top:16px;}
+  .scarcity-bar{height:5px;background:rgba(255,255,255,0.18);border-radius:100px;overflow:hidden;margin-top:8px;}
+  .price-card:not(.featured) .scarcity-bar{background:var(--line);}
+  .scarcity-fill{height:100%;width:13%;background:var(--coral);border-radius:100px;}
+  .scarcity-label{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:#9DB5AB;}
+  .price-more{margin-top:18px;text-align:center;font-size:0.86rem;color:var(--ink-muted);}
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:720px;}
+  details{border-bottom:1px solid var(--line);padding:22px 0;}
+  summary{
+    cursor:pointer;list-style:none;display:flex;justify-content:space-between;
+    align-items:center;font-weight:600;font-size:1.02rem;gap:16px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";font-family:'IBM Plex Mono',monospace;font-size:1.3rem;color:var(--sage);flex:none;transition:transform .2s ease;}
+  details[open] summary::after{transform:rotate(45deg);}
+  details p{margin:14px 0 0;color:var(--ink-muted);font-size:0.95rem;max-width:62ch;}
+
+  /* ---------- final cta ---------- */
+  .final-cta{
+    background:var(--pin);color:var(--paper);border-radius:24px;
+    padding:64px 48px;text-align:center;
+  }
+  @media (max-width:640px){ .final-cta{padding:44px 24px;} }
+  .final-cta h2{font-size:clamp(1.7rem,3.4vw,2.5rem);color:var(--paper);max-width:20ch;margin:0 auto;}
+  .final-cta .trust-row{justify-content:center;color:#B7C6BC;}
+  .final-cta .trust-row span::before{color:#8FB097;}
+  .final-cta-actions{margin-top:32px;}
+  .final-cta .btn-primary{background:var(--paper);color:var(--pin);}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;}
+  .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;font-size:0.85rem;color:var(--ink-muted);}
+  .footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+  .footer-links a{text-decoration:none;}
+  .footer-links a:hover{color:var(--pin);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-mark"></span> Mon Assistant Kiné</div>
+    <div class="nav-links">
+      <a href="#comment">Comment ça marche</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="#tarifs">Créer mon compte</a>
+  </div>
+</nav>
+
+<!-- SECTION 1 : HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Offre Pionnier · 13/100 places prises</span>
+        <h1>Pose ta question comme à un confrère.<br>Une réponse sourcée en 30 secondes.</h1>
+        <p class="hero-sub">Doute clinique, question bibliographique, drapeau rouge à vérifier — MAK mobilise 56 000+ ressources scientifiques dont le Cleland, et te donne une orientation actionnable, pas un pavé à trier.</p>
+        <div class="hero-actions">
+          <a href="#tarifs" class="btn-primary">Créer mon compte gratuitement →</a>
+          <a href="#comment" class="btn-ghost">Voir comment ça marche</a>
+        </div>
+        <div class="trust-row">
+          <span>Sans carte bancaire</span>
+          <span>Hébergé en France · HDS</span>
+          <span>5 min de prise en main</span>
+        </div>
+      </div>
+
+      <div class="transform-card reveal">
+        <div class="chat-card">
+          <div class="chat-bubble-q">"Doute sur une prise en charge cervicale — patient avec ATCD hernie 2019, douleur EVA 6. Dois-je orienter ?"</div>
+          <div class="chat-answer">
+            <div class="chat-answer-head">
+              <span class="chat-answer-label">Orientation clinique</span>
+              <span class="chat-timer">30 sec</span>
+            </div>
+            <div class="chat-item flag"><span class="chat-dot flag"></span><span>⚠ ATCD hernie 2019 — à réévaluer avant mobilisation forcée</span></div>
+            <div class="chat-item"><span class="chat-dot"></span><span>3 tests cliniques suggérés pour objectiver la radiculopathie</span></div>
+            <div class="chat-item"><span class="chat-dot"></span><span>Orientation médicale recommandée si aggravation sous 2 séances</span></div>
+            <div class="chat-sources">Basé sur <b>56 000+ sources EBP</b> — dont Cleland, 4<sup>e</sup> éd.</div>
+          </div>
+        </div>
+        <div class="transform-caption">D'un doute clinique à une orientation structurée en <b>30 secondes</b>, sources incluses.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 2 : TÉMOIGNAGES -->
+<section>
+  <div class="wrap">
+    <div class="testimonial-wrap reveal">
+      <div class="quote-mark">"</div>
+      <div>
+        <blockquote>Je discute avec l'IA de certains cas et ça m'aide dans mes réflexions — ça rassure de se savoir sur la bonne voie.</blockquote>
+        <div class="testimonial-attr">Constance — Kinésithérapeute libérale</div>
+      </div>
+    </div>
+    <div class="testimonial-secondary reveal">
+      <div class="quote-mark">"</div>
+      <div>
+        <blockquote>J'avais un doute sur une prise en charge cervicale. En 30 secondes j'avais une orientation structurée.</blockquote>
+        <div class="testimonial-attr">Amandine S. — Kinésithérapeute libérale, Toulouse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 : STAT CLÉ -->
+<section class="stat-section">
+  <div class="wrap">
+    <div class="stat-grid reveal">
+      <div class="stat-number mono">100h</div>
+      <div class="stat-copy">
+        <p>C'est le temps que tu perds chaque année sur la recherche biblio et les doutes cliniques non résolus — 1 à 2h par recherche sur PubMed, contre 30 secondes avec MAK.</p>
+        <p>Soit un raisonnement clinique mieux sourcé, sans y sacrifier tes soirées.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 : COMMENT ÇA MARCHE -->
+<section id="comment">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Comment ça marche</span>
+      <h2>Trois étapes. Pas de formation nécessaire.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="step-num">01</span>
+        <h3>Tu poses ta question</h3>
+        <p>Comme tu le ferais à un confrère — un doute clinique, une question biblio, un cas atypique.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">02</span>
+        <h3>MAK mobilise les sources</h3>
+        <p>56 000+ ressources EBP dont le Cleland, drapeaux rouges vérifiés, tests cliniques suggérés.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">03</span>
+        <h3>Tu obtiens une orientation</h3>
+        <p>Pas un pavé à trier — une réponse structurée et actionnable, en 30 secondes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 : FONCTIONNALITÉS (grille 4 cartes) -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Au-delà du copilote</span>
+      <h2>Un seul outil pour le reste de ton quotidien de cabinet.</h2>
+    </div>
+    <div class="feature-grid reveal">
+      <div class="feature-card primary">
+        <span class="feature-tag">Le cœur de MAK</span>
+        <div class="feature-icon">🧠</div>
+        <h3>Copilote clinique</h3>
+        <p>Une question, une réponse sourcée en 30 secondes — 56 000+ ressources dont le Cleland.</p>
+        <div class="feature-quote">"Ça rassure de se savoir sur la bonne voie."<cite>— Constance, kiné libérale</cite></div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">Bilans</span>
+        <div class="feature-icon">📋</div>
+        <h3>Bilans en 3 min</h3>
+        <p>Dictée → bilan structuré conforme NGAP, drapeaux rouges inclus.</p>
+        <div class="feature-quote">"Dicter en direct et voir la rédaction se faire toute seule, je trouve ça incroyable."<cite>— Constance, kiné libérale</cite></div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">Module Administratif</span>
+        <div class="feature-icon">📨</div>
+        <h3>Moins de paperasse</h3>
+        <p>Suivi patient et tâches administratives centralisés, sans changer d'outil.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">Chatbot patient</span>
+        <div class="feature-icon">💬</div>
+        <h3>Réponds une fois, pas dix</h3>
+        <p>Les questions récurrentes entre les séances trouvent réponse sans mobiliser ton temps.</p>
+        <div class="feature-quote">"Une meilleure continuité des soins — et je ne suis plus dérangée le samedi soir."<cite>— Constance, kiné libérale</cite></div>
+      </div>
+    </div>
+
+    <!-- Contrats encart discret (dans la même section features) -->
+    <div class="also-box free reveal" style="margin-top:24px;border:1px dashed #86efac;border-radius:14px;padding:24px;display:flex;gap:16px;align-items:center;background:#f0fdf4;">
+      <span style="font-size:1.5rem;flex:none;">📑</span>
+      <div>
+        <span class="free-badge">Gratuit à vie</span>
+        <strong style="display:block;font-size:0.95rem;margin-bottom:4px;">Contrats de remplacement</strong>
+        <p style="margin:0;font-size:0.85rem;color:#166534;">Rédaction, signature électronique, déclaration à l'Ordre en 1 clic. Offert à tous les kinés, avec ou sans abonnement MAK.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 : PRICING -->
+<section id="tarifs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Tarifs</span>
+      <h2>Simple. L'offre Pionnier, tant qu'il reste des places.</h2>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-name">Découverte</div>
+        <div class="price-amount">9€<span>/mois</span></div>
+        <ul class="price-list">
+          <li>1 programme actif</li>
+          <li>Copilote IA — usage découverte</li>
+          <li>Sans engagement</li>
+        </ul>
+        <a class="price-cta" href="#" style="background:transparent;color:var(--pin);border:1.5px solid var(--line);">Commencer</a>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge">Recommandé · Prix bloqué à vie</span>
+        <div class="price-name">Pionnier</div>
+        <div class="price-strike">49€/mois</div>
+        <div class="price-amount">19€<span>/mois</span></div>
+        <ul class="price-list">
+          <li>Programmes et usage illimités</li>
+          <li>Bilans, Copilote clinique, Module Administratif</li>
+          <li>Communauté privée fondateurs + badge Pionnier</li>
+          <li>Prix garanti à vie, même après la fin de l'offre</li>
+        </ul>
+        <a class="price-cta" href="#">Créer mon compte et choisir Pionnier →</a>
+        <div class="scarcity">
+          <div class="scarcity-label">13 / 100 places prises</div>
+          <div class="scarcity-bar"><div class="scarcity-fill"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="price-more">Besoin de plus (multi-praticiens, accès complet) ? <a class="btn-ghost" href="/tarifs" style="font-size:0.86rem;">Voir la formule Expert</a></div>
+  </div>
+</section>
+
+<!-- SECTION 7 : FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2>Ce que les kinés nous demandent le plus</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details open>
+        <summary>L'IA est-elle fiable pour la clinique ?</summary>
+        <p>MAK s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.</p>
+      </details>
+      <details>
+        <summary>Est-ce que l'abonnement est vraiment rentable ?</summary>
+        <p>Si MAK te fait gagner ne serait-ce que 30 minutes par semaine, l'abonnement Pionnier est amorti largement. La plupart des utilisateurs actuels rapportent 2h/semaine récupérées.</p>
+      </details>
+      <details>
+        <summary>Mes données patients sont-elles protégées ?</summary>
+        <p>Oui. Hébergement HDS en France, conforme RGPD, et aucune donnée patient n'est utilisée pour entraîner des modèles tiers.</p>
+      </details>
+      <details>
+        <summary>Dois-je installer un logiciel ?</summary>
+        <p>Non. Mon Assistant Kiné est 100% en ligne, accessible depuis ton navigateur, que ce soit sur ordi ou tablette. Rien à télécharger, rien à configurer.</p>
+      </details>
+      <details>
+        <summary>Comment vous contacter ?</summary>
+        <p>Directement par mail : sylvain@monassistantkine.fr. Je réponds personnellement et rapidement.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8 : CTA FINAL -->
+<section>
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <h2>Ton prochain bilan en 3 minutes.</h2>
+      <div class="final-cta-actions">
+        <a class="btn-primary" href="#tarifs">Créer mon compte gratuitement →</a>
+      </div>
+      <div class="trust-row" style="margin-top:24px;">
+        <span>Sans engagement</span>
+        <span>Sans carte bancaire</span>
+        <span>Places limitées aux 100 premiers</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>© 2026 Mon Assistant Kiné — Conçu par deux kinés libéraux</div>
+    <div class="footer-links">
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/politique-confidentialite">Confidentialité</a>
+      <a href="/cgu">CGU</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>

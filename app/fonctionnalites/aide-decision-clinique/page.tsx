@@ -83,11 +83,11 @@ const FAQ = [
   },
   {
     q: "C'est un diagnostic différentiel automatisé ?",
-    a: "Non. MAK propose des hypothèses et des tests — pas un diagnostic. La démarche diagnostique reste ta responsabilité en tant que praticien. MAK est un second regard, pas un remplaçant.",
+    a: "Non. Mon Assistant Kiné propose des hypothèses et des tests — pas un diagnostic. La démarche diagnostique reste ta responsabilité en tant que praticien. Mon Assistant Kiné est un second regard, pas un remplaçant.",
   },
   {
     q: "Les sources bibliographiques sont vérifiables ?",
-    a: "Oui. Chaque source est citée avec un lien direct vers l'article original sur PubMed ou PEDro. MAK ne cite que des sources réelles — pas d'hallucinations comme avec les LLM généralistes.",
+    a: "Oui. Chaque source est citée avec un lien direct vers l'article original sur PubMed ou PEDro. Mon Assistant Kiné ne cite que des sources réelles — pas d'hallucinations comme avec les LLM généralistes.",
   },
   {
     q: "Pourquoi Mistral plutôt qu'une IA américaine ?",
@@ -123,7 +123,7 @@ export default function CopiloteIAKinePage() {
             Pose ta question comme tu le ferais à un confrère. L&apos;IA identifie automatiquement si elle est clinique, bibliographique ou pratique — et mobilise l&apos;expertise adaptée en quelques secondes.
           </p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
           >
             Essayer gratuitement <ArrowRight className="w-4 h-4" />
@@ -226,10 +226,10 @@ export default function CopiloteIAKinePage() {
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Pourquoi Mistral</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-6">Une IA européenne pour des données de santé.</h2>
           <p className="text-[#475569] leading-relaxed mb-4">
-            MAK est propulsé par Mistral — le modèle de langage fondé en France, de rang mondial, dont les infrastructures sont hébergées en Europe. Pour des professionnels de santé qui manipulent des données cliniques sensibles, c&apos;est une garantie concrète : conformité RGPD, souveraineté des données, aucune fuite vers des serveurs hors UE.
+            Mon Assistant Kiné est propulsé par Mistral — le modèle de langage fondé en France, de rang mondial, dont les infrastructures sont hébergées en Europe. Pour des professionnels de santé qui manipulent des données cliniques sensibles, c&apos;est une garantie concrète : conformité RGPD, souveraineté des données, aucune fuite vers des serveurs hors UE.
           </p>
           <p className="text-[#475569] leading-relaxed">
-            Contrairement aux LLM généralistes comme ChatGPT, MAK ne cite que des sources réelles et vérifiables. Les hallucinations — inventer une étude qui n&apos;existe pas — ne sont pas acceptables en contexte clinique. Chaque référence bibliographique est cliquable et pointe vers l&apos;article original sur PubMed ou PEDro.
+            Contrairement aux LLM généralistes comme ChatGPT, Mon Assistant Kiné ne cite que des sources réelles et vérifiables. Les hallucinations — inventer une étude qui n&apos;existe pas — ne sont pas acceptables en contexte clinique. Chaque référence bibliographique est cliquable et pointe vers l&apos;article original sur PubMed ou PEDro.
           </p>
         </div>
       </section>
@@ -255,7 +255,7 @@ export default function CopiloteIAKinePage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer le copilote IA gratuitement</h2>
           <p className="text-white/80 mb-8">Sans carte bancaire · Accès immédiat · IA européenne</p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
             Créer mon compte <ArrowRight className="w-4 h-4" />

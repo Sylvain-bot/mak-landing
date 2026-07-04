@@ -4,6 +4,8 @@ import Script from "next/script";
 import ClarityInit from "@/components/ClarityInit";
 import ClarityRouteTracker from "@/components/ClarityRouteTracker";
 import { JsonLd } from "@/components/JsonLd";
+import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import "./globals.css";
 
@@ -38,6 +40,7 @@ export default function RootLayout({
       className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-[#0f172a]">
+        <PostHogProvider>
         <JsonLd data={{
           "@context": "https://schema.org",
           "@type": "Organization",
@@ -47,6 +50,7 @@ export default function RootLayout({
           "logo": "https://www.monassistantkine.fr/logo-mak.webp",
         }} />
         {children}
+        <ExitIntentPopup />
         <ClarityInit />
         <ClarityRouteTracker />
 
@@ -72,6 +76,7 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        </PostHogProvider>
       </body>
     </html>
   );

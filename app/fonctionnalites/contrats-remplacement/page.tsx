@@ -48,7 +48,7 @@ const STEPS = [
   {
     icon: "✅",
     title: "Déclaration à l'Ordre en 1 clic",
-    body: "Une fois signé, MAK génère les éléments nécessaires à la déclaration du remplacement auprès de l'Ordre des Masseurs-Kinésithérapeutes. Conformité assurée, sans démarche supplémentaire.",
+    body: "Une fois signé, Mon Assistant Kiné génère les éléments nécessaires à la déclaration du remplacement auprès de l'Ordre des Masseurs-Kinésithérapeutes. Conformité assurée, sans démarche supplémentaire.",
   },
 ];
 
@@ -62,7 +62,7 @@ const STATS = [
 const FAQ = [
   {
     q: "C'est vraiment gratuit ?",
-    a: "Oui, entièrement et sans limite de durée. Le module contrats est notre façon de rendre service à toute la communauté des kinés libéraux — qu'ils soient abonnés à MAK ou non.",
+    a: "Oui, entièrement et sans limite de durée. Le module contrats est notre façon de rendre service à toute la communauté des kinés libéraux — qu'ils soient abonnés à Mon Assistant Kiné ou non.",
   },
   {
     q: "Mon remplaçant doit-il créer un compte ?",
@@ -74,7 +74,7 @@ const FAQ = [
   },
   {
     q: "Comment fonctionne la déclaration à l'Ordre ?",
-    a: "Une fois le contrat signé par les deux parties, MAK génère les éléments nécessaires à la déclaration du remplacement à l'Ordre. La démarche qui prenait plusieurs étapes se fait en 1 clic depuis l'app.",
+    a: "Une fois le contrat signé par les deux parties, Mon Assistant Kiné génère les éléments nécessaires à la déclaration du remplacement à l'Ordre. La démarche qui prenait plusieurs étapes se fait en 1 clic depuis l'app.",
   },
   {
     q: "Mes contrats sont-ils sauvegardés si je n'ai pas d'abonnement ?",
@@ -100,11 +100,11 @@ export default function ContratsRemplacementPage() {
             <span className="text-[#3899aa]">Signés, déclarés, archivés.</span>
           </h1>
           <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            De la rédaction à la déclaration ordinale — tout se passe dans MAK, en 2 minutes.
+            De la rédaction à la déclaration ordinale — tout se passe dans Mon Assistant Kiné, en 2 minutes.
             Offert à toute la communauté des kinés libéraux. Sans abonnement.
           </p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
           >
             Accéder au module — c'est gratuit <ArrowRight className="w-4 h-4" />
@@ -178,7 +178,7 @@ export default function ContratsRemplacementPage() {
           </p>
           <p className="text-[#475569] leading-relaxed">
             Ce module est notre contribution à la communauté. Pas un produit d'appel — un vrai service,
-            entièrement gratuit, sans limite de durée, que tu aies un abonnement MAK ou non.
+            entièrement gratuit, sans limite de durée, que tu aies un abonnement Mon Assistant Kiné ou non.
           </p>
           <blockquote className="mt-8 pl-5 italic text-[#64748b] text-sm leading-relaxed"
             style={{ borderLeft: "2px solid #d4ecea" }}>
@@ -203,20 +203,41 @@ export default function ContratsRemplacementPage() {
         </div>
       </section>
 
+      {/* Cross-sell doux */}
+      <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Et pendant que ton remplaçant signe…</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-[#0f172a] mb-4 leading-tight">
+            Découvre ce que Mon Assistant Kiné fait d&apos;autre pour ton cabinet
+          </h2>
+          <p className="text-[#475569] text-base mb-6 leading-relaxed">
+            Bilans en 3 minutes, copilote clinique sourcé (56 000+ études dont Cleland), suivi patient WhatsApp.
+            Un seul outil, conçu par des kinés libéraux.
+          </p>
+          <Link
+            href="https://app.monassistantkine.fr/signup"
+            className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base hover:scale-[1.02] transition-all shadow-lg shadow-[#3899aa]/20"
+          >
+            Tester sur mon prochain bilan — gratuit, sans CB
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* CTA final */}
       <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Accéder au module contrats</h2>
           <p className="text-white/80 mb-8">Gratuit · Sans carte bancaire · Accès immédiat</p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
             Créer mon compte <ArrowRight className="w-4 h-4" />
           </Link>
           <p className="text-white/60 text-sm mt-4">
             Déjà un compte ?{" "}
-            <a href="https://monassistantkine.vercel.app/login" className="underline text-white/80 hover:text-white">
+            <a href="https://app.monassistantkine.fr/login" className="underline text-white/80 hover:text-white">
               Se connecter
             </a>
           </p>
