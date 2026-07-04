@@ -138,7 +138,7 @@ export default function SuiviPatientPage() {
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #d4ecea", boxShadow: "0 4px 24px rgba(56,153,170,0.08)" }}>
             <Image
-              src="/screenshots/chatbot.png"
+              src="/chatbot.png"
               alt="Capture d'écran du suivi patient WhatsApp et programme d'exercices de Mon Assistant Kiné"
               width={1200}
               height={800}
