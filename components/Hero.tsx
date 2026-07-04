@@ -274,13 +274,13 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="flex flex-wrap gap-3 mb-7"
+              className="flex flex-col sm:flex-row gap-3 mb-7"
             >
               <Link
                 href={CTA_SIGNUP_URL}
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40"
+                  "w-full sm:w-auto justify-center bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40"
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
@@ -289,7 +289,7 @@ export function Hero() {
               </Link>
               <a
                 href="#demo"
-                className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
                 onClick={() => ph?.capture("cta_demo_click", { location: "hero" })}
               >
                 Voir la démo (2 min)

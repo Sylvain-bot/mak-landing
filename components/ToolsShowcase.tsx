@@ -237,13 +237,17 @@ export function ToolsShowcase() {
           </h2>
         </div>
 
-        {/* Tab pills */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        {/* Tab pills — sticky + scrollable on mobile */}
+        <div
+          className="sticky top-16 z-20 -mx-4 sm:mx-0 sm:static sm:z-auto mb-6 sm:mb-8"
+          style={{ background: "rgba(240,249,250,0.96)", backdropFilter: "blur(10px)" }}
+        >
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide px-4 sm:px-0 sm:flex-wrap sm:justify-center py-3 sm:py-0">
           {TOOLS.map((t, i) => (
             <button
               key={t.id}
               onClick={() => setActive(i)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 shrink-0"
               style={
                 i === active
                   ? {
@@ -278,6 +282,7 @@ export function ToolsShowcase() {
               </span>
             </button>
           ))}
+          </div>
         </div>
 
         {/* Content card */}

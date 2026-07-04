@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const TESTIMONIALS = [
@@ -36,16 +36,19 @@ const TESTIMONIALS = [
   },
 ];
 
+const N = TESTIMONIALS.length;
+
 export function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0);
   const [dir, setDir] = useState(1);
   const [paused, setPaused] = useState(false);
+  const touchStartX = useRef(0);
 
   useEffect(() => {
     if (paused) return;
     const timer = setInterval(() => {
       setDir(1);
-      setCurrent((c) => (c + 1) % TESTIMONIALS.length);
+      setCurrent((c) => (c + 1) % N);
     }, 4500);
     return () => clearInterval(timer);
   }, [paused]);
@@ -56,6 +59,9 @@ export function TestimonialsCarousel() {
     setPaused(true);
     setTimeout(() => setPaused(false), 8000);
   }
+
+  function next() { goTo((current + 1) % N); }
+  function prev() { goTo((current - 1 + N) % N); }
 
   const t = TESTIMONIALS[current];
 
@@ -74,7 +80,16 @@ export function TestimonialsCarousel() {
           </h2>
         </div>
 
-        <div className="relative overflow-hidden" style={{ minHeight: "220px" }}>
+        <div
+          className="relative"
+          style={{ minHeight: "220px" }}
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX.current;
+            if (dx < -40) next();
+            else if (dx > 40) prev();
+          }}
+        >
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={current}
@@ -91,7 +106,6 @@ export function TestimonialsCarousel() {
               }}
             >
               <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-                {/* 5 étoiles */}
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} width="17" height="17" viewBox="0 0 20 20" fill="#f59e0b" aria-hidden>
@@ -99,7 +113,6 @@ export function TestimonialsCarousel() {
                     </svg>
                   ))}
                 </div>
-                {/* Tag module */}
                 <span
                   className="text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
                   style={{ background: "#eef7f6", color: "#3899aa", border: "1px solid #d4ecea" }}
@@ -119,7 +132,7 @@ export function TestimonialsCarousel() {
           </AnimatePresence>
         </div>
 
-        {/* Dots / progress pills */}
+        {/* Dots */}
         <div className="flex justify-center gap-2 mt-5" role="tablist" aria-label="Témoignages">
           {TESTIMONIALS.map((_, i) => (
             <button
@@ -137,6 +150,10 @@ export function TestimonialsCarousel() {
             />
           ))}
         </div>
+
+        <p className="text-center text-xs text-[#cbd5e1] mt-3 sm:hidden">
+          ← Glisse pour naviguer →
+        </p>
       </div>
     </section>
   );
