@@ -32,16 +32,18 @@ export function CtaFinal() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <Link
-            href={CTA_SIGNUP_URL}
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 transition-all hover:scale-[1.02] inline-flex items-center shadow-lg shadow-[#3899aa]/20"
-            )}
-          >
-            {CTA_MAIN}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex justify-center">
+            <Link
+              href={CTA_SIGNUP_URL}
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "w-full sm:w-auto bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 text-base gap-2 transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/20 whitespace-normal h-auto min-h-[48px] py-3 text-center justify-center"
+              )}
+            >
+              {CTA_MAIN}
+              <ArrowRight className="w-4 h-4 shrink-0" />
+            </Link>
+          </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.25} className="mt-4 mb-6">

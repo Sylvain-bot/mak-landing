@@ -280,7 +280,7 @@ export function Hero() {
                 href={CTA_SIGNUP_URL}
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "w-full sm:w-auto justify-center bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40"
+                  "w-full sm:w-auto justify-center bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-6 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40 whitespace-normal h-auto min-h-[48px] py-3 text-center"
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >

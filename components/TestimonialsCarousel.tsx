@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const TESTIMONIALS = [
   {
@@ -42,7 +43,6 @@ export function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0);
   const [dir, setDir] = useState(1);
   const [paused, setPaused] = useState(false);
-  const touchStartX = useRef(0);
 
   useEffect(() => {
     if (paused) return;
@@ -60,8 +60,8 @@ export function TestimonialsCarousel() {
     setTimeout(() => setPaused(false), 8000);
   }
 
-  function next() { goTo((current + 1) % N); }
   function prev() { goTo((current - 1 + N) % N); }
+  function next() { goTo((current + 1) % N); }
 
   const t = TESTIMONIALS[current];
 
@@ -80,16 +80,7 @@ export function TestimonialsCarousel() {
           </h2>
         </div>
 
-        <div
-          className="relative"
-          style={{ minHeight: "220px" }}
-          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
-          onTouchEnd={(e) => {
-            const dx = e.changedTouches[0].clientX - touchStartX.current;
-            if (dx < -40) next();
-            else if (dx > 40) prev();
-          }}
-        >
+        <div className="relative" style={{ minHeight: "220px" }}>
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={current}
@@ -132,28 +123,44 @@ export function TestimonialsCarousel() {
           </AnimatePresence>
         </div>
 
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-5" role="tablist" aria-label="Témoignages">
-          {TESTIMONIALS.map((_, i) => (
-            <button
-              key={i}
-              role="tab"
-              aria-selected={i === current}
-              onClick={() => goTo(i)}
-              className="transition-all duration-300 rounded-full"
-              style={{
-                width: i === current ? "22px" : "8px",
-                height: "8px",
-                background: i === current ? "#3899aa" : "#d4ecea",
-              }}
-              aria-label={`Témoignage ${i + 1}`}
-            />
-          ))}
-        </div>
+        {/* Navigation : flèches + dots */}
+        <div className="flex justify-center items-center gap-4 mt-5">
+          <button
+            onClick={prev}
+            aria-label="Témoignage précédent"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+            style={{ border: "1px solid #d4ecea", background: "white", color: "#3899aa" }}
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
 
-        <p className="text-center text-xs text-[#cbd5e1] mt-3 sm:hidden">
-          ← Glisse pour naviguer →
-        </p>
+          <div className="flex gap-2" role="tablist" aria-label="Témoignages">
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                role="tab"
+                aria-selected={i === current}
+                onClick={() => goTo(i)}
+                className="transition-all duration-300 rounded-full"
+                style={{
+                  width: i === current ? "22px" : "8px",
+                  height: "8px",
+                  background: i === current ? "#3899aa" : "#d4ecea",
+                }}
+                aria-label={`Témoignage ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={next}
+            aria-label="Témoignage suivant"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+            style={{ border: "1px solid #d4ecea", background: "white", color: "#3899aa" }}
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </section>
   );

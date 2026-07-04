@@ -242,7 +242,8 @@ export function ToolsShowcase() {
           className="sticky top-16 z-20 -mx-4 sm:mx-0 sm:static sm:z-auto mb-6 sm:mb-8"
           style={{ background: "rgba(240,249,250,0.96)", backdropFilter: "blur(10px)" }}
         >
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide px-4 sm:px-0 sm:flex-wrap sm:justify-center py-3 sm:py-0">
+          <div className="relative">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide px-4 pr-10 sm:px-0 sm:pr-0 sm:flex-wrap sm:justify-center py-3 sm:py-0">
           {TOOLS.map((t, i) => (
             <button
               key={t.id}
@@ -282,6 +283,12 @@ export function ToolsShowcase() {
               </span>
             </button>
           ))}
+            </div>
+            {/* Fade gradient — mobile only — signals more tabs to the right */}
+            <div
+              className="absolute right-0 top-0 bottom-0 w-12 pointer-events-none sm:hidden"
+              style={{ background: "linear-gradient(to right, transparent, rgba(240,249,250,0.96))" }}
+            />
           </div>
         </div>
 
