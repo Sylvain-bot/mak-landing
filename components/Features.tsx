@@ -19,7 +19,7 @@ const FEATURES = [
   {
     icon: "📋",
     tag: "Bilans kinésithérapiques",
-    title: "Bilan NGAP dicté ou tapé, structuré en 5 minutes",
+    title: "Bilan NGAP dicté ou tapé, structuré en 3 minutes",
     bullets: [
       "Dictée vocale ou saisie libre",
       "Mise en forme NGAP automatique",
