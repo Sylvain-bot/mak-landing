@@ -150,7 +150,7 @@ function AppScreenshot() {
       {/* Lightbox via Portal */}
       {mounted && open && createPortal(
         <div
-          className="fixed inset-0 z-[200] flex items-center justify-center"
+          className="fixed inset-0 z-[200] flex items-center justify-center pt-16"
           style={{ background: "rgba(0,0,0,0.92)" }}
           onClick={closeLightbox}
           onWheel={onWheel}
