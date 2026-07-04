@@ -504,6 +504,25 @@ export function ToolsShowcase() {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Dots — mobile uniquement, même principe que témoignages */}
+        <div className="flex justify-center gap-2 mt-5 sm:hidden" role="tablist" aria-label="Outils">
+          {TOOLS.map((_, i) => (
+            <button
+              key={i}
+              role="tab"
+              aria-selected={i === active}
+              onClick={() => setActive(i)}
+              className="transition-all duration-300 rounded-full"
+              style={{
+                width: i === active ? "22px" : "8px",
+                height: "8px",
+                background: i === active ? "#3899aa" : "#d4ecea",
+              }}
+              aria-label={`Outil ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
