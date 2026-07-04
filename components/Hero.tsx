@@ -84,8 +84,7 @@ function AppScreenshot() {
     setScale((s) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, s + (e.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP))));
   }
 
-  function zoomIn()  { setScale((s) => Math.min(ZOOM_MAX, s + ZOOM_STEP)); }
-  function zoomOut() { setScale((s) => Math.max(ZOOM_MIN, s - ZOOM_STEP)); }
+  function zoomIn()    { setScale((s) => Math.min(ZOOM_MAX, s + ZOOM_STEP)); }
   function zoomReset() { setScale(1); setOrigin({ x: 50, y: 50 }); }
 
   function closeLightbox() { setOpen(false); setScale(1); setOrigin({ x: 50, y: 50 }); }
@@ -147,7 +146,7 @@ function AppScreenshot() {
       {/* Lightbox — clic fond = ferme, clic image = zoom */}
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-[200] flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.92)" }}
           onClick={closeLightbox}
           onWheel={onWheel}
