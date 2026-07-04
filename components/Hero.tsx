@@ -289,7 +289,7 @@ export function Hero() {
               </Link>
               <a
                 href="#demo"
-                className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] h-auto py-3 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
                 onClick={() => ph?.capture("cta_demo_click", { location: "hero" })}
               >
                 Voir la démo (2 min)

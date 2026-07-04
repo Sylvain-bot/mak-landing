@@ -106,7 +106,7 @@ export function Pricing() {
                 </div>
                 <Link
                   href={CTA_SIGNUP_URL}
-                  className="block w-full text-center py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110"
+                  className="block w-full text-center px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 whitespace-normal"
                   style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.35)" }}
                 >
                   {CTA_MAIN}
