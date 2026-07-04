@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, useInView } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -59,8 +60,11 @@ const ZOOM_STEP = 0.5;
 function AppScreenshot() {
   const [open, setOpen] = useState(false);
   const [scale, setScale] = useState(1);
-  const [origin, setOrigin] = useState({ x: 50, y: 50 }); // transform-origin en %
+  const [origin, setOrigin] = useState({ x: 50, y: 50 });
+  const [mounted, setMounted] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { setMounted(true); }, []);
 
   // Escape key + reset zoom on close
   useEffect(() => {
@@ -143,22 +147,20 @@ function AppScreenshot() {
         </div>
       </div>
 
-      {/* Lightbox — clic fond = ferme, clic image = zoom */}
-      {open && (
+      {/* Lightbox via Portal — échappe les parents transformés (motion.div) */}
+      {mounted && open && createPortal(
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.92)" }}
           onClick={closeLightbox}
           onWheel={onWheel}
         >
-          {/* × fermer — toujours visible */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold transition-colors"
-            style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.2)" }}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold"
+            style={{ background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.3)", zIndex: 201 }}
           >×</button>
 
-          {/* Image seule — clic dessus = zoom/dézoom, stopPropagation évite de fermer */}
           <div
             ref={imgRef}
             style={{
@@ -178,7 +180,8 @@ function AppScreenshot() {
               style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
