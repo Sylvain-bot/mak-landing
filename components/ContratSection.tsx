@@ -51,7 +51,7 @@ export function ContratSection() {
             <span className="text-[#3899aa]">Sans paperasse. Entre kinés.</span>
           </h2>
           <p className="text-base text-[#475569] max-w-2xl mx-auto">
-            MAK offre à toute la communauté un module complet de gestion des contrats de remplacement —
+            Mon Assistant Kiné offre à toute la communauté un module complet de gestion des contrats de remplacement —
             de la rédaction à la déclaration ordinale. Gratuit. Sans abonnement. Sans limite.
           </p>
         </ScrollReveal>

@@ -5,18 +5,6 @@ import Link from "next/link";
 
 const FEATURES = [
   {
-    icon: "🧠",
-    tag: "Copilote clinique",
-    title: "Un doute clinique → réponse sourcée en 30 secondes",
-    bullets: [
-      "56 000+ ressources EBP dont le Cleland",
-      "Drapeaux rouges détectés automatiquement",
-      "Tests cliniques suggérés et cotés",
-    ],
-    href: "/fonctionnalites/aide-decision-clinique",
-    primary: true,
-  },
-  {
     icon: "📋",
     tag: "Bilans kinésithérapiques",
     title: "Bilan NGAP dicté ou tapé, structuré en 3 minutes",
@@ -26,6 +14,7 @@ const FEATURES = [
       "Export PDF ou envoi mail en 1 clic",
     ],
     href: "/fonctionnalites/documentation-bilan-kine",
+    primary: true,
   },
   {
     icon: "📨",
@@ -34,14 +23,14 @@ const FEATURES = [
     bullets: [
       "Templates pour tous tes documents courants",
       "L'IA rédige si tu n'as pas de template",
-      "Envoi direct depuis MAK",
+      "Envoi direct depuis Mon Assistant Kiné",
     ],
     href: "/fonctionnalites/gestion-administrative",
   },
   {
     icon: "📱",
     tag: "Suivi patient à domicile",
-    title: "Programme d'exercices sur WhatsApp, compliance suivie en temps réel",
+    title: "Programme d'exercices sur WhatsApp — zéro relance manuelle",
     bullets: [
       "Prescription d'exercices avec vidéos démonstratives",
       "Patient reçoit tout sur WhatsApp — sans appli à installer",
@@ -61,17 +50,17 @@ export function Features() {
       <div className="max-w-6xl mx-auto">
         <ScrollReveal className="mb-10">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">
-            Au-delà du copilote
+            Tes outils quotidiens
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight max-w-lg">
             Un outil. Tout ce qu&apos;il faut au cabinet.
           </h2>
-          <p className="mt-4 text-base sm:text-lg font-semibold text-[#3899aa] max-w-2xl">
-            Pose ta question comme à un confrère — réponse sourcée en 30 secondes.
+          <p className="mt-4 text-base sm:text-lg text-[#64748b] max-w-2xl">
+            Bilans, courriers, suivi patient — chaque tâche chronophage devient une affaire de minutes.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
           {FEATURES.map((f, i) => (
             <ScrollReveal key={f.tag} delay={i * 0.07}>
               <div

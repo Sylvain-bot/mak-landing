@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: "Est-ce que l'abonnement est vraiment rentable ?",
-    a: "Un kiné libéral passe environ 45 minutes par jour sur la documentation. À 19€/mois, MAK coûte moins qu'une seule séance remboursée — et te rend environ 16 heures par mois. Fais le calcul avec ton taux horaire : c'est l'abonnement le plus rentable de ton cabinet.",
+    a: "Un kiné libéral passe environ 45 minutes par jour sur la documentation. À 19€/mois, Mon Assistant Kiné coûte moins qu'une seule séance remboursée — et te rend environ 16 heures par mois. Fais le calcul avec ton taux horaire : c'est l'abonnement le plus rentable de ton cabinet.",
   },
   {
     q: "Mes données sont-elles protégées ?",

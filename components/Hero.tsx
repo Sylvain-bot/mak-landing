@@ -129,7 +129,7 @@ function AppScreenshot() {
         <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
           <Image
             src="/Hero.png"
-            alt="Copilote clinique MAK — cas cervical, réponse clinique sourcée en temps réel"
+            alt="Copilote clinique Mon Assistant Kiné — cas cervical, réponse clinique sourcée en temps réel"
             width={900}
             height={700}
             className="w-full h-auto object-cover object-top"
@@ -176,7 +176,7 @@ function AppScreenshot() {
             >
               <Image
                 src="/Hero.png"
-                alt="Copilote clinique MAK — vue complète"
+                alt="Copilote clinique Mon Assistant Kiné — vue complète"
                 width={1400}
                 height={1000}
                 className="block rounded-xl shadow-2xl"
@@ -327,16 +327,16 @@ export function Hero() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-7">
               <StatItem
-                target={56000} suffix="+" label="études scientifiques intégrées"
-                frenchFormat active={inView}
+                target={3} suffix=" min" label="Bilan NGAP complet"
+                active={inView}
               />
               <StatItem
-                target={3} suffix=" min" label="pour un bilan complet"
+                target={2} suffix=" min" label="Courrier ou document admin"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
               <StatItem
-                target={5} suffix=" min" label="pour prendre l'app en main"
+                target={4} suffix="h/sem" label="récupérées en moyenne"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />

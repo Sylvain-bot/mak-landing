@@ -27,7 +27,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.15}>
           <p className="text-[#475569] text-base mb-8 leading-relaxed">
-            Accès immédiat. Sans carte bancaire. 5 minutes pour prendre MAK en main.
+            Accès immédiat. Sans carte bancaire. 5 minutes pour prendre Mon Assistant Kiné en main.
           </p>
         </ScrollReveal>
 

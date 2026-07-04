@@ -39,7 +39,7 @@ const FEATURES = [
     href: "/fonctionnalites/gestion-administrative",
     icon: "📨",
     title: "Administratif",
-    desc: "Courriers, relances et ordonnances générés en un clic à partir de tes templates, envoyés directement depuis MAK.",
+    desc: "Courriers, relances et ordonnances générés en un clic à partir de tes templates, envoyés directement depuis Mon Assistant Kiné.",
   },
   {
     href: "/fonctionnalites/contrats-remplacement",

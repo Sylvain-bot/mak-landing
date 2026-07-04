@@ -41,7 +41,7 @@ const WONT_DO = [
 ];
 
 const WILL_DO = [
-  "Construire MAK avec les retours des kinés utilisateurs",
+  "Construire Mon Assistant Kiné avec les retours des kinés utilisateurs",
   "Maintenir les données patients en sécurité, conformément au RGPD",
   "Rester honnêtes sur ce que l'IA peut et ne peut pas faire",
 ];
@@ -100,7 +100,7 @@ export default function EquipePage() {
                 )}
               </div>
               <p className="text-[#475569] leading-relaxed mb-4">
-                Kinésithérapeute libéral depuis 14 ans, installé en Normandie. Diplômé universitaire en kinésithérapie du sport. MAK est né d&apos;une frustration partagée : passer trop de temps à documenter, pas assez de temps à soigner.
+                Kinésithérapeute libéral depuis 14 ans, installé en Normandie. Diplômé universitaire en kinésithérapie du sport. Mon Assistant Kiné est né d&apos;une frustration partagée : passer trop de temps à documenter, pas assez de temps à soigner.
               </p>
               <blockquote className="border-l-4 border-[#3899aa] pl-4 italic text-[#475569] text-sm">
                 &ldquo;On a créé l&apos;outil qu&apos;on aurait voulu avoir dès notre première année d&apos;installation. Un assistant qui connaît notre métier.&rdquo;
@@ -120,7 +120,7 @@ export default function EquipePage() {
                 )}
               </div>
               <p className="text-[#475569] leading-relaxed mb-4">
-                Kinésithérapeute libéral, Valentin pilote le développement produit de MAK. Son ancrage dans la pratique clinique quotidienne guide chaque décision produit : si ce n&apos;est pas utile au cabinet, ça n&apos;entre pas dans MAK.
+                Kinésithérapeute libéral, Valentin pilote le développement produit de Mon Assistant Kiné. Son ancrage dans la pratique clinique quotidienne guide chaque décision produit : si ce n&apos;est pas utile au cabinet, ça n&apos;entre pas dans Mon Assistant Kiné.
               </p>
               <blockquote className="border-l-4 border-[#3899aa] pl-4 italic text-[#475569] text-sm">
                 &ldquo;On ne construit pas des features. On résout des problèmes réels que nos collègues kinés rencontrent chaque jour.&rdquo;
@@ -165,7 +165,7 @@ export default function EquipePage() {
       <section className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-[#0f172a] mb-4">Une question ? Une idée ?</h2>
-          <p className="text-[#475569] mb-2">Vous êtes kiné et vous voulez contribuer à l&apos;évolution de MAK ?</p>
+          <p className="text-[#475569] mb-2">Vous êtes kiné et vous voulez contribuer à l&apos;évolution de Mon Assistant Kiné ?</p>
           <a href="mailto:contact@monassistantkine.fr" className="text-[#3899aa] font-semibold hover:underline block mb-8">
             contact@monassistantkine.fr
           </a>

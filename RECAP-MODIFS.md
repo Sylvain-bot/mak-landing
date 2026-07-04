@@ -126,6 +126,76 @@ Plan `"Déclic"` → `"Découverte"`
 
 ---
 
+---
+
+## Correctif cohérence narrative — 04/07/2026
+
+### Tâche A — Remplacement MAK → Mon Assistant Kiné
+Grep sur tous les fichiers `.tsx/.ts` : toutes les occurrences remplacées sauf :
+- `lib/schemas/homepage.schema.ts` : `"alternateName": "MAK"` (métadonnée JSON-LD, non visible)
+- `app/page.tsx` : `"Mon Assistant Kiné (MAK)"` — exception unique autorisée dans la démo copilote
+- Pages `app/admin/` : pas du site marketing
+
+### Tâche B — Barre de stats Hero (Hero.tsx)
+| Avant | Après |
+|---|---|
+| `56 000+` études scientifiques intégrées | `3 min` — Bilan NGAP complet |
+| `3 min` pour un bilan complet | `2 min` — Courrier ou document admin |
+| `5 min` pour prendre l'app en main | `4h/sem` — récupérées en moyenne |
+Les stats copilote (56 000+) déplacées dans la section copilote dédiée.
+
+### Tâche C — Section "Comment ça marche" (app/page.tsx)
+- H2 : `"Trois étapes. Pas de formation nécessaire."` → `"Ton prochain bilan, en 3 étapes"`
+- Étapes réécrites autour du cas bilan (dictée → structure NGAP → export PDF)
+- Ligne de transition ajoutée : `"Et ça marche pareil pour tes courriers, ton suivi patient et tes questions cliniques."`
+
+### Tâche D — Features.tsx
+- Copilote retiré de la grille (vivra dans sa propre section)
+- Eyebrow : `"Au-delà du copilote"` → `"Tes outils quotidiens"`
+- Tagline : remplacée par `"Bilans, courriers, suivi patient — chaque tâche chronophage devient une affaire de minutes."`
+- Grille : 4 cartes → 3 cartes (Bilans ✦ Admin ✦ Suivi patient)
+- Bilans devient la carte `primary` (dark)
+- Suivi patient : title mis à jour avec `"zéro relance manuelle"`
+
+### Tâche E — Section copilote (app/page.tsx)
+Nouvelle section positionnée après Features, fond dark (#0f172a) :
+- H2 : `"Et quand tu as un doute : pose ta question comme à un confrère."`
+- Cadrage : "Le bonus qui n'existe nulle part ailleurs" — pas la fonction principale
+- Contenu : 56 000+ études, Cleland, réponse sourcée 30 secondes, mock carte
+
+### Tâche F — Témoignages (app/page.tsx)
+- H2 ajouté : `"Ils ont récupéré leurs soirées"`
+- Marion D. (Biot) ajoutée en premier : `"Je rédige mes bilans directement pendant les séances. Mes soirées m'appartiennent à nouveau."`
+- Constance et Amandine conservées en secondaire
+
+---
+
+## Séquence H1 + H2 — Homepage (pour validation)
+
+> Coller cette séquence dans ton audit : la lecture doit former un pitch logique et complet.
+
+**H1 :** Récupère 45 minutes par jour au cabinet.
+
+**H2 :** Ils ont récupéré leurs soirées
+
+**H2 :** Vois Mon Assistant Kiné en action
+
+**H2 :** Ton prochain bilan, en 3 étapes
+
+**H2 :** Un outil. Tout ce qu'il faut au cabinet.
+
+**H2 :** Et quand tu as un doute : pose ta question comme à un confrère.
+
+**H2 :** Un abonnement. Tout ce qu'il faut au cabinet.
+
+**H2 :** Simple, transparent. Sans surprise.
+
+**H2 :** Questions fréquentes
+
+**H2 :** Récupère 45 minutes par jour. Dès ton prochain bilan.
+
+---
+
 ## Note technique — build local
 
 Le build `npm run build` échoue sur `supabaseUrl is required` lors de la collecte des données de pages API. C'est un problème **pré-existant** : le `.env.local` local ne contient pas les variables Supabase (configurées uniquement sur Vercel). La compilation TypeScript réussit (`✓ Compiled`, `✓ TypeScript`). Ce n'est pas lié à nos changements. Le dev server (`npm run dev`) fonctionne normalement.

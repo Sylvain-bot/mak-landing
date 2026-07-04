@@ -35,7 +35,7 @@ const STATS = [
   { icon: "⏱", value: "3 minutes", label: "temps moyen pour un bilan complet" },
   { icon: "📄", value: "Conforme NGAP", label: "validé par des kinés praticiens" },
   { icon: "🔧", value: "Templates", label: "personnalisables selon ta spécialité" },
-  { icon: "📨", value: "Envoi 1 clic", label: "directement depuis MAK" },
+  { icon: "📨", value: "Envoi 1 clic", label: "directement depuis Mon Assistant Kiné" },
 ];
 
 const STEPS = [
@@ -47,7 +47,7 @@ const STEPS = [
   {
     n: "02",
     title: "L'IA structure et met en conformité",
-    body: "MAK traite l'ensemble de tes données et génère un document structuré, conforme aux exigences NGAP et aux attentes de l'Assurance Maladie. Format professionnel, terminologie clinique exacte, structure attendue par tes correspondants médicaux.",
+    body: "Mon Assistant Kiné traite l'ensemble de tes données et génère un document structuré, conforme aux exigences NGAP et aux attentes de l'Assurance Maladie. Format professionnel, terminologie clinique exacte, structure attendue par tes correspondants médicaux.",
   },
   {
     n: "03",
@@ -59,15 +59,15 @@ const STEPS = [
 const FAQ = [
   {
     q: "Le document généré est-il vraiment conforme NGAP ?",
-    a: "Oui. La structure et la terminologie sont basées sur les exigences NGAP et les retours de kinésithérapeutes praticiens. Tu restes responsable du contenu clinique — MAK gère la forme.",
+    a: "Oui. La structure et la terminologie sont basées sur les exigences NGAP et les retours de kinésithérapeutes praticiens. Tu restes responsable du contenu clinique — Mon Assistant Kiné gère la forme.",
   },
   {
     q: "Je peux personnaliser les templates selon ma spécialité ?",
-    a: "Oui. MAK propose des templates de base (MSK, neurologique, respiratoire, sportif, pédiatrique) que tu peux modifier et enregistrer selon ta pratique.",
+    a: "Oui. Mon Assistant Kiné propose des templates de base (MSK, neurologique, respiratoire, sportif, pédiatrique) que tu peux modifier et enregistrer selon ta pratique.",
   },
   {
     q: "Mes données patients sont-elles sécurisées ?",
-    a: "MAK respecte le RGPD et les recommandations de la CNIL pour le traitement de données de santé. Tes données ne sont jamais revendues ni utilisées pour entraîner des modèles tiers.",
+    a: "Mon Assistant Kiné respecte le RGPD et les recommandations de la CNIL pour le traitement de données de santé. Tes données ne sont jamais revendues ni utilisées pour entraîner des modèles tiers.",
   },
 ];
 
@@ -126,7 +126,7 @@ export default function DocumentationBilanPage() {
       <section className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Comment ça marche</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-10">Comment MAK génère ton bilan</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-10">Comment Mon Assistant Kiné génère ton bilan</h2>
           <div className="space-y-8">
             {STEPS.map((s) => (
               <div key={s.n} className="flex gap-6 items-start">
@@ -176,13 +176,13 @@ export default function DocumentationBilanPage() {
       {/* Différenciation */}
       <section className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-3xl mx-auto">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Pourquoi MAK</p>
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Pourquoi Mon Assistant Kiné</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-6">Pas un outil générique. Un outil kiné.</h2>
           <p className="text-[#475569] leading-relaxed mb-4">
             ChatGPT ne sait pas ce qu&apos;est un testing musculaire coté de 0 à 5. Il ne connaît pas la structure d&apos;un bilan kinésithérapique conforme NGAP. Il te donnera un texte qu&apos;il faudra entièrement reformater.
           </p>
           <p className="text-[#475569] leading-relaxed">
-            MAK a été conçu par des kinésithérapeutes libéraux. Chaque champ, chaque template, chaque formulation a été pensé pour correspondre exactement à ce qu&apos;on attend d&apos;un bilan professionnel en France.
+            Mon Assistant Kiné a été conçu par des kinésithérapeutes libéraux. Chaque champ, chaque template, chaque formulation a été pensé pour correspondre exactement à ce qu&apos;on attend d&apos;un bilan professionnel en France.
           </p>
         </div>
       </section>

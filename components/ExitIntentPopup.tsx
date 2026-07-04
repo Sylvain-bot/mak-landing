@@ -100,7 +100,7 @@ export function ExitIntentPopup() {
               </div>
               <h2 className="text-xl font-bold text-[#0f172a] mb-2">Tu es dans la boucle !</h2>
               <p className="text-sm text-[#64748b] mb-6 leading-relaxed">
-                On te tient au courant des nouveautés MAK et on partage les meilleures ressources cliniques — sans spam.
+                On te tient au courant des nouveautés Mon Assistant Kiné et on partage les meilleures ressources cliniques — sans spam.
               </p>
               <button onClick={dismiss} className="text-sm font-medium text-[#3899aa] hover:underline">
                 Fermer
@@ -117,7 +117,7 @@ export function ExitIntentPopup() {
                 L&apos;inscription automatique n&apos;est pas encore disponible. Envoie-nous un mail et on t&apos;ajoute manuellement — promis, c&apos;est rapide.
               </p>
               <a
-                href={`mailto:${CONTACT_EMAIL}?subject=Inscription newsletter MAK&body=Bonjour, je souhaite m'inscrire à la newsletter MAK. Mon email : ${encodeURIComponent(email)}`}
+                href={`mailto:${CONTACT_EMAIL}?subject=Inscription newsletter Mon Assistant Kiné&body=Bonjour, je souhaite m'inscrire à la newsletter Mon Assistant Kiné. Mon email : ${encodeURIComponent(email)}`}
                 className="inline-flex items-center gap-2 px-6 h-11 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02]"
                 style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)" }}
                 onClick={() => sessionStorage.setItem(STORAGE_KEY, "1")}
@@ -134,7 +134,7 @@ export function ExitIntentPopup() {
               <div className="flex items-start justify-between gap-3 mb-5">
                 <div>
                   <p className="text-[#3899aa] text-[11px] font-semibold uppercase tracking-widest mb-1.5 font-mono">
-                    Rejoins la communauté MAK
+                    Rejoins la communauté Mon Assistant Kiné
                   </p>
                   <h2 className="text-xl font-bold text-[#0f172a] leading-snug">
                     Les coulisses du projet,<br />les nouveautés et les meilleures ressources cliniques.

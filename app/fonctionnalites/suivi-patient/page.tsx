@@ -34,7 +34,7 @@ const STEPS = [
   {
     icon: "📋",
     title: "Crée le programme en quelques minutes",
-    body: "Définis les exercices depuis la bibliothèque MAK ou crées-en de nouveaux. Pour chaque exercice : séries, répétitions, fréquences, consignes personnalisées. MAK génère le programme complet avec des vidéos démonstratives associées automatiquement.",
+    body: "Définis les exercices depuis la bibliothèque Mon Assistant Kiné ou crées-en de nouveaux. Pour chaque exercice : séries, répétitions, fréquences, consignes personnalisées. Mon Assistant Kiné génère le programme complet avec des vidéos démonstratives associées automatiquement.",
   },
   {
     icon: "📱",
@@ -44,7 +44,7 @@ const STEPS = [
   {
     icon: "🤖",
     title: "Le chatbot répond à ta place — selon ton protocole",
-    body: "Le patient a une question ? Le chatbot MAK répond en respectant strictement le protocole de soin que tu as défini. Pas d'improvisation, pas d'informations contradictoires.",
+    body: "Le patient a une question ? Le chatbot Mon Assistant Kiné répond en respectant strictement le protocole de soin que tu as défini. Pas d'improvisation, pas d'informations contradictoires.",
   },
   {
     icon: "📊",
@@ -67,7 +67,7 @@ const FAQ = [
   },
   {
     q: "Je peux personnaliser les vidéos ?",
-    a: "MAK intègre une bibliothèque de vidéos démonstratives associées automatiquement à chaque exercice. Tu peux créer tes propres exercices avec tes propres vidéos depuis ton espace.",
+    a: "Mon Assistant Kiné intègre une bibliothèque de vidéos démonstratives associées automatiquement à chaque exercice. Tu peux créer tes propres exercices avec tes propres vidéos depuis ton espace.",
   },
   {
     q: "Le chatbot peut-il donner des informations médicales au patient ?",
@@ -166,10 +166,10 @@ export default function SuiviPatientPage() {
       {/* Différenciation */}
       <section className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-3xl mx-auto">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Pourquoi MAK</p>
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Pourquoi Mon Assistant Kiné</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-6">Pas un simple envoi de PDF. Un vrai outil de suivi.</h2>
           <p className="text-[#475569] leading-relaxed">
-            Envoyer un PDF d&apos;exercices par mail, tout le monde peut le faire. Ce que MAK apporte en plus : la validation des séances, le suivi de la douleur, le chatbot guidé par ton protocole, et le dashboard qui te donne une vue complète de la compliance de chaque patient. La rééducation à domicile devient traçable, interactive, et contrôlée.
+            Envoyer un PDF d&apos;exercices par mail, tout le monde peut le faire. Ce que Mon Assistant Kiné apporte en plus : la validation des séances, le suivi de la douleur, le chatbot guidé par ton protocole, et le dashboard qui te donne une vue complète de la compliance de chaque patient. La rééducation à domicile devient traçable, interactive, et contrôlée.
           </p>
         </div>
       </section>

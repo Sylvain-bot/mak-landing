@@ -87,7 +87,7 @@ const INCLUDED = [
 const FAQ_ITEMS = [
   {
     q: "L'offre Pionnier est-elle vraiment à vie ?",
-    a: "Oui. Les 100 premiers inscrits bénéficient du tarif 19€/mois garanti à vie, même lorsque MAK évoluera vers des tarifs supérieurs. C'est notre façon de remercier les kinés qui nous font confiance dès le départ.",
+    a: "Oui. Les 100 premiers inscrits bénéficient du tarif 19€/mois garanti à vie, même lorsque Mon Assistant Kiné évoluera vers des tarifs supérieurs. C'est notre façon de remercier les kinés qui nous font confiance dès le départ.",
   },
   {
     q: "Que se passe-t-il après les 100 premiers ?",
@@ -107,8 +107,8 @@ const FAQ_ITEMS = [
     a: "Oui. Tu peux monter ou descendre de formule à tout moment. Le changement prend effet à la prochaine période de facturation.",
   },
   {
-    q: "MAK remplace-t-il mon logiciel de gestion de cabinet ?",
-    a: "Non. MAK complète ton logiciel de gestion (agenda, facturation, télétransmission) — il ne le remplace pas. MAK couvre la partie clinique, documentaire et le suivi entre séances.",
+    q: "Mon Assistant Kiné remplace-t-il mon logiciel de gestion de cabinet ?",
+    a: "Non. Mon Assistant Kiné complète ton logiciel de gestion (agenda, facturation, télétransmission) — il ne le remplace pas. Mon Assistant Kiné couvre la partie clinique, documentaire et le suivi entre séances.",
   },
   {
     q: "Les données de mes patients sont-elles sécurisées ?",
@@ -254,7 +254,7 @@ export default function TarifsPage() {
       {/* Ce qui est inclus */}
       <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-[#0f172a] mb-8 text-center">Ce que tu obtiens avec MAK</h2>
+          <h2 className="text-2xl font-bold text-[#0f172a] mb-8 text-center">Ce que tu obtiens avec Mon Assistant Kiné</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {INCLUDED.map((item) => (
               <div key={item.label} className="bg-white rounded-2xl p-5 text-center" style={{ border: "1px solid #d4ecea" }}>

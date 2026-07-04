@@ -66,7 +66,7 @@ export default function BioPage() {
             Gagne <em className="not-italic text-[#3899aa]">45 minutes par jour</em><br />au cabinet.
           </h1>
           <p className="text-lg text-[#475569] mb-2 leading-relaxed">
-            MAK mobilise 56 000+ ressources scientifiques dont le Cleland pour répondre à tes doutes cliniques — en 30 secondes, pendant ou entre les séances.
+            Mon Assistant Kiné mobilise 56 000+ ressources scientifiques dont le Cleland pour répondre à tes doutes cliniques — en 30 secondes, pendant ou entre les séances.
           </p>
           <p className="text-base text-[#94a3b8] mb-8">
             Bilans, administratif, suivi patient à domicile. Un seul outil.
@@ -126,7 +126,7 @@ export default function BioPage() {
       <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}>
         <div className="max-w-2xl mx-auto">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 text-center">Fonctionnalités</p>
-          <h2 className="text-2xl font-bold text-[#0f172a] mb-8 text-center">Ce que MAK fait pour toi</h2>
+          <h2 className="text-2xl font-bold text-[#0f172a] mb-8 text-center">Ce que Mon Assistant Kiné fait pour toi</h2>
           <div className="flex flex-col gap-3">
             {FEATS.map((f) => (
               <div
