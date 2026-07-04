@@ -111,7 +111,7 @@ export function ContratSection() {
                   <span className="text-white/90 text-sm font-medium">Accès immédiat, gratuit à vie</span>
                 </div>
                 <Link
-                  href="https://monassistantkine.vercel.app/signup"
+                  href="https://app.monassistantkine.fr/signup"
                   className="inline-flex items-center justify-center gap-2 w-full bg-white text-[#3899aa] font-semibold px-6 py-3.5 rounded-xl text-sm hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
                 >
                   Accéder au module contrats
@@ -119,7 +119,7 @@ export function ContratSection() {
                 </Link>
                 <p className="text-white/60 text-xs text-center mt-3">
                   Déjà un compte ?{" "}
-                  <a href="https://monassistantkine.vercel.app/login" className="underline text-white/80 hover:text-white">
+                  <a href="https://app.monassistantkine.fr/login" className="underline text-white/80 hover:text-white">
                     Se connecter
                   </a>
                 </p>

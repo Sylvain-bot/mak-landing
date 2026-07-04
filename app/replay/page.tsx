@@ -173,7 +173,7 @@ export default function ReplayPage() {
 
         {/* CTA */}
         <Link
-          href="https://monassistantkine.vercel.app/signup"
+          href="https://app.monassistantkine.fr/signup"
           style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             width: "100%", background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)",
@@ -191,7 +191,7 @@ export default function ReplayPage() {
         <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 12 }}>
           Au lieu de 49€/mois · Tarif garanti à vie · Limité aux 100 premiers
         </p>
-        <Link href="https://monassistantkine.vercel.app/login" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>
+        <Link href="https://app.monassistantkine.fr/login" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>
           Déjà un compte ? <span style={{ color: "#3899aa", fontWeight: 600 }}>Se connecter</span>
         </Link>
       </div>

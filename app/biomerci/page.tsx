@@ -119,7 +119,7 @@ export default function BioMerciPage() {
 
         {/* CTA */}
         <Link
-          href="https://monassistantkine.vercel.app/signup"
+          href="https://app.monassistantkine.fr/signup"
           style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             width: "100%", background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)",

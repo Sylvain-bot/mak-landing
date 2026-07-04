@@ -12,11 +12,11 @@ const FAQS = [
   },
   {
     q: "Est-ce que l'abonnement est vraiment rentable ?",
-    a: "Calcul rapide : Mon Assistant Kiné te dégage +2h à 3h par semaine. À 35-50€ de l'heure, c'est 270 à 680€ récupérés chaque mois. L'abonnement se rembourse à la première séance supplémentaire.",
+    a: "Un kiné libéral passe environ 45 minutes par jour sur la documentation. À 19€/mois, MAK coûte moins qu'une seule séance remboursée — et te rend environ 16 heures par mois. Fais le calcul avec ton taux horaire : c'est l'abonnement le plus rentable de ton cabinet.",
   },
   {
     q: "Mes données sont-elles protégées ?",
-    a: "Oui. Toutes les données sont chiffrées, hébergées en France, et le service est conforme RGPD et HDS (Hébergeur de Données de Santé). Tes données patient ne quittent jamais le territoire français.",
+    a: "Oui. Toutes les données sont chiffrées et hébergées en France. Le service est conforme RGPD — les données de santé de tes patients ne quittent pas le territoire français et ne sont jamais utilisées pour entraîner des modèles IA tiers.",
   },
   {
     q: "Dois-je installer un logiciel ?",

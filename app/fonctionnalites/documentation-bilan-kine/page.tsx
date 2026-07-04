@@ -27,12 +27,12 @@ const schema = {
   "operatingSystem": "Web",
   "url": "https://www.monassistantkine.fr",
   "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR" },
-  "description": "Génère des bilans kinésithérapiques conformes NGAP en 2 minutes grâce à l'IA.",
+  "description": "Génère des bilans kinésithérapiques conformes NGAP en 3 minutes grâce à l'IA.",
   "audience": { "@type": "MedicalAudience", "audienceType": "Physiotherapist" },
 };
 
 const STATS = [
-  { icon: "⏱", value: "2 minutes", label: "temps moyen pour un bilan complet" },
+  { icon: "⏱", value: "3 minutes", label: "temps moyen pour un bilan complet" },
   { icon: "📄", value: "Conforme NGAP", label: "validé par des kinés praticiens" },
   { icon: "🔧", value: "Templates", label: "personnalisables selon ta spécialité" },
   { icon: "📨", value: "Envoi 1 clic", label: "directement depuis MAK" },
@@ -81,7 +81,7 @@ export default function DocumentationBilanPage() {
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4">Fonctionnalité</p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Tes bilans kinésithérapiques en 2 minutes.<br />
+            Tes bilans kinésithérapiques en 3 minutes.<br />
             <span className="text-[#3899aa]">Conformes NGAP. Prêts à envoyer.</span>
           </h1>
           <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -89,7 +89,7 @@ export default function DocumentationBilanPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="https://monassistantkine.vercel.app/signup"
+              href="https://app.monassistantkine.fr/signup"
               className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
             >
               Créer mon compte gratuitement <ArrowRight className="w-4 h-4" />
@@ -208,7 +208,7 @@ export default function DocumentationBilanPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Commencer gratuitement</h2>
           <p className="text-white/80 mb-8">0€, sans carte bancaire</p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
             Créer mon compte <ArrowRight className="w-4 h-4" />

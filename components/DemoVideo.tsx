@@ -30,7 +30,7 @@ export function DemoVideo() {
           </h2>
           <p className="text-[#475569] text-base mb-9 max-w-2xl mx-auto">
             De la question clinique au bilan complet — découvre comment des kinés
-            gagnent 2h par semaine dès le premier jour.
+            récupèrent 45 minutes par jour dès le premier jour.
           </p>
         </ScrollReveal>
 
@@ -62,7 +62,7 @@ export function DemoVideo() {
         <ScrollReveal delay={0.3}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="https://monassistantkine.vercel.app/signup"
+              href="https://app.monassistantkine.fr/signup"
               className="inline-flex items-center gap-2 text-[#3899aa] hover:text-[#2d8a9a] text-sm font-semibold underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
             >
               Essayer gratuitement — sans carte bancaire

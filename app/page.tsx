@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { COMPLIANCE_CLAIM } from "@/lib/claims";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
@@ -11,14 +12,14 @@ import { homepageSchema } from "@/lib/schemas/homepage.schema";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Mon Assistant Kiné | Bilans en 3 min — IA pour Kinésithérapeutes",
-  description: "Gagnez 2h/semaine : bilans en 3 minutes, drapeaux rouges détectés, 56 000+ études intégrées. Essayez Mon Assistant Kiné gratuitement.",
+  title: "Mon Assistant Kiné — Récupère 45 min/jour au cabinet | IA pour Kinésithérapeutes",
+  description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé (56 000+ études). Conçu par des kinés libéraux. Essai gratuit, sans CB.",
   alternates: {
     canonical: "https://www.monassistantkine.fr",
   },
   openGraph: {
-    title: "Mon Assistant Kiné | IA pour Kinésithérapeutes",
-    description: "Gagnez 2h/semaine grâce à l'IA : bilans en 3 min, drapeaux rouges détectés.",
+    title: "Mon Assistant Kiné — Récupère 45 min/jour au cabinet",
+    description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé. Conçu par des kinés libéraux.",
     url: "https://www.monassistantkine.fr",
     type: "website",
     locale: "fr_FR",
@@ -239,6 +240,18 @@ export default async function Home() {
 
       {/* SECTION 8 — CTA final */}
       <CtaFinal />
+
+      {/* Sécurité & conformité */}
+      <section className="py-10 px-4 sm:px-6" style={{ borderTop: "1px solid #d4ecea" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <h3 className="text-base font-semibold text-[#0f172a] mb-2">Sécurité &amp; conformité</h3>
+          <p className="text-sm text-[#64748b] leading-relaxed">
+            Mon Assistant Kiné est conçu dans le respect des obligations RGPD applicables aux
+            professionnels de santé. Les données patients ne sont jamais utilisées pour entraîner
+            des modèles IA tiers. {COMPLIANCE_CLAIM}.
+          </p>
+        </div>
+      </section>
 
       <Footer />
     </main>

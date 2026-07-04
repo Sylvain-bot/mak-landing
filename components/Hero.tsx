@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { usePostHog } from "posthog-js/react";
+import { CTA_SIGNUP_URL, COMPLIANCE_CLAIM } from "@/lib/claims";
 
 function useCountUp(target: number, duration: number, active: boolean): number {
   const [count, setCount] = useState(target);
@@ -51,7 +52,7 @@ function StatItem({
   );
 }
 
-const TRUST = ["Sans carte bancaire", "HDS · Hébergé en France", "5 min de prise en main"];
+const TRUST = ["Sans carte bancaire", COMPLIANCE_CLAIM, "5 min de prise en main"];
 
 const ZOOM_MIN = 1;
 const ZOOM_MAX = 4;
@@ -66,7 +67,6 @@ function AppScreenshot() {
 
   useEffect(() => { setMounted(true); }, []);
 
-  // Escape key + reset zoom on close
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
@@ -76,7 +76,6 @@ function AppScreenshot() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Molette → zoom centré sur le curseur
   function onWheel(e: React.WheelEvent<HTMLDivElement>) {
     e.preventDefault();
     const rect = imgRef.current?.getBoundingClientRect();
@@ -233,7 +232,7 @@ export function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-                Offre Pionnier — Pour les 100 premiers · Lancé le 22/04/2026
+                Offre Pionnier — 100 places · Conçu par 2 kinés D.E.
               </span>
             </motion.div>
 
@@ -243,10 +242,12 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1] text-[#0f172a] mb-5"
             >
-              Pose ta question<br />comme à un confrère.<br />
+              Récupère{" "}
               <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-                Réponse sourcée en 30 secondes.
+                45 minutes par jour
               </span>
+              <br />
+              au cabinet.
             </motion.h1>
 
             <motion.p
@@ -255,9 +256,10 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="text-base text-[#475569] mb-8 leading-relaxed"
             >
-              Doute clinique, question bibliographique, drapeau rouge à vérifier — MAK mobilise{" "}
-              <span className="text-[#0f172a] font-semibold">56 000+ ressources dont le Cleland</span>{" "}
-              et te donne une orientation actionnable, pas un pavé à trier.
+              Bilans NGAP dictés en 3 minutes, courriers en 2 minutes,
+              suivi patient sur WhatsApp — et un copilote clinique sourcé
+              ({" "}<span className="text-[#0f172a] font-semibold">56 000+ études, Cleland inclus</span>)
+              {" "}quand tu as un doute. Un seul outil, conçu par des kinés libéraux.
             </motion.p>
 
             <motion.div
@@ -267,14 +269,14 @@ export function Hero() {
               className="flex flex-wrap gap-3 mb-7"
             >
               <Link
-                href="https://monassistantkine.vercel.app/signup"
+                href={CTA_SIGNUP_URL}
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40"
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
-                Créer mon compte gratuitement
+                Tester sur mon prochain bilan — gratuit, sans CB
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
@@ -282,7 +284,7 @@ export function Hero() {
                 className="inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
                 onClick={() => ph?.capture("cta_demo_click", { location: "hero" })}
               >
-                Voir comment ça marche
+                Voir la démo (2 min)
               </a>
             </motion.div>
 
@@ -301,7 +303,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — chat demo */}
+          {/* Right — screenshot avec lightbox */}
           <motion.div
             initial={{ opacity: 0, x: 32, scale: 0.97 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -329,7 +331,7 @@ export function Hero() {
                 frenchFormat active={inView}
               />
               <StatItem
-                target={2} suffix=" min" label="pour un bilan complet"
+                target={3} suffix=" min" label="pour un bilan complet"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />

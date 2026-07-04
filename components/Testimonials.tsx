@@ -5,6 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
+// TODO-FONDATEUR: remplacer par des témoignages réels avec nom complet, ville, résultat chiffré et photo.
+// Ces témoignages proviennent de bêta-testeurs — confirmer l'accord de chaque personne avant deploy.
+// Slots supplémentaires à remplir : 3 témoignages avec temps gagné chiffré, nom, ville, photo.
 const TESTIMONIALS = [
   {
     name: "Amandine S.",

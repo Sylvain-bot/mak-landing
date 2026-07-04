@@ -63,8 +63,7 @@ export default function BioPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-4">
-            Pose ta question clinique<br />
-            <span className="text-[#3899aa]">comme à un confrère.</span>
+            Gagne <em className="not-italic text-[#3899aa]">45 minutes par jour</em><br />au cabinet.
           </h1>
           <p className="text-lg text-[#475569] mb-2 leading-relaxed">
             MAK mobilise 56 000+ ressources scientifiques dont le Cleland pour répondre à tes doutes cliniques — en 30 secondes, pendant ou entre les séances.
@@ -111,7 +110,7 @@ export default function BioPage() {
           </div>
 
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 w-full bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25 mb-3"
             onClick={() => { try { (window as any).clarity?.("set", "cta_clicked", "true"); } catch(e) {} }}
           >
@@ -176,7 +175,7 @@ export default function BioPage() {
               Offert à toute la communauté des kinés libéraux — abonné ou non.
             </p>
             <Link
-              href="https://monassistantkine.vercel.app/signup"
+              href="https://app.monassistantkine.fr/signup"
               className="block text-center bg-[#16a34a] hover:bg-[#15803d] text-white text-sm font-semibold py-3 rounded-lg transition-all hover:scale-[1.02]"
             >
               Accéder au module — c&apos;est gratuit →
@@ -309,7 +308,7 @@ export default function BioPage() {
           <h2 className="text-2xl font-bold text-white mb-2">Essayer Mon Assistant Kiné gratuitement</h2>
           <p className="text-white/80 text-sm mb-6">Sans carte bancaire · Accès immédiat · Sans engagement</p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02] mb-4"
             onClick={() => { try { (window as any).clarity?.("set", "cta_clicked", "true"); } catch(e) {} }}
           >
@@ -317,7 +316,7 @@ export default function BioPage() {
           </Link>
           <p className="text-sm text-white/70">
             Déjà un compte ?{" "}
-            <Link href="https://monassistantkine.vercel.app/login" className="text-white font-semibold hover:underline">
+            <Link href="https://app.monassistantkine.fr/login" className="text-white font-semibold hover:underline">
               Se connecter
             </Link>
           </p>

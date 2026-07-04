@@ -66,6 +66,9 @@ export function Features() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight max-w-lg">
             Un outil. Tout ce qu&apos;il faut au cabinet.
           </h2>
+          <p className="mt-4 text-base sm:text-lg font-semibold text-[#3899aa] max-w-2xl">
+            Pose ta question comme à un confrère — réponse sourcée en 30 secondes.
+          </p>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">

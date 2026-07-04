@@ -83,7 +83,7 @@ export default function GestionAdministrativePage() {
             Courriers médecins, relances, documents administratifs — MAK les génère depuis tes templates ou les crée de zéro si tu n&apos;en as pas. Envoi direct, sans copier-coller.
           </p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
           >
             Créer mon compte gratuitement <ArrowRight className="w-4 h-4" />
@@ -180,7 +180,7 @@ export default function GestionAdministrativePage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Simplifier mon administratif gratuitement</h2>
           <p className="text-white/80 mb-8">Sans carte bancaire · Accès immédiat</p>
           <Link
-            href="https://monassistantkine.vercel.app/signup"
+            href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
             Créer mon compte <ArrowRight className="w-4 h-4" />
