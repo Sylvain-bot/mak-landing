@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Shield, Zap } from "lucide-react";
-import { CTA_SIGNUP_URL, CTA_MAIN, GUARANTEE_TEXT, COMPLIANCE_CLAIM } from "@/lib/claims";
+import { CTA_SIGNUP_URL, CTA_MAIN, COMPLIANCE_CLAIM } from "@/lib/claims";
 
 export function CtaFinal() {
   return (
@@ -54,17 +54,6 @@ export function CtaFinal() {
                 </span>
               )
             )}
-          </div>
-        </ScrollReveal>
-
-        {/* Garantie */}
-        <ScrollReveal delay={0.3}>
-          <div
-            className="flex items-start gap-3 rounded-xl px-5 py-4 text-left mb-6"
-            style={{ background: "white", border: "1px solid #d4ecea" }}
-          >
-            <Shield className="w-4 h-4 text-[#3899aa] shrink-0 mt-0.5" />
-            <p className="text-xs text-[#64748b] leading-relaxed">{GUARANTEE_TEXT}</p>
           </div>
         </ScrollReveal>
 

@@ -2,12 +2,11 @@
 
 import { ScrollReveal } from "./ScrollReveal";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, Zap, Shield } from "lucide-react";
+import { CheckCircle2, Zap } from "lucide-react";
 import Link from "next/link";
 import {
   CTA_SIGNUP_URL,
   CTA_MAIN,
-  GUARANTEE_TEXT,
   PRICE_PIONNIER,
   PRICE_DECOUVERTE,
   PRICE_PRATIQUE,
@@ -96,12 +95,6 @@ export function Pricing() {
                     </li>
                   ))}
                 </ul>
-                {/* Garantie */}
-                <div className="flex items-start gap-2 p-3 rounded-xl mb-4"
-                  style={{ background: "rgba(56,153,170,0.12)", border: "1px solid rgba(56,153,170,0.25)" }}>
-                  <Shield className="w-4 h-4 text-[#3899aa] shrink-0 mt-0.5" />
-                  <p className="text-white/70 text-xs leading-relaxed">{GUARANTEE_TEXT}</p>
-                </div>
               </div>
 
               <div className="shrink-0 text-center lg:text-right">

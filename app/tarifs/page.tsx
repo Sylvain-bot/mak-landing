@@ -3,12 +3,11 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { CheckCircle2, Shield, Zap, ArrowRight } from "lucide-react";
+import { CheckCircle2, Zap, ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import {
   CTA_SIGNUP_URL,
   CTA_MAIN,
-  GUARANTEE_TEXT,
   COMPLIANCE_CLAIM,
   PRICE_PIONNIER,
   PRICE_DECOUVERTE,
@@ -174,12 +173,6 @@ export default function TarifsPage() {
                     </li>
                   ))}
                 </ul>
-                {/* Garantie */}
-                <div className="flex items-start gap-2 p-3 rounded-xl"
-                  style={{ background: "rgba(56,153,170,0.12)", border: "1px solid rgba(56,153,170,0.25)" }}>
-                  <Shield className="w-4 h-4 text-[#3899aa] shrink-0 mt-0.5" />
-                  <p className="text-white/70 text-xs leading-relaxed">{GUARANTEE_TEXT}</p>
-                </div>
               </div>
 
               <div className="shrink-0 text-center">
@@ -304,12 +297,6 @@ export default function TarifsPage() {
           >
             {CTA_MAIN} <ArrowRight className="w-4 h-4" />
           </Link>
-          {/* Garantie */}
-          <div className="flex items-start gap-2 max-w-md mx-auto text-left mt-4 px-4 py-3 rounded-xl"
-            style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.25)" }}>
-            <Shield className="w-4 h-4 text-white/80 shrink-0 mt-0.5" />
-            <p className="text-white/70 text-xs leading-relaxed">{GUARANTEE_TEXT}</p>
-          </div>
           <p className="text-xs text-white/60 mt-4">
             Une question ?{" "}
             <a href="mailto:sylvain@monassistantkine.fr" className="underline hover:text-white">

@@ -28,7 +28,7 @@ export const CTA_LOGIN_URL = APP_URL + "/login";
 // TODO-FONDATEUR: si hébergeur certifié HDS → remplacer par "Hébergement certifié HDS 🇫🇷"
 export const COMPLIANCE_CLAIM = "RGPD · Données de santé hébergées en France";
 
-// Garantie
-// TODO-FONDATEUR: valider les termes exacts de la garantie avant deploy
-export const GUARANTEE_TEXT =
-  "Garantie 45 minutes : si tu ne récupères pas au moins 2 heures ta première semaine d'abonnement, on te rembourse ton mois. Un mail suffit.";
+// Garantie — désactivée jusqu'à mise en place opérationnelle
+// TODO-FONDATEUR: décommenter et câbler quand le process de remboursement est en place
+// export const GUARANTEE_TEXT =
+//   "Garantie 45 minutes : si tu ne récupères pas au moins 2 heures ta première semaine d'abonnement, on te rembourse ton mois. Un mail suffit.";
