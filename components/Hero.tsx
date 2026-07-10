@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import { motion, useInView } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -62,140 +61,28 @@ function StatItem({
 
 const TRUST = ["Sans carte bancaire", COMPLIANCE_CLAIM, "5 min de prise en main"];
 
-const ZOOM_MIN = 1;
-const ZOOM_MAX = 4;
-const ZOOM_STEP = 0.5;
-
 function AppScreenshot() {
-  const [open, setOpen] = useState(false);
-  const [scale, setScale] = useState(1);
-  const [origin, setOrigin] = useState({ x: 50, y: 50 });
-  const [mounted, setMounted] = useState(false);
-  const imgRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => { setMounted(true); }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") { setOpen(false); setScale(1); }
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
-
-  function onWheel(e: React.WheelEvent<HTMLDivElement>) {
-    e.preventDefault();
-    const rect = imgRef.current?.getBoundingClientRect();
-    if (rect) {
-      const ox = ((e.clientX - rect.left) / rect.width) * 100;
-      const oy = ((e.clientY - rect.top) / rect.height) * 100;
-      setOrigin({ x: ox, y: oy });
-    }
-    setScale((s) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, s + (e.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP))));
-  }
-
-  function zoomIn()    { setScale((s) => Math.min(ZOOM_MAX, s + ZOOM_STEP)); }
-  function zoomReset() { setScale(1); setOrigin({ x: 50, y: 50 }); }
-
-  function closeLightbox() { setOpen(false); setScale(1); setOrigin({ x: 50, y: 50 }); }
-
   return (
-    <>
-      {/* Vignette cliquable */}
+    <div
+      className="relative flex justify-center"
+      style={{
+        WebkitMaskImage: "radial-gradient(ellipse 85% 85% at 50% 45%, black 35%, transparent 75%)",
+        maskImage: "radial-gradient(ellipse 85% 85% at 50% 45%, black 35%, transparent 75%)",
+      }}
+    >
       <div
-        className="rounded-2xl overflow-hidden cursor-zoom-in"
-        style={{
-          border: "1px solid #d4ecea",
-          boxShadow: "0 8px 40px rgba(56,153,170,0.10), 0 2px 8px rgba(0,0,0,0.06)",
-        }}
-        onClick={() => setOpen(true)}
-        title="Cliquer pour agrandir"
-      >
-        {/* Chrome bar */}
-        <div
-          className="px-4 py-2.5 flex items-center gap-2.5 shrink-0"
-          style={{ background: "#f4f4f5", borderBottom: "1px solid #e4e4e5" }}
-        >
-          <div className="flex gap-1.5 shrink-0">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#28c941]" />
-          </div>
-          <div
-            className="flex-1 mx-2 rounded-md px-3 py-1 text-xs text-[#3899aa] font-medium truncate"
-            style={{ background: "white", border: "1px solid #e4e4e5" }}
-          >
-            app.monassistantkine.fr — Copilote clinique
-          </div>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs text-emerald-600 font-semibold">Live</span>
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden bg-white" style={{ maxHeight: "430px" }}>
-          <Image
-            src="/Hero.png"
-            alt="Copilote clinique Mon Assistant Kiné — cas cervical, réponse clinique sourcée en temps réel"
-            width={900}
-            height={700}
-            className="w-full h-auto object-cover object-top"
-            priority
-          />
-          <div
-            className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, transparent, white)" }}
-          />
-          <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold" style={{ background: "rgba(15,23,42,0.55)", color: "white" }}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
-            Agrandir
-          </div>
-        </div>
-      </div>
-
-      {/* Lightbox via Portal */}
-      {mounted && open && createPortal(
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center pt-16"
-          style={{ background: "rgba(0,0,0,0.92)" }}
-          onClick={closeLightbox}
-          onWheel={onWheel}
-        >
-          {/* Wrapper relatif = × positionné sur la photo, pas sur le viewport */}
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
-            {/* × sur la photo — coin haut-droit de l'image */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
-              style={{ background: "rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.35)" }}
-            >×</button>
-
-            {/* Image avec zoom */}
-            <div
-              ref={imgRef}
-              style={{
-                transform: `scale(${scale})`,
-                transformOrigin: `${origin.x}% ${origin.y}%`,
-                transition: "transform 0.15s ease",
-                cursor: scale > 1 ? "zoom-out" : "zoom-in",
-              }}
-              onClick={(e) => { e.stopPropagation(); scale > 1 ? zoomReset() : zoomIn(); }}
-            >
-              <Image
-                src="/Hero.png"
-                alt="Copilote clinique Mon Assistant Kiné — vue complète"
-                width={1400}
-                height={1000}
-                className="block rounded-xl shadow-2xl"
-                style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
-              />
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
-    </>
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 70% 50% at 50% 60%, rgba(56,153,170,0.18) 0%, transparent 70%)" }}
+      />
+      <video
+        src="/test-hero4.mp4"
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        style={{ width: "65%" }}
+      />
+    </div>
   );
 }
 
@@ -205,7 +92,7 @@ export function Hero() {
   const ph = usePostHog();
 
   return (
-    <section className="relative overflow-hidden bg-white pt-24 pb-0 px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-white pt-16 sm:pt-24 pb-0 px-4 sm:px-6">
       {/* Dot grid */}
       <div
         aria-hidden

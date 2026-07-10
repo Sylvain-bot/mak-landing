@@ -3,7 +3,8 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
-import { ExternalLink, Play } from "lucide-react";
+import { ArrowRight, ExternalLink, Play } from "lucide-react";
+import { CTA_SIGNUP_URL } from "@/lib/claims";
 import Link from "next/link";
 
 export function DemoVideo() {
@@ -60,21 +61,21 @@ export function DemoVideo() {
         </motion.div>
 
         <ScrollReveal delay={0.3}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div
+            className="rounded-2xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-5"
+            style={{ background: "white", border: "1px solid #d4ecea" }}
+          >
+            <div className="text-center sm:text-left">
+              <p className="text-base font-bold text-[#0f172a]">Convaincu ?</p>
+              <p className="text-sm text-[#475569]">Teste sur ton prochain bilan — gratuit, sans carte bancaire.</p>
+            </div>
             <Link
-              href="https://app.monassistantkine.fr/signup"
-              className="inline-flex items-center gap-2 text-[#3899aa] hover:text-[#2d8a9a] text-sm font-semibold underline underline-offset-4 decoration-[#d4ecea] hover:decoration-[#3899aa]/40 transition-all"
+              href={CTA_SIGNUP_URL}
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 whitespace-nowrap"
+              style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.3)" }}
             >
-              Essayer gratuitement — sans carte bancaire
-              <ExternalLink className="w-4 h-4" />
-            </Link>
-            <span className="hidden sm:block text-[#d4ecea]">·</span>
-            <Link
-              href="https://www.monassistantkine.fr/replay"
-              className="inline-flex items-center gap-2 text-[#94a3b8] hover:text-[#475569] text-sm transition-colors"
-            >
-              <Play className="w-3.5 h-3.5" />
-              Voir le replay du live de lancement
+              Tester Mon Assistant Kiné
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </ScrollReveal>

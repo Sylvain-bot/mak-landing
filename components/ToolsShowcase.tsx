@@ -28,6 +28,7 @@ type Tool = {
   steps: Step[];
   stat: { value: string; label: string };
   link: string;
+  video?: string;
   example: Example | null;
 };
 
@@ -60,6 +61,7 @@ const TOOLS: Tool[] = [
     ],
     stat: { value: "3 min", label: "au lieu de 20 min" },
     link: "/fonctionnalites/documentation-bilan-kine",
+    video: "/video-bilan2.mp4",
     example: null,
   },
   {
@@ -90,40 +92,8 @@ const TOOLS: Tool[] = [
     ],
     stat: { value: "30 sec", label: "réponse sourcée" },
     link: "/fonctionnalites/aide-decision-clinique",
-    example: {
-      question:
-        "Lombalgique chronique 55 ans — douleurs nocturnes + raideur matinale > 1h depuis 2 semaines. Est-ce que je dois m'inquiéter ?",
-      answer: {
-        opening:
-          "Drapeaux rouges majeurs : douleurs nocturnes + raideur matinale > 1h chez un patient de 55 ans → suspicion forte de pathologie inflammatoire ou systémique.",
-        hypotheses: [
-          {
-            label: "Pelvispondylite (spondylarthrite ankylosante)",
-            desc: "Raideur matinale > 1h + amélioration avec l'activité physique. Début possible après 45 ans.",
-          },
-          {
-            label: "Infection discale / spondylodiscite",
-            desc: "À évoquer si fièvre, AEG, immunodépression, geste invasif récent.",
-          },
-          {
-            label: "Métastases vertébrales",
-            desc: "ATCD néoplasique ? Perte de poids inexpliquée ? Douleur continue non mécanique.",
-          },
-        ],
-        actions: [
-          "Interroger sur : fièvre, frissons, perte de poids, ATCD de cancer, immunodépression, symptômes vésico-sphinctériens",
-          "Examen neurologique : déficit moteur ou sensitif des membres inférieurs, signe de la queue de cheval",
-          "Si suspicion infectieuse ou neurologique → adresser en urgence",
-        ],
-        conduite: [
-          "Si douleurs uniquement nocturnes, sans autre signe → bilan biologique (NFS, CRP, VS) + radio bassin face + RDV rhumatologue",
-          "Si fièvre ou AEG → urgences",
-          "Si déficit neuro → urgences immédiates",
-        ],
-        warning:
-          "Ne pas attendre : ces signes ne relèvent pas d'une prise en charge kiné en première intention. Référer sans délai.",
-      },
-    },
+    video: "/copilote-video.mp4",
+    example: null,
   },
   {
     id: "suivi",
@@ -153,6 +123,7 @@ const TOOLS: Tool[] = [
     ],
     stat: { value: "↑", label: "Meilleure observance" },
     link: "/fonctionnalites/suivi-patient",
+    video: "/prog-suivi.mp4",
     example: null,
   },
   {
@@ -183,6 +154,7 @@ const TOOLS: Tool[] = [
     ],
     stat: { value: "2 min", label: "par document" },
     link: "/fonctionnalites/gestion-administrative",
+    video: "/admini.mp4",
     example: null,
   },
   {
@@ -214,6 +186,7 @@ const TOOLS: Tool[] = [
     ],
     stat: { value: "100 %", label: "Gratuit pour tous les kinés" },
     link: "/fonctionnalites/contrats-remplacement",
+    video: "/contrat.mp4",
     example: null,
   },
 ];
@@ -300,9 +273,11 @@ export function ToolsShowcase() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.28, ease: "easeOut" }}
-            className="bg-white rounded-2xl overflow-hidden"
+            className="bg-white rounded-2xl overflow-hidden flex"
             style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 16px rgba(56,153,170,0.07)" }}
           >
+            {/* Left: all content */}
+            <div className="flex-1 min-w-0 flex flex-col">
             {/* Problem band */}
             <div
               className="px-6 sm:px-8 py-5 flex items-start gap-4"
@@ -331,7 +306,7 @@ export function ToolsShowcase() {
             </div>
 
             {/* Solution body */}
-            <div className="px-6 sm:px-8 py-7">
+            <div className="px-6 sm:px-8 py-7 flex-1">
               <p className="text-[10px] font-semibold uppercase tracking-widest text-[#3899aa] mb-1.5 font-mono">
                 Avec Mon Assistant Kiné
               </p>
@@ -339,21 +314,35 @@ export function ToolsShowcase() {
                 {tool.solution}
               </p>
 
-              {/* Steps */}
-              <div className="grid sm:grid-cols-3 gap-4 mb-6">
+              {/* Vidéo — mobile uniquement, sous les étapes */}
+              {tool.video && (
+                <div className="sm:hidden mb-5 rounded-2xl overflow-hidden" style={{ background: "white" }}>
+                  <video
+                    src={tool.video}
+                    autoPlay
+                    muted
+                    playsInline
+                    preload="auto"
+                    style={{ width: "100%", mixBlendMode: "multiply" }}
+                  />
+                </div>
+              )}
+
+              {/* Steps — empilés verticalement */}
+              <div className="flex flex-col gap-3 mb-6">
                 {tool.steps.map((step) => (
                   <div
                     key={step.num}
-                    className="flex flex-col gap-2 p-4 rounded-xl"
+                    className="flex items-start gap-3 p-4 rounded-xl"
                     style={{ background: "#f8fafc", border: "1px solid #f1f5f9" }}
                   >
-                    <span className="text-xs font-bold font-mono" style={{ color: "#3899aa" }}>
+                    <span className="text-xs font-bold font-mono shrink-0 mt-0.5" style={{ color: "#3899aa" }}>
                       {step.num}
                     </span>
-                    <p className="text-sm font-semibold text-[#0f172a] leading-snug">
-                      {step.title}
-                    </p>
-                    <p className="text-xs text-[#64748b] leading-relaxed">{step.desc}</p>
+                    <div>
+                      <p className="text-sm font-semibold text-[#0f172a] leading-snug">{step.title}</p>
+                      <p className="text-xs text-[#64748b] leading-relaxed mt-0.5">{step.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -502,6 +491,29 @@ export function ToolsShowcase() {
                 </Link>
               </div>
             </div>
+            </div>{/* end left column */}
+
+            {/* Right: video panel — full card height, desktop only */}
+            {tool.video && (
+              <div
+                className="hidden sm:flex items-center justify-center shrink-0"
+                style={{ width: "380px", borderLeft: "1px solid #f1f5f9", background: "white" }}
+              >
+                <video
+                  src={tool.video}
+                  autoPlay
+                  muted
+                  playsInline
+                  preload="auto"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    mixBlendMode: "multiply",
+                  }}
+                />
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
 
