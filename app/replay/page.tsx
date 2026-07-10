@@ -70,6 +70,27 @@ export default function ReplayPage() {
           Live de Lancement — Replay
         </div>
 
+        {/* Bandeau évolution */}
+        <div style={{
+          width: "100%", marginBottom: 28,
+          background: "linear-gradient(135deg, #fef9f0, #fef3e2)",
+          border: "1px solid #fde68a",
+          borderRadius: 12, padding: "12px 16px",
+          display: "flex", alignItems: "flex-start", gap: 10,
+        }}>
+          <span style={{ fontSize: 18, flexShrink: 0, marginTop: 1 }}>🚀</span>
+          <div>
+            <p style={{ fontSize: 13, fontWeight: 700, color: "#92400e", marginBottom: 3 }}>
+              L&apos;app a évolué depuis ce live !
+            </p>
+            <p style={{ fontSize: 12, color: "#a16207", lineHeight: 1.5 }}>
+              Grâce aux retours des premiers utilisateurs, Mon Assistant Kiné a été
+              considérablement amélioré depuis ce replay. Les fonctionnalités présentées
+              sont toujours là — mais l&apos;expérience est aujourd&apos;hui bien meilleure.
+            </p>
+          </div>
+        </div>
+
         {/* Title */}
         <h1 style={{
           fontSize: "clamp(24px, 6vw, 36px)", fontWeight: 700,

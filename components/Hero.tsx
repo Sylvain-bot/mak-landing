@@ -175,11 +175,11 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="#demo"
+                href="/replay"
                 className="w-full inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"
-                onClick={() => ph?.capture("cta_demo_click", { location: "hero" })}
+                onClick={() => ph?.capture("cta_replay_click", { location: "hero" })}
               >
-                Voir la démo (2 min)
+                Voir le replay de lancement
               </a>
             </motion.div>
 
