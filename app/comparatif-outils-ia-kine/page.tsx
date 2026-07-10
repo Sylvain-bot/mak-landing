@@ -154,7 +154,7 @@ export default function ComparatifPage() {
       {/* Pour qui choisir quoi */}
       <section className="py-16 px-4 sm:px-6 bg-white">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-[#0f172a] mb-8">Pour qui choisir quoi</h2>
+          <h2 className="text-2xl font-bold text-[#0f172a] mb-8">Quel outil correspond à ton usage ?</h2>
           <div className="space-y-4">
             {[
               { title: "Choisissez Mon Assistant Kiné si :", items: ["Tu es kinésithérapeute libéral en France", "Tu veux gagner du temps sur la documentation et l'administratif", "Tu veux un suivi patient structuré avec programme d'exercices et vidéos", "Tu veux des recherches EBP fiables sans risque d'hallucination"], color: "#3899aa", bg: "#eef7f6" },
