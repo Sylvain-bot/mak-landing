@@ -7,6 +7,14 @@ import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
+    q: "Comment fonctionne l'essai gratuit de 14 jours ?",
+    a: "Tu crées ton compte en 2 minutes, sans carte bancaire, et tu as accès à toutes les fonctionnalités pendant 14 jours. Fais un vrai bilan, teste le copilote sur un cas réel, juge sur pièces avant de choisir une formule.",
+  },
+  {
+    q: "Que se passe-t-il à la fin des 14 jours ?",
+    a: "Comme on ne te demande jamais ta carte bancaire, il n'y a rien à annuler ni aucun risque de prélèvement automatique. À la fin de l'essai, tu choisis simplement la formule qui te convient — Pionnier en priorité tant qu'il reste des places.",
+  },
+  {
     q: "L'IA est-elle fiable pour la clinique ?",
     a: "Mon Assistant Kiné s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
   },

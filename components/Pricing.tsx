@@ -2,7 +2,7 @@
 
 import { ScrollReveal } from "./ScrollReveal";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, Zap } from "lucide-react";
+import { CheckCircle2, Gift, Zap } from "lucide-react";
 import Link from "next/link";
 import {
   CTA_SIGNUP_URL,
@@ -11,6 +11,7 @@ import {
   PRICE_DECOUVERTE,
   PRICE_PRATIQUE,
   PRICE_EXPERT,
+  TRIAL_DAYS,
 } from "@/lib/claims";
 
 const PLANS_STANDARD = [
@@ -61,6 +62,22 @@ export function Pricing() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-3 leading-tight">
             Simple, transparent. Sans surprise.
           </h2>
+        </ScrollReveal>
+
+        {/* Bandeau essai gratuit — porte d'entrée unique avant de choisir une formule */}
+        <ScrollReveal className="mb-8">
+          <div
+            className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 rounded-2xl px-5 py-4 sm:px-6"
+            style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
+          >
+            <Gift className="w-5 h-5 text-[#3899aa] shrink-0" />
+            <p className="text-sm text-[#0f172a] text-center sm:text-left">
+              <span className="font-semibold">Commence par {TRIAL_DAYS} jours d&apos;essai gratuit, sans carte bancaire.</span>{" "}
+              <span className="text-[#475569]">
+                À la fin, choisis la formule qui te convient — Pionnier en priorité tant qu&apos;il reste des places.
+              </span>
+            </p>
+          </div>
         </ScrollReveal>
 
         {/* Étage 1 — Offre Pionnier */}
@@ -149,7 +166,7 @@ export function Pricing() {
                     href={CTA_SIGNUP_URL}
                     className="w-full text-center block py-2.5 rounded-lg text-xs font-semibold transition-all hover:scale-[1.02] border border-[#d4ecea] text-[#64748b] hover:bg-[#eef7f6] hover:text-[#3899aa] hover:border-[#3899aa]/40"
                   >
-                    Commencer
+                    Essai gratuit {TRIAL_DAYS} jours
                   </Link>
                 </div>
               </ScrollReveal>

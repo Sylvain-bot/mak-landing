@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { usePostHog } from "posthog-js/react";
-import { CTA_SIGNUP_URL, COMPLIANCE_CLAIM } from "@/lib/claims";
+import { CTA_SIGNUP_URL, CTA_MAIN, COMPLIANCE_CLAIM, TRIAL_DAYS } from "@/lib/claims";
 
 function useCountUp(target: number, duration: number, active: boolean): number {
   const [count, setCount] = useState(target);
@@ -59,7 +59,7 @@ function StatItem({
   );
 }
 
-const TRUST = ["Sans carte bancaire", COMPLIANCE_CLAIM, "5 min de prise en main"];
+const TRUST = [`${TRIAL_DAYS} jours d'essai gratuit`, "Sans carte bancaire", COMPLIANCE_CLAIM];
 
 function AppScreenshot() {
   return (
@@ -127,7 +127,7 @@ export function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-                Offre Pionnier — 100 places · Conçu par 2 kinés D.E.
+                {TRIAL_DAYS} jours offerts, sans CB · Conçu par 2 kinés D.E.
               </span>
             </motion.div>
 
@@ -171,7 +171,7 @@ export function Hero() {
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
-                Tester sur mon prochain bilan — gratuit, sans CB
+                {CTA_MAIN}
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a

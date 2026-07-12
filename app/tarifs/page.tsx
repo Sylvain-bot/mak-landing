@@ -3,7 +3,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { CheckCircle2, Zap, ArrowRight } from "lucide-react";
+import { CheckCircle2, Gift, Zap, ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import {
   CTA_SIGNUP_URL,
@@ -13,15 +13,16 @@ import {
   PRICE_DECOUVERTE,
   PRICE_PRATIQUE,
   PRICE_EXPERT,
+  TRIAL_DAYS,
 } from "@/lib/claims";
 
 export const metadata: Metadata = {
   title: "Tarifs Mon Assistant Kiné — À partir de 9€/mois",
-  description: "Offre Pionnier : accès complet à vie à 19€/mois pour les 100 premiers kinés. Plans standards à partir de 9€/mois. Sans engagement, résiliable à tout moment.",
+  description: "14 jours d'essai gratuit, sans carte bancaire. Offre Pionnier : accès complet à vie à 19€/mois pour les 100 premiers kinés. Plans standards à partir de 9€/mois. Sans engagement.",
   alternates: { canonical: "https://www.monassistantkine.fr/tarifs" },
   openGraph: {
     title: "Tarifs Mon Assistant Kiné | À partir de 9€/mois",
-    description: "Offre Pionnier réservée aux 100 premiers : accès complet à vie à 19€/mois. Sans engagement.",
+    description: "14 jours d'essai gratuit, sans carte bancaire. Offre Pionnier réservée aux 100 premiers : accès complet à vie à 19€/mois. Sans engagement.",
     url: "https://www.monassistantkine.fr/tarifs",
     type: "website",
     images: [DEFAULT_OG_IMAGE],
@@ -94,9 +95,13 @@ const FAQ_ITEMS = [
     a: "Les inscrits Pionnier gardent leur tarif 19€/mois à vie — il ne bougera jamais. Les kinés qui s'inscrivent après passent sur la grille standard (Découverte 9€ / Pratique 29€ / Expert 49€).",
   },
   {
-    q: "Comment fonctionne l'essai gratuit ?",
-    a: "Crée ton compte gratuitement, sans carte bancaire : fais un bilan complet, pose tes questions au copilote, et fais-toi ton avis avant de choisir.",
-    // TODO-FONDATEUR: préciser les limites exactes de l'essai (nombre de bilans/questions offerts) pour affichage transparent
+    q: "Comment fonctionne l'essai gratuit de 14 jours ?",
+    a: "Crée ton compte en 2 minutes, sans carte bancaire : tu as accès à toutes les fonctionnalités pendant 14 jours. Fais un bilan complet, pose tes questions au copilote, et fais-toi ton avis avant de choisir.",
+    // TODO-FONDATEUR: confirmer côté app que l'essai est bien limité à 14 jours (durée calendaire vs usage) avant deploy
+  },
+  {
+    q: "Que se passe-t-il à la fin des 14 jours ?",
+    a: "Comme on ne te demande jamais ta carte bancaire, il n'y a rien à annuler ni aucun risque de prélèvement automatique. Tu choisis simplement la formule qui te convient — Pionnier en priorité tant qu'il reste des places.",
   },
   {
     q: "Y a-t-il un engagement de durée ?",
@@ -135,8 +140,27 @@ export default function TarifsPage() {
             <span className="text-[#3899aa]">Sans surprise.</span>
           </h1>
           <p className="text-lg text-[#475569] max-w-2xl mx-auto leading-relaxed">
-            Choisis la formule adaptée à ta pratique. Sans engagement, résiliable à tout moment.
+            Commence par {TRIAL_DAYS} jours d&apos;essai gratuit, sans carte bancaire. Choisis ensuite
+            la formule adaptée à ta pratique. Sans engagement, résiliable à tout moment.
           </p>
+        </div>
+      </section>
+
+      {/* Bandeau essai gratuit — porte d'entrée unique avant de choisir une formule */}
+      <section className="px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
+        <div className="max-w-4xl mx-auto pb-6">
+          <div
+            className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 rounded-2xl px-5 py-4 sm:px-6"
+            style={{ background: "white", border: "1px solid #d4ecea" }}
+          >
+            <Gift className="w-5 h-5 text-[#3899aa] shrink-0" />
+            <p className="text-sm text-[#0f172a] text-center sm:text-left">
+              <span className="font-semibold">{TRIAL_DAYS} jours d&apos;essai gratuit, sans carte bancaire.</span>{" "}
+              <span className="text-[#475569]">
+                À la fin, choisis la formule qui te convient — Pionnier en priorité tant qu&apos;il reste des places.
+              </span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -290,7 +314,7 @@ export default function TarifsPage() {
       <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer Mon Assistant Kiné gratuitement</h2>
-          <p className="text-white/80 mb-4">Sans carte bancaire · Accès immédiat · Sans engagement</p>
+          <p className="text-white/80 mb-4">{TRIAL_DAYS} jours d&apos;essai gratuit · Sans carte bancaire · Sans engagement</p>
           <Link
             href={CTA_SIGNUP_URL}
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02] mb-4"

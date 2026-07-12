@@ -19,8 +19,13 @@ export const PRICE_PRATIQUE = "29";
 export const PRICE_EXPERT = "49";
 export const PRICE_STANDARD = "49";
 
+// Essai gratuit
+// TODO-FONDATEUR: confirmer que l'essai 14j/sans CB est bien configuré côté app.monassistantkine.fr avant deploy
+export const TRIAL_DAYS = "14";
+export const TRIAL_CLAIM = `${TRIAL_DAYS} jours d'essai gratuit. Sans carte bancaire. Sans engagement.`;
+
 // CTA principal unique
-export const CTA_MAIN = "Tester sur mon prochain bilan — gratuit, sans CB";
+export const CTA_MAIN = `Démarrer mon essai gratuit de ${TRIAL_DAYS} jours — sans CB`;
 export const CTA_SIGNUP_URL = APP_URL + "/signup";
 export const CTA_LOGIN_URL = APP_URL + "/login";
 

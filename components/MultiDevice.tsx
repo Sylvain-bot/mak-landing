@@ -101,7 +101,7 @@ export function MultiDevice() {
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="relative"
+            className="relative scale-[1.8]"
           >
             <Image
               src="/new_se-removebg-preview.png"

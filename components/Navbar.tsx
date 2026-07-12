@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { CTA_SIGNUP_URL, CTA_LOGIN_URL, TRIAL_DAYS } from "@/lib/claims";
 
 const FEATURES = [
   { href: "/fonctionnalites/documentation-bilan-kine", icon: "📋", label: "Bilans NGAP", badge: null },
@@ -137,19 +138,19 @@ export function Navbar() {
           {/* Right side */}
           <div className="flex items-center gap-2">
             <Link
-              href="https://app.monassistantkine.fr/login"
+              href={CTA_LOGIN_URL}
               className="hidden md:inline-flex px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]"
             >
               Se connecter
             </Link>
             <Link
-              href="https://app.monassistantkine.fr/signup"
+              href={CTA_SIGNUP_URL}
               className={cn(
                 buttonVariants({ size: "sm" }),
                 "hidden md:inline-flex bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-medium shadow-sm shadow-[#3899aa]/20 transition-all hover:scale-[1.03]"
               )}
             >
-              Tester gratuitement
+              Essai gratuit {TRIAL_DAYS} jours
             </Link>
 
             {/* Mobile toggle */}
@@ -210,18 +211,18 @@ export function Navbar() {
 
               <div className="pt-2 space-y-2">
                 <Link
-                  href="https://app.monassistantkine.fr/login"
+                  href={CTA_LOGIN_URL}
                   onClick={() => setMobileOpen(false)}
                   className="block text-center py-3 rounded-xl border border-[#d4ecea] text-[#475569] font-medium text-sm hover:bg-[#eef7f6] transition-all"
                 >
                   Se connecter
                 </Link>
                 <Link
-                  href="https://app.monassistantkine.fr/signup"
+                  href={CTA_SIGNUP_URL}
                   onClick={() => setMobileOpen(false)}
                   className="block text-center py-3 rounded-xl bg-[#3899aa] text-white font-semibold text-sm hover:bg-[#2d8a9a] transition-all"
                 >
-                  Créer mon compte
+                  Démarrer mon essai gratuit
                 </Link>
               </div>
             </div>

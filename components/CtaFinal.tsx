@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Shield, Zap } from "lucide-react";
-import { CTA_SIGNUP_URL, CTA_MAIN, COMPLIANCE_CLAIM } from "@/lib/claims";
+import { CTA_SIGNUP_URL, CTA_MAIN, COMPLIANCE_CLAIM, TRIAL_DAYS } from "@/lib/claims";
 
 export function CtaFinal() {
   return (
@@ -27,7 +27,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.15}>
           <p className="text-[#475569] text-base mb-8 leading-relaxed">
-            Accès immédiat. Sans carte bancaire. 5 minutes pour prendre Mon Assistant Kiné en main.
+            {TRIAL_DAYS} jours d&apos;accès complet. Sans carte bancaire. 5 minutes pour prendre Mon Assistant Kiné en main.
           </p>
         </ScrollReveal>
 
@@ -46,9 +46,9 @@ export function CtaFinal() {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.25} className="mt-4 mb-6">
+        <ScrollReveal delay={0.25} className="mt-4 mb-3">
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[#64748b]">
-            {["Sans engagement", "Sans carte bancaire", "Places limitées aux 100 premiers"].map(
+            {[`${TRIAL_DAYS} jours d'essai gratuit`, "Sans carte bancaire", "Sans engagement"].map(
               (item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
@@ -57,6 +57,13 @@ export function CtaFinal() {
               )
             )}
           </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.3} className="mb-6">
+          <p className="text-[#94a3b8] text-xs italic">
+            Comme on ne te demande jamais ta carte bancaire, il n&apos;y a rien à annuler et aucun risque
+            de prélèvement surprise à la fin de l&apos;essai.
+          </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.35}>
