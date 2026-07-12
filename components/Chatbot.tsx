@@ -246,8 +246,8 @@ export function Chatbot() {
                   }}
                   placeholder="Écris ta question..."
                   rows={1}
-                  className="flex-1 resize-none text-sm px-3 py-2.5 rounded-xl outline-none"
-                  style={{ background: "#f0f9fa", border: "1px solid #d4ecea", color: "#0f172a", maxHeight: 88 }}
+                  className="flex-1 resize-none px-3 py-2.5 rounded-xl outline-none"
+                  style={{ background: "#f0f9fa", border: "1px solid #d4ecea", color: "#0f172a", maxHeight: 88, fontSize: 16 }}
                 />
                 <button
                   onClick={() => send(input)}
