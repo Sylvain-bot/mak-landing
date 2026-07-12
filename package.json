@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.111.0",
     "@base-ui/react": "^1.4.1",
     "@microsoft/clarity": "^1.0.2",
     "@supabase/supabase-js": "^2.105.4",

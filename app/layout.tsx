@@ -5,6 +5,7 @@ import ClarityInit from "@/components/ClarityInit";
 import ClarityRouteTracker from "@/components/ClarityRouteTracker";
 import { JsonLd } from "@/components/JsonLd";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { Chatbot } from "@/components/Chatbot";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import "./globals.css";
@@ -51,6 +52,7 @@ export default function RootLayout({
         }} />
         {children}
         <ExitIntentPopup />
+        <Chatbot />
         <ClarityInit />
         <ClarityRouteTracker />
 
