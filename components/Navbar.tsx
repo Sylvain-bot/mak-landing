@@ -152,7 +152,7 @@ export function Navbar() {
                 "hidden md:inline-flex bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-medium shadow-sm shadow-[#3899aa]/20 transition-all hover:scale-[1.03]"
               )}
             >
-              Tester gratuitement
+              Essai 14j gratuit
             </Link>
 
             {/* Mobile toggle */}
@@ -227,7 +227,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="block text-center py-3 rounded-xl bg-[#3899aa] text-white font-semibold text-sm hover:bg-[#2d8a9a] transition-all"
                 >
-                  Créer mon compte
+                  Essayer 14 jours — gratuit
                 </Link>
               </div>
             </div>

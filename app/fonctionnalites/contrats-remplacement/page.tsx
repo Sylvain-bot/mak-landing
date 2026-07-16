@@ -218,7 +218,7 @@ export default function ContratsRemplacementPage() {
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base hover:scale-[1.02] transition-all shadow-lg shadow-[#3899aa]/20"
           >
-            Tester sur mon prochain bilan — gratuit, sans CB
+            Essayer Mon Assistant Kiné — 14 jours gratuits
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

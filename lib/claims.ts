@@ -20,7 +20,7 @@ export const PRICE_EXPERT = "49";
 export const PRICE_STANDARD = "49";
 
 // CTA principal unique
-export const CTA_MAIN = "Tester sur mon prochain bilan — gratuit, sans CB";
+export const CTA_MAIN = "Essayer 14 jours — sans carte bancaire";
 export const CTA_SIGNUP_URL = APP_URL + "/signup";
 export const CTA_LOGIN_URL = APP_URL + "/login";
 

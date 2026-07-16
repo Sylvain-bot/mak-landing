@@ -15,7 +15,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Mon Assistant Kiné — Récupère 45 min/jour au cabinet | IA pour Kinésithérapeutes",
-  description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé (56 000+ études). Conçu par des kinés libéraux. Essai gratuit, sans CB.",
+  description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé (56 000+ études). Conçu par des kinés libéraux. 14 jours d'essai gratuit, sans CB.",
   alternates: {
     canonical: "https://www.monassistantkine.fr",
   },

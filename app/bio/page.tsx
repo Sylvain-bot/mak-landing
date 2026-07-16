@@ -114,10 +114,10 @@ export default function BioPage() {
             className="inline-flex items-center justify-center gap-2 w-full bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25 mb-3"
             onClick={() => { try { (window as any).clarity?.("set", "cta_clicked", "true"); } catch(e) {} }}
           >
-            Créer mon compte gratuitement <ArrowRight className="w-4 h-4" />
+            Essayer 14 jours — sans carte bancaire <ArrowRight className="w-4 h-4" />
           </Link>
           <p className="text-xs text-[#94a3b8]">
-            Sans carte bancaire · Accès immédiat · Annulable à tout moment
+            14 jours d&apos;essai · Sans carte bancaire · Annulable à tout moment
           </p>
         </div>
       </section>
@@ -305,14 +305,14 @@ export default function BioPage() {
       {/* CTA final */}
       <section className="py-16 px-4 sm:px-6" style={{ background: "#3899aa" }}>
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-2">Essayer Mon Assistant Kiné gratuitement</h2>
-          <p className="text-white/80 text-sm mb-6">Sans carte bancaire · Accès immédiat · Sans engagement</p>
+          <h2 className="text-2xl font-bold text-white mb-2">Essayer Mon Assistant Kiné — 14 jours gratuits</h2>
+          <p className="text-white/80 text-sm mb-6">14 jours d&apos;essai · Sans carte bancaire · Sans engagement</p>
           <Link
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02] mb-4"
             onClick={() => { try { (window as any).clarity?.("set", "cta_clicked", "true"); } catch(e) {} }}
           >
-            Créer mon compte <ArrowRight className="w-4 h-4" />
+            Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
           </Link>
           <p className="text-sm text-white/70">
             Déjà un compte ?{" "}

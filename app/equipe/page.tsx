@@ -173,7 +173,7 @@ export default function EquipePage() {
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02]"
           >
-            Rejoindre Mon Assistant Kiné gratuitement <ArrowRight className="w-4 h-4" />
+            Essayer 14 jours — sans carte bancaire <ArrowRight className="w-4 h-4" />
           </Link>
           <p className="text-xs text-[#94a3b8] mt-3">Ou découvrez <Link href="/tarifs" className="text-[#3899aa] hover:underline">nos formules →</Link></p>
         </div>

@@ -17,7 +17,7 @@ const NEXT_STEPS = [
   {
     icon: "🚀",
     title: "Envie de tester maintenant ?",
-    detail: "Crée ton compte gratuitement — sans carte bancaire. Tu verras la différence dès le premier bilan.",
+    detail: "14 jours d'essai gratuit — sans carte bancaire. Tu verras la différence dès le premier bilan.",
   },
 ];
 
@@ -131,11 +131,11 @@ export default function BioMerciPage() {
           onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.92"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
           onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "none"; }}
         >
-          Tester Mon Assistant Kiné gratuitement
+          Essayer 14 jours — sans carte bancaire
           <span style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>→</span>
         </Link>
         <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 20 }}>
-          Sans carte bancaire · Accès immédiat
+          14 jours d&apos;essai · Sans carte bancaire · Accès immédiat
         </p>
 
         {/* Back to landing */}

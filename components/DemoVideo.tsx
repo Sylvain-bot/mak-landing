@@ -67,14 +67,14 @@ export function DemoVideo() {
           >
             <div className="text-center sm:text-left">
               <p className="text-base font-bold text-[#0f172a]">Convaincu ?</p>
-              <p className="text-sm text-[#475569]">Teste sur ton prochain bilan — gratuit, sans carte bancaire.</p>
+              <p className="text-sm text-[#475569]">14 jours d&apos;essai — sans carte bancaire.</p>
             </div>
             <Link
               href={CTA_SIGNUP_URL}
               className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 whitespace-nowrap"
               style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.3)" }}
             >
-              Tester Mon Assistant Kiné
+              Essayer 14 jours gratuitement
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

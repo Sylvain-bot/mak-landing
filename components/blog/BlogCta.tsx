@@ -20,7 +20,7 @@ export function BlogCta() {
         className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90"
         style={{ background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)" }}
       >
-        Essayer gratuitement
+        14 jours d&apos;essai gratuit
       </Link>
     </div>
   );

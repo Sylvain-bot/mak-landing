@@ -59,7 +59,7 @@ function StatItem({
   );
 }
 
-const TRUST = ["Sans carte bancaire", COMPLIANCE_CLAIM, "5 min de prise en main"];
+const TRUST = ["14 jours d'essai gratuit", COMPLIANCE_CLAIM, "5 min de prise en main"];
 
 function AppScreenshot() {
   return (
@@ -171,7 +171,7 @@ export function Hero() {
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
-                Tester sur mon prochain bilan — gratuit, sans CB
+                Essayer 14 jours — sans carte bancaire
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a

@@ -119,7 +119,7 @@ export function Results() {
               href="https://app.monassistantkine.fr/signup"
               className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0 hover:text-[#2d8a9a] transition-colors"
             >
-              <span>Essayer gratuitement</span>
+              <span>Essayer — 14 jours gratuits</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

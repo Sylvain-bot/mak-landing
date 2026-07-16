@@ -126,7 +126,7 @@ export default function CopiloteIAKinePage() {
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
           >
-            Essayer gratuitement <ArrowRight className="w-4 h-4" />
+            Essayer 14 jours — sans CB <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
@@ -252,13 +252,13 @@ export default function CopiloteIAKinePage() {
       {/* CTA final */}
       <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer le copilote IA gratuitement</h2>
-          <p className="text-white/80 mb-8">Sans carte bancaire · Accès immédiat · IA européenne</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer le copilote IA — 14 jours gratuits</h2>
+          <p className="text-white/80 mb-8">14 jours d&apos;essai · Sans carte bancaire · IA européenne</p>
           <Link
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
-            Créer mon compte <ArrowRight className="w-4 h-4" />
+            Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
