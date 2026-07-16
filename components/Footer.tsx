@@ -53,7 +53,29 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Légal + contact */}
+          {/* Entreprise */}
+          <div>
+            <p className="text-xs font-semibold text-[#64748b] uppercase tracking-widest mb-3">Entreprise</p>
+            <nav className="flex flex-col gap-1.5">
+              <Link href="/equipe" className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
+                L&apos;équipe
+              </Link>
+              <Link href="/blog" className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
+                Blog
+              </Link>
+              <Link href="/replay" className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
+                Replay de lancement
+              </Link>
+              <a
+                href="mailto:sylvain@monassistantkine.fr"
+                className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors"
+              >
+                Contact
+              </a>
+            </nav>
+          </div>
+
+          {/* Légal */}
           <div>
             <p className="text-xs font-semibold text-[#64748b] uppercase tracking-widest mb-3">Légal</p>
             <nav className="flex flex-col gap-1.5">
@@ -66,12 +88,6 @@ export function Footer() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href="mailto:sylvain@monassistantkine.fr"
-                className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors"
-              >
-                Contact
-              </a>
             </nav>
           </div>
         </div>

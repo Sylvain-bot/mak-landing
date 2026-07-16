@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 const YT_ID = "i4jnfqxYzwQ";
 
@@ -19,217 +21,140 @@ export default function ReplayPage() {
   const [ytLoaded, setYtLoaded] = useState(false);
 
   return (
-    <main style={{
-      fontFamily: "var(--font-sans, 'Poppins', system-ui, sans-serif)",
-      background: "#f0f9fa",
-      color: "#0f172a",
-      minHeight: "100svh",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: "48px 20px 48px",
-      position: "relative",
-      overflow: "hidden",
-    }}>
-      {/* Background */}
-      <div aria-hidden style={{
-        position: "fixed", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 60% 40% at 50% -5%, rgba(56,153,170,0.09) 0%, transparent 70%)",
-      }} />
-      <div aria-hidden style={{
-        position: "fixed", inset: 0, pointerEvents: "none", opacity: 0.035,
-        backgroundImage: "linear-gradient(rgba(56,153,170,1) 1px, transparent 1px), linear-gradient(90deg, rgba(56,153,170,1) 1px, transparent 1px)",
-        backgroundSize: "44px 44px",
-      }} />
+    <>
+      <Navbar />
+      <main>
+        {/* Hero */}
+        <section className="bg-white pt-28 pb-12 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[#3899aa] text-xs font-semibold mb-5"
+              style={{ background: "#eef7f6", border: "1px solid #d4ecea" }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#3899aa"><path d="M8 5v14l11-7z"/></svg>
+              Live de Lancement — Replay
+            </div>
 
-      <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 640, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            {/* Bandeau évolution */}
+            <div
+              className="flex items-start gap-3 text-left rounded-2xl px-5 py-4 mb-8"
+              style={{ background: "#fef9f0", border: "1px solid #fde68a" }}
+            >
+              <span className="text-xl shrink-0">🚀</span>
+              <div>
+                <p className="text-sm font-bold text-[#92400e] mb-1">L&apos;app a évolué depuis ce live !</p>
+                <p className="text-xs text-[#a16207] leading-relaxed">
+                  Grâce aux retours des premiers utilisateurs, Mon Assistant Kiné a été considérablement amélioré depuis ce replay. Les fonctionnalités présentées sont toujours là — mais l&apos;expérience est aujourd&apos;hui bien meilleure.
+                </p>
+              </div>
+            </div>
 
-        {/* Logo */}
-        <div style={{ marginBottom: 32 }}>
-          <Link href="/">
-            <Image
-              src="https://d1yei2z3i6k35z.cloudfront.net/13022750/69f8eddbd64793.49542531_Design_sans_titre__12_-removebg-preview2.webp"
-              alt="Mon Assistant Kiné"
-              width={120}
-              height={60}
-              priority
-              style={{ width: 110, height: "auto", display: "block" }}
-            />
-          </Link>
-        </div>
-
-        {/* Badge */}
-        <div style={{
-          display: "inline-flex", alignItems: "center", gap: 7,
-          background: "#eef7f6", border: "1px solid #d4ecea",
-          color: "#3899aa", fontSize: 11, fontWeight: 700,
-          letterSpacing: "0.07em", textTransform: "uppercase",
-          padding: "5px 14px", borderRadius: 50, marginBottom: 20,
-        }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="#3899aa"><path d="M8 5v14l11-7z"/></svg>
-          Live de Lancement — Replay
-        </div>
-
-        {/* Bandeau évolution */}
-        <div style={{
-          width: "100%", marginBottom: 28,
-          background: "linear-gradient(135deg, #fef9f0, #fef3e2)",
-          border: "1px solid #fde68a",
-          borderRadius: 12, padding: "12px 16px",
-          display: "flex", alignItems: "flex-start", gap: 10,
-        }}>
-          <span style={{ fontSize: 18, flexShrink: 0, marginTop: 1 }}>🚀</span>
-          <div>
-            <p style={{ fontSize: 13, fontWeight: 700, color: "#92400e", marginBottom: 3 }}>
-              L&apos;app a évolué depuis ce live !
-            </p>
-            <p style={{ fontSize: 12, color: "#a16207", lineHeight: 1.5 }}>
-              Grâce aux retours des premiers utilisateurs, Mon Assistant Kiné a été
-              considérablement amélioré depuis ce replay. Les fonctionnalités présentées
-              sont toujours là — mais l&apos;expérience est aujourd&apos;hui bien meilleure.
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight mb-4">
+              Replay — Live de Lancement<br />
+              <span className="text-[#3899aa]">Mon Assistant Kiné</span>
+            </h1>
+            <p className="text-base text-[#475569] max-w-xl mx-auto leading-relaxed">
+              Tu as manqué le live ? Regarde le replay et découvre l&apos;offre Pionnier réservée aux 100 premiers abonnés.
             </p>
           </div>
-        </div>
+        </section>
 
-        {/* Title */}
-        <h1 style={{
-          fontSize: "clamp(24px, 6vw, 36px)", fontWeight: 700,
-          textAlign: "center", lineHeight: 1.2, letterSpacing: "-0.02em",
-          color: "#0f172a", marginBottom: 12,
-        }}>
-          Replay — Live de Lancement<br />
-          <span style={{ color: "#3899aa" }}>Mon Assistant Kiné</span>
-        </h1>
+        {/* Vidéo */}
+        <section className="py-10 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
+          <div className="max-w-3xl mx-auto">
+            <div
+              onClick={() => setYtLoaded(true)}
+              className="relative rounded-2xl overflow-hidden cursor-pointer mb-3"
+              style={{
+                aspectRatio: "16/9",
+                border: "1px solid #d4ecea",
+                boxShadow: "0 8px 40px rgba(56,153,170,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+                background: "#0f172a",
+              }}
+            >
+              {ytLoaded ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&rel=0&modestbranding=1`}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title="Replay Mon Assistant Kiné"
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              ) : (
+                <>
+                  <Image
+                    src={`https://i.ytimg.com/vi/${YT_ID}/maxresdefault.jpg`}
+                    alt="Replay Mon Assistant Kiné"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 768px"
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0" style={{ background: "rgba(15,23,42,0.25)" }} />
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center"
+                      style={{ background: "rgba(56,153,170,0.95)", boxShadow: "0 4px 24px rgba(0,0,0,0.3)" }}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 3 }}>
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div
+                    className="absolute bottom-3 right-3 text-[11px] font-semibold px-2 py-1 rounded-md"
+                    style={{ background: "rgba(0,0,0,0.6)", color: "white" }}
+                  >
+                    49:00
+                  </div>
+                </>
+              )}
+            </div>
+            <p className="text-xs text-[#94a3b8] text-center mb-10">Clique pour lancer · Replay complet · 49 minutes</p>
 
-        <p style={{ fontSize: 15, color: "#475569", textAlign: "center", lineHeight: 1.6, marginBottom: 32, maxWidth: 480 }}>
-          Tu as manqué le live ? Regarde le replay et découvre l&apos;offre Pionnier réservée aux 100 premiers abonnés.
-        </p>
-
-        {/* YouTube facade */}
-        <div
-          onClick={() => setYtLoaded(true)}
-          style={{
-            width: "100%", aspectRatio: "16/9",
-            borderRadius: 16, overflow: "hidden",
-            border: "1px solid #d4ecea",
-            boxShadow: "0 8px 40px rgba(56,153,170,0.12), 0 2px 8px rgba(0,0,0,0.06)",
-            position: "relative", cursor: ytLoaded ? "default" : "pointer",
-            background: "#0f172a", marginBottom: 12,
-          }}
-        >
-          {ytLoaded ? (
-            <iframe
-              src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&rel=0&modestbranding=1`}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="Replay Mon Assistant Kiné"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
-            />
-          ) : (
-            <>
-              <Image
-                src={`https://i.ytimg.com/vi/${YT_ID}/maxresdefault.jpg`}
-                alt="Replay Mon Assistant Kiné"
-                fill
-                sizes="(max-width: 640px) 100vw, 640px"
-                style={{ objectFit: "cover" }}
-                loading="lazy"
-              />
-              {/* Dark overlay */}
-              <div style={{ position: "absolute", inset: 0, background: "rgba(15,23,42,0.25)" }} />
-              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none" }}>
-                <div style={{
-                  width: 68, height: 68, borderRadius: "50%",
-                  background: "rgba(56,153,170,0.95)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
-                }}>
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 4 }}>
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
+            {/* Timeline */}
+            <div
+              className="rounded-2xl p-6 mb-10"
+              style={{ background: "white", border: "1px solid #d4ecea" }}
+            >
+              <p className="text-[10px] font-semibold text-[#3899aa] uppercase tracking-widest mb-5 font-mono">
+                Timeline du replay
+              </p>
+              <div className="flex flex-col divide-y" style={{ borderColor: "#f0f9fa" }}>
+                {TIMELINE.map((item) => (
+                  <div key={item.time} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
+                    <span
+                      className="text-xs font-bold shrink-0 px-2 py-0.5 rounded-md mt-0.5"
+                      style={{ background: "#eef7f6", color: "#3899aa", border: "1px solid #d4ecea" }}
+                    >
+                      {item.time}
+                    </span>
+                    <span className="text-sm text-[#475569] leading-relaxed">{item.text}</span>
+                  </div>
+                ))}
               </div>
-              <div style={{
-                position: "absolute", bottom: 14, right: 14,
-                background: "rgba(0,0,0,0.6)", color: "#fff",
-                fontSize: 11, fontWeight: 600, padding: "3px 8px",
-                borderRadius: 6, letterSpacing: "0.03em",
-              }}>49:00</div>
-            </>
-          )}
-        </div>
-        <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 36 }}>
-          Clique pour lancer · Replay complet · 49 minutes
-        </p>
+            </div>
 
-        {/* Timeline */}
-        <div style={{
-          width: "100%", background: "white",
-          border: "1px solid #d4ecea", borderRadius: 16,
-          padding: "20px 24px", marginBottom: 32,
-          boxShadow: "0 2px 12px rgba(56,153,170,0.06)",
-        }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: "#3899aa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
-            Timeline du replay
-          </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-            {TIMELINE.map((item, i) => (
-              <div key={item.time} style={{
-                display: "flex", alignItems: "flex-start", gap: 12,
-                paddingBottom: i < TIMELINE.length - 1 ? 14 : 0,
-                marginBottom: i < TIMELINE.length - 1 ? 14 : 0,
-                borderBottom: i < TIMELINE.length - 1 ? "1px solid #f0f9fa" : "none",
-              }}>
-                <span style={{
-                  fontSize: 11, fontWeight: 700, color: "#3899aa",
-                  background: "#eef7f6", border: "1px solid #d4ecea",
-                  borderRadius: 6, padding: "2px 7px",
-                  flexShrink: 0, marginTop: 1, letterSpacing: "0.02em",
-                }}>{item.time}</span>
-                <span style={{ fontSize: 13, color: "#334155", lineHeight: 1.5 }}>{item.text}</span>
-              </div>
-            ))}
+            {/* CTA */}
+            <div
+              className="rounded-2xl p-7 text-center"
+              style={{ background: "#0f172a", border: "2px solid #3899aa" }}
+            >
+              <p className="text-white font-bold text-xl mb-1">Prêt à rejoindre les pionniers ?</p>
+              <p className="text-white/60 text-sm mb-6">19€/mois · À vie · Limité aux 100 premiers</p>
+              <Link
+                href="https://app.monassistantkine.fr/signup"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110"
+                style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 20px rgba(56,153,170,0.35)" }}
+              >
+                Rejoindre l&apos;offre Pionnier — 19€/mois
+              </Link>
+              <p className="text-white/40 text-xs mt-3">Sans engagement · Résiliable à tout moment</p>
+            </div>
           </div>
-        </div>
-
-        {/* CTA */}
-        <Link
-          href="https://app.monassistantkine.fr/signup"
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-            width: "100%", background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)",
-            color: "#fff", fontSize: 15, fontWeight: 700,
-            padding: "16px 32px", borderRadius: 50, textDecoration: "none",
-            boxShadow: "0 4px 20px rgba(56,153,170,0.35)",
-            marginBottom: 10, transition: "transform .2s, opacity .2s",
-          }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.92"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "none"; }}
-        >
-          Rejoindre l&apos;offre Pionnier — 19€/mois
-          <span style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>→</span>
-        </Link>
-        <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 12 }}>
-          Au lieu de 49€/mois · Tarif garanti à vie · Limité aux 100 premiers
-        </p>
-        <Link href="https://app.monassistantkine.fr/login" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>
-          Déjà un compte ? <span style={{ color: "#3899aa", fontWeight: 600 }}>Se connecter</span>
-        </Link>
-      </div>
-
-      {/* Footer */}
-      <footer style={{ position: "relative", zIndex: 2, textAlign: "center", marginTop: 48 }}>
-        <p style={{ fontSize: 11.5, color: "#94a3b8", marginBottom: 8 }}>© 2026 Mon Assistant Kiné</p>
-        <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
-          {[
-            { label: "CGU", href: "/cgu" },
-            { label: "Confidentialité", href: "/politique-confidentialite" },
-            { label: "Mentions légales", href: "/mentions-legales" },
-          ].map((l) => (
-            <Link key={l.label} href={l.href} style={{ fontSize: 11, color: "#94a3b8", textDecoration: "none" }}>{l.label}</Link>
-          ))}
-        </div>
-      </footer>
-    </main>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

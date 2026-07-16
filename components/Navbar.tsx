@@ -129,6 +129,9 @@ export function Navbar() {
             <Link href="/blog" className="px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]">
               Blog
             </Link>
+            <Link href="/equipe" className="px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]">
+              L&apos;équipe
+            </Link>
             <Link href="/comparatif-outils-ia-kine" className="px-3 py-2 text-sm font-medium text-[#475569] hover:text-[#3899aa] transition-colors rounded-lg hover:bg-[#eef7f6]">
               Comparatif
             </Link>
@@ -202,6 +205,9 @@ export function Navbar() {
                 </Link>
                 <Link href="/blog" onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2.5 text-sm font-medium text-[#475569] hover:text-[#3899aa] hover:bg-[#eef7f6] rounded-xl transition-colors">
                   Blog
+                </Link>
+                <Link href="/equipe" onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2.5 text-sm font-medium text-[#475569] hover:text-[#3899aa] hover:bg-[#eef7f6] rounded-xl transition-colors">
+                  L&apos;équipe
                 </Link>
                 <Link href="/comparatif-outils-ia-kine" onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2.5 text-sm font-medium text-[#475569] hover:text-[#3899aa] hover:bg-[#eef7f6] rounded-xl transition-colors">
                   Comparatif
