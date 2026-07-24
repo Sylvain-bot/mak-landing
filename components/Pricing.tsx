@@ -12,6 +12,7 @@ import {
   PRICE_DECOUVERTE,
   PRICE_PRATIQUE,
   PRICE_EXPERT,
+  PRICE_DECOUVERTE_ANNUAL,
   PRICE_PIONNIER_ANNUAL,
   PRICE_PRATIQUE_ANNUAL,
   PRICE_EXPERT_ANNUAL,
@@ -51,6 +52,15 @@ const PLANS_MONTHLY = [
 
 const PLANS_ANNUAL = [
   {
+    name: "Découverte",
+    price: PRICE_DECOUVERTE_ANNUAL,
+    description: "Pour découvrir l'IA au cabinet",
+    features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
+    fami: null,
+    famiIneligible: true,
+    highlight: false,
+  },
+  {
     name: "Pionnier",
     price: PRICE_PIONNIER_ANNUAL,
     description: "Pour les 100 premiers kinés — accès complet garanti",
@@ -64,6 +74,7 @@ const PLANS_ANNUAL = [
       "Communauté privée fondateurs",
     ],
     fami: FAMI_NET_PIONNIER,
+    famiIneligible: false,
     highlight: true,
   },
   {
@@ -78,6 +89,7 @@ const PLANS_ANNUAL = [
       "Vidéotransmission sécurisée",
     ],
     fami: FAMI_NET_PRATIQUE,
+    famiIneligible: false,
     highlight: false,
   },
   {
@@ -86,6 +98,7 @@ const PLANS_ANNUAL = [
     description: "Accès complet, tous modules",
     features: ["Programmes illimités", "Accès complet tous modules", "Vidéotransmission sécurisée"],
     fami: FAMI_NET_EXPERT,
+    famiIneligible: false,
     highlight: false,
   },
 ];
@@ -183,13 +196,13 @@ export function Pricing() {
                   </div>
 
                   <div className="shrink-0 text-center lg:text-right">
-                    <div className="inline-block rounded-2xl p-6 mb-4"
+                    <div className="inline-block rounded-2xl p-6 mb-2"
                       style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}>
                       <div className="text-5xl font-bold text-white">{PRICE_PIONNIER}€</div>
                       <div className="text-white/50 text-sm">/mois · à vie</div>
                       <div className="text-[#3899aa] text-xs font-semibold mt-1">au lieu de 49€/mois</div>
                     </div>
-                    <p className="text-xs mb-3 mt-1" style={{ color: "rgba(232,176,77,0.75)" }}>
+                    <p className="text-xs mb-3" style={{ color: "rgba(232,176,77,0.75)" }}>
                       ★ Éligible aide FAMI 350 €/an —{" "}
                       <button
                         onClick={() => setAnnual(true)}
@@ -232,7 +245,7 @@ export function Pricing() {
                         </div>
                         <p className="text-[#94a3b8] text-xs leading-relaxed">{plan.description}</p>
                       </div>
-                      <ul className="space-y-2 mb-6 flex-1">
+                      <ul className="space-y-2 mb-4 flex-1">
                         {plan.features.map((f) => (
                           <li key={f} className="flex items-start gap-2 text-xs text-[#475569]">
                             <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#d4ecea]" />
@@ -240,43 +253,41 @@ export function Pricing() {
                           </li>
                         ))}
                       </ul>
+                      {/* FAMI indicator */}
+                      {plan.famiIneligible ? (
+                        <div className="rounded-lg px-3 py-2 mb-3" style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}>
+                          <p className="text-[10px] text-center text-[#94a3b8]">
+                            Non éligible FAMI — module vidéotransmission non inclus
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="rounded-lg px-3 py-2 mb-3" style={{ background: "rgba(232,176,77,0.06)", border: "1px solid rgba(232,176,77,0.2)" }}>
+                          <p className="text-[10px] font-semibold text-center" style={{ color: "#92680a" }}>
+                            ★ Éligible aide FAMI 350 €/an —{" "}
+                            <button
+                              onClick={() => setAnnual(true)}
+                              className="underline font-bold hover:opacity-80"
+                              style={{ color: "#e8b04d" }}
+                            >
+                              voir l&apos;annuel
+                            </button>
+                          </p>
+                        </div>
+                      )}
                       <Link
                         href={CTA_SIGNUP_URL}
                         className="w-full text-center block py-2.5 rounded-lg text-xs font-semibold transition-all hover:scale-[1.02] border border-[#d4ecea] text-[#64748b] hover:bg-[#eef7f6] hover:text-[#3899aa] hover:border-[#3899aa]/40"
                       >
                         Commencer
                       </Link>
-                      {plan.famiIneligible && (
-                        <p className="text-[10px] text-center mt-2 text-[#94a3b8]">
-                          Non éligible FAMI — module vidéotransmission non inclus
-                        </p>
-                      )}
                     </div>
                   </ScrollReveal>
                 ))}
               </div>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.2} className="mt-5">
-              <div
-                className="flex items-start gap-3 rounded-xl px-4 py-3"
-                style={{ background: "rgba(232,176,77,0.06)", border: "1px solid rgba(232,176,77,0.25)" }}
-              >
-                <span style={{ color: "#e8b04d", fontSize: "0.85rem", marginTop: "1px" }}>★</span>
-                <p className="text-xs leading-relaxed" style={{ color: "#92680a" }}>
-                  <strong>Les formules Pratique et Expert sont éligibles à l&apos;aide FAMI.</strong>{" "}
-                  Votre CPAM peut vous verser jusqu&apos;à 350 €/an — passez à l&apos;annuel pour voir votre gain exact.{" "}
-                  <button
-                    onClick={() => setAnnual(true)}
-                    className="underline font-semibold hover:opacity-80 transition-opacity"
-                  >
-                    Voir les offres annuelles →
-                  </button>
-                </p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={0.3} className="mt-3">
-              <p className="text-[#94a3b8] text-xs text-center mb-3">
+            <ScrollReveal delay={0.3} className="mt-4">
+              <p className="text-[#94a3b8] text-xs text-center">
                 Sans engagement. Résiliable à tout moment.
               </p>
             </ScrollReveal>
@@ -293,18 +304,18 @@ export function Pricing() {
                 <p className="text-sm" style={{ color: "#92680a" }}>
                   <strong>Avec le FAMI :</strong> les kinés équipés d&apos;une solution de vidéotransmission sécurisée
                   peuvent toucher jusqu&apos;à <strong>{FAMI_AMOUNT} €/an</strong>{" "}de l&apos;Assurance Maladie.
-                  Les nets ci-dessous tiennent compte de cette aide.{" "}
+                  Les gains ci-dessous tiennent compte de cette aide.{" "}
                   <a href="#fami-disclaimer" className="underline opacity-70">Voir conditions*</a>
                 </p>
               </div>
             </ScrollReveal>
 
-            {/* Grille annuelle — 3 tiers */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
+            {/* Grille annuelle — 4 tiers */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               {PLANS_ANNUAL.map((plan, i) => (
                 <ScrollReveal key={plan.name} delay={i * 0.07}>
                   <div
-                    className={cn("rounded-2xl p-6 flex flex-col h-full", plan.highlight ? "" : "bg-white")}
+                    className={cn("rounded-2xl p-5 flex flex-col h-full", plan.highlight ? "" : "bg-white")}
                     style={plan.highlight
                       ? { background: "#0f172a", border: "2px solid #3899aa", boxShadow: "0 8px 30px rgba(56,153,170,0.2)" }
                       : { border: "1px solid #d4ecea", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }
@@ -316,32 +327,44 @@ export function Pricing() {
                         <Zap className="w-2.5 h-2.5" /> 100 premiers
                       </span>
                     )}
-                    <h3 className={cn("text-base font-bold mb-1", plan.highlight ? "text-white" : "text-[#0f172a]")}>
+                    <h3 className={cn("text-sm font-bold mb-1", plan.highlight ? "text-white" : "text-[#0f172a]")}>
                       {plan.name}
                     </h3>
                     <div className="flex items-baseline gap-1 mb-1">
-                      <span className={cn("text-4xl font-bold", plan.highlight ? "text-white" : "text-[#0f172a]")}>
+                      <span className={cn("text-3xl font-bold", plan.highlight ? "text-white" : "text-[#0f172a]")}>
                         {plan.price}€
                       </span>
                       <span className={cn("text-xs", plan.highlight ? "text-white/50" : "text-[#94a3b8]")}>/an</span>
                     </div>
-                    <p className={cn("text-xs mb-4", plan.highlight ? "text-white/50" : "text-[#94a3b8]")}>
+                    <p className={cn("text-xs mb-3", plan.highlight ? "text-white/50" : "text-[#94a3b8]")}>
                       {plan.description}
                     </p>
 
                     {/* FAMI badge */}
-                    {plan.fami && (() => {
+                    {plan.famiIneligible ? (
+                      <div
+                        className="rounded-lg px-3 py-2 mb-3"
+                        style={plan.highlight
+                          ? { background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }
+                          : { background: "#f8fafc", border: "1px solid #e2e8f0" }
+                        }
+                      >
+                        <p className={cn("text-[10px] text-center", plan.highlight ? "text-white/30" : "text-[#94a3b8]")}>
+                          Non éligible FAMI — module vidéotransmission non inclus
+                        </p>
+                      </div>
+                    ) : plan.fami ? (() => {
                       const n = parseFloat(plan.fami);
                       const isGain = n < 0;
                       return (
                         <div
-                          className="rounded-lg px-3 py-2 mb-4 flex items-center justify-between"
+                          className="rounded-lg px-3 py-2 mb-3 flex items-center justify-between"
                           style={plan.highlight
                             ? { background: "rgba(232,176,77,0.12)", border: "1px solid rgba(232,176,77,0.3)" }
                             : { background: "#fef9f0", border: "1px solid #fde68a" }
                           }
                         >
-                          <span className="text-[11px] text-[#92680a] font-medium">
+                          <span className="text-[10px] text-[#92680a] font-medium">
                             {isGain ? "Vous gagnez*" : "Coût net*"}
                           </span>
                           <span className="text-sm font-bold" style={{ color: isGain ? "#e8b04d" : "#64748b" }}>
@@ -349,12 +372,12 @@ export function Pricing() {
                           </span>
                         </div>
                       );
-                    })()}
+                    })() : null}
 
-                    <ul className="space-y-2 mb-6 flex-1">
+                    <ul className="space-y-1.5 mb-5 flex-1">
                       {plan.features.map((f) => (
                         <li key={f} className={cn("flex items-start gap-2 text-xs", plan.highlight ? "text-white/80" : "text-[#475569]")}>
-                          <CheckCircle2 className={cn("w-3.5 h-3.5 shrink-0 mt-0.5", plan.highlight ? "text-[#3899aa]" : "text-[#d4ecea]")} />
+                          <CheckCircle2 className={cn("w-3 h-3 shrink-0 mt-0.5", plan.highlight ? "text-[#3899aa]" : "text-[#d4ecea]")} />
                           {f}
                         </li>
                       ))}
@@ -363,7 +386,7 @@ export function Pricing() {
                     <Link
                       href={CTA_SIGNUP_URL}
                       className={cn(
-                        "w-full text-center block py-3 rounded-xl text-sm font-bold transition-all hover:scale-[1.02]",
+                        "w-full text-center block py-2.5 rounded-xl text-xs font-bold transition-all hover:scale-[1.02]",
                         plan.highlight
                           ? "text-white hover:brightness-110"
                           : "border border-[#d4ecea] text-[#64748b] hover:bg-[#eef7f6] hover:text-[#3899aa] hover:border-[#3899aa]/40"

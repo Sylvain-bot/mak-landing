@@ -97,7 +97,7 @@ export function Hero() {
   const ph = usePostHog();
 
   return (
-    <section className="relative overflow-hidden bg-white pt-16 sm:pt-24 pb-0 px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 pb-0 px-4 sm:px-6">
       {/* Dot grid */}
       <div
         aria-hidden

@@ -20,6 +20,7 @@ export const PRICE_EXPERT = "49";
 export const PRICE_STANDARD = "49";
 
 // Prix annuel
+export const PRICE_DECOUVERTE_ANNUAL = "99";
 export const PRICE_PIONNIER_ANNUAL = "199";
 export const PRICE_PRATIQUE_ANNUAL = "299";
 export const PRICE_EXPERT_ANNUAL = "499";
