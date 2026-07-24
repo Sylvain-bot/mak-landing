@@ -12,12 +12,23 @@ export const TIME_SAVED_WEEK = "4 heures par semaine";
 // Contenu
 export const STUDY_COUNT = "56 000+";
 
-// Prix
+// Prix mensuel
 export const PRICE_PIONNIER = "19";
 export const PRICE_DECOUVERTE = "9";
 export const PRICE_PRATIQUE = "29";
 export const PRICE_EXPERT = "49";
 export const PRICE_STANDARD = "49";
+
+// Prix annuel
+export const PRICE_PIONNIER_ANNUAL = "199";
+export const PRICE_PRATIQUE_ANNUAL = "299";
+export const PRICE_EXPERT_ANNUAL = "499";
+
+// FAMI
+export const FAMI_AMOUNT = "350";
+export const FAMI_NET_PIONNIER = "-151";
+export const FAMI_NET_PRATIQUE = "-51";
+export const FAMI_NET_EXPERT = "149";
 
 // CTA principal unique
 export const CTA_MAIN = "Essayer 14 jours — sans carte bancaire";

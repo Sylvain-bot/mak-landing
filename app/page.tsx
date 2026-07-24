@@ -8,6 +8,7 @@ import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { MultiDevice } from "@/components/MultiDevice";
 import { CtaFinal } from "@/components/CtaFinal";
+import { FamiSection } from "@/components/FamiSection";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { homepageSchema } from "@/lib/schemas/homepage.schema";
@@ -70,6 +71,7 @@ export default async function Home() {
                 "Module administratif — courriers médecins, relances et comptes-rendus depuis tes templates ou rédigés par l'IA",
                 "Suivi patient à domicile — programme d'exercices sur WhatsApp avec vidéos, zéro relance manuelle",
                 "Copilote clinique — 56 000+ ressources dont le Cleland, drapeaux rouges vérifiés, réponse sourcée en 30 secondes",
+                "Vidéotransmission sécurisée — consultations à distance, suivi post-op, bilan initial à domicile (rend éligible au FAMI)",
                 "Données hébergées en Europe, jamais utilisées pour entraîner des modèles IA tiers",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-[#475569] leading-snug">
@@ -82,7 +84,10 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SECTION 6 — Pricing */}
+      {/* SECTION 6 — FAMI */}
+      <FamiSection />
+
+      {/* SECTION 7 — Pricing */}
       <Pricing />
 
       {/* SECTION 7 — FAQ */}

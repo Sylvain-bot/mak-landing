@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
+import { Pricing } from "@/components/Pricing";
 import { Footer } from "@/components/Footer";
-import { CheckCircle2, Zap, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import {
   CTA_SIGNUP_URL,
@@ -14,6 +15,7 @@ import {
   PRICE_PRATIQUE,
   PRICE_EXPERT,
 } from "@/lib/claims";
+
 
 export const metadata: Metadata = {
   title: "Tarifs Mon Assistant Kiné — À partir de 9€/mois",
@@ -99,8 +101,20 @@ const FAQ_ITEMS = [
     // TODO-FONDATEUR: préciser les limites exactes de l'essai (nombre de bilans/questions offerts) pour affichage transparent
   },
   {
+    q: "Comment fonctionne l'aide FAMI avec Mon Assistant Kiné ?",
+    a: "Mon Assistant Kiné inclut un module de vidéotransmission sécurisée qui rend ton cabinet éligible à un indicateur du FAMI (Forfait d'Aide à la Modernisation et à l'Informatisation de la CNAM). Concrètement : tu t'abonnes et utilises la vidéotransmission en 2026, tu déclares sur Amelipro en janvier-mars 2027, tu touches jusqu'à 350 €/an de ta CPAM au printemps 2027. Cette aide est indépendante du mode de paiement choisi (mensuel ou annuel).",
+  },
+  {
+    q: "Si je m'abonne en fin d'année, suis-je éligible au FAMI tout de suite ?",
+    a: "Pas pour l'année en cours. L'éligibilité se base sur l'année d'équipement : un abonnement souscrit en décembre 2026 ne représente pas une année complète d'équipement 2026. Tu pourras déclarer au titre de 2027 (en janvier-mars 2028) et toucher l'aide au printemps 2028. Mieux vaut s'abonner tôt dans l'année pour que l'équipement soit effectif sur toute la période.",
+  },
+  {
+    q: "Quelle est la différence entre l'offre mensuelle et l'offre annuelle ?",
+    a: "C'est exactement la même app avec les mêmes modules (bilans, copilote, suivi patient, admin, vidéotransmission, contrats). La différence est uniquement le rythme de facturation : le mensuel est sans engagement, résiliable à tout moment ; l'annuel engage sur 12 mois payés en une fois, à un tarif inférieur. Le FAMI s'applique dans les deux cas.",
+  },
+  {
     q: "Y a-t-il un engagement de durée ?",
-    a: "Aucun. Toutes les formules sont sans engagement et résiliables à tout moment depuis ton espace personnel.",
+    a: "Pour les formules mensuelles : aucun engagement, résiliable à tout moment. Pour les formules annuelles : engagement de 12 mois, paiement en une fois.",
   },
   {
     q: "Puis-je changer de formule en cours de route ?",
@@ -140,116 +154,8 @@ export default function TarifsPage() {
         </div>
       </section>
 
-      {/* Étage 1 — Offre Pionnier */}
-      <section className="py-10 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
-        <div className="max-w-4xl mx-auto">
-          <div
-            className="rounded-2xl p-7 sm:p-9 relative overflow-hidden"
-            style={{ background: "#0f172a", border: "2px solid #3899aa", boxShadow: "0 8px 40px rgba(56,153,170,0.2)" }}
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(56,153,170,0.18) 0%, transparent 70%)" }} />
-
-            <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center relative z-10">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3899aa] text-white text-xs font-bold">
-                    <Zap className="w-3 h-3" />
-                    Les 100 premiers seulement
-                  </span>
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                  Les 100 premiers kinés verrouillent tout à {PRICE_PIONNIER}€/mois. À vie.
-                </h2>
-                <p className="text-white/70 text-sm leading-relaxed mb-4">
-                  Accès complet à tous les modules, prix garanti à vie, sans engagement, badge fondateur.
-                  Quand les 100 places sont prises, cette offre disparaît définitivement.
-                </p>
-                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-5">
-                  {PIONNIER_FEATURES.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-white/85 text-sm">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="shrink-0 text-center">
-                <div className="inline-block rounded-2xl p-6 mb-4"
-                  style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}>
-                  <div className="text-5xl font-bold text-white">{PRICE_PIONNIER}€</div>
-                  <div className="text-white/50 text-sm">/mois · à vie</div>
-                  <div className="text-[#3899aa] text-xs font-semibold mt-1">au lieu de 49€/mois</div>
-                </div>
-                <Link
-                  href={CTA_SIGNUP_URL}
-                  className="block w-full text-center py-3.5 px-6 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02]"
-                  style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.35)" }}
-                >
-                  {CTA_MAIN}
-                </Link>
-                <p className="text-white/40 text-xs mt-2">Sans engagement · Résiliable à tout moment</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Étage 2 — Grille standard */}
-      <section className="py-12 px-4 sm:px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-[#64748b] text-sm font-semibold text-center mb-7">Les tarifs après les 100 premiers :</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 items-start">
-            {PLANS_STANDARD.map((plan) => (
-              <div
-                key={plan.name}
-                className="rounded-2xl p-6 flex flex-col bg-white"
-                style={{ border: "1px solid #d4ecea", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-              >
-                <div className="mb-5">
-                  <h2 className="text-sm font-bold text-[#0f172a] mb-1">{plan.name}</h2>
-                  <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-4xl font-bold text-[#0f172a]">{plan.price}€</span>
-                    <span className="text-[#94a3b8] text-sm">/mois</span>
-                  </div>
-                  <p className="text-[#94a3b8] text-xs leading-relaxed">{plan.description}</p>
-                </div>
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-[#475569]">
-                      <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-[#d4ecea]" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={CTA_SIGNUP_URL}
-                  className="w-full text-center block py-3 rounded-lg text-sm font-semibold transition-all hover:scale-[1.02] border border-[#d4ecea] text-[#64748b] hover:bg-[#eef7f6] hover:text-[#3899aa]"
-                >
-                  Commencer
-                </Link>
-              </div>
-            ))}
-          </div>
-          <p className="text-[#94a3b8] text-xs text-center mt-6">Sans engagement · Résiliable à tout moment</p>
-
-          {/* Bandeau contrats gratuits */}
-          <div className="flex items-center gap-4 rounded-2xl px-6 py-4 mt-6" style={{ background: "#f0fdf4", border: "1px solid #86efac" }}>
-            <span className="text-2xl shrink-0">📑</span>
-            <div className="flex-1">
-              <p className="text-sm font-bold text-[#15803d]">Module Contrats de remplacement — 100 % gratuit</p>
-              <p className="text-xs text-[#166534] mt-0.5 leading-relaxed">
-                Signature électronique, invitation par lien, déclaration Ordre en 1 clic, archivage automatique.
-                Offert à toute la communauté des kinés libéraux — abonné ou non, sans limite de durée.
-              </p>
-            </div>
-            <Link href="/fonctionnalites/contrats-remplacement" className="shrink-0 text-xs font-semibold text-[#15803d] hover:text-[#166534] transition-colors whitespace-nowrap">
-              En savoir plus →
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Grille tarifaire avec toggle mensuel / annuel */}
+      <Pricing />
 
       {/* Ce qui est inclus */}
       <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
