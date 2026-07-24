@@ -151,7 +151,8 @@ export function FamiSection() {
                   </div>
                 </div>
                 <p className="text-white/40 text-xs">
-                  Ta CPAM te verse 151 € de plus que le coût de ton abonnement.
+                  Ta CPAM te verse 151 € de plus que le coût de ton abonnement.{" "}
+                  <span className="text-white/25 italic">Soit 3 restos avec tes collègues pour leur parler de Mon Assistant Kiné.</span>
                 </p>
               </div>
 

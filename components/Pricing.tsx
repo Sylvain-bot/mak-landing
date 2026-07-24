@@ -41,12 +41,14 @@ const PLANS_MONTHLY = [
       "Suivi patient WhatsApp",
       "Vidéotransmission sécurisée",
     ],
+    famiNetLabel: "Gratuit avec l'aide FAMI*",
   },
   {
     name: "Expert",
     price: PRICE_EXPERT,
     description: "Accès complet, tous modules",
     features: ["Programmes illimités", "Accès complet tous modules", "Vidéotransmission sécurisée"],
+    famiNetLabel: "Soit 19,83 €/mois réel après aide FAMI*",
   },
 ];
 
@@ -63,7 +65,7 @@ const PLANS_ANNUAL = [
   {
     name: "Pionnier",
     price: PRICE_PIONNIER_ANNUAL,
-    description: "Pour les 100 premiers kinés — accès complet garanti",
+    description: "Pour les 100 premiers kinés · Prix garanti à vie",
     features: [
       "Programmes illimités",
       "Copilote IA Kiné — usage illimité",
@@ -203,7 +205,7 @@ export function Pricing() {
                       <div className="text-[#3899aa] text-xs font-semibold mt-1">au lieu de 49€/mois</div>
                     </div>
                     <p className="text-xs mb-3" style={{ color: "rgba(232,176,77,0.75)" }}>
-                      ★ Éligible aide FAMI 350 €/an —{" "}
+                      ★ Tu gagnes 122 €/an net avec l&apos;aide FAMI* —{" "}
                       <button
                         onClick={() => setAnnual(true)}
                         className="underline hover:opacity-90 transition-opacity"
@@ -262,14 +264,14 @@ export function Pricing() {
                         </div>
                       ) : (
                         <div className="rounded-lg px-3 py-2 mb-3" style={{ background: "rgba(232,176,77,0.06)", border: "1px solid rgba(232,176,77,0.2)" }}>
-                          <p className="text-[10px] font-semibold text-center" style={{ color: "#92680a" }}>
-                            ★ Éligible aide FAMI 350 €/an —{" "}
+                          <p className="text-[10px] font-semibold text-center leading-relaxed" style={{ color: "#92680a" }}>
+                            ★ {plan.famiNetLabel}{" "}
                             <button
                               onClick={() => setAnnual(true)}
                               className="underline font-bold hover:opacity-80"
                               style={{ color: "#e8b04d" }}
                             >
-                              voir l&apos;annuel
+                              → voir l&apos;annuel
                             </button>
                           </p>
                         </div>
