@@ -191,6 +191,16 @@ export function Pricing() {
                       <div className="text-white/50 text-sm">/mois · à vie</div>
                       <div className="text-[#3899aa] text-xs font-semibold mt-1">au lieu de 49€/mois</div>
                     </div>
+                    <p className="text-xs mb-3 mt-1" style={{ color: "rgba(232,176,77,0.75)" }}>
+                      ★ Éligible aide FAMI 350 €/an —{" "}
+                      <button
+                        onClick={() => setAnnual(true)}
+                        className="underline hover:opacity-90 transition-opacity"
+                        style={{ color: "#e8b04d" }}
+                      >
+                        voir l&apos;annuel
+                      </button>
+                    </p>
                     <Link
                       href={CTA_SIGNUP_URL}
                       className="block w-full text-center px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 whitespace-normal"
@@ -244,7 +254,26 @@ export function Pricing() {
               </div>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.3} className="mt-5">
+            <ScrollReveal delay={0.2} className="mt-5">
+              <div
+                className="flex items-start gap-3 rounded-xl px-4 py-3"
+                style={{ background: "rgba(232,176,77,0.06)", border: "1px solid rgba(232,176,77,0.25)" }}
+              >
+                <span style={{ color: "#e8b04d", fontSize: "0.85rem", marginTop: "1px" }}>★</span>
+                <p className="text-xs leading-relaxed" style={{ color: "#92680a" }}>
+                  <strong>Toutes ces formules sont éligibles à l&apos;aide FAMI.</strong>{" "}
+                  Votre CPAM peut vous verser jusqu&apos;à 350 €/an — sans calcul sur le mensuel,
+                  mais l&apos;annuel vous permet de visualiser le gain net.{" "}
+                  <button
+                    onClick={() => setAnnual(true)}
+                    className="underline font-semibold hover:opacity-80 transition-opacity"
+                  >
+                    Voir les offres annuelles →
+                  </button>
+                </p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.3} className="mt-3">
               <p className="text-[#94a3b8] text-xs text-center mb-3">
                 Sans engagement. Résiliable à tout moment.
               </p>

@@ -38,9 +38,9 @@ const STEPS = [
 ];
 
 const ANNUAL_TIERS = [
-  { name: "Pionnier", price: "199", net: "−151", highlight: true },
-  { name: "Pratique", price: "299", net: "−51", highlight: false },
-  { name: "Expert", price: "499", net: "+149", highlight: false },
+  { name: "Pionnier", price: "199", display: "+151 €", label: "vous gagnez", gold: true, highlight: true },
+  { name: "Pratique", price: "299", display: "+51 €", label: "vous gagnez", gold: true, highlight: false },
+  { name: "Expert", price: "499", display: "149 €", label: "coût net", gold: false, highlight: false },
 ];
 
 export function FamiSection() {
@@ -110,12 +110,13 @@ export function FamiSection() {
                 className="mt-6 rounded-xl p-4"
                 style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}
               >
-                <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-1.5 font-mono">La CNAM paie, pas nous</p>
+                <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-1.5 font-mono">Comment la CNAM rémunère votre modernisation</p>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  Le module vidéotransmission sécurisée rend votre cabinet éligible à un indicateur
-                  du <strong className="text-white/90">FAMI</strong> — le Forfait d&apos;Aide à la Modernisation et
-                  à l&apos;Informatisation versé par l&apos;Assurance Maladie. Jusqu&apos;à{" "}
-                  <strong className="text-[#e8b04d]">350 €/an</strong> remboursés par votre CPAM.
+                  La CNAM dispose d'un forfait annuel pour aider les kinés libéraux à se moderniser.
+                  S'équiper d'une solution de <strong className="text-white/90">vidéotransmission sécurisée</strong> est
+                  l'un des critères éligibles. Vous le déclarez chaque année en janvier-mars sur Amelipro —
+                  votre <strong className="text-[#e8b04d]">CPAM vous verse jusqu'à 350 €</strong>,
+                  sans avance de frais, sans dossier complexe.
                 </p>
               </div>
             </div>
@@ -135,21 +136,21 @@ export function FamiSection() {
                 </p>
                 <div className="space-y-2.5 mb-4">
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-white/60">Abonnement Pionnier annuel</span>
+                    <span className="text-white/60">Vous payez (abonnement annuel)</span>
                     <span className="text-white font-semibold">199 €</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-white/60">Aide FAMI (CNAM)*</span>
-                    <span className="font-semibold" style={{ color: "#e8b04d" }}>− 350 €</span>
+                    <span className="text-white/60">CPAM vous verse (aide FAMI)*</span>
+                    <span className="font-semibold" style={{ color: "#e8b04d" }}>+ 350 €</span>
                   </div>
                   <div className="h-px" style={{ background: "rgba(232,176,77,0.2)" }} />
                   <div className="flex justify-between items-center">
-                    <span className="text-white font-bold text-sm">Coût net annuel</span>
-                    <span className="text-2xl font-bold" style={{ color: "#e8b04d" }}>− 151 €</span>
+                    <span className="text-white font-bold text-sm">Vous gagnez</span>
+                    <span className="text-2xl font-bold" style={{ color: "#e8b04d" }}>+ 151 €</span>
                   </div>
                 </div>
                 <p className="text-white/40 text-xs">
-                  L&apos;Assurance Maladie vous verse 350 € de plus que ce que vous payez.
+                  La CPAM vous verse 151 € de plus que le coût de votre abonnement.
                 </p>
               </div>
 
@@ -176,13 +177,10 @@ export function FamiSection() {
                         <span className="text-white/40 text-xs ml-2">{t.price} €/an</span>
                       </div>
                       <div className="text-right">
-                        <span
-                          className="text-sm font-bold"
-                          style={{ color: t.net.startsWith("−") || t.net.startsWith("-") ? "#e8b04d" : "#94a3b8" }}
-                        >
-                          {t.net} €*
+                        <span className="text-sm font-bold" style={{ color: t.gold ? "#e8b04d" : "#94a3b8" }}>
+                          {t.display}*
                         </span>
-                        <span className="text-white/30 text-xs ml-1">net FAMI</span>
+                        <span className="text-white/30 text-xs ml-1">{t.label}</span>
                       </div>
                     </div>
                   ))}
