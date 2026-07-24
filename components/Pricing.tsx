@@ -27,7 +27,7 @@ const PLANS_MONTHLY = [
     name: "Découverte",
     price: PRICE_DECOUVERTE,
     description: "Pour découvrir l'IA au cabinet sans engagement",
-    features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
+    features: ["1 programme max par mois", "Copilote IA Kiné — usage découverte"],
     famiIneligible: true,
   },
   {
@@ -35,7 +35,7 @@ const PLANS_MONTHLY = [
     price: PRICE_PRATIQUE,
     description: "Pour les kinés qui veulent aller plus loin",
     features: [
-      "5 programmes max",
+      "5 programmes max par mois",
       "Copilote IA Kiné — usage standard",
       "Bilan kiné",
       "Suivi patient WhatsApp",
@@ -55,7 +55,7 @@ const PLANS_ANNUAL = [
     name: "Découverte",
     price: PRICE_DECOUVERTE_ANNUAL,
     description: "Pour découvrir l'IA au cabinet",
-    features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
+    features: ["1 programme max par mois", "Copilote IA Kiné — usage découverte"],
     fami: null,
     famiIneligible: true,
     highlight: false,
@@ -82,7 +82,7 @@ const PLANS_ANNUAL = [
     price: PRICE_PRATIQUE_ANNUAL,
     description: "Pour les kinés qui veulent aller plus loin",
     features: [
-      "5 programmes max",
+      "5 programmes max par mois",
       "Copilote IA Kiné — usage standard",
       "Bilan kiné",
       "Suivi patient WhatsApp",
@@ -365,7 +365,7 @@ export function Pricing() {
                           }
                         >
                           <span className="text-[10px] text-[#92680a] font-medium">
-                            {isGain ? "Vous gagnez*" : "Coût net*"}
+                            {isGain ? "Tu gagnes*" : "Coût net*"}
                           </span>
                           <span className="text-sm font-bold" style={{ color: isGain ? "#e8b04d" : "#64748b" }}>
                             {isGain ? `+${Math.abs(n)} €/an` : `${n} €/an`}
@@ -408,8 +408,8 @@ export function Pricing() {
 
             <ScrollReveal delay={0.25}>
               <p id="fami-disclaimer" className="text-[#94a3b8] text-xs text-center max-w-2xl mx-auto leading-relaxed">
-                *L&apos;aide FAMI ({FAMI_AMOUNT} €/an) est versée par votre CPAM après déclaration sur Amelipro
-                (janvier-mars de l&apos;année suivante). Son versement dépend de votre CPAM et du respect
+                *L&apos;aide FAMI ({FAMI_AMOUNT} €/an) est versée par ta CPAM après déclaration sur Amelipro
+                (janvier-mars de l&apos;année suivante). Son versement dépend de ta CPAM et du respect
                 des conditions du cahier des charges CNAM — Mon Assistant Kiné ne peut pas le garantir.
               </p>
             </ScrollReveal>

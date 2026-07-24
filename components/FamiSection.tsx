@@ -28,7 +28,7 @@ const STEPS = [
   {
     n: "3",
     title: "Tu déclares sur Amelipro (janv. – mars 2027)",
-    body: "Une case à cocher sur Amelipro, au titre de l'année 2026. 5 minutes, une fois par an. Mon Assistant Kiné vous fournit l'attestation d'équipement à joindre à votre déclaration.",
+    body: "Une case à cocher sur Amelipro, au titre de l'année 2026. 5 minutes, une fois par an. Mon Assistant Kiné te fournit l'attestation d'équipement à joindre à ta déclaration.",
   },
   {
     n: "4",
@@ -38,8 +38,8 @@ const STEPS = [
 ];
 
 const ANNUAL_TIERS = [
-  { name: "Pionnier", price: "199", display: "+151 €", label: "vous gagnez", gold: true, highlight: true },
-  { name: "Pratique", price: "299", display: "+51 €", label: "vous gagnez", gold: true, highlight: false },
+  { name: "Pionnier", price: "199", display: "+151 €", label: "tu gagnes", gold: true, highlight: true },
+  { name: "Pratique", price: "299", display: "+51 €", label: "tu gagnes", gold: true, highlight: false },
   { name: "Expert", price: "499", display: "149 €", label: "coût net", gold: false, highlight: false },
 ];
 
@@ -71,7 +71,7 @@ export function FamiSection() {
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
             Cette année, Mon Assistant Kiné<br />
-            <span style={{ color: "#e8b04d" }}>peut vous coûter moins que zéro.</span>
+            <span style={{ color: "#e8b04d" }}>peut te coûter moins que zéro.</span>
           </h2>
           <p className="text-white/60 text-lg">Et ce n&apos;est même pas la meilleure partie.</p>
         </ScrollReveal>
@@ -86,7 +86,7 @@ export function FamiSection() {
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
             >
               <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-5 font-mono">
-                Ce que vous obtenez
+                Ce que tu obtiens
               </p>
               <ul className="space-y-4">
                 {FEATURES.map((f) => (
@@ -111,12 +111,12 @@ export function FamiSection() {
                 className="mt-6 rounded-xl p-4"
                 style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}
               >
-                <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-1.5 font-mono">Comment la CNAM rémunère votre modernisation</p>
+                <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-1.5 font-mono">Comment la CNAM rémunère ta modernisation</p>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  La CNAM dispose d'un forfait annuel pour aider les kinés libéraux à se moderniser.
-                  S'équiper d'une solution de <strong className="text-white/90">vidéotransmission sécurisée</strong> est
-                  l'un des critères éligibles. Vous le déclarez chaque année en janvier-mars sur Amelipro —
-                  votre <strong className="text-[#e8b04d]">CPAM vous verse jusqu'à 350 €</strong>,
+                  La CNAM dispose d&apos;un forfait annuel pour aider les kinés libéraux à se moderniser.
+                  S&apos;équiper d&apos;une solution de <strong className="text-white/90">vidéotransmission sécurisée</strong> est
+                  l&apos;un des critères éligibles. Tu le déclares chaque année en janvier-mars sur Amelipro —
+                  ta <strong className="text-[#e8b04d]">CPAM te verse jusqu&apos;à 350 €</strong>,
                   sans avance de frais, sans dossier complexe.
                 </p>
               </div>
@@ -137,21 +137,21 @@ export function FamiSection() {
                 </p>
                 <div className="space-y-2.5 mb-4">
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-white/60">Vous payez (abonnement annuel)</span>
+                    <span className="text-white/60">Tu paies (abonnement annuel)</span>
                     <span className="text-white font-semibold">199 €</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-white/60">CPAM vous verse (aide FAMI)*</span>
+                    <span className="text-white/60">Ta CPAM te verse (aide FAMI)*</span>
                     <span className="font-semibold" style={{ color: "#e8b04d" }}>+ 350 €</span>
                   </div>
                   <div className="h-px" style={{ background: "rgba(232,176,77,0.2)" }} />
                   <div className="flex justify-between items-center">
-                    <span className="text-white font-bold text-sm">Vous gagnez</span>
+                    <span className="text-white font-bold text-sm">Tu gagnes</span>
                     <span className="text-2xl font-bold" style={{ color: "#e8b04d" }}>+ 151 €</span>
                   </div>
                 </div>
                 <p className="text-white/40 text-xs">
-                  La CPAM vous verse 151 € de plus que le coût de votre abonnement.
+                  Ta CPAM te verse 151 € de plus que le coût de ton abonnement.
                 </p>
               </div>
 
@@ -204,7 +204,7 @@ export function FamiSection() {
               c&apos;est de ne pas s&apos;abonner.
             </p>
             <p className="text-white/40 text-sm mt-3 leading-relaxed">
-              Offre Pionnier à 199 €/an · Votre CPAM vous verse 350 € · Vous gagnez 151 € net — chaque année.
+              Offre Pionnier à 199 €/an · Ta CPAM te verse 350 € · Tu gagnes 151 € net — chaque année.
             </p>
           </div>
         </ScrollReveal>
@@ -251,10 +251,10 @@ export function FamiSection() {
             Essayer 14 jours — sans carte bancaire →
           </Link>
           <p className="text-white/30 text-xs max-w-xl mx-auto leading-relaxed">
-            *L&apos;éligibilité au FAMI dépend de votre CPAM et du respect des conditions du cahier des charges CNAM.
+            *L&apos;éligibilité au FAMI dépend de ta CPAM et du respect des conditions du cahier des charges CNAM.
             L&apos;aide est déclarée chaque année en janvier-mars sur Amelipro, au titre de l&apos;année précédente
             (abonnement 2026 → déclaration janv.-mars 2027 → versement printemps 2027).
-            Mon Assistant Kiné ne peut pas garantir le versement. Renseignez-vous auprès de votre CPAM.
+            Mon Assistant Kiné ne peut pas garantir le versement. Renseigne-toi auprès de ta CPAM.
           </p>
         </ScrollReveal>
       </div>

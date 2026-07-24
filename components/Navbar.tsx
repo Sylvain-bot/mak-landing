@@ -54,7 +54,7 @@ export function Navbar() {
         {/* FAMI announcement strip */}
         <div className="py-1.5 px-4 text-center text-xs" style={{ background: "#0f2229" }}>
           <span style={{ color: "#e8b04d" }} className="font-bold">★ Nouveau · FAMI :</span>{" "}
-          <span className="text-white/70">Votre CPAM peut vous verser jusqu&apos;à 350 €/an grâce à Mon Assistant Kiné.</span>{" "}
+          <span className="text-white/70">Ta CPAM peut te verser jusqu&apos;à 350 €/an grâce à Mon Assistant Kiné.</span>{" "}
           <a href="#fami-section" className="font-semibold underline hover:opacity-90 transition-opacity" style={{ color: "#e8b04d" }}>
             Comment ça marche →
           </a>
