@@ -27,7 +27,7 @@ const PLANS_MONTHLY = [
     price: PRICE_DECOUVERTE,
     description: "Pour découvrir l'IA au cabinet sans engagement",
     features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
-    fami: null,
+    famiIneligible: true,
   },
   {
     name: "Pratique",
@@ -40,14 +40,12 @@ const PLANS_MONTHLY = [
       "Suivi patient WhatsApp",
       "Vidéotransmission sécurisée",
     ],
-    fami: null,
   },
   {
     name: "Expert",
     price: PRICE_EXPERT,
     description: "Accès complet, tous modules",
     features: ["Programmes illimités", "Accès complet tous modules", "Vidéotransmission sécurisée"],
-    fami: null,
   },
 ];
 
@@ -248,6 +246,11 @@ export function Pricing() {
                       >
                         Commencer
                       </Link>
+                      {plan.famiIneligible && (
+                        <p className="text-[10px] text-center mt-2 text-[#94a3b8]">
+                          Non éligible FAMI — module vidéotransmission non inclus
+                        </p>
+                      )}
                     </div>
                   </ScrollReveal>
                 ))}
@@ -261,9 +264,8 @@ export function Pricing() {
               >
                 <span style={{ color: "#e8b04d", fontSize: "0.85rem", marginTop: "1px" }}>★</span>
                 <p className="text-xs leading-relaxed" style={{ color: "#92680a" }}>
-                  <strong>Toutes ces formules sont éligibles à l&apos;aide FAMI.</strong>{" "}
-                  Votre CPAM peut vous verser jusqu&apos;à 350 €/an — sans calcul sur le mensuel,
-                  mais l&apos;annuel vous permet de visualiser le gain net.{" "}
+                  <strong>Les formules Pratique et Expert sont éligibles à l&apos;aide FAMI.</strong>{" "}
+                  Votre CPAM peut vous verser jusqu&apos;à 350 €/an — passez à l&apos;annuel pour voir votre gain exact.{" "}
                   <button
                     onClick={() => setAnnual(true)}
                     className="underline font-semibold hover:opacity-80 transition-opacity"
@@ -290,7 +292,7 @@ export function Pricing() {
                 <span className="text-lg shrink-0">💡</span>
                 <p className="text-sm" style={{ color: "#92680a" }}>
                   <strong>Avec le FAMI :</strong> les kinés équipés d&apos;une solution de vidéotransmission sécurisée
-                  peuvent toucher jusqu&apos;à <strong>{FAMI_AMOUNT} €/an</strong> de l&apos;Assurance Maladie.
+                  peuvent toucher jusqu&apos;à <strong>{FAMI_AMOUNT} €/an</strong>{" "}de l&apos;Assurance Maladie.
                   Les nets ci-dessous tiennent compte de cette aide.{" "}
                   <a href="#fami-disclaimer" className="underline opacity-70">Voir conditions*</a>
                 </p>
@@ -327,24 +329,27 @@ export function Pricing() {
                       {plan.description}
                     </p>
 
-                    {/* FAMI net badge */}
-                    {plan.fami && (
-                      <div
-                        className="rounded-lg px-3 py-2 mb-4 flex items-center justify-between"
-                        style={plan.highlight
-                          ? { background: "rgba(232,176,77,0.12)", border: "1px solid rgba(232,176,77,0.3)" }
-                          : { background: "#fef9f0", border: "1px solid #fde68a" }
-                        }
-                      >
-                        <span className="text-[11px] text-[#92680a] font-medium">Net avec FAMI*</span>
-                        <span
-                          className="text-sm font-bold"
-                          style={{ color: plan.fami.startsWith("−") || plan.fami.startsWith("-") ? "#e8b04d" : "#64748b" }}
+                    {/* FAMI badge */}
+                    {plan.fami && (() => {
+                      const n = parseFloat(plan.fami);
+                      const isGain = n < 0;
+                      return (
+                        <div
+                          className="rounded-lg px-3 py-2 mb-4 flex items-center justify-between"
+                          style={plan.highlight
+                            ? { background: "rgba(232,176,77,0.12)", border: "1px solid rgba(232,176,77,0.3)" }
+                            : { background: "#fef9f0", border: "1px solid #fde68a" }
+                          }
                         >
-                          {plan.fami} €/an
-                        </span>
-                      </div>
-                    )}
+                          <span className="text-[11px] text-[#92680a] font-medium">
+                            {isGain ? "Vous gagnez*" : "Coût net*"}
+                          </span>
+                          <span className="text-sm font-bold" style={{ color: isGain ? "#e8b04d" : "#64748b" }}>
+                            {isGain ? `+${Math.abs(n)} €/an` : `${n} €/an`}
+                          </span>
+                        </div>
+                      );
+                    })()}
 
                     <ul className="space-y-2 mb-6 flex-1">
                       {plan.features.map((f) => (

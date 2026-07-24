@@ -28,7 +28,7 @@ const STEPS = [
   {
     n: "3",
     title: "Tu déclares sur Amelipro (janv. – mars 2027)",
-    body: "Une case à cocher sur Amelipro, au titre de l'année 2026. 5 minutes, une fois par an.",
+    body: "Une case à cocher sur Amelipro, au titre de l'année 2026. 5 minutes, une fois par an. Mon Assistant Kiné vous fournit l'attestation d'équipement à joindre à votre déclaration.",
   },
   {
     n: "4",
@@ -46,6 +46,7 @@ const ANNUAL_TIERS = [
 export function FamiSection() {
   return (
     <section
+      id="fami-section"
       className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: "#0f2229" }}
     >
@@ -189,6 +190,24 @@ export function FamiSection() {
             </div>
           </ScrollReveal>
         </div>
+
+        {/* Hormozi callout */}
+        <ScrollReveal delay={0.05} className="mb-10">
+          <div
+            className="rounded-2xl px-6 py-6 text-center"
+            style={{ background: "rgba(232,176,77,0.05)", border: "1px solid rgba(232,176,77,0.2)" }}
+          >
+            <p className="text-white text-xl sm:text-2xl font-bold leading-snug mb-1">
+              La seule façon de perdre de l&apos;argent avec Mon Assistant Kiné,
+            </p>
+            <p className="text-xl sm:text-2xl font-bold" style={{ color: "#e8b04d" }}>
+              c&apos;est de ne pas s&apos;abonner.
+            </p>
+            <p className="text-white/40 text-sm mt-3 leading-relaxed">
+              Offre Pionnier à 199 €/an · Votre CPAM vous verse 350 € · Vous gagnez 151 € net — chaque année.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 4 étapes */}
         <ScrollReveal delay={0.1} className="mb-12">
