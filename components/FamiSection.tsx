@@ -114,7 +114,7 @@ export function FamiSection() {
                 <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-1.5 font-mono">Comment la CNAM rémunère ta modernisation</p>
                 <p className="text-white/70 text-sm leading-relaxed">
                   La CNAM dispose d&apos;un forfait annuel pour aider les kinés libéraux à se moderniser.
-                  S&apos;équiper d&apos;une solution de <strong className="text-white/90">vidéotransmission sécurisée</strong> est
+                  S&apos;équiper d&apos;une solution de <strong className="text-white/90">vidéotransmission sécurisée</strong>{" "}est
                   l&apos;un des critères éligibles. Tu le déclares chaque année en janvier-mars sur Amelipro —
                   ta <strong className="text-[#e8b04d]">CPAM te verse jusqu&apos;à 350 €</strong>,
                   sans avance de frais, sans dossier complexe.
