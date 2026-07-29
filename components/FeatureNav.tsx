@@ -5,6 +5,7 @@ const FEATURES = [
   { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Copilote IA Kiné", desc: "clinique & bibliographique" },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", desc: "via WhatsApp" },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", desc: "en 1 clic" },
+  { href: "/fonctionnalites/videotransmission", icon: "📹", label: "Vidéotransmission", desc: "éligible FAMI ★", isNew: true },
   { href: "/fonctionnalites/contrats-remplacement", icon: "📑", label: "Contrats", desc: "100 % gratuit", free: true },
 ];
 
@@ -23,12 +24,16 @@ export function FeatureNav() {
               className="flex flex-col items-center gap-1.5 p-4 rounded-xl bg-white text-center transition-all hover:-translate-y-0.5 w-[calc(50%-6px)] sm:w-40"
               style={(f as any).free
                 ? { border: "1px solid #86efac", boxShadow: "0 1px 4px rgba(22,163,74,0.08)" }
-                : { border: "1px solid #d4ecea", boxShadow: "0 1px 4px rgba(56,153,170,0.06)" }
+                : (f as any).isNew
+                  ? { border: "1px solid #f0d080", boxShadow: "0 1px 4px rgba(232,176,77,0.15)" }
+                  : { border: "1px solid #d4ecea", boxShadow: "0 1px 4px rgba(56,153,170,0.06)" }
               }
             >
               <span className="text-xl">{f.icon}</span>
               <span className="text-xs font-semibold text-[#0f172a]">{f.label}</span>
-              <span className="text-xs" style={{ color: (f as any).free ? "#15803d" : "#94a3b8" }}>{f.desc}</span>
+              <span className="text-xs" style={{
+                color: (f as any).free ? "#15803d" : (f as any).isNew ? "#92680a" : "#94a3b8"
+              }}>{f.desc}</span>
             </Link>
           ))}
         </div>

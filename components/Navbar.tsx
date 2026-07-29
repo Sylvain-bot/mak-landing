@@ -13,6 +13,7 @@ const FEATURES = [
   { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Copilote IA Kiné", badge: null },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", badge: null },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", badge: null },
+  { href: "/fonctionnalites/videotransmission", icon: "📹", label: "Vidéotransmission", badge: "Nouveau" },
   { href: "/fonctionnalites/contrats-remplacement", icon: "📑", label: "Contrats de remplacement", badge: "Gratuit" },
 ];
 
