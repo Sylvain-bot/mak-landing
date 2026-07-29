@@ -11,7 +11,7 @@ const POINTS = [
   {
     icon: "📹",
     title: "Consultation vidéo sécurisée",
-    body: "Suivi post-opératoire, bilan initial à domicile, renouvellement d'ordonnance — directement depuis Mon Assistant Kiné, sans installation côté patient.",
+    body: "Suivi post-opératoire, rééducation à distance, coordination de soins — directement depuis Mon Assistant Kiné, sans installation côté patient.",
   },
   {
     icon: "📋",
@@ -50,7 +50,7 @@ export function VideotransmissionSection() {
             </h2>
 
             <p className="text-[#475569] leading-relaxed mb-8">
-              Suivi post-opératoire, bilan initial à domicile, téléconsultation de renouvellement —
+              Suivi post-opératoire, rééducation à distance, coordination de soins —
               le module vidéotransmission de Mon Assistant Kiné est conçu pour les kinés libéraux.
               Sécurisé, simple pour le patient, et{" "}
               <strong className="text-[#0f172a]">éligible à l&apos;aide FAMI de ta CPAM</strong>.
@@ -105,6 +105,7 @@ export function VideotransmissionSection() {
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-sm mx-auto lg:max-w-none lg:mx-0"
           >
             <div
               className="rounded-2xl overflow-hidden"
@@ -113,8 +114,8 @@ export function VideotransmissionSection() {
               <Image
                 src="/videotransmission-kine.png"
                 alt="Module vidéotransmission sécurisée de Mon Assistant Kiné — consultation kinésithérapie à distance"
-                width={1200}
-                height={800}
+                width={640}
+                height={427}
                 className="w-full h-auto"
               />
             </div>

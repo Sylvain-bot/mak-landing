@@ -57,24 +57,6 @@ const STATS = [
   { icon: "📄", value: "CR automatique", label: "généré à la fin de la session" },
 ];
 
-const USECASES = [
-  {
-    icon: "🦴",
-    title: "Suivi post-opératoire",
-    body: "Consulte ton patient à J+3, J+7, J+15 depuis chez lui. Gagne du temps pour lui et pour toi. Aucun déplacement, même qualité de suivi.",
-  },
-  {
-    icon: "🏠",
-    title: "Bilan initial à domicile",
-    body: "Pour les patients à mobilité réduite ou éloignés, effectue le premier bilan en vidéo avant de planifier les séances en présentiel.",
-  },
-  {
-    icon: "📋",
-    title: "Renouvellement d'ordonnance",
-    body: "Prépare le renouvellement avec le patient, transmets un compte-rendu structuré au médecin prescripteur. Fluidifie la coordination de soins.",
-  },
-];
-
 const FAQ_ITEMS = [
   {
     q: "Le module vidéo est-il inclus dans tous les abonnements ?",
@@ -91,10 +73,6 @@ const FAQ_ITEMS = [
   {
     q: "Les données de la téléconsultation sont-elles sécurisées ?",
     a: "Oui. La connexion vidéo est chiffrée de bout en bout. Les données ne sont pas stockées après la session (sauf le compte-rendu texte que tu as validé). Mon Assistant Kiné respecte le RGPD et les recommandations de la CNIL pour le traitement des données de santé.",
-  },
-  {
-    q: "Est-ce que les téléconsultations sont remboursées par l'Assurance Maladie ?",
-    a: "La téléconsultation kiné ne fait pas encore l'objet d'une nomenclature spécifique dans la NGAP. Ce module répond principalement à un besoin de suivi et de coordination, pas à une facturation à l'acte. Pour l'état exact de la réglementation, consulte l'Ordre des Masseurs-Kinésithérapeutes.",
   },
 ];
 
@@ -117,8 +95,9 @@ export default function VideotransmissionPage() {
             <span className="text-[#3899aa]">intégrée à ton cabinet kiné.</span>
           </h1>
           <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            Téléconsultations, suivi post-opératoire, bilan initial à domicile — directement
-            depuis Mon Assistant Kiné. Sans installation pour le patient. Et ce module te rend{" "}
+            Suivi post-opératoire, rééducation à distance, coordination de soins —
+            directement depuis Mon Assistant Kiné. Sans installation pour le patient.
+            Et ce module te rend{" "}
             <strong className="text-[#0f172a]">éligible à 350 €/an versés par ta CPAM</strong>.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -189,25 +168,6 @@ export default function VideotransmissionPage() {
                   <h3 className="font-semibold text-[#0f172a] mb-2">{s.title}</h3>
                   <p className="text-[#475569] leading-relaxed">{s.body}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Cas d'usage */}
-      <section className="py-20 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
-        <div className="max-w-4xl mx-auto">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Cas d&apos;usage</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-8">
-            Quand utiliser la vidéotransmission ?
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {USECASES.map((u) => (
-              <div key={u.title} className="bg-white rounded-2xl p-6" style={{ border: "1px solid #d4ecea" }}>
-                <div className="text-2xl mb-3">{u.icon}</div>
-                <h3 className="font-semibold text-[#0f172a] mb-2">{u.title}</h3>
-                <p className="text-sm text-[#64748b] leading-relaxed">{u.body}</p>
               </div>
             ))}
           </div>
