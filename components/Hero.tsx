@@ -176,7 +176,7 @@ export function Hero() {
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
-                Essayer 14 jours — sans carte bancaire
+                Essayer 14 jours
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a

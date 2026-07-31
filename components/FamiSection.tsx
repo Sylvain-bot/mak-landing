@@ -249,7 +249,7 @@ export function FamiSection() {
               boxShadow: "0 4px 24px rgba(56,153,170,0.35)",
             }}
           >
-            Essayer 14 jours — sans carte bancaire →
+            Essayer 14 jours →
           </Link>
           <p className="text-white/30 text-xs max-w-xl mx-auto leading-relaxed">
             *L&apos;éligibilité au FAMI dépend de ta CPAM et du respect des conditions du cahier des charges CNAM.

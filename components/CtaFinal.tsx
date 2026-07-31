@@ -27,7 +27,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.15}>
           <p className="text-[#475569] text-base mb-8 leading-relaxed">
-            14 jours d&apos;essai gratuit. Sans carte bancaire. 5 minutes pour prendre Mon Assistant Kiné en main.
+            14 jours d&apos;essai gratuit. 5 minutes pour prendre Mon Assistant Kiné en main.
           </p>
         </ScrollReveal>
 

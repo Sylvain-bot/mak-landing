@@ -97,7 +97,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Comment fonctionne l'essai gratuit ?",
-    a: "Tu bénéficies de 14 jours d'essai complet, sans carte bancaire. Fais des bilans, utilise le copilote, explore toutes les fonctionnalités — et fais-toi ton avis avant de choisir. À l'issue des 14 jours, tu choisis ta formule ou tu ne paies rien.",
+    a: "Tu bénéficies de 14 jours d'essai complet avec carte bancaire — résiliable à tout moment. Fais des bilans, utilise le copilote, explore toutes les fonctionnalités — et fais-toi ton avis avant de choisir. Tu ne seras débité qu'à l'issue des 14 jours si tu gardes l'abonnement.",
     // TODO-FONDATEUR: préciser les limites exactes de l'essai (nombre de bilans/questions offerts) pour affichage transparent
   },
   {
@@ -196,7 +196,7 @@ export default function TarifsPage() {
       <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer Mon Assistant Kiné — 14 jours gratuits</h2>
-          <p className="text-white/80 mb-4">14 jours d&apos;essai · Sans carte bancaire · Sans engagement</p>
+          <p className="text-white/80 mb-4">14 jours d&apos;essai · Sans engagement</p>
           <Link
             href={CTA_SIGNUP_URL}
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02] mb-4"

@@ -3,6 +3,46 @@
 import { useEffect, useRef, useState } from "react";
 import { X, Send, MessageCircle, ChevronDown } from "lucide-react";
 
+function RobotIcon() {
+  return (
+    <svg viewBox="0 0 36 36" width="36" height="36" aria-hidden="true">
+      <style>{`
+        @keyframes blink {
+          0%, 90%, 100% { transform: scaleY(1); }
+          95% { transform: scaleY(0.1); }
+        }
+        @keyframes antenna-pulse {
+          0%, 100% { opacity: 1; r: 2; }
+          50% { opacity: 0.5; r: 2.8; }
+        }
+        .eye { animation: blink 3.5s ease-in-out infinite; transform-origin: center; }
+        .eye-r { animation: blink 3.5s ease-in-out 0.15s infinite; transform-origin: center; }
+        .ant-dot { animation: antenna-pulse 1.8s ease-in-out infinite; }
+      `}</style>
+      {/* Antenne */}
+      <line x1="18" y1="7" x2="18" y2="3" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle className="ant-dot" cx="18" cy="2.2" r="2" fill="#e8b04d"/>
+      {/* Tête */}
+      <rect x="6" y="7" width="24" height="18" rx="4" fill="white" fillOpacity="0.15"/>
+      <rect x="6" y="7" width="24" height="18" rx="4" fill="none" stroke="white" strokeWidth="1.2" strokeOpacity="0.5"/>
+      {/* Yeux */}
+      <g className="eye">
+        <rect x="10" y="13" width="6" height="5" rx="2" fill="white"/>
+        <rect x="11.5" y="14.5" width="3" height="3" rx="1" fill="#3899aa"/>
+      </g>
+      <g className="eye-r">
+        <rect x="20" y="13" width="6" height="5" rx="2" fill="white"/>
+        <rect x="21.5" y="14.5" width="3" height="3" rx="1" fill="#3899aa"/>
+      </g>
+      {/* Bouche */}
+      <rect x="13" y="21" width="10" height="2" rx="1" fill="white" fillOpacity="0.6"/>
+      {/* Oreilles */}
+      <rect x="3" y="12" width="3" height="5" rx="1.5" fill="white" fillOpacity="0.3"/>
+      <rect x="30" y="12" width="3" height="5" rx="1.5" fill="white" fillOpacity="0.3"/>
+    </svg>
+  );
+}
+
 type Message = { role: "user" | "assistant"; content: string };
 
 type View = "chat" | "contact" | "contact-sent";
@@ -173,7 +213,7 @@ export function ChatBot() {
       {/* Chat panel */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 flex flex-col rounded-2xl overflow-hidden shadow-2xl w-[340px] max-h-[520px]"
+          className="fixed bottom-24 right-3 left-3 sm:left-auto sm:right-6 sm:w-[340px] z-50 flex flex-col rounded-2xl overflow-hidden shadow-2xl max-h-[520px]"
           style={{ border: "1px solid #d4ecea", background: "white" }}
         >
           {/* Header */}
@@ -182,9 +222,9 @@ export function ChatBot() {
             style={{ background: "#0f172a" }}
           >
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
                 style={{ background: "#3899aa" }}>
-                🦴
+                <RobotIcon />
               </div>
               <div>
                 <p className="text-white text-sm font-semibold leading-none mb-0.5">
@@ -288,7 +328,7 @@ export function ChatBot() {
                   placeholder="Ton prénom *"
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm outline-none text-[#0f172a] placeholder:text-[#94a3b8]"
+                  className="w-full px-3.5 py-2.5 rounded-xl outline-none text-[#0f172a] placeholder:text-[#94a3b8] text-base sm:text-sm"
                   style={{ border: "1px solid #d4ecea", background: "#f8fafc" }}
                 />
                 <input
@@ -297,7 +337,7 @@ export function ChatBot() {
                   required
                   value={contactEmail}
                   onChange={(e) => setContactEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm outline-none text-[#0f172a] placeholder:text-[#94a3b8]"
+                  className="w-full px-3.5 py-2.5 rounded-xl outline-none text-[#0f172a] placeholder:text-[#94a3b8] text-base sm:text-sm"
                   style={{ border: "1px solid #d4ecea", background: "#f8fafc" }}
                 />
                 <textarea
@@ -305,7 +345,7 @@ export function ChatBot() {
                   value={contactMessage}
                   onChange={(e) => setContactMessage(e.target.value)}
                   rows={3}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm outline-none text-[#0f172a] placeholder:text-[#94a3b8] resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl outline-none text-[#0f172a] placeholder:text-[#94a3b8] resize-none text-base sm:text-sm"
                   style={{ border: "1px solid #d4ecea", background: "#f8fafc" }}
                 />
               </div>
@@ -346,7 +386,7 @@ export function ChatBot() {
                 className="mt-2 inline-flex items-center justify-center w-full py-2.5 rounded-xl text-sm font-semibold text-white"
                 style={{ background: "#3899aa" }}
               >
-                Essayer 14 jours — sans CB
+                Essayer 14 jours
               </a>
               <button
                 onClick={() => setView("chat")}

@@ -105,7 +105,7 @@ export default function VideotransmissionPage() {
               href={CTA_SIGNUP_URL}
               className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
             >
-              Essayer 14 jours — sans CB <ArrowRight className="w-4 h-4" />
+              Essayer 14 jours <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="#fami"
@@ -224,7 +224,7 @@ export default function VideotransmissionPage() {
               className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-lg text-sm font-bold text-white transition-all hover:scale-[1.02]"
               style={{ background: "#e8b04d", color: "#0f2229" }}
             >
-              Essayer 14 jours — sans CB <ArrowRight className="w-4 h-4" />
+              Essayer 14 jours <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/tarifs"
@@ -318,7 +318,7 @@ export default function VideotransmissionPage() {
             Essayer la vidéotransmission — 14 jours gratuits
           </h2>
           <p className="text-white/80 mb-8">
-            Module inclus dès l&apos;offre Pratique · Sans carte bancaire · Accès immédiat
+            Module inclus dès l&apos;offre Pratique · Accès immédiat
           </p>
           <Link
             href={CTA_SIGNUP_URL}

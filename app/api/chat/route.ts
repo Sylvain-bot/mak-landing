@@ -36,7 +36,7 @@ AIDE FAMI (Forfait Aide à la Modernisation et Informatisation) :
 - Éligible : Pratique, Expert, Pionnier (mensuel ou annuel)
 - Exemple Pionnier annuel : tu paies 199 €, ta CPAM te verse 350 € → tu gagnes 151 € net chaque année
 
-ESSAI GRATUIT : 14 jours sans carte bancaire. Accès immédiat sur https://app.monassistantkine.fr/signup
+ESSAI GRATUIT : 14 jours d'essai (carte bancaire requise, résiliable à tout moment). Accès immédiat sur https://app.monassistantkine.fr/signup
 
 DONNÉES & SÉCURITÉ : hébergement en Europe, jamais utilisées pour entraîner des modèles IA tiers, conformité RGPD.
 

@@ -32,7 +32,7 @@ export const FAMI_NET_PRATIQUE = "-51";
 export const FAMI_NET_EXPERT = "149";
 
 // CTA principal unique
-export const CTA_MAIN = "Essayer 14 jours — sans carte bancaire";
+export const CTA_MAIN = "Essayer 14 jours";
 export const CTA_SIGNUP_URL = APP_URL + "/signup";
 export const CTA_LOGIN_URL = APP_URL + "/login";
 
