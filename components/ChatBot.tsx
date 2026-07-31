@@ -10,7 +10,7 @@ type View = "chat" | "contact" | "contact-sent";
 const WELCOME: Message = {
   role: "assistant",
   content:
-    "Bonjour 👋 Je suis l'assistant de Mon Assistant Kiné. Tu as une question sur le produit, les tarifs ou l'aide FAMI ? Je suis là.",
+    "Bonjour 👋 Tu as une question sur Mon Assistant Kiné — ou tu préfères qu'on te recontacte directement ?",
 };
 
 export function ChatBot() {
@@ -225,18 +225,23 @@ export function ChatBot() {
                 <div ref={bottomRef} />
               </div>
 
-              {/* Parler à Sylvain CTA */}
-              {messages.length >= 3 && (
-                <div className="px-4 pb-2 shrink-0">
-                  <button
-                    onClick={() => setView("contact")}
-                    className="w-full text-center py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-90"
-                    style={{ background: "#fef9ec", border: "1px solid #f0d080", color: "#92680a" }}
-                  >
-                    ✉️ Parler directement à Sylvain (co-fondateur kiné)
-                  </button>
-                </div>
-              )}
+              {/* Actions rapides — toujours visibles */}
+              <div className="px-4 pb-2 shrink-0 flex gap-2">
+                <button
+                  onClick={() => setView("contact")}
+                  className="flex-1 text-center py-2 rounded-xl text-xs font-semibold transition-all hover:opacity-90"
+                  style={{ background: "#fef9ec", border: "1px solid #f0d080", color: "#92680a" }}
+                >
+                  ✉️ Être recontacté
+                </button>
+                <button
+                  onClick={() => inputRef.current?.focus()}
+                  className="flex-1 text-center py-2 rounded-xl text-xs font-semibold transition-all hover:bg-[#eef7f6]"
+                  style={{ border: "1px solid #d4ecea", color: "#3899aa" }}
+                >
+                  💬 Poser une question
+                </button>
+              </div>
 
               {/* Input */}
               <form
