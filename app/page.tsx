@@ -73,7 +73,7 @@ export default async function Home() {
                 "Module administratif — courriers médecins, relances et comptes-rendus depuis tes templates ou rédigés par l'IA",
                 "Suivi patient à domicile — programme d'exercices sur WhatsApp avec vidéos, zéro relance manuelle",
                 "Copilote clinique — 56 000+ ressources dont le Cleland, drapeaux rouges vérifiés, réponse sourcée en 30 secondes",
-                "Vidéotransmission sécurisée — consultations à distance, suivi post-op, bilan initial à domicile (rend éligible au FAMI)",
+                "Vidéotransmission sécurisée — consultations à distance, suivi post-op (rend éligible au FAMI)",
                 "Données hébergées en Europe, jamais utilisées pour entraîner des modèles IA tiers",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-[#475569] leading-snug">
