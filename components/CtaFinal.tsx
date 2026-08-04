@@ -48,7 +48,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.25} className="mt-4 mb-6">
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[#64748b]">
-            {["14 jours d'essai gratuit", "Sans carte bancaire", "Places limitées aux 100 premiers"].map(
+            {["14 jours d'essai gratuit", "Places limitées aux 100 premiers"].map(
               (item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />

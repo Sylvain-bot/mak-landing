@@ -23,7 +23,7 @@ const STEPS = [
   {
     n: "2",
     title: "Tu l'utilises normalement",
-    body: "Consultations à distance, suivi post-op, bilan initial à domicile — comme d'habitude.",
+    body: "Consultations à distance, suivi post-op — comme d'habitude.",
   },
   {
     n: "3",
