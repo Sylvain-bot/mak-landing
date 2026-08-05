@@ -59,7 +59,12 @@ function StatItem({
   );
 }
 
-const TRUST = ["14 jours d'essai gratuit", COMPLIANCE_CLAIM, "5 min de prise en main"];
+const TRUST: { label: string; gold?: boolean }[] = [
+  { label: "14 jours d'essai gratuit" },
+  { label: COMPLIANCE_CLAIM },
+  { label: "5 min de prise en main" },
+  { label: "Éligible aide FAMI 350 €/an", gold: true },
+];
 
 function AppScreenshot() {
   return (
@@ -92,7 +97,7 @@ export function Hero() {
   const ph = usePostHog();
 
   return (
-    <section className="relative overflow-hidden bg-white pt-16 sm:pt-24 pb-0 px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 pb-0 px-4 sm:px-6">
       {/* Dot grid */}
       <div
         aria-hidden
@@ -171,7 +176,7 @@ export function Hero() {
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
-                Essayer 14 jours — sans carte bancaire
+                Essayer 14 jours
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
@@ -190,9 +195,16 @@ export function Hero() {
               className="flex flex-wrap gap-x-5 gap-y-2"
             >
               {TRUST.map((item) => (
-                <span key={item} className="flex items-center gap-1.5 text-sm text-[#64748b]">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
-                  {item}
+                <span
+                  key={item.label}
+                  className="flex items-center gap-1.5 text-sm"
+                  style={item.gold ? { color: "#92680a", fontWeight: 500 } : { color: "#64748b" }}
+                >
+                  {item.gold
+                    ? <span style={{ color: "#e8b04d", fontSize: "0.7rem" }}>★</span>
+                    : <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
+                  }
+                  {item.label}
                 </span>
               ))}
             </motion.div>

@@ -228,7 +228,7 @@ export default function ContratsRemplacementPage() {
       <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Accéder au module contrats</h2>
-          <p className="text-white/80 mb-8">Gratuit · Sans carte bancaire · Accès immédiat</p>
+          <p className="text-white/80 mb-8">Gratuit · Accès immédiat</p>
           <Link
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"

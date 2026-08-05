@@ -13,6 +13,7 @@ const FEATURES = [
   { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Copilote IA Kiné", badge: null },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", badge: null },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", badge: null },
+  { href: "/fonctionnalites/videotransmission", icon: "📹", label: "Vidéotransmission", badge: "Nouveau" },
   { href: "/fonctionnalites/contrats-remplacement", icon: "📑", label: "Contrats de remplacement", badge: "Gratuit" },
 ];
 
@@ -51,6 +52,15 @@ export function Navbar() {
           borderBottom: scrolled || mobileOpen ? "1px solid #d4ecea" : "none",
         }}
       >
+        {/* FAMI announcement strip */}
+        <div className="py-1.5 px-4 text-center text-xs" style={{ background: "#0f2229" }}>
+          <span style={{ color: "#e8b04d" }} className="font-bold">★ Nouveau · FAMI :</span>{" "}
+          <span className="text-white/70">Ta CPAM peut te verser jusqu&apos;à 350 €/an grâce à Mon Assistant Kiné.</span>{" "}
+          <a href="#fami-section" className="font-semibold underline hover:opacity-90 transition-opacity" style={{ color: "#e8b04d" }}>
+            Comment ça marche →
+          </a>
+        </div>
+
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
@@ -175,7 +185,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-white border-b border-[#d4ecea] md:hidden overflow-hidden"
+            className="fixed top-[88px] left-0 right-0 z-40 bg-white border-b border-[#d4ecea] md:hidden overflow-hidden"
           >
             <div className="px-4 py-4 space-y-1 max-h-[80vh] overflow-y-auto">
               <p className="text-xs font-semibold text-[#94a3b8] uppercase tracking-widest px-3 pb-1">

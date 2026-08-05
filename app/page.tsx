@@ -8,6 +8,8 @@ import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { MultiDevice } from "@/components/MultiDevice";
 import { CtaFinal } from "@/components/CtaFinal";
+import { FamiSection } from "@/components/FamiSection";
+import { VideotransmissionSection } from "@/components/VideotransmissionSection";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { homepageSchema } from "@/lib/schemas/homepage.schema";
@@ -15,7 +17,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Mon Assistant Kiné — Récupère 45 min/jour au cabinet | IA pour Kinésithérapeutes",
-  description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé (56 000+ études). Conçu par des kinés libéraux. 14 jours d'essai gratuit, sans CB.",
+  description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé (56 000+ études). Conçu par des kinés libéraux. 14 jours d'essai gratuit.",
   alternates: {
     canonical: "https://www.monassistantkine.fr",
   },
@@ -35,6 +37,7 @@ export default async function Home() {
   return (
     <main>
       <JsonLd data={homepageSchema} />
+
       <Navbar />
 
       {/* SECTION 1 — Hero */}
@@ -70,6 +73,7 @@ export default async function Home() {
                 "Module administratif — courriers médecins, relances et comptes-rendus depuis tes templates ou rédigés par l'IA",
                 "Suivi patient à domicile — programme d'exercices sur WhatsApp avec vidéos, zéro relance manuelle",
                 "Copilote clinique — 56 000+ ressources dont le Cleland, drapeaux rouges vérifiés, réponse sourcée en 30 secondes",
+                "Vidéotransmission sécurisée — consultations à distance, suivi post-op (rend éligible au FAMI)",
                 "Données hébergées en Europe, jamais utilisées pour entraîner des modèles IA tiers",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-[#475569] leading-snug">
@@ -82,7 +86,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SECTION 6 — Pricing */}
+      {/* SECTION 6 — Vidéotransmission (nouveauté) */}
+      <VideotransmissionSection />
+
+      {/* SECTION 7 — FAMI */}
+      <FamiSection />
+
+      {/* SECTION 7 — Pricing */}
       <Pricing />
 
       {/* SECTION 7 — FAQ */}
