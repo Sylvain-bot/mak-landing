@@ -67,19 +67,20 @@ export default async function Home() {
             <div className="rounded-2xl p-7 sm:p-9" style={{ background: "#fff5f5", border: "1px solid #fca5a5" }}>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-2 h-2 rounded-full bg-red-400" />
-                <p className="text-xs font-bold uppercase tracking-widest text-red-400">Sans MAK</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-red-400">Le pilote automatique</p>
               </div>
               <p className="text-[#475569] leading-relaxed text-sm mb-6">
-                Tu rentres du cabinet avec ton sac de dossiers en retard. Tu rédiges tes bilans après le
-                repas, pendant que ta famille passe la soirée sans toi. Un cas compliqué te trotte encore
-                dans la tête — et tu n&apos;as personne à qui le poser.
+                Tu soignes bien — mais honnêtement, tu fonctionnes en routine. Les articles scientifiques
+                s&apos;accumulent dans tes onglets sans que tu les lises vraiment. Tu refais les mêmes
+                techniques depuis des années. Tes bilans sont rédigés le soir. Tes patients, tu les suis
+                comme tu peux. Ce n&apos;est pas ce que tu imaginais en sortant de l&apos;école.
               </p>
               <div className="space-y-2.5">
                 {[
-                  "Bilans rédigés le soir ou le week-end",
-                  "Questions cliniques sans réponse immédiate",
-                  "Suivi entre les séances ? Impossible à gérer seul",
-                  "Charge mentale qui déborde sur la vie perso",
+                  "Les mêmes techniques depuis des années, sans mise à jour",
+                  "La littérature scientifique que tu n'as plus le temps de lire",
+                  "Suivi patient entre les séances : bricolage ou rien",
+                  "Bilans rédigés le soir — la charge mentale qui déborde",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs text-red-500/80">
                     <span className="mt-0.5 shrink-0 font-bold">✕</span>
@@ -93,19 +94,20 @@ export default async function Home() {
             <div className="rounded-2xl p-7 sm:p-9" style={{ background: "#eef7f6", border: "1px solid #3899aa" }}>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-2 h-2 rounded-full bg-[#3899aa]" />
-                <p className="text-xs font-bold uppercase tracking-widest text-[#3899aa]">Avec MAK</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#3899aa]">Le kiné que tu voulais être</p>
               </div>
               <p className="text-[#475569] leading-relaxed text-sm mb-6">
-                Tu dictes ton bilan entre deux patients — il est prêt avant que tu aies raccroché ta blouse.
-                Le cas compliqué ? Tu poses la question au Copilote, réponse sourcée en 30 secondes,
-                comme à un confrère de confiance. Tes patients sont suivis. Tes soirées t&apos;appartiennent.
+                Tu poses ta question clinique au Copilote — réponse en 30 secondes, sources citées parmi
+                56 000+ études. Ton bilan est dicté entre deux patients. Tes patients reçoivent leur programme
+                de rééducation sur WhatsApp. Tu pratiques avec la rigueur que tu voulais avoir. Tes soirées
+                t&apos;appartiennent à nouveau.
               </p>
               <div className="space-y-2.5">
                 {[
-                  "Bilan dicté en 3 minutes, entre deux patients",
-                  "Questions cliniques répondues en 30 secondes avec les sources",
-                  "Patients suivis entre les séances par programme WhatsApp",
-                  "La tête libre pour soigner — et pour vivre",
+                  "Toujours à jour scientifiquement, sans y passer des heures",
+                  "Bilans en 3 minutes — dictés entre deux patients",
+                  "Patients suivis entre les séances, programme WhatsApp automatisé",
+                  "La fierté de pratiquer comme tu l'avais imaginé",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs text-[#2a7a8a] font-medium">
                     <span className="mt-0.5 shrink-0">✓</span>

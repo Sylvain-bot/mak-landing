@@ -156,10 +156,9 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="text-base text-[#475569] mb-5 leading-relaxed"
             >
-              <span className="text-[#0f172a] font-medium">Sois le kiné que tu voulais être.</span>
-              {" "}Bilans dictés en 3 minutes. Réponse clinique sourcée en 30 secondes
-              pendant une séance compliquée — tu n&apos;es plus seul.
-              Patients suivis entre les séances. Conçu par 2 kinés libéraux.
+              Tu voulais être rigoureux, curieux, toujours à jour scientifiquement.{" "}
+              <span className="text-[#0f172a] font-medium">Le libéral t&apos;a mis en pilote automatique.</span>
+              {" "}MAK te remet aux commandes — sans y passer tes soirées. Conçu par 2 kinés libéraux.
             </motion.p>
 
             <motion.p
@@ -169,7 +168,7 @@ export function Hero() {
               className="text-xs text-[#64748b] rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
               style={{ background: "#f0f9fa" }}
             >
-              <span className="font-semibold text-[#475569]">Le Copilote</span>, c&apos;est comme un confrère disponible à toute heure : pose ta question clinique, il répond en 30 secondes en citant ses sources (56&nbsp;000+ études, Cleland inclus). Tu décides toujours.
+              <span className="font-semibold text-[#475569]">Le Copilote</span> : pose ta question clinique, il répond en 30 secondes en citant ses sources parmi 56&nbsp;000+ études (Cleland inclus). Tu restes informé. Tu décides toujours.
             </motion.p>
 
             <motion.div
