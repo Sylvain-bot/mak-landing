@@ -95,15 +95,16 @@ export default async function Home() {
               </div>
               <p className="text-[#475569] leading-relaxed text-sm mb-6">
                 Tu poses ta question clinique au Copilote — réponse en 30 secondes, sources citées parmi
-                56 000+ études. Ton bilan est dicté entre deux patients. Tes patients reçoivent leur programme
-                de rééducation sur WhatsApp. Tu pratiques avec la rigueur que tu voulais avoir. Tes soirées
+                56 000+ études. Tes patients reçoivent leur programme de rééducation sur WhatsApp et sont
+                accompagnés par le chatbot que tu as programmé pour eux. Tu pratiques avec la rigueur que
+                tu voulais avoir. Ton bilan est mis au propre directement pendant la séance. Tes soirées
                 t&apos;appartiennent à nouveau.
               </p>
               <div className="space-y-2.5">
                 {[
                   "Toujours à jour scientifiquement, sans y passer des heures",
-                  "Bilans en 3 minutes — dictés entre deux patients",
-                  "Patients suivis entre les séances, programme WhatsApp automatisé",
+                  "Bilan mis au propre pendant la séance, en temps réel",
+                  "Patients suivis entre les séances, chatbot WhatsApp programmé pour eux",
                   "La fierté de pratiquer comme tu l'avais imaginé",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs text-[#2a7a8a] font-medium">

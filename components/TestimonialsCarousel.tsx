@@ -31,12 +31,6 @@ const TESTIMONIALS = [
     location: "Toulouse",
     tag: "Copilote",
   },
-  {
-    quote: "Le gain de temps sur les bilans est réel. J'en fais deux fois plus sans rester le soir.",
-    author: "Thomas R.",
-    location: "Bordeaux",
-    tag: "Bilans",
-  },
 ];
 
 const DOUBLED = [...TESTIMONIALS, ...TESTIMONIALS];
@@ -54,7 +48,7 @@ export function TestimonialsCarousel() {
       style={{ background: "white", borderTop: "1px solid #d4ecea" }}
       aria-label="Témoignages kinésithérapeutes"
     >
-      <div className="mak-ticker-track flex gap-3 w-max">
+      <div className="mak-ticker-track flex gap-6 w-max">
         {DOUBLED.map((t, i) => (
           <div
             key={i}

@@ -21,7 +21,7 @@ export function CtaFinal() {
               le kiné que tu voulais être.
             </span>
             <br />
-            <span className="text-[#94a3b8]">Dès ton prochain bilan.</span>
+            <span className="text-[#94a3b8]">Dès ta prochaine séance.</span>
           </h2>
         </ScrollReveal>
 
