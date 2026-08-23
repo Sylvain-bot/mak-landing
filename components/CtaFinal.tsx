@@ -16,9 +16,9 @@ export function CtaFinal() {
       <div className="max-w-2xl mx-auto text-center">
         <ScrollReveal delay={0.1}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-4 leading-tight">
-            Récupère{" "}
+            Redeviens{" "}
             <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-              45 minutes par jour.
+              le kiné que tu voulais être.
             </span>
             <br />
             <span className="text-[#94a3b8]">Dès ton prochain bilan.</span>

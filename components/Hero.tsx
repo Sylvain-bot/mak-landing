@@ -156,10 +156,10 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="text-base text-[#475569] mb-5 leading-relaxed"
             >
-              Un jeudi 19h, face au cas qui te met en doute —&nbsp;
-              <span className="text-[#0f172a] font-medium">tu n&apos;es plus seule.</span>
-              {" "}Bilans dictés en 3 minutes entre deux patients,
-              copilote clinique sourcé en 30 secondes.
+              Pendant une séance compliquée, face au cas qui te met en doute —&nbsp;
+              <span className="text-[#0f172a] font-medium">tu n&apos;es plus seul.</span>
+              {" "}Bilans dictés en 3 minutes. Questions cliniques,
+              réponse sourcée en 30 secondes.
               Conçu par 2 kinés libéraux.
             </motion.p>
 
@@ -167,10 +167,10 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28, ease: "easeOut" }}
-              className="text-xs text-[#64748b] italic rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
+              className="text-xs text-[#64748b] rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
               style={{ background: "#f0f9fa" }}
             >
-              Le Copilote propose des pistes sourcées — tu décides toujours.
+              <span className="font-semibold text-[#475569]">Le Copilote</span>, c&apos;est comme un confrère disponible à toute heure : pose ta question clinique, il répond en 30 secondes en citant ses sources (56&nbsp;000+ études, Cleland inclus). Tu décides toujours.
             </motion.p>
 
             <motion.div
@@ -245,17 +245,17 @@ export function Hero() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-7">
               <StatItem
-                target={3} suffix=" min" label="Bilan NGAP complet"
+                target={3} suffix=" min" label="Bilan NGAP dicté et mis en forme"
                 active={inView}
               />
               <StatItem
-                target={2} suffix=" min" label="Courrier ou document admin"
+                target={30} suffix=" sec" label="Réponse à ta question clinique (Copilote)"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
               <StatItem
-                target={4} suffix="h/sem" label="récupérées en moyenne"
-                active={inView}
+                target={56000} suffix="+" label="Ressources scientifiques accessibles (dont Cleland)"
+                frenchFormat active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
             </div>
