@@ -156,21 +156,21 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="text-base text-[#475569] mb-5 leading-relaxed"
             >
-              Pas celle qui rentre avec un sac de dossiers en retard.
-              Un jeudi, 19h, face au cas qui te met en doute, tu n&apos;es plus seule :
-              un copilote sourcé qui répond en 30 secondes comme un confrère de confiance,
-              des bilans dictés en 3 minutes entre deux patients.
-              Un seul outil, conçu par des kinés libéraux.
+              Un jeudi 19h, face au cas qui te met en doute —&nbsp;
+              <span className="text-[#0f172a] font-medium">tu n&apos;es plus seule.</span>
+              {" "}Bilans dictés en 3 minutes entre deux patients,
+              copilote clinique sourcé en 30 secondes.
+              Conçu par 2 kinés libéraux.
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28, ease: "easeOut" }}
-              className="text-sm text-[#475569] rounded-lg px-4 py-3 mb-7 border border-[#d4ecea]"
+              className="text-xs text-[#64748b] italic rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
               style={{ background: "#f0f9fa" }}
             >
-              Le Copilote propose des pistes sourcées. Il ne décide jamais à ta place — ce sera toujours vrai.
+              Le Copilote propose des pistes sourcées — tu décides toujours.
             </motion.p>
 
             <motion.div
