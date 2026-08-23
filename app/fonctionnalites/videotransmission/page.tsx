@@ -84,21 +84,20 @@ export default function VideotransmissionPage() {
       {/* Hero */}
       <section className="bg-white pt-28 pb-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-bold"
-            style={{ background: "#fef9ec", border: "1px solid #f0d080", color: "#92680a" }}>
-            <span>★</span>
-            <span>Nouveau · Éligible aide FAMI 350 €/an</span>
-          </div>
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4">Fonctionnalité</p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Vidéotransmission sécurisée<br />
-            <span className="text-[#3899aa]">intégrée à ton cabinet kiné.</span>
+            Ne perds jamais le fil<br />
+            <span className="text-[#3899aa]">avec un patient.</span>
           </h1>
-          <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            Suivi post-opératoire, rééducation à distance, coordination de soins —
-            directement depuis Mon Assistant Kiné. Sans installation pour le patient.
-            Et ce module te rend{" "}
-            <strong className="text-[#0f172a]">éligible à 350 €/an versés par ta CPAM</strong>.
+          <p className="text-lg text-[#475569] mb-4 max-w-2xl mx-auto leading-relaxed">
+            Tu n&apos;achètes pas un outil de visioconférence.
+            Tu achètes la certitude de ne jamais perdre le fil avec un patient —
+            qu&apos;il soit cloué chez lui après une opération, trop loin pour se déplacer,
+            ou juste indisponible ce jour-là.
+          </p>
+          <p className="text-sm text-[#64748b] mb-8 max-w-xl mx-auto">
+            Lien envoyé par SMS ou WhatsApp, zéro installation côté patient. Compte-rendu généré automatiquement.
+            Chiffré de bout en bout.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -111,7 +110,7 @@ export default function VideotransmissionPage() {
               href="#fami"
               className="inline-flex items-center justify-center h-12 px-6 rounded-lg border border-[#d4ecea] text-[#3899aa] font-medium hover:bg-[#eef7f6] transition-all"
             >
-              Comprendre l&apos;aide FAMI →
+              Aide FAMI — en savoir plus →
             </Link>
           </div>
         </div>
@@ -174,6 +173,30 @@ export default function VideotransmissionPage() {
         </div>
       </section>
 
+      {/* Avant / Après */}
+      <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}>
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-8">Avant / Après</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="rounded-2xl p-7" style={{ background: "#fff5f5", border: "1px solid #fca5a5" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-4">Avant</p>
+              <p className="text-[#475569] leading-relaxed text-sm">
+                Un patient qui ne peut pas venir au cabinet, c&apos;est une séance sautée, un suivi qui se casse,
+                et souvent un rappel plusieurs jours après pour savoir comment ça va.
+              </p>
+            </div>
+            <div className="rounded-2xl p-7" style={{ background: "#eef7f6", border: "1px solid #3899aa" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] mb-4">Après</p>
+              <p className="text-[#475569] leading-relaxed text-sm">
+                Tu lances la consultation depuis Mon Assistant Kiné, le patient rejoint par un simple lien,
+                et le compte-rendu part automatiquement à son médecin. Le suivi continue, même quand le patient
+                ne peut pas être là.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Bloc FAMI dédié */}
       <section id="fami" className="py-20 px-4 sm:px-6" style={{ background: "#0f2229" }}>
         <div className="max-w-3xl mx-auto text-center">
@@ -214,7 +237,7 @@ export default function VideotransmissionPage() {
                 <span className="text-sm font-bold text-white">Tu gagnes</span>
                 <span className="text-2xl font-bold" style={{ color: "#e8b04d" }}>+ 151 €/an</span>
               </div>
-              <p className="text-xs text-white/40 mt-1">net chaque année, garanti à vie sur l&apos;Offre Pionnier</p>
+              <p className="text-xs text-white/40 mt-1">net/an si FAMI accordé (sous réserve des conditions CPAM)</p>
             </div>
           </div>
 
@@ -258,19 +281,19 @@ export default function VideotransmissionPage() {
               {
                 name: "Pratique · 29 €/mois",
                 included: true,
-                note: "★ Module vidéo inclus · Éligible FAMI · Gratuit après aide CPAM",
+                note: "★ Module vidéo inclus · Éligible aide FAMI (sous réserve conditions CPAM)",
                 color: "#3899aa",
               },
               {
                 name: "Expert · 49 €/mois",
                 included: true,
-                note: "★ Module vidéo inclus · Éligible FAMI · 19,83 €/mois réel après aide",
+                note: "★ Module vidéo inclus · Éligible aide FAMI (sous réserve conditions CPAM)",
                 color: "#3899aa",
               },
               {
                 name: "Pionnier · 19 €/mois",
                 included: true,
-                note: "★ Module vidéo inclus · Éligible FAMI · Tu gagnes 122 €/an net",
+                note: "★ Module vidéo inclus · Éligible aide FAMI (sous réserve conditions CPAM)",
                 color: "#3899aa",
               },
             ].map((plan) => (

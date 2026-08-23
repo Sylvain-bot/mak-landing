@@ -5,7 +5,7 @@ const FEATURES = [
   { href: "/fonctionnalites/aide-decision-clinique", icon: "🧠", label: "Copilote IA Kiné", desc: "clinique & bibliographique" },
   { href: "/fonctionnalites/suivi-patient", icon: "💬", label: "Suivi patient", desc: "via WhatsApp" },
   { href: "/fonctionnalites/gestion-administrative", icon: "📨", label: "Administratif", desc: "en 1 clic" },
-  { href: "/fonctionnalites/videotransmission", icon: "📹", label: "Vidéotransmission", desc: "éligible FAMI ★", isNew: true },
+  { href: "/fonctionnalites/videotransmission", icon: "📹", label: "Vidéotransmission", desc: "consultation à distance", isNew: true },
   { href: "/fonctionnalites/contrats-remplacement", icon: "📑", label: "Contrats", desc: "100 % gratuit", free: true },
 ];
 

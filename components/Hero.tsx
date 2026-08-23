@@ -63,7 +63,7 @@ const TRUST: { label: string; gold?: boolean }[] = [
   { label: "14 jours d'essai gratuit" },
   { label: COMPLIANCE_CLAIM },
   { label: "5 min de prise en main" },
-  { label: "Éligible aide FAMI 350 €/an", gold: true },
+  { label: "Conçu par 2 kinés D.E. libéraux" },
 ];
 
 function AppScreenshot() {
@@ -142,24 +142,35 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1] text-[#0f172a] mb-5"
             >
-              Récupère{" "}
+              Deviens le kiné{" "}
               <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-                45 minutes par jour
+                que tu voulais être
               </span>
               <br />
-              au cabinet.
+              en sortant de l&apos;école.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="text-base text-[#475569] mb-8 leading-relaxed"
+              className="text-base text-[#475569] mb-5 leading-relaxed"
             >
-              Bilans NGAP dictés en 3 minutes, courriers en 2 minutes,
-              suivi patient sur WhatsApp — et un copilote clinique sourcé
-              ({" "}<span className="text-[#0f172a] font-semibold">56 000+ études, Cleland inclus</span>)
-              {" "}quand tu as un doute. Un seul outil, conçu par des kinés libéraux.
+              Pas celle qui rentre avec un sac de dossiers en retard.
+              Un jeudi, 19h, face au cas qui te met en doute, tu n&apos;es plus seule :
+              un copilote sourcé qui répond en 30 secondes comme un confrère de confiance,
+              des bilans dictés en 3 minutes entre deux patients.
+              Un seul outil, conçu par des kinés libéraux.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.28, ease: "easeOut" }}
+              className="text-sm text-[#475569] rounded-lg px-4 py-3 mb-7 border border-[#d4ecea]"
+              style={{ background: "#f0f9fa" }}
+            >
+              Le Copilote propose des pistes sourcées. Il ne décide jamais à ta place — ce sera toujours vrai.
             </motion.p>
 
             <motion.div

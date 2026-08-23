@@ -50,10 +50,10 @@ export function VideotransmissionSection() {
             </h2>
 
             <p className="text-[#475569] leading-relaxed mb-8">
-              Suivi post-opératoire, rééducation à distance, coordination de soins —
-              le module vidéotransmission de Mon Assistant Kiné est conçu pour les kinés libéraux.
-              Sécurisé, simple pour le patient, et{" "}
-              <strong className="text-[#0f172a]">éligible à l&apos;aide FAMI de ta CPAM</strong>.
+              Tu n&apos;achètes pas un outil de visioconférence.
+              Tu achètes la certitude de ne jamais perdre le fil avec un patient —
+              qu&apos;il soit cloué chez lui après une opération, trop loin pour se déplacer,
+              ou juste indisponible ce jour-là.
             </p>
 
             <ul className="space-y-5 mb-8">

@@ -16,14 +16,14 @@ import { homepageSchema } from "@/lib/schemas/homepage.schema";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Mon Assistant Kiné — Récupère 45 min/jour au cabinet | IA pour Kinésithérapeutes",
-  description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé (56 000+ études). Conçu par des kinés libéraux. 14 jours d'essai gratuit.",
+  title: "Mon Assistant Kiné | L'IA pour kinésithérapeutes — Bilans en 3 min, copilote clinique",
+  description: "Un copilote sourcé (56 000+ études) qui répond en 30 secondes, des bilans NGAP en 3 minutes, le suivi patient automatisé. Conçu par deux kinés libéraux. 14 jours d'essai.",
   alternates: {
     canonical: "https://www.monassistantkine.fr",
   },
   openGraph: {
-    title: "Mon Assistant Kiné — Récupère 45 min/jour au cabinet",
-    description: "Bilans NGAP en 3 min, admin en 2 min, suivi patient WhatsApp, copilote clinique sourcé. Conçu par des kinés libéraux.",
+    title: "Mon Assistant Kiné | L'IA pour kinésithérapeutes",
+    description: "Un copilote clinique sourcé qui répond en 30 secondes, des bilans en 3 minutes. Conçu par deux kinés libéraux.",
     url: "https://www.monassistantkine.fr",
     type: "website",
     locale: "fr_FR",
@@ -49,7 +49,34 @@ export default async function Home() {
       {/* SECTION 3 — Outils : problème / solution / comment ça marche */}
       <ToolsShowcase />
 
-      {/* SECTION 4 — Multi-device */}
+      {/* SECTION 4 — Avant / Après */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6" style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}>
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-8 font-mono">
+            Avant / Après
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="rounded-2xl p-7" style={{ background: "#fff5f5", border: "1px solid #fca5a5" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-4">Avant MAK</p>
+              <p className="text-[#475569] leading-relaxed text-sm">
+                Tu rentres du cabinet avec ton sac de dossiers en retard. Tu rédiges tes bilans après le repas,
+                pendant que ta famille passe la soirée sans toi. Un cas clinique de l&apos;après-midi te trotte
+                encore dans la tête — et à 19h un jeudi, tu n&apos;as personne à qui le poser.
+              </p>
+            </div>
+            <div className="rounded-2xl p-7" style={{ background: "#eef7f6", border: "1px solid #3899aa" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] mb-4">Après MAK</p>
+              <p className="text-[#475569] leading-relaxed text-sm">
+                Tu dictes ton bilan entre deux patients, il est prêt avant que tu aies raccroché ta blouse.
+                Le cas qui te mettait en doute, tu l&apos;as posé au Copilote — réponse sourcée en 30 secondes,
+                comme à un confrère de confiance. Tes soirées t&apos;appartiennent à nouveau.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5 — Multi-device */}
       <MultiDevice />
 
       {/* SECTION 5 — Ce qui est inclus (à déplacer/supprimer selon besoins) */}
@@ -73,7 +100,7 @@ export default async function Home() {
                 "Module administratif — courriers médecins, relances et comptes-rendus depuis tes templates ou rédigés par l'IA",
                 "Suivi patient à domicile — programme d'exercices sur WhatsApp avec vidéos, zéro relance manuelle",
                 "Copilote clinique — 56 000+ ressources dont le Cleland, drapeaux rouges vérifiés, réponse sourcée en 30 secondes",
-                "Vidéotransmission sécurisée — consultations à distance, suivi post-op (rend éligible au FAMI)",
+                "Vidéotransmission sécurisée — consultations à distance, suivi post-op, coordination de soins (éligible aide FAMI)",
                 "Données hébergées en Europe, jamais utilisées pour entraîner des modèles IA tiers",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-[#475569] leading-snug">
