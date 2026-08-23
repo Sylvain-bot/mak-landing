@@ -156,11 +156,10 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="text-base text-[#475569] mb-5 leading-relaxed"
             >
-              Pendant une séance compliquée, face au cas qui te met en doute —&nbsp;
-              <span className="text-[#0f172a] font-medium">tu n&apos;es plus seul.</span>
-              {" "}Bilans dictés en 3 minutes. Questions cliniques,
-              réponse sourcée en 30 secondes.
-              Conçu par 2 kinés libéraux.
+              <span className="text-[#0f172a] font-medium">Sois le kiné que tu voulais être.</span>
+              {" "}Bilans dictés en 3 minutes. Réponse clinique sourcée en 30 secondes
+              pendant une séance compliquée — tu n&apos;es plus seul.
+              Patients suivis entre les séances. Conçu par 2 kinés libéraux.
             </motion.p>
 
             <motion.p
