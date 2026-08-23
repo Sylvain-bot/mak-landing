@@ -43,13 +43,10 @@ export default async function Home() {
       {/* SECTION 1 — Hero */}
       <Hero />
 
-      {/* SECTION 2 — Témoignages carousel */}
+      {/* SECTION 2 — Témoignages ticker */}
       <TestimonialsCarousel />
 
-      {/* SECTION 3 — Outils : problème / solution / comment ça marche */}
-      <ToolsShowcase />
-
-      {/* SECTION 4 — Avant / Après */}
+      {/* SECTION 3 — Avant / Après */}
       <section className="py-20 sm:py-28 px-4 sm:px-6" style={{ background: "white", borderTop: "1px solid #d4ecea" }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -119,6 +116,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* SECTION 4 — Outils : problème / solution / comment ça marche */}
+      <ToolsShowcase />
 
       {/* SECTION 5 — Multi-device */}
       <MultiDevice />
