@@ -87,11 +87,11 @@ const FAQ_ITEMS = [
   },
   {
     q: "Y a-t-il un engagement de durée ?",
-    a: "Pour les formules mensuelles : aucun engagement, résiliable à tout moment. Pour les formules annuelles : engagement de 12 mois, paiement en une fois.",
+    a: "L'offre mensuelle est sans engagement, résiliable à tout moment. L'offre annuelle engage sur 12 mois, paiement en une fois.",
   },
   {
-    q: "Puis-je changer de formule en cours de route ?",
-    a: "Oui. Tu peux monter ou descendre de formule à tout moment. Le changement prend effet à la prochaine période de facturation.",
+    q: "Puis-je passer du mensuel à l'annuel en cours de route ?",
+    a: "Oui. Tu peux basculer de l'offre mensuelle à l'offre annuelle à tout moment. Le changement prend effet à la prochaine période de facturation.",
   },
   {
     q: "Mon Assistant Kiné remplace-t-il mon logiciel de gestion de cabinet ?",

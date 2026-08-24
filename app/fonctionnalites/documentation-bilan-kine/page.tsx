@@ -7,7 +7,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Documentation bilan kiné automatisée | Mon Assistant Kiné",
-  description: "Générez vos bilans kinésithérapiques conformes NGAP en quelques minutes. Saisie libre, templates personnalisables, export PDF ou envoi mail en un clic. Essai gratuit.",
+  description: "Génère tes bilans kinésithérapiques conformes NGAP en quelques minutes. Saisie libre, templates personnalisables, export PDF ou envoi mail en un clic. Essai gratuit.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/documentation-bilan-kine" },
   openGraph: {
     title: "Documentation bilan kiné automatisée | Mon Assistant Kiné",

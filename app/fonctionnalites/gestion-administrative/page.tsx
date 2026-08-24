@@ -7,7 +7,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Gestion administrative automatisée pour kinésithérapeutes | Mon Assistant Kiné",
-  description: "Courriers, relances, ordonnances — générés en un clic avec vos templates personnalisables. L'IA crée le document si besoin. Fini les tâches administratives en soirée.",
+  description: "Courriers, relances, ordonnances — générés en un clic avec tes templates personnalisables. L'IA crée le document si besoin. Fini les tâches administratives en soirée.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/gestion-administrative" },
   openGraph: {
     title: "Gestion administrative kiné | Mon Assistant Kiné",

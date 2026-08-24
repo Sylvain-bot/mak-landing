@@ -7,7 +7,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Suivi patient et programme d'exercices à domicile | Mon Assistant Kiné",
-  description: "Créez des programmes d'exercices personnalisés envoyés sur WhatsApp avec vidéos. Le patient valide ses séances, vous suivez tout sur votre dashboard. Chatbot guidé par votre protocole.",
+  description: "Crée des programmes d'exercices personnalisés envoyés sur WhatsApp avec vidéos. Le patient valide ses séances, tu suis tout sur ton dashboard. Chatbot guidé par ton protocole.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/suivi-patient" },
   openGraph: {
     title: "Suivi patient à domicile | Mon Assistant Kiné",
