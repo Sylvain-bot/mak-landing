@@ -57,7 +57,7 @@ export default async function Home() {
             </h2>
             <p className="text-[#64748b] text-lg max-w-xl mx-auto leading-relaxed">
               La plupart des kinés se reconnaissent dans la colonne de gauche.<br />
-              MAK, c&apos;est la colonne de droite.
+              Mon Assistant Kiné, c&apos;est la colonne de droite.
             </p>
           </div>
 
