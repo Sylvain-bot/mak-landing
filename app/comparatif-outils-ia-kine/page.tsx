@@ -157,8 +157,8 @@ export default function ComparatifPage() {
           <h2 className="text-2xl font-bold text-[#0f172a] mb-8">Quel outil correspond à ton usage ?</h2>
           <div className="space-y-4">
             {[
-              { title: "Choisissez Mon Assistant Kiné si :", items: ["Tu es kinésithérapeute libéral en France", "Tu veux gagner du temps sur la documentation et l'administratif", "Tu veux un suivi patient structuré avec programme d'exercices et vidéos", "Tu veux des recherches EBP fiables sans risque d'hallucination"], color: "#3899aa", bg: "#eef7f6" },
-              { title: "Choisissez ChatGPT si :", items: ["Tu cherches un assistant généraliste pour rédiger des emails, préparer une formation, ou brainstormer", "Pas pour ta documentation clinique ni ton raisonnement diagnostique"], color: "#64748b", bg: "#f8fafc" },
+              { title: "Choisis Mon Assistant Kiné si :", items: ["Tu es kinésithérapeute libéral en France", "Tu veux gagner du temps sur la documentation et l'administratif", "Tu veux un suivi patient structuré avec programme d'exercices et vidéos", "Tu veux des recherches EBP fiables sans risque d'hallucination"], color: "#3899aa", bg: "#eef7f6" },
+              { title: "Choisis ChatGPT si :", items: ["Tu cherches un assistant généraliste pour rédiger des emails, préparer une formation, ou brainstormer", "Pas pour ta documentation clinique ni ton raisonnement diagnostique"], color: "#64748b", bg: "#f8fafc" },
             ].map((block) => (
               <div key={block.title} className="rounded-2xl p-6" style={{ background: block.bg, border: `1px solid ${block.color}30` }}>
                 <h3 className="font-bold mb-3" style={{ color: block.color }}>{block.title}</h3>

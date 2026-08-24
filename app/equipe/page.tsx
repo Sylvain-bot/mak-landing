@@ -120,7 +120,7 @@ export default function EquipePage() {
                 )}
               </div>
               <p className="text-[#475569] leading-relaxed mb-4">
-                Kinésithérapeute libéral, Valentin pilote le développement produit de Mon Assistant Kiné. Son ancrage dans la pratique clinique quotidienne guide chaque décision produit : si ce n&apos;est pas utile au cabinet, ça n&apos;entre pas dans Mon Assistant Kiné.
+                {FOUNDER_2_NAME} pilote le développement produit de Mon Assistant Kiné. Son ancrage dans la pratique clinique quotidienne guide chaque décision produit : si ce n&apos;est pas utile au cabinet, ça n&apos;entre pas dans Mon Assistant Kiné.
               </p>
               <blockquote className="border-l-4 border-[#3899aa] pl-4 italic text-[#475569] text-sm">
                 &ldquo;On ne construit pas des features. On résout des problèmes réels que nos collègues kinés rencontrent chaque jour.&rdquo;
@@ -165,7 +165,7 @@ export default function EquipePage() {
       <section className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-[#0f172a] mb-4">Une question ? Une idée ?</h2>
-          <p className="text-[#475569] mb-2">Vous êtes kiné et vous voulez contribuer à l&apos;évolution de Mon Assistant Kiné ?</p>
+          <p className="text-[#475569] mb-2">Tu es kiné et tu veux contribuer à l&apos;évolution de Mon Assistant Kiné ?</p>
           <a href="mailto:contact@monassistantkine.fr" className="text-[#3899aa] font-semibold hover:underline block mb-8">
             contact@monassistantkine.fr
           </a>
