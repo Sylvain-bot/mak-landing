@@ -62,12 +62,27 @@ export function MultiDevice() {
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.14 }}
-            className="text-[#94a3b8] text-base leading-relaxed mb-10"
+            className="text-[#94a3b8] text-base leading-relaxed mb-6"
           >
             Mon Assistant Kiné fonctionne directement dans le navigateur — au bureau,
             en déplacement ou entre deux patients. Aucune application à installer,
             aucune synchronisation à gérer.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="rounded-xl px-5 py-4 mb-8"
+            style={{ background: "rgba(56,153,170,0.08)", border: "1px solid rgba(56,153,170,0.2)" }}
+          >
+            <p className="text-white font-semibold text-sm mb-1">Pas besoin de maîtriser l&apos;IA.</p>
+            <p className="text-[#94a3b8] text-sm leading-relaxed">
+              Si tu sais dicter un message vocal, tu sais utiliser Mon Assistant Kiné.
+              Prise en main en 5 minutes, guidée pas à pas. Pas de jargon, pas de formation requise —
+              tu poses ta question en langage naturel, comme à un confrère.
+            </p>
+          </motion.div>
 
           <div className="flex flex-col sm:flex-row gap-4">
             {DEVICES.map(({ icon: Icon, label }, i) => (

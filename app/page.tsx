@@ -9,7 +9,6 @@ import { FAQ } from "@/components/FAQ";
 import { MultiDevice } from "@/components/MultiDevice";
 import { CtaFinal } from "@/components/CtaFinal";
 import { FamiSection } from "@/components/FamiSection";
-import { VideotransmissionSection } from "@/components/VideotransmissionSection";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { homepageSchema } from "@/lib/schemas/homepage.schema";
@@ -130,44 +129,7 @@ export default async function Home() {
       {/* SECTION 5 — Multi-device */}
       <MultiDevice />
 
-      {/* SECTION 5 — Ce qui est inclus (à déplacer/supprimer selon besoins) */}
-      <section
-        className="py-16 sm:py-20 px-4 sm:px-6"
-        style={{ background: "white", borderTop: "1px solid #d4ecea" }}
-      >
-        <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-[1fr_1.6fr] gap-8 sm:gap-14 items-start">
-            <div>
-              <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">
-                Ce qui est inclus
-              </p>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">
-                Un abonnement.<br />Tout ce qu&apos;il faut au cabinet.
-              </h2>
-            </div>
-            <ul className="space-y-3.5">
-              {[
-                "Bilans kinésithérapiques conformes NGAP — dictée vocale, mise en forme automatique, export PDF en 1 clic",
-                "Module administratif — courriers médecins, relances et comptes-rendus depuis tes templates ou rédigés par l'IA",
-                "Suivi patient à domicile — programme d'exercices sur WhatsApp avec vidéos, zéro relance manuelle",
-                "Copilote clinique — 56 000+ ressources dont le Cleland, drapeaux rouges vérifiés, réponse sourcée en 30 secondes",
-                "Vidéotransmission sécurisée — consultations à distance, suivi post-op, coordination de soins (éligible aide FAMI)",
-                "Données hébergées en Europe, jamais utilisées pour entraîner des modèles IA tiers",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-[#475569] leading-snug">
-                  <span className="text-[#3899aa] font-bold mt-0.5 shrink-0">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6 — Vidéotransmission (nouveauté) */}
-      <VideotransmissionSection />
-
-      {/* SECTION 7 — FAMI */}
+      {/* SECTION 6 — FAMI */}
       <FamiSection />
 
       {/* SECTION 7 — Pricing */}
