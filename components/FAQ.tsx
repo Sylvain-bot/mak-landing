@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: "Est-ce que l'abonnement est vraiment rentable ?",
-    a: "Un kiné libéral passe environ 45 minutes par jour sur la documentation. À 19€/mois, Mon Assistant Kiné coûte moins qu'une seule séance remboursée — et te rend environ 16 heures par mois. Fais le calcul avec ton taux horaire : c'est l'abonnement le plus rentable de ton cabinet.",
+    a: "Un kiné libéral passe environ 45 minutes par jour sur la documentation. À 19€/mois, ça coûte moins qu'une séance remboursée — et te rend environ 16 heures par mois. En optant pour le plan annuel (199€/an), tu es éligible à l'aide FAMI de ta CPAM : jusqu'à 350€/an versés directement — soit +151€ nets dans ta poche. Avec le temps récupéré et l'aide FAMI, c'est l'abonnement le plus rentable de ton cabinet.",
   },
   {
     q: "Mes données sont-elles protégées ?",

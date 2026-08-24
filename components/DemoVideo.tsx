@@ -67,7 +67,7 @@ export function DemoVideo() {
           >
             <div className="text-center sm:text-left">
               <p className="text-base font-bold text-[#0f172a]">Convaincu ?</p>
-              <p className="text-sm text-[#475569]">14 jours d&apos;essai — sans carte bancaire.</p>
+              <p className="text-sm text-[#475569]">14 jours d&apos;essai.</p>
             </div>
             <Link
               href={CTA_SIGNUP_URL}

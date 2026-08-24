@@ -62,12 +62,35 @@ export function MultiDevice() {
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.14 }}
-            className="text-[#94a3b8] text-base leading-relaxed mb-10"
+            className="text-[#94a3b8] text-base leading-relaxed mb-6"
           >
             Mon Assistant Kiné fonctionne directement dans le navigateur — au bureau,
             en déplacement ou entre deux patients. Aucune application à installer,
             aucune synchronisation à gérer.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="rounded-xl px-5 py-4 mb-8"
+            style={{ background: "rgba(56,153,170,0.08)", border: "1px solid rgba(56,153,170,0.2)" }}
+          >
+            <p className="text-white font-semibold text-sm mb-2">Pas besoin de maîtriser l&apos;IA.</p>
+            <p className="text-[#94a3b8] text-sm leading-relaxed mb-3">
+              Tu parles ou tu écris. Le Copilote analyse ta demande et répond.
+              Pas de formulaire, pas de menu complexe — juste du langage naturel,
+              comme à un confrère. Prise en main en 5 minutes.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {["🎙 Parle", "⌨️ Écris", "💬 Pose ta question — il comprend"].map((item) => (
+                <span key={item} className="text-xs px-2.5 py-1 rounded-full text-white/60"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          </motion.div>
 
           <div className="flex flex-col sm:flex-row gap-4">
             {DEVICES.map(({ icon: Icon, label }, i) => (

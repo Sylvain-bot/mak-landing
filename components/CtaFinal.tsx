@@ -16,18 +16,18 @@ export function CtaFinal() {
       <div className="max-w-2xl mx-auto text-center">
         <ScrollReveal delay={0.1}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-4 leading-tight">
-            Récupère{" "}
+            Redeviens{" "}
             <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-              45 minutes par jour.
+              le kiné que tu voulais être.
             </span>
             <br />
-            <span className="text-[#94a3b8]">Dès ton prochain bilan.</span>
+            <span className="text-[#94a3b8]">Dès ta prochaine séance.</span>
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
           <p className="text-[#475569] text-base mb-8 leading-relaxed">
-            14 jours d&apos;essai gratuit. Sans carte bancaire. 5 minutes pour prendre Mon Assistant Kiné en main.
+            14 jours d&apos;essai gratuit. 5 minutes pour prendre Mon Assistant Kiné en main.
           </p>
         </ScrollReveal>
 
@@ -48,7 +48,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.25} className="mt-4 mb-6">
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[#64748b]">
-            {["14 jours d'essai gratuit", "Sans carte bancaire", "Places limitées aux 100 premiers"].map(
+            {["14 jours d'essai gratuit", "Places limitées aux 100 premiers"].map(
               (item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />

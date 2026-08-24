@@ -14,6 +14,7 @@ export const FEATURES_NAV = [
   { href: "/fonctionnalites/suivi-patient", label: "Suivi patient WhatsApp" },
   { href: "/fonctionnalites/gestion-administrative", label: "Gestion administrative" },
   { href: "/fonctionnalites/contrats-remplacement", label: "Contrats de remplacement — Gratuit" },
+  { href: "/fonctionnalites/videotransmission", label: "Vidéotransmission" },
 ];
 
 export function Footer() {

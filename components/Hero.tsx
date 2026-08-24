@@ -59,7 +59,12 @@ function StatItem({
   );
 }
 
-const TRUST = ["14 jours d'essai gratuit", COMPLIANCE_CLAIM, "5 min de prise en main"];
+const TRUST: { label: string; gold?: boolean }[] = [
+  { label: "14 jours d'essai gratuit" },
+  { label: COMPLIANCE_CLAIM },
+  { label: "5 min de prise en main" },
+  { label: "Peut te coûter moins que zéro (aide FAMI*)", gold: true },
+];
 
 function AppScreenshot() {
   return (
@@ -92,7 +97,7 @@ export function Hero() {
   const ph = usePostHog();
 
   return (
-    <section className="relative overflow-hidden bg-white pt-16 sm:pt-24 pb-0 px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 pb-0 px-4 sm:px-6">
       {/* Dot grid */}
       <div
         aria-hidden
@@ -137,24 +142,33 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1] text-[#0f172a] mb-5"
             >
-              Récupère{" "}
+              Deviens le kiné{" "}
               <span className="bg-gradient-to-r from-[#3899aa] to-[#2a7a8a] bg-clip-text text-transparent">
-                45 minutes par jour
+                que tu voulais être
               </span>
               <br />
-              au cabinet.
+              en sortant de l&apos;école.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="text-base text-[#475569] mb-8 leading-relaxed"
+              className="text-base text-[#475569] mb-5 leading-relaxed"
             >
-              Bilans NGAP dictés en 3 minutes, courriers en 2 minutes,
-              suivi patient sur WhatsApp — et un copilote clinique sourcé
-              ({" "}<span className="text-[#0f172a] font-semibold">56 000+ études, Cleland inclus</span>)
-              {" "}quand tu as un doute. Un seul outil, conçu par des kinés libéraux.
+              Tu voulais être rigoureux, curieux, toujours à jour scientifiquement.{" "}
+              <span className="text-[#0f172a] font-medium">Le libéral t&apos;a mis en pilote automatique.</span>
+              {" "}Mon Assistant Kiné te remet aux commandes — sans y passer tes soirées.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.28, ease: "easeOut" }}
+              className="text-xs text-[#64748b] rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
+              style={{ background: "#f0f9fa" }}
+            >
+              <span className="font-semibold text-[#475569]">Le Copilote</span> : pose ta question clinique, il répond en 30 secondes en citant ses sources parmi 56&nbsp;000+ études (Cleland inclus). Tu restes informé. Tu décides toujours.
             </motion.p>
 
             <motion.div
@@ -171,7 +185,7 @@ export function Hero() {
                 )}
                 onClick={() => ph?.capture("cta_signup_click", { location: "hero" })}
               >
-                Essayer 14 jours — sans carte bancaire
+                Essayer 14 jours
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
@@ -183,6 +197,15 @@ export function Hero() {
               </a>
             </motion.div>
 
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.38 }}
+              className="text-xs text-[#64748b] mb-5"
+            >
+              <span className="font-semibold text-[#3899aa]">Pionnier</span> — tu rejoins une communauté privée de kinés qui façonnent l&apos;outil avec nous. Ton retour compte vraiment.
+            </motion.p>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -190,9 +213,16 @@ export function Hero() {
               className="flex flex-wrap gap-x-5 gap-y-2"
             >
               {TRUST.map((item) => (
-                <span key={item} className="flex items-center gap-1.5 text-sm text-[#64748b]">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
-                  {item}
+                <span
+                  key={item.label}
+                  className="flex items-center gap-1.5 text-sm"
+                  style={item.gold ? { color: "#92680a", fontWeight: 500 } : { color: "#64748b" }}
+                >
+                  {item.gold
+                    ? <span style={{ color: "#e8b04d", fontSize: "0.7rem" }}>★</span>
+                    : <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
+                  }
+                  {item.label}
                 </span>
               ))}
             </motion.div>
@@ -222,17 +252,17 @@ export function Hero() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-7">
               <StatItem
-                target={3} suffix=" min" label="Bilan NGAP complet"
+                target={3} suffix=" min" label="Bilan NGAP dicté et mis en forme"
                 active={inView}
               />
               <StatItem
-                target={2} suffix=" min" label="Courrier ou document admin"
+                target={30} suffix=" sec" label="Réponse à ta question clinique (Copilote)"
                 active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
               <StatItem
-                target={4} suffix="h/sem" label="récupérées en moyenne"
-                active={inView}
+                target={56000} suffix="+" label="Ressources scientifiques accessibles (dont Cleland)"
+                frenchFormat active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
             </div>

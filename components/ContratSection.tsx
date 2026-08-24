@@ -102,10 +102,6 @@ export function ContratSection() {
 
               {/* CTA intégré en bas de la carte */}
               <div className="rounded-2xl p-5 mt-6" style={{ background: "#3899aa" }}>
-                <div className="flex items-center gap-2 mb-1">
-                  <CheckCircle2 className="w-4 h-4 text-white/80 shrink-0" />
-                  <span className="text-white/90 text-sm font-medium">Sans carte bancaire</span>
-                </div>
                 <div className="flex items-center gap-2 mb-4">
                   <CheckCircle2 className="w-4 h-4 text-white/80 shrink-0" />
                   <span className="text-white/90 text-sm font-medium">Accès immédiat, gratuit à vie</span>
