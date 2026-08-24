@@ -131,14 +131,14 @@ export function ExitIntentPopup() {
 
           ) : (
             <>
-              <div className="flex items-start justify-between gap-3 mb-5">
+              <div className="flex items-start justify-between gap-3 mb-4">
                 <div>
-                  <p className="text-[#3899aa] text-[11px] font-semibold uppercase tracking-widest mb-1.5 font-mono">
-                    Rejoins la communauté Mon Assistant Kiné
-                  </p>
-                  <h2 className="text-xl font-bold text-[#0f172a] leading-snug">
-                    Les coulisses du projet,<br />les nouveautés et les meilleures ressources cliniques.
+                  <h2 className="text-xl font-bold text-[#0f172a] leading-snug mb-1">
+                    Reste à jour —<br />sans y passer du temps.
                   </h2>
+                  <p className="text-sm text-[#64748b]">
+                    Ressources EBP + coulisses de Mon Assistant Kiné · 1 mail par semaine max.
+                  </p>
                 </div>
                 <button
                   onClick={dismiss}
@@ -148,19 +148,6 @@ export function ExitIntentPopup() {
                   ×
                 </button>
               </div>
-
-              <ul className="space-y-2 mb-6">
-                {[
-                  "Les coulisses du projet — décisions produit, ce qui arrive, ce qu'on a testé",
-                  "Ressources EBP actionnables sélectionnées par des kinés praticiens",
-                  "Accès anticipé aux nouvelles fonctionnalités",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-[#475569]">
-                    <span className="text-[#3899aa] font-bold mt-0.5 shrink-0">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input
@@ -181,12 +168,12 @@ export function ExitIntentPopup() {
                   className="w-full h-11 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02] disabled:opacity-60"
                   style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 14px rgba(56,153,170,0.3)" }}
                 >
-                  {state === "loading" ? "Inscription…" : "Je rejoins la liste — c'est gratuit"}
+                  {state === "loading" ? "Inscription…" : "M'inscrire — c'est gratuit"}
                 </button>
               </form>
 
-              <p className="text-[11px] text-[#94a3b8] text-center mt-4">
-                Réservé aux kinésithérapeutes · Pas de spam · Désabonnement en 1 clic
+              <p className="text-[11px] text-[#94a3b8] text-center mt-3">
+                Pas de spam · Désabonnement en 1 clic
               </p>
             </>
           )}
