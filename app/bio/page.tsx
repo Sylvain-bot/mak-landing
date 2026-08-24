@@ -99,7 +99,6 @@ export default function BioPage() {
               </span>
               <div>
                 <span className="text-2xl font-bold text-[#3899aa]">19€</span>
-                <span className="text-xs text-[#94a3b8] line-through ml-1.5">49€</span>
                 <span className="text-xs text-[#94a3b8]">/mois</span>
               </div>
             </div>

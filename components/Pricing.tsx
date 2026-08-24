@@ -138,7 +138,7 @@ export function Pricing() {
                     style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}>
                     <div className="text-5xl font-bold text-white">{PRICE_PIONNIER}€</div>
                     <div className="text-white/40 text-sm">/mois · à vie</div>
-                    <div className="text-[#3899aa] text-xs font-semibold mt-1">au lieu de 49€/mois</div>
+                    <div className="text-[#3899aa] text-xs font-semibold mt-1">100 places · tarif bloqué à vie</div>
                   </div>
                   <button
                     onClick={() => setAnnual(true)}
@@ -180,7 +180,7 @@ export function Pricing() {
                     <span className="text-4xl font-bold text-white">{PRICE_PIONNIER_ANNUAL}€</span>
                     <span className="text-white/40 text-sm">/an</span>
                   </div>
-                  <p className="text-[#3899aa] text-xs font-semibold mb-4">Prix garanti à vie — au lieu de 588€/an</p>
+                  <p className="text-[#3899aa] text-xs font-semibold mb-4">Prix garanti à vie · 100 places</p>
                   <ul className="space-y-2 mb-6">
                     {PIONNIER_FEATURES.map((f) => (
                       <li key={f} className="flex items-center gap-2 text-white/80 text-sm">
