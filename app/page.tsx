@@ -45,16 +45,20 @@ export default async function Home() {
       <TestimonialsCarousel />
 
       {/* SECTION 3 — Avant / Après */}
-      <section className="py-20 sm:py-28 px-4 sm:px-6" style={{ background: "white", borderTop: "1px solid #d4ecea" }}>
+      <section className="py-24 sm:py-32 px-4 sm:px-6" style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}>
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4 font-mono">
+          <div className="text-center mb-14">
+            <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-5 font-mono">
               Avant / Après
             </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight">
-              Une journée au cabinet.{" "}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-4">
+              La même journée.{" "}
               <span style={{ color: "#3899aa" }}>Deux versions.</span>
             </h2>
+            <p className="text-[#64748b] text-lg max-w-xl mx-auto leading-relaxed">
+              La plupart des kinés se reconnaissent dans la colonne de gauche.<br />
+              MAK, c&apos;est la colonne de droite.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

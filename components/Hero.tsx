@@ -158,7 +158,7 @@ export function Hero() {
             >
               Tu voulais être rigoureux, curieux, toujours à jour scientifiquement.{" "}
               <span className="text-[#0f172a] font-medium">Le libéral t&apos;a mis en pilote automatique.</span>
-              {" "}MAK te remet aux commandes — sans y passer tes soirées. Conçu par 2 kinés libéraux.
+              {" "}MAK te remet aux commandes — sans y passer tes soirées.
             </motion.p>
 
             <motion.p

@@ -78,12 +78,12 @@ export function MultiDevice() {
           >
             <p className="text-white font-semibold text-sm mb-2">Pas besoin de maîtriser l&apos;IA.</p>
             <p className="text-[#94a3b8] text-sm leading-relaxed mb-3">
-              Tu dictes entre deux patients, tu tapes quelques mots depuis ta tablette, tu glisses un PDF —
-              Mon Assistant Kiné s&apos;adapte à ta façon de travailler, pas l&apos;inverse.
-              Prise en main en 5 minutes, guidée pas à pas.
+              Tu parles ou tu écris. Le Copilote analyse ta demande et répond.
+              Pas de formulaire, pas de menu complexe — juste du langage naturel,
+              comme à un confrère. Prise en main en 5 minutes.
             </p>
             <div className="flex flex-wrap gap-2">
-              {["🎙 Dictée vocale", "⌨️ Saisie texte", "📄 Import PDF", "💬 Questions en langage naturel"].map((item) => (
+              {["🎙 Parle", "⌨️ Écris", "💬 Pose ta question — il comprend"].map((item) => (
                 <span key={item} className="text-xs px-2.5 py-1 rounded-full text-white/60"
                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                   {item}
