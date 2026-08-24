@@ -27,7 +27,7 @@ const schema = {
   "applicationCategory": "HealthApplication",
   "operatingSystem": "Web",
   "url": "https://www.monassistantkine.fr",
-  "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR" },
+  "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR" },
   "description": "Module de vidéotransmission sécurisée pour kinésithérapeutes libéraux. Téléconsultations intégrées, bilan généré automatiquement, éligible à l'aide FAMI CPAM.",
   "audience": { "@type": "MedicalAudience", "audienceType": "Physiotherapist" },
 };
@@ -46,7 +46,7 @@ const STEPS = [
   {
     n: "03",
     title: "Le compte-rendu est généré automatiquement",
-    body: "À la fin de la session, Mon Assistant Kiné génère un compte-rendu structuré basé sur tes notes. Export PDF en 1 clic, envoi direct au médecin référent. Traçabilité complète dans le dossier patient.",
+    body: "À la fin de la session, Mon Assistant Kiné génère un compte-rendu structuré basé sur tes notes. Export PDF en 1 clic. Traçabilité complète dans le dossier patient.",
   },
 ];
 
@@ -59,8 +59,8 @@ const STATS = [
 
 const FAQ_ITEMS = [
   {
-    q: "Le module vidéo est-il inclus dans tous les abonnements ?",
-    a: "Le module vidéotransmission est disponible à partir de l'abonnement Pratique (29 €/mois). Il n'est pas inclus dans l'offre Découverte — c'est pour cela que l'offre Découverte n'est pas éligible à l'aide FAMI.",
+    q: "Le module vidéo est-il inclus dans l'offre Pionnier ?",
+    a: "Oui. Le module vidéotransmission est inclus dans l'offre Pionnier (19 €/mois) — avec l'ensemble des fonctionnalités de Mon Assistant Kiné.",
   },
   {
     q: "En quoi ce module me rend-il éligible au FAMI ?",
@@ -96,8 +96,7 @@ export default function VideotransmissionPage() {
             ou juste indisponible ce jour-là.
           </p>
           <p className="text-sm text-[#64748b] mb-8 max-w-xl mx-auto">
-            Lien envoyé par SMS ou WhatsApp, zéro installation côté patient. Compte-rendu généré automatiquement.
-            Chiffré de bout en bout.
+            Lien envoyé par SMS ou WhatsApp, zéro installation côté patient. Compte-rendu généré automatiquement à exporter en PDF. Chiffré de bout en bout.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -189,8 +188,7 @@ export default function VideotransmissionPage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] mb-4">Après</p>
               <p className="text-[#475569] leading-relaxed text-sm">
                 Tu lances la consultation depuis Mon Assistant Kiné, le patient rejoint par un simple lien,
-                et le compte-rendu part automatiquement à son médecin. Le suivi continue, même quand le patient
-                ne peut pas être là.
+                et le compte-rendu est généré automatiquement pour l&apos;exporter ou l&apos;archiver en 1 clic. Le suivi continue, même quand le patient ne peut pas être là.
               </p>
             </div>
           </div>
@@ -198,7 +196,7 @@ export default function VideotransmissionPage() {
       </section>
 
       {/* Bloc FAMI dédié */}
-      <section id="fami" className="py-20 px-4 sm:px-6" style={{ background: "#0f2229" }}>
+      <section id="fami" className="py-20 px-4 sm:px-6" style={{ background: "#0f172a" }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-xs font-bold"
             style={{ background: "rgba(232,176,77,0.15)", border: "1px solid rgba(232,176,77,0.4)", color: "#e8b04d" }}>
@@ -245,7 +243,7 @@ export default function VideotransmissionPage() {
             <Link
               href={CTA_SIGNUP_URL}
               className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-lg text-sm font-bold text-white transition-all hover:scale-[1.02]"
-              style={{ background: "#e8b04d", color: "#0f2229" }}
+              style={{ background: "#e8b04d", color: "#0f172a" }}
             >
               Essayer 14 jours <ArrowRight className="w-4 h-4" />
             </Link>
@@ -272,24 +270,6 @@ export default function VideotransmissionPage() {
           <h2 className="text-2xl font-bold text-[#0f172a] mb-6">Inclus dans quels abonnements ?</h2>
           <div className="space-y-3">
             {[
-              {
-                name: "Découverte · 9 €/mois",
-                included: false,
-                note: "Non éligible FAMI — module vidéo non inclus",
-                color: "#94a3b8",
-              },
-              {
-                name: "Pratique · 29 €/mois",
-                included: true,
-                note: "★ Module vidéo inclus · Éligible aide FAMI (sous réserve conditions CPAM)",
-                color: "#3899aa",
-              },
-              {
-                name: "Expert · 49 €/mois",
-                included: true,
-                note: "★ Module vidéo inclus · Éligible aide FAMI (sous réserve conditions CPAM)",
-                color: "#3899aa",
-              },
               {
                 name: "Pionnier · 19 €/mois",
                 included: true,
@@ -341,7 +321,7 @@ export default function VideotransmissionPage() {
             Essayer la vidéotransmission — 14 jours gratuits
           </h2>
           <p className="text-white/80 mb-8">
-            Module inclus dès l&apos;offre Pratique · Accès immédiat
+            Module inclus dans l&apos;offre Pionnier · Accès immédiat
           </p>
           <Link
             href={CTA_SIGNUP_URL}
