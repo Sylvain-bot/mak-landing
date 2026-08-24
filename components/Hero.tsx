@@ -63,7 +63,7 @@ const TRUST: { label: string; gold?: boolean }[] = [
   { label: "14 jours d'essai gratuit" },
   { label: COMPLIANCE_CLAIM },
   { label: "5 min de prise en main" },
-  { label: "Conçu par 2 kinés D.E. libéraux" },
+  { label: "Peut te coûter moins que zéro (aide FAMI*)", gold: true },
 ];
 
 function AppScreenshot() {
@@ -132,7 +132,7 @@ export function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-                Offre Pionnier — 100 places · Conçu par 2 kinés D.E.
+                Offre Pionnier — 100 places · tu façonnes l&apos;outil avec nous
               </span>
             </motion.div>
 

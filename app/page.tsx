@@ -106,6 +106,8 @@ export default async function Home() {
                   "Bilan mis au propre pendant la séance, en temps réel",
                   "Patients suivis entre les séances, chatbot WhatsApp programmé pour eux",
                   "La fierté de pratiquer comme tu l'avais imaginé",
+                  "Communauté privée de pionniers — tu participes à l'évolution de l'outil",
+                  "★ Abonnement annuel qui peut te rapporter de l'argent (aide FAMI*)",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs text-[#2a7a8a] font-medium">
                     <span className="mt-0.5 shrink-0">✓</span>
@@ -115,6 +117,10 @@ export default async function Home() {
               </div>
             </div>
           </div>
+          <p className="text-xs text-[#94a3b8] text-center mt-6">
+            *Aide FAMI versée par ta CPAM (jusqu&apos;à 350 €/an) — sous réserve des conditions du cahier des charges CNAM.{" "}
+            <a href="#fami-section" className="underline hover:text-[#3899aa] transition-colors">En savoir plus →</a>
+          </p>
         </div>
       </section>
 
