@@ -76,12 +76,20 @@ export function MultiDevice() {
             className="rounded-xl px-5 py-4 mb-8"
             style={{ background: "rgba(56,153,170,0.08)", border: "1px solid rgba(56,153,170,0.2)" }}
           >
-            <p className="text-white font-semibold text-sm mb-1">Pas besoin de maîtriser l&apos;IA.</p>
-            <p className="text-[#94a3b8] text-sm leading-relaxed">
-              Si tu sais dicter un message vocal, tu sais utiliser Mon Assistant Kiné.
-              Prise en main en 5 minutes, guidée pas à pas. Pas de jargon, pas de formation requise —
-              tu poses ta question en langage naturel, comme à un confrère.
+            <p className="text-white font-semibold text-sm mb-2">Pas besoin de maîtriser l&apos;IA.</p>
+            <p className="text-[#94a3b8] text-sm leading-relaxed mb-3">
+              Tu dictes entre deux patients, tu tapes quelques mots depuis ta tablette, tu glisses un PDF —
+              Mon Assistant Kiné s&apos;adapte à ta façon de travailler, pas l&apos;inverse.
+              Prise en main en 5 minutes, guidée pas à pas.
             </p>
+            <div className="flex flex-wrap gap-2">
+              {["🎙 Dictée vocale", "⌨️ Saisie texte", "📄 Import PDF", "💬 Questions en langage naturel"].map((item) => (
+                <span key={item} className="text-xs px-2.5 py-1 rounded-full text-white/60"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  {item}
+                </span>
+              ))}
+            </div>
           </motion.div>
 
           <div className="flex flex-col sm:flex-row gap-4">

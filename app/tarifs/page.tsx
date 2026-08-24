@@ -11,19 +11,16 @@ import {
   CTA_MAIN,
   COMPLIANCE_CLAIM,
   PRICE_PIONNIER,
-  PRICE_DECOUVERTE,
-  PRICE_PRATIQUE,
-  PRICE_EXPERT,
 } from "@/lib/claims";
 
 
 export const metadata: Metadata = {
-  title: "Tarifs Mon Assistant Kiné — À partir de 9€/mois",
-  description: "Offre Pionnier : accès complet à vie à 19€/mois pour les 100 premiers kinés. Plans standards à partir de 9€/mois. Sans engagement, résiliable à tout moment.",
+  title: "Tarif Mon Assistant Kiné — Offre Pionnier 19€/mois à vie",
+  description: "Offre Pionnier : accès complet à 19€/mois garanti à vie pour les 100 premiers kinés. Peut te coûter moins que zéro avec l'aide FAMI. Sans engagement.",
   alternates: { canonical: "https://www.monassistantkine.fr/tarifs" },
   openGraph: {
-    title: "Tarifs Mon Assistant Kiné | À partir de 9€/mois",
-    description: "Offre Pionnier réservée aux 100 premiers : accès complet à vie à 19€/mois. Sans engagement.",
+    title: "Tarif Mon Assistant Kiné | Offre Pionnier 19€/mois à vie",
+    description: "Offre Pionnier réservée aux 100 premiers : accès complet à vie à 19€/mois. Éligible aide FAMI 350€/an.",
     url: "https://www.monassistantkine.fr/tarifs",
     type: "website",
     images: [DEFAULT_OG_IMAGE],
@@ -39,10 +36,7 @@ const schema = {
   "operatingSystem": "Web",
   "url": "https://www.monassistantkine.fr",
   "offers": [
-    { "@type": "Offer", "name": "Découverte", "price": PRICE_DECOUVERTE, "priceCurrency": "EUR" },
-    { "@type": "Offer", "name": "Pionnier", "price": PRICE_PIONNIER, "priceCurrency": "EUR", "description": "Prix bloqué à vie pour les 100 premiers" },
-    { "@type": "Offer", "name": "Pratique", "price": PRICE_PRATIQUE, "priceCurrency": "EUR" },
-    { "@type": "Offer", "name": "Expert", "price": PRICE_EXPERT, "priceCurrency": "EUR" },
+    { "@type": "Offer", "name": "Pionnier", "price": PRICE_PIONNIER, "priceCurrency": "EUR", "description": "Accès complet, prix garanti à vie pour les 100 premiers kinés" },
   ],
   "audience": { "@type": "MedicalAudience", "audienceType": "Physiotherapist" },
 };
@@ -55,27 +49,6 @@ const PIONNIER_FEATURES = [
   "Suivi patient WhatsApp",
   "Communauté privée fondateurs",
   "Badge Pionnier exclusif",
-];
-
-const PLANS_STANDARD = [
-  {
-    name: "Découverte",
-    price: PRICE_DECOUVERTE,
-    description: "Pour découvrir l'IA au cabinet sans engagement",
-    features: ["1 programme max", "Copilote IA Kiné — usage découverte"],
-  },
-  {
-    name: "Pratique",
-    price: PRICE_PRATIQUE,
-    description: "Pour les kinés qui veulent aller plus loin",
-    features: ["5 programmes max", "Copilote IA Kiné — usage standard", "Bilan kiné", "Suivi patient WhatsApp"],
-  },
-  {
-    name: "Expert",
-    price: PRICE_EXPERT,
-    description: "Accès complet, tous modules",
-    features: ["Programmes illimités", "Accès complet tous modules"],
-  },
 ];
 
 const INCLUDED = [
@@ -93,7 +66,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Que se passe-t-il après les 100 premiers ?",
-    a: "Les inscrits Pionnier gardent leur tarif 19€/mois à vie — il ne bougera jamais. Les kinés qui s'inscrivent après passent sur la grille standard (Découverte 9€ / Pratique 29€ / Expert 49€).",
+    a: "Les inscrits Pionnier gardent leur tarif 19€/mois à vie — il ne bougera jamais. Les kinés qui s'inscrivent après passeront sur la grille standard que nous préparerons pour cette prochaine phase. Les Pionniers participent d'ailleurs à définir les fonctionnalités prioritaires.",
   },
   {
     q: "Comment fonctionne l'essai gratuit ?",
@@ -149,7 +122,7 @@ export default function TarifsPage() {
             <span className="text-[#3899aa]">Sans surprise.</span>
           </h1>
           <p className="text-lg text-[#475569] max-w-2xl mx-auto leading-relaxed">
-            Choisis la formule adaptée à ta pratique. Sans engagement, résiliable à tout moment.
+            Une seule offre tant qu&apos;il reste des places : tout inclus, prix bloqué à vie. Sans engagement sur le mensuel.
           </p>
         </div>
       </section>

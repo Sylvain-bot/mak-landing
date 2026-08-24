@@ -8,7 +8,6 @@ import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { MultiDevice } from "@/components/MultiDevice";
 import { CtaFinal } from "@/components/CtaFinal";
-import { FamiSection } from "@/components/FamiSection";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { homepageSchema } from "@/lib/schemas/homepage.schema";
@@ -129,10 +128,7 @@ export default async function Home() {
       {/* SECTION 5 — Multi-device */}
       <MultiDevice />
 
-      {/* SECTION 6 — FAMI */}
-      <FamiSection />
-
-      {/* SECTION 7 — Pricing */}
+      {/* SECTION 6 — Pricing + FAMI */}
       <Pricing />
 
       {/* SECTION 7 — FAQ */}

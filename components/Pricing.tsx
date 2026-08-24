@@ -5,6 +5,7 @@ import { ScrollReveal } from "./ScrollReveal";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Zap } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   CTA_SIGNUP_URL,
   CTA_MAIN,
@@ -14,14 +15,36 @@ import {
 } from "@/lib/claims";
 
 const PIONNIER_FEATURES = [
-  "Programmes illimités",
-  "Copilote IA Kiné — usage illimité",
-  "Module Administratif",
-  "Bilan kiné",
-  "Suivi patient WhatsApp",
+  "Bilans NGAP dictés et mis en forme",
+  "Copilote clinique — 56 000+ études, Cleland inclus",
+  "Suivi patient WhatsApp + chatbot entre les séances",
+  "Module Administratif — courriers, templates",
   "Vidéotransmission sécurisée",
   "Communauté privée fondateurs",
   "Badge Pionnier exclusif",
+];
+
+const STEPS = [
+  {
+    n: "1",
+    title: "Tu t'abonnes en 2026",
+    body: "Tu accèdes au module vidéotransmission sécurisée dès le premier jour.",
+  },
+  {
+    n: "2",
+    title: "Tu l'utilises normalement",
+    body: "Consultations à distance, suivi post-op, coordination de soins — comme d'habitude.",
+  },
+  {
+    n: "3",
+    title: "Tu déclares sur Amelipro (janv.–mars 2027)",
+    body: "Une case à cocher, au titre de l'année 2026. 5 minutes, une fois par an.",
+  },
+  {
+    n: "4",
+    title: "Ta CPAM te verse 350 € (printemps 2027)",
+    body: "Versement direct. Pas de remboursement à demander, pas de facture.",
+  },
 ];
 
 export function Pricing() {
@@ -29,26 +52,30 @@ export function Pricing() {
 
   return (
     <section
+      id="pricing"
       className="py-20 sm:py-28 px-4 sm:px-6"
-      style={{ background: "#f0f9fa", borderTop: "1px solid #d4ecea" }}
+      style={{ background: "#0f172a" }}
     >
-      <div className="max-w-3xl mx-auto">
-        <ScrollReveal className="text-center mb-8">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3">Tarifs</p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] mb-2 leading-tight">
-            Simple, transparent. Sans surprise.
-          </h2>
-          <p className="text-[#64748b] text-sm mb-6">
-            Tant qu&apos;il reste des places, une seule offre : tout inclus, prix bloqué à vie.
-          </p>
+      {/* Glow */}
+      <div className="absolute left-0 right-0 pointer-events-none overflow-hidden" aria-hidden>
+        <div className="mx-auto max-w-4xl h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(56,153,170,0.4), transparent)" }} />
+      </div>
 
-          {/* Toggle mensuel / annuel */}
-          <div className="inline-flex items-center rounded-xl p-1" style={{ background: "#e2eef0", border: "1px solid #d4ecea" }}>
+      <div className="max-w-4xl mx-auto">
+        <ScrollReveal className="text-center mb-10">
+          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">Tarif</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
+            Simple et transparent.<br />
+            <span style={{ color: "#3899aa" }}>Et possiblement gratuit.</span>
+          </h2>
+          <p className="text-white/50 text-sm mb-6">Tant qu&apos;il reste des places, une seule offre : tout inclus, prix bloqué à vie.</p>
+
+          <div className="inline-flex items-center rounded-xl p-1" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
             <button
               onClick={() => setAnnual(false)}
               className={cn(
                 "px-5 py-2 rounded-lg text-sm font-semibold transition-all",
-                !annual ? "bg-white text-[#0f172a] shadow-sm" : "text-[#64748b] hover:text-[#475569]"
+                !annual ? "bg-white text-[#0f172a] shadow-sm" : "text-white/50 hover:text-white/70"
               )}
             >
               Mensuel
@@ -57,13 +84,13 @@ export function Pricing() {
               onClick={() => setAnnual(true)}
               className={cn(
                 "px-5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2",
-                annual ? "bg-white text-[#0f172a] shadow-sm" : "text-[#64748b] hover:text-[#475569]"
+                annual ? "bg-white text-[#0f172a] shadow-sm" : "text-white/50 hover:text-white/70"
               )}
             >
               Annuel
               <span
                 className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
-                style={{ background: "rgba(232,176,77,0.15)", color: "#92680a", border: "1px solid rgba(232,176,77,0.4)" }}
+                style={{ background: "rgba(232,176,77,0.2)", color: "#e8b04d", border: "1px solid rgba(232,176,77,0.4)" }}
               >
                 FAMI −350€
               </span>
@@ -72,33 +99,33 @@ export function Pricing() {
         </ScrollReveal>
 
         {!annual ? (
-          /* ── MENSUEL ── Pionnier uniquement */
+          /* ── MENSUEL ── */
           <ScrollReveal>
             <div
-              className="rounded-2xl p-7 sm:p-9 relative overflow-hidden"
-              style={{ background: "#0f172a", border: "2px solid #3899aa", boxShadow: "0 8px 40px rgba(56,153,170,0.2)" }}
+              className="rounded-2xl p-7 sm:p-10 relative overflow-hidden"
+              style={{ border: "2px solid #3899aa", boxShadow: "0 8px 40px rgba(56,153,170,0.2)", background: "rgba(56,153,170,0.05)" }}
             >
               <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none"
-                style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(56,153,170,0.18) 0%, transparent 70%)" }} />
+                style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(56,153,170,0.15) 0%, transparent 70%)" }} />
 
               <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center relative z-10">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-2 mb-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3899aa] text-white text-xs font-bold">
                       <Zap className="w-3 h-3" />
-                      Les 100 premiers seulement
+                      100 places · Pionnier
                     </span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                    Offre Pionnier — tout inclus, {PRICE_PIONNIER}€/mois à vie.
+                    Tout inclus. {PRICE_PIONNIER}€/mois à vie.
                   </h3>
-                  <p className="text-white/70 text-sm leading-relaxed mb-4">
-                    Accès complet à tous les modules, prix garanti à vie, sans engagement, badge fondateur.
+                  <p className="text-white/60 text-sm leading-relaxed mb-5">
+                    Accès complet à tous les modules, prix garanti à vie, sans engagement.
                     Quand les 100 places sont prises, cette offre disparaît définitivement.
                   </p>
                   <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
                     {PIONNIER_FEATURES.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-white/85 text-sm">
+                      <li key={f} className="flex items-center gap-2 text-white/80 text-sm">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
                         {f}
                       </li>
@@ -106,23 +133,20 @@ export function Pricing() {
                   </ul>
                 </div>
 
-                <div className="shrink-0 text-center lg:text-right w-full lg:w-auto">
-                  <div className="inline-block rounded-2xl p-6 mb-3"
+                <div className="shrink-0 text-center w-full lg:w-auto">
+                  <div className="inline-block rounded-2xl px-8 py-6 mb-3"
                     style={{ background: "rgba(56,153,170,0.1)", border: "1px solid rgba(56,153,170,0.25)" }}>
                     <div className="text-5xl font-bold text-white">{PRICE_PIONNIER}€</div>
-                    <div className="text-white/50 text-sm">/mois · à vie</div>
+                    <div className="text-white/40 text-sm">/mois · à vie</div>
                     <div className="text-[#3899aa] text-xs font-semibold mt-1">au lieu de 49€/mois</div>
                   </div>
-                  <p className="text-xs mb-4" style={{ color: "rgba(232,176,77,0.75)" }}>
-                    ★ Passe à l&apos;annuel et{" "}
-                    <button
-                      onClick={() => setAnnual(true)}
-                      className="underline hover:opacity-90 transition-opacity font-semibold"
-                      style={{ color: "#e8b04d" }}
-                    >
-                      gagne 151€ net avec le FAMI →
-                    </button>
-                  </p>
+                  <button
+                    onClick={() => setAnnual(true)}
+                    className="block w-full text-xs mb-4 hover:opacity-90 transition-opacity"
+                    style={{ color: "#e8b04d" }}
+                  >
+                    ★ Passe à l&apos;annuel → gagne 151€ net avec le FAMI
+                  </button>
                   <Link
                     href={CTA_SIGNUP_URL}
                     className="block w-full text-center px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110"
@@ -130,77 +154,41 @@ export function Pricing() {
                   >
                     {CTA_MAIN}
                   </Link>
-                  <p className="text-white/40 text-xs mt-2">Sans engagement · Résiliable à tout moment</p>
+                  <p className="text-white/30 text-xs mt-2">Sans engagement · Résiliable à tout moment</p>
                 </div>
               </div>
             </div>
-
-            <p className="text-center text-xs text-[#94a3b8] mt-4">
-              D&apos;autres formules seront disponibles après les 100 places.{" "}
-              <Link href="/tarifs" className="underline hover:text-[#3899aa] transition-colors">
-                Voir tous les tarifs →
-              </Link>
-            </p>
           </ScrollReveal>
         ) : (
-          /* ── ANNUEL ── Pionnier uniquement */
-          <ScrollReveal>
-            <div
-              className="rounded-2xl p-7 sm:p-9 relative overflow-hidden"
-              style={{ background: "#0f172a", border: "2px solid #3899aa", boxShadow: "0 8px 40px rgba(56,153,170,0.2)" }}
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none"
-                style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(56,153,170,0.18) 0%, transparent 70%)" }} />
+          /* ── ANNUEL ── */
+          <>
+            <ScrollReveal>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
 
-              <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center relative z-10">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
+                {/* Carte Pionnier annuelle */}
+                <div
+                  className="rounded-2xl p-6 relative overflow-hidden"
+                  style={{ border: "2px solid #3899aa", boxShadow: "0 8px 40px rgba(56,153,170,0.2)", background: "rgba(56,153,170,0.05)" }}
+                >
+                  <div className="flex items-center gap-2 mb-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3899aa] text-white text-xs font-bold">
                       <Zap className="w-3 h-3" />
-                      Les 100 premiers seulement
-                    </span>
-                    <span
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
-                      style={{ background: "rgba(232,176,77,0.15)", border: "1px solid rgba(232,176,77,0.4)", color: "#e8b04d" }}
-                    >
-                      ★ Éligible FAMI
+                      Pionnier annuel
                     </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                    Offre Pionnier annuelle — et tu <em>gagnes</em> 151€ net.
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed mb-4">
-                    Ta CPAM te verse {FAMI_AMOUNT}€/an grâce au FAMI.
-                    Pour {PRICE_PIONNIER_ANNUAL}€ d&apos;abonnement, tu rentres dans tes frais et au-delà.
-                    Prix garanti à vie, accès à tout.
-                  </p>
-                  <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-4xl font-bold text-white">{PRICE_PIONNIER_ANNUAL}€</span>
+                    <span className="text-white/40 text-sm">/an</span>
+                  </div>
+                  <p className="text-[#3899aa] text-xs font-semibold mb-4">Prix garanti à vie — au lieu de 588€/an</p>
+                  <ul className="space-y-2 mb-6">
                     {PIONNIER_FEATURES.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-white/85 text-sm">
+                      <li key={f} className="flex items-center gap-2 text-white/80 text-sm">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#3899aa] shrink-0" />
                         {f}
                       </li>
                     ))}
                   </ul>
-                </div>
-
-                <div className="shrink-0 text-center lg:text-right w-full lg:w-auto">
-                  {/* Reçu compact */}
-                  <div className="rounded-2xl p-5 mb-3 text-left"
-                    style={{ background: "rgba(232,176,77,0.08)", border: "1px solid rgba(232,176,77,0.3)" }}>
-                    <div className="flex justify-between items-center text-sm mb-2">
-                      <span className="text-white/60">Tu paies</span>
-                      <span className="text-white font-semibold">{PRICE_PIONNIER_ANNUAL} €</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm mb-2">
-                      <span className="text-white/60">FAMI (CPAM)*</span>
-                      <span className="font-semibold" style={{ color: "#e8b04d" }}>+ {FAMI_AMOUNT} €</span>
-                    </div>
-                    <div className="border-t pt-2 mt-1 flex justify-between items-center" style={{ borderColor: "rgba(232,176,77,0.2)" }}>
-                      <span className="text-white font-bold text-sm">Tu gagnes</span>
-                      <span className="text-2xl font-bold" style={{ color: "#e8b04d" }}>+ 151 €</span>
-                    </div>
-                  </div>
                   <Link
                     href={CTA_SIGNUP_URL}
                     className="block w-full text-center px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110"
@@ -208,36 +196,85 @@ export function Pricing() {
                   >
                     {CTA_MAIN}
                   </Link>
-                  <p className="text-white/40 text-xs mt-2">Engagement 12 mois · Paiement en une fois</p>
+                  <p className="text-white/30 text-xs mt-2 text-center">Engagement 12 mois · Paiement en une fois</p>
+                </div>
+
+                {/* Reçu FAMI */}
+                <div className="flex flex-col gap-4">
+                  <div
+                    className="rounded-2xl p-6 flex-1"
+                    style={{ background: "rgba(232,176,77,0.06)", border: "1px solid rgba(232,176,77,0.25)" }}
+                  >
+                    <p className="text-[#e8b04d] text-xs font-semibold uppercase tracking-widest mb-4 font-mono">
+                      Avec l&apos;aide FAMI*
+                    </p>
+                    <div className="space-y-3 mb-4">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-white/60">Tu paies</span>
+                        <span className="text-white font-semibold">{PRICE_PIONNIER_ANNUAL} €</span>
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-white/60">Ta CPAM te verse</span>
+                        <span className="font-semibold" style={{ color: "#e8b04d" }}>+ {FAMI_AMOUNT} €</span>
+                      </div>
+                      <div className="h-px" style={{ background: "rgba(232,176,77,0.2)" }} />
+                      <div className="flex justify-between items-center">
+                        <span className="text-white font-bold text-sm">Tu gagnes</span>
+                        <span className="text-2xl font-bold" style={{ color: "#e8b04d" }}>+ 151 €</span>
+                      </div>
+                    </div>
+                    <p className="text-white/30 text-xs leading-relaxed">
+                      La seule façon de perdre de l&apos;argent avec Mon Assistant Kiné, c&apos;est de ne pas s&apos;abonner.
+                    </p>
+                  </div>
+
+                  <div
+                    className="rounded-2xl p-5"
+                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                  >
+                    <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3 font-mono">Comment ça marche</p>
+                    <div className="space-y-3">
+                      {STEPS.map((step) => (
+                        <div key={step.n} className="flex gap-3">
+                          <span
+                            className="w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 font-mono"
+                            style={{ background: "rgba(56,153,170,0.2)", color: "#3899aa", border: "1px solid rgba(56,153,170,0.3)" }}
+                          >
+                            {step.n}
+                          </span>
+                          <div>
+                            <p className="text-white text-xs font-semibold leading-snug">{step.title}</p>
+                            <p className="text-white/40 text-xs leading-relaxed">{step.body}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
-            <p id="fami-disclaimer" className="text-[#94a3b8] text-xs text-center max-w-xl mx-auto mt-4 leading-relaxed">
-              *L&apos;aide FAMI ({FAMI_AMOUNT} €/an) est versée par ta CPAM après déclaration sur Amelipro
-              (janv.-mars de l&apos;année suivante). Son versement dépend de ta CPAM et du respect des
-              conditions CNAM — Mon Assistant Kiné ne peut pas le garantir.
-            </p>
-
-            <p className="text-center text-xs text-[#94a3b8] mt-3">
-              D&apos;autres formules seront disponibles après les 100 places.{" "}
-              <Link href="/tarifs" className="underline hover:text-[#3899aa] transition-colors">
-                Voir tous les tarifs →
-              </Link>
-            </p>
-          </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <p id="fami-disclaimer" className="text-white/25 text-xs text-center max-w-xl mx-auto leading-relaxed mb-6">
+                *L&apos;aide FAMI ({FAMI_AMOUNT} €/an) est versée par ta CPAM après déclaration sur Amelipro
+                (janv.-mars de l&apos;année suivante). Son versement dépend de ta CPAM et du respect des
+                conditions CNAM — Mon Assistant Kiné ne peut pas le garantir.{" "}
+                <a href="/tarifs#faq" className="underline hover:text-white/50">Questions fréquentes →</a>
+              </p>
+            </ScrollReveal>
+          </>
         )}
 
-        {/* Bandeau contrats gratuits — toujours visible */}
-        <ScrollReveal delay={0.2} className="mt-6">
-          <div className="flex items-center gap-3 rounded-2xl px-5 py-4" style={{ background: "#f0fdf4", border: "1px solid #86efac" }}>
+        {/* Bandeau contrats gratuits */}
+        <ScrollReveal delay={0.15} className="mt-6">
+          <div className="flex items-center gap-3 rounded-2xl px-5 py-4" style={{ background: "rgba(21,128,61,0.1)", border: "1px solid rgba(134,239,172,0.25)" }}>
             <span className="text-xl shrink-0">📑</span>
             <div className="flex-1 min-w-0">
-              <span className="text-sm font-semibold text-[#15803d]">Module Contrats de remplacement — 100 % gratuit</span>
-              <span className="text-xs text-[#166534]"> · Signature électronique, déclaration Ordre en 1 clic, archivage. Offert à tous les kinés, même sans abonnement.</span>
+              <span className="text-sm font-semibold text-green-300">Module Contrats de remplacement — 100 % gratuit</span>
+              <span className="text-xs text-green-400/70"> · Signature électronique, déclaration Ordre en 1 clic, archivage. Offert à tous les kinés, même sans abonnement.</span>
             </div>
             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0"
-              style={{ background: "#dcfce7", border: "1px solid #86efac", color: "#15803d" }}>
+              style={{ background: "rgba(21,128,61,0.2)", border: "1px solid rgba(134,239,172,0.3)", color: "#86efac" }}>
               Gratuit
             </span>
           </div>
