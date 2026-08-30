@@ -68,7 +68,10 @@ export function Pricing() {
             Simple et transparent.<br />
             <span style={{ color: "#3899aa" }}>Et possiblement gratuit.</span>
           </h2>
-          <p className="text-white/50 text-sm mb-6">Tant qu&apos;il reste des places, une seule offre : tout inclus, prix bloqué à vie.</p>
+          <p className="text-white/50 text-sm mb-2">Tant qu&apos;il reste des places, une seule offre : tout inclus, prix bloqué à vie.</p>
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#e8b04d" }}>
+            ★ <strong>L&apos;aide FAMI</strong> : ta CPAM verse <strong>350 €/an</strong> à tous les kinés libéraux équipés d&apos;une solution de télétransmission. En choisissant le plan annuel à 199 €, tu en reçois 350 € — <strong>l&apos;abonnement te rapporte 151 € nets.</strong>
+          </p>
 
           <div className="inline-flex items-center rounded-xl p-1" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
             <button

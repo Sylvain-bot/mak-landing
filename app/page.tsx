@@ -7,6 +7,8 @@ import { ToolsShowcase } from "@/components/ToolsShowcase";
 import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { MultiDevice } from "@/components/MultiDevice";
+import { TimeCalculator } from "@/components/TimeCalculator";
+import { ReeducaBanner } from "@/components/ReeducaBanner";
 import { CtaFinal } from "@/components/CtaFinal";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -38,6 +40,11 @@ export default async function Home() {
 
       <Navbar />
 
+      {/* Bandeau événement Rééduca — mt-16 pour passer sous la navbar fixed */}
+      <div className="mt-16">
+        <ReeducaBanner />
+      </div>
+
       {/* SECTION 1 — Hero */}
       <Hero />
 
@@ -68,18 +75,13 @@ export default async function Home() {
                 <span className="w-2 h-2 rounded-full bg-red-400" />
                 <p className="text-xs font-bold uppercase tracking-widest text-red-400">Le pilote automatique</p>
               </div>
-              <p className="text-[#475569] leading-relaxed text-sm mb-6">
-                Tu soignes bien — mais honnêtement, tu fonctionnes en routine. Les articles scientifiques
-                s&apos;accumulent dans tes onglets sans que tu les lises vraiment. Tu refais les mêmes
-                techniques depuis des années. Tes bilans sont rédigés le soir. Tes patients, tu les suis
-                comme tu peux. Ce n&apos;est pas ce que tu imaginais en sortant de l&apos;école.
-              </p>
               <div className="space-y-2.5">
                 {[
                   "Les mêmes techniques depuis des années, sans mise à jour",
-                  "La littérature scientifique que tu n'as plus le temps de lire",
-                  "Suivi patient entre les séances : bricolage ou rien",
+                  "La littérature scientifique qui s'accumule sans que tu la lises",
                   "Bilans rédigés le soir — la charge mentale qui déborde",
+                  "Suivi patient entre les séances : bricolage ou rien",
+                  "Pas ce que tu imaginais en sortant de l'école",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs text-red-500/80">
                     <span className="mt-0.5 shrink-0 font-bold">✕</span>
@@ -95,20 +97,14 @@ export default async function Home() {
                 <span className="w-2 h-2 rounded-full bg-[#3899aa]" />
                 <p className="text-xs font-bold uppercase tracking-widest text-[#3899aa]">Le kiné que tu voulais être</p>
               </div>
-              <p className="text-[#475569] leading-relaxed text-sm mb-6">
-                Tu poses ta question clinique au Copilote — réponse en 30 secondes, sources citées parmi
-                56 000+ études. Tes patients reçoivent leur programme de rééducation sur WhatsApp et sont
-                accompagnés par le chatbot que tu as programmé pour eux. Tu pratiques avec la rigueur que
-                tu voulais avoir. Ton bilan est mis au propre directement pendant la séance. Tes soirées
-                t&apos;appartiennent à nouveau.
-              </p>
               <div className="space-y-2.5">
                 {[
-                  "Toujours à jour scientifiquement, sans y passer des heures",
+                  "Copilote clinique — réponse en 30 sec, 56 000+ études citées",
                   "Bilan mis au propre pendant la séance, en temps réel",
-                  "Patients suivis entre les séances, chatbot WhatsApp programmé pour eux",
+                  "Patients suivis entre les séances via chatbot WhatsApp",
+                  "Tes soirées t'appartiennent à nouveau",
                   "La fierté de pratiquer comme tu l'avais imaginé",
-                  "Communauté privée de pionniers — tu participes à l'évolution de l'outil",
+                  "Communauté privée de pionniers — tu façonnes l'outil avec nous",
                   "★ Abonnement annuel qui peut te rapporter de l'argent (aide FAMI*)",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs text-[#2a7a8a] font-medium">
@@ -129,7 +125,10 @@ export default async function Home() {
       {/* SECTION 4 — Outils : problème / solution / comment ça marche */}
       <ToolsShowcase />
 
-      {/* SECTION 5 — Multi-device */}
+      {/* SECTION 5 — Calculateur de temps gagné */}
+      <TimeCalculator />
+
+      {/* SECTION 6 — Multi-device */}
       <MultiDevice />
 
       {/* SECTION 6 — Pricing + FAMI */}
