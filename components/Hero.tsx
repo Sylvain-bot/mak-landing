@@ -97,7 +97,7 @@ export function Hero() {
   const ph = usePostHog();
 
   return (
-    <section className="relative overflow-hidden bg-white pt-8 sm:pt-12 pb-0 px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-white pt-2 sm:pt-3 pb-0 px-4 sm:px-6">
       {/* Dot grid */}
       <div
         aria-hidden
@@ -124,18 +124,6 @@ export function Hero() {
 
           {/* Left — text */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease: "easeOut" }}
-              className="mb-6"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
-                Offre Pionnier — 100 places · Conçu par 2 kinés D.E.
-              </span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -197,14 +185,17 @@ export function Hero() {
               </a>
             </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.38 }}
-              className="text-xs text-[#64748b] mb-5"
+              className="mb-5"
             >
-              <span className="font-semibold text-[#3899aa]">Pionnier</span> — tu rejoins une communauté privée de kinés qui façonnent l&apos;outil avec nous. Ton retour compte vraiment.
-            </motion.p>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
+                Offre Pionnier — 100 places · Conçu par 2 kinés D.E.
+              </span>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
