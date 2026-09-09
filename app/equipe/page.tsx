@@ -166,8 +166,8 @@ export default function EquipePage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-[#0f172a] mb-4">Une question ? Une idée ?</h2>
           <p className="text-[#475569] mb-2">Tu es kiné et tu veux contribuer à l&apos;évolution de Mon Assistant Kiné ?</p>
-          <a href="mailto:contact@monassistantkine.fr" className="text-[#3899aa] font-semibold hover:underline block mb-8">
-            contact@monassistantkine.fr
+          <a href="mailto:sylvain@monassistantkine.fr" className="text-[#3899aa] font-semibold hover:underline block mb-8">
+            sylvain@monassistantkine.fr
           </a>
           <Link
             href="https://app.monassistantkine.fr/signup"

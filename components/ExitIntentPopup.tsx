@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const STORAGE_KEY = "mak_newsletter_dismissed";
-const CONTACT_EMAIL = "contact@monassistantkine.fr";
+const CONTACT_EMAIL = "sylvain@monassistantkine.fr";
 
 export function ExitIntentPopup() {
   const pathname = usePathname();

@@ -33,7 +33,7 @@ export async function sendBrevoEmail(payload: {
       htmlContent: payload.htmlContent,
       sender: {
         name: payload.senderName ?? "Mon Assistant Kiné",
-        email: payload.senderEmail ?? "contact@monassistantkine.fr",
+        email: payload.senderEmail ?? "sylvain@monassistantkine.fr",
       },
       recipients: { listIds: payload.listIds },
       scheduledAt: new Date().toISOString(),
