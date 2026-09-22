@@ -11,7 +11,7 @@ import { FOUNDER_1_NAME, FOUNDER_1_LINKEDIN, FOUNDER_2_NAME, FOUNDER_2_LINKEDIN 
 const YT_ID = "ZrA7d4CvRRE";
 
 const FEATS = [
-  { icon: "📋", label: "Bilans en 3 minutes", detail: "Dicte tes notes, l'IA structure un bilan conforme et exportable" },
+  { icon: "📋", label: "Bilans en 3 minutes", detail: "Enregistre ta séance, l'IA génère un bilan NGAP complet en quelques secondes — export PDF en 1 clic" },
   { icon: "🧠", label: "IA clinique & bibliographique", detail: "56 000+ études intégrées — drapeaux rouges, raisonnement structuré, recherche EBP en 30 sec" },
   { icon: "💬", label: "Chatbot patient", detail: "Tes patients accompagnés entre les séances, sans SMS à gérer" },
 ];

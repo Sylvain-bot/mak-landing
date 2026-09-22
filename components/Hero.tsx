@@ -189,11 +189,14 @@ export function Hero() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.38 }}
-              className="mb-5"
+              className="mb-3 flex flex-wrap gap-2"
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4ecea] bg-[#eef7f6] text-[#3899aa] text-sm font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3899aa] animate-pulse" />
                 Offre Pionnier — 100 places · Conçu par 2 kinés D.E.
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[rgba(232,176,77,0.35)] text-sm font-semibold" style={{ background: "rgba(232,176,77,0.08)", color: "#92680a" }}>
+                🎤 Cité à la conférence ITMP · Rééduca Paris 2026
               </span>
             </motion.div>
 
@@ -243,7 +246,7 @@ export function Hero() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-7">
               <StatItem
-                target={3} suffix=" min" label="Bilan NGAP dicté et mis en forme"
+                target={3} suffix=" min" label="Bilan NGAP complet — enregistrement + structuration automatique"
                 active={inView}
               />
               <StatItem

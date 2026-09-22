@@ -34,37 +34,6 @@ type Tool = {
 
 const TOOLS: Tool[] = [
   {
-    id: "bilans",
-    icon: "📋",
-    label: "Bilans",
-    badge: "3 min",
-    problem:
-      "18 à 25 minutes par bilan NGAP. Multiplié par 8 bilans par semaine — c'est 3 heures de paperasse hebdomadaire, après les séances.",
-    solution:
-      "Tu dictes ou tu tapes tes notes en vrac. Mon Assistant Kiné structure au format NGAP en quelques secondes.",
-    steps: [
-      {
-        num: "01",
-        title: "Tu dictes entre deux patients",
-        desc: "ou tu tapes tes notes brutes — sans te soucier de la mise en forme",
-      },
-      {
-        num: "02",
-        title: "Structuration NGAP automatique",
-        desc: "terminologie exacte, format CPAM, cohérence clinique vérifiée",
-      },
-      {
-        num: "03",
-        title: "Tu relis, tu exportes",
-        desc: "PDF ou envoi mail direct en 1 clic — Chrono : 3 minutes",
-      },
-    ],
-    stat: { value: "3 min", label: "au lieu de 20 min" },
-    link: "/fonctionnalites/documentation-bilan-kine",
-    video: "/video-bilan2.mp4",
-    example: null,
-  },
-  {
     id: "copilote",
     icon: "🧠",
     label: "Copilote",
@@ -203,7 +172,7 @@ export function ToolsShowcase() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 font-mono">
-            Ce que ça fait concrètement
+            Les autres modules
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight">
             Choisis ton problème. Vois la solution.
@@ -243,7 +212,11 @@ export function ToolsShowcase() {
               <span
                 className="text-[11px] px-2 py-0.5 rounded-full font-mono"
                 style={
-                  i === active
+                  t.badge === "NOUVEAU"
+                    ? i === active
+                      ? { background: "rgba(232,176,77,0.25)", color: "#e8b04d" }
+                      : { background: "rgba(232,176,77,0.15)", color: "#e8b04d", border: "1px solid rgba(232,176,77,0.4)" }
+                    : i === active
                     ? t.badgeGreen
                       ? { background: "rgba(255,255,255,0.2)", color: "#bbf7d0" }
                       : { background: "rgba(56,153,170,0.25)", color: "#3899aa" }

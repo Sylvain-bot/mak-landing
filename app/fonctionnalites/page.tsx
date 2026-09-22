@@ -27,7 +27,7 @@ const FEATURES = [
     href: "/fonctionnalites/documentation-bilan-kine",
     icon: "📋",
     title: "Bilans NGAP",
-    desc: "Génère un bilan kinésithérapique complet et conforme en quelques minutes, exportable en PDF ou par mail.",
+    desc: "Enregistre ta séance, le bilan NGAP complet est généré automatiquement en quelques secondes. Export PDF en 1 clic. Nouveau module.",
   },
   {
     href: "/fonctionnalites/suivi-patient",
