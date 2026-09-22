@@ -9,6 +9,7 @@ import { FAQ } from "@/components/FAQ";
 import { MultiDevice } from "@/components/MultiDevice";
 import { TimeCalculator } from "@/components/TimeCalculator";
 import { ReeducaBanner } from "@/components/ReeducaBanner";
+import { BilanVocalSection } from "@/components/BilanVocalSection";
 import { CtaFinal } from "@/components/CtaFinal";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -122,7 +123,10 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SECTION 4 — Outils : problème / solution / comment ça marche */}
+      {/* SECTION 4 — Nouveauté Module Bilans */}
+      <BilanVocalSection />
+
+      {/* SECTION 5 — Outils : problème / solution / comment ça marche */}
       <ToolsShowcase />
 
       {/* SECTION 5 — Calculateur de temps gagné */}

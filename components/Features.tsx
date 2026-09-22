@@ -7,11 +7,11 @@ const FEATURES = [
   {
     icon: "📋",
     tag: "Bilans kinésithérapiques",
-    title: "Bilan NGAP dicté ou tapé, structuré en 3 minutes",
+    title: "Enregistre ta séance — bilan NGAP prêt en quelques secondes",
     bullets: [
-      "Dictée vocale ou saisie libre",
-      "Mise en forme NGAP automatique",
-      "Export PDF ou envoi mail en 1 clic",
+      "Enregistrement de la séance entière en 1 tap",
+      "Transcription et structuration NGAP automatiques",
+      "Export PDF en 1 clic — en-tête cabinet, signable",
     ],
     href: "/fonctionnalites/documentation-bilan-kine",
     primary: true,

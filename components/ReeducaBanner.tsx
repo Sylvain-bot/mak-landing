@@ -16,18 +16,16 @@ export function ReeducaBanner() {
       >
         {repeated.map((_, i) => (
           <span key={i} className="flex items-center gap-3 shrink-0">
-            <span className="text-sm font-medium text-[#2a7a8a]">Rendez-vous au salon</span>
+            <span className="text-sm font-medium text-[#2a7a8a]">🎤 Mon Assistant Kiné cité à la conférence ITMP · Rééduca Paris, septembre 2026</span>
+            <span className="text-[#3899aa]/40 mx-2">✦</span>
             <Image
               src="/logo reeduca.png"
               alt="Rééduca"
-              width={140}
-              height={52}
+              width={110}
+              height={40}
               className="object-contain"
-              style={{ maxHeight: "50px", width: "auto" }}
+              style={{ maxHeight: "38px", width: "auto", opacity: 0.75 }}
             />
-            <span className="text-sm font-medium text-[#2a7a8a]">
-              · 17–19 septembre 2026, Paris · Conférence ITMP sur l&apos;IA en kinésithérapie — Mon Assistant Kiné y sera présenté
-            </span>
             <span className="text-[#3899aa]/40 mx-2">✦</span>
           </span>
         ))}
