@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.monassistantkine.fr";
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow: "/admin" },
+      { userAgent: "*", allow: "/", disallow: ["/admin", "/downloads/"] },
     ],
     sitemap: `${site}/sitemap.xml`,
   };

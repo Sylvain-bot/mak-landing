@@ -22,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${site}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     { url: `${site}/tarifs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site}/equipe`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${site}/guide-fami`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site}/replay`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${site}/comparatif-outils-ia-kine`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site}/fonctionnalites`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },

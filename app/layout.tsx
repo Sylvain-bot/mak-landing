@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
 import ClarityInit from "@/components/ClarityInit";
 import ClarityRouteTracker from "@/components/ClarityRouteTracker";
 import { JsonLd } from "@/components/JsonLd";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { ChatBot } from "@/components/ChatBot";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { UtmCapture } from "@/components/UtmCapture";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import "./globals.css";
 
@@ -55,6 +57,9 @@ export default function RootLayout({
         <ChatBot />
         <ClarityInit />
         <ClarityRouteTracker />
+        <Suspense fallback={null}>
+          <UtmCapture />
+        </Suspense>
 
         {/* Meta Pixel */}
         <Script id="fb-pixel" strategy="afterInteractive">{`

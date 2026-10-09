@@ -64,6 +64,9 @@ export function Footer() {
               <Link href="/blog" className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
                 Blog
               </Link>
+              <Link href="/#guide-fami" className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
+                Guide FAMI gratuit
+              </Link>
               <Link href="/replay" className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
                 Replay de lancement
               </Link>

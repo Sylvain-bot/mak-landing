@@ -11,6 +11,7 @@ import { TimeCalculator } from "@/components/TimeCalculator";
 import { ReeducaBanner } from "@/components/ReeducaBanner";
 import { BilanVocalSection } from "@/components/BilanVocalSection";
 import { CtaFinal } from "@/components/CtaFinal";
+import { LeadMagnetSection } from "@/components/LeadMagnetSection";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { homepageSchema } from "@/lib/schemas/homepage.schema";
@@ -134,6 +135,9 @@ export default async function Home() {
 
       {/* SECTION 6 — Multi-device */}
       <MultiDevice />
+
+      {/* Lead magnet — Guide FAMI 2027 */}
+      <LeadMagnetSection />
 
       {/* SECTION 6 — Pricing + FAMI */}
       <Pricing />

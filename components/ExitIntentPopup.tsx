@@ -14,7 +14,7 @@ export function ExitIntentPopup() {
   const triggered = useRef(false);
 
   useEffect(() => {
-    if (pathname.startsWith("/admin")) return;
+    if (pathname.startsWith("/admin") || pathname.startsWith("/guide-fami")) return;
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
     let mobileTimer: ReturnType<typeof setTimeout>;
