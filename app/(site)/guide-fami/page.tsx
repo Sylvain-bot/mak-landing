@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { LeadMagnetForm } from "@/components/LeadMagnetForm";
 import { GuideFamiImage } from "@/components/GuideFamiImage";
 import { GuideFamiPitch } from "@/components/LeadMagnetSection";
@@ -69,9 +70,10 @@ export default function GuideFamiPage() {
       <footer className="px-4 sm:px-6 py-6 bg-white" style={{ borderTop: "1px solid #d4ecea" }}>
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#94a3b8]">
           <p>© 2026 Mon Assistant Kiné</p>
-          <nav className="flex gap-4">
+          <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             <Link href="/mentions-legales" className="hover:text-[#475569] transition-colors">Mentions légales</Link>
             <Link href="/politique-confidentialite" className="hover:text-[#475569] transition-colors">Politique de confidentialité</Link>
+            <ManageCookiesButton className="hover:text-[#475569] transition-colors" />
           </nav>
         </div>
       </footer>

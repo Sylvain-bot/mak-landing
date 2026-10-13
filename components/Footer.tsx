@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 
 const LEGAL_LINKS = [
   { label: "Mentions légales", href: "/mentions-legales" },
@@ -92,6 +93,7 @@ export function Footer() {
                   {link.label}
                 </Link>
               ))}
+              <ManageCookiesButton className="text-left text-xs text-[#94a3b8] hover:text-[#475569] transition-colors" />
             </nav>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 
 const NEXT_STEPS = [
   {
@@ -155,6 +156,7 @@ export default function BioMerciPage() {
           ].map((l) => (
             <Link key={l.label} href={l.href} style={{ fontSize: 11, color: "#94a3b8", textDecoration: "none" }}>{l.label}</Link>
           ))}
+          <ManageCookiesButton style={{ fontSize: 11, color: "#94a3b8", background: "none", border: 0, padding: 0, cursor: "pointer", fontFamily: "inherit" }} />
         </div>
       </footer>
     </main>

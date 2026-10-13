@@ -7,12 +7,7 @@ import posthog from "posthog-js";
 import { Loader2 } from "lucide-react";
 import { getStoredUtmSource } from "@/lib/utm";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
-
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
+import { trackMetaEvent } from "@/components/MetaPixel";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -56,13 +51,10 @@ export function LeadMagnetForm({ source }: { source: string }) {
       });
 
       if (res.ok) {
+        // Meta : uniquement avec le consentement « Publicité » (d=1)
+        trackMetaEvent("Lead", { content_name: "guide-fami-2027" });
         try {
-          if (typeof window.fbq === "function") {
-            window.fbq("track", "Lead", { content_name: "guide-fami-2027" });
-          }
-        } catch {}
-        try {
-          posthog.capture("leadmagnet_submit", { source: finalSource, leadmagnet: "fami-2027" });
+          if (posthog.__loaded) posthog.capture("leadmagnet_submit", { source: finalSource, leadmagnet: "fami-2027" });
         } catch {}
         router.push("/guide-fami/merci");
         return;

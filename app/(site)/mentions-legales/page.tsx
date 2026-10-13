@@ -75,11 +75,16 @@ export default function MentionsLegalesPage() {
 
       <h2>Cookies</h2>
       <ul>
-        <li>Cookies fonctionnels strictement nécessaires</li>
-        <li>Cookies de paiement Stripe</li>
-        <li>Cookies d&apos;audience Google Analytics 4 (consentement explicite requis)</li>
-        <li>Absence de cookies publicitaires</li>
+        <li>Cookies strictement nécessaires, dont mak_consent qui mémorise vos choix pendant 6 mois</li>
+        <li>Cookies de paiement Stripe (application)</li>
+        <li>Mesure d&apos;audience PostHog (hébergement UE), uniquement avec votre consentement « Mesure d&apos;audience »</li>
+        <li>Pixel Meta (publicité, transfert possible vers les États-Unis), uniquement avec votre consentement « Publicité »</li>
+        <li>Choix modifiable à tout moment via le lien « Gérer mes cookies » en bas de page</li>
       </ul>
+      <p>
+        Détails (durées, finalités, chatbot) dans la{" "}
+        <a href="/politique-confidentialite#cookies">Politique de confidentialité</a>.
+      </p>
 
       <h2>Conditions d&apos;utilisation</h2>
       <p>L&apos;utilisation du service requiert l&apos;acceptation des :</p>
