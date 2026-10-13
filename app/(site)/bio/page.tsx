@@ -111,7 +111,6 @@ export default function BioPage() {
           <Link
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 w-full bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25 mb-3"
-            onClick={() => { try { (window as any).clarity?.("set", "cta_clicked", "true"); } catch(e) {} }}
           >
             Essayer 14 jours <ArrowRight className="w-4 h-4" />
           </Link>
@@ -309,7 +308,6 @@ export default function BioPage() {
           <Link
             href="https://app.monassistantkine.fr/signup"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02] mb-4"
-            onClick={() => { try { (window as any).clarity?.("set", "cta_clicked", "true"); } catch(e) {} }}
           >
             Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
           </Link>

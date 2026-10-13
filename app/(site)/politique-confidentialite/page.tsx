@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function PolitiqueConfidentialitePage() {
   return (
-    <LegalLayout title="Politique de confidentialité" lastUpdated="7 juin 2026 — Version 3.3">
+    <LegalLayout title="Politique de confidentialité" lastUpdated="13 octobre 2026 — Version 3.4">
       <h2>Responsable du traitement</h2>
       <p>
         <strong>SAS Mon Assistant Kiné</strong>
@@ -174,10 +174,18 @@ export default function PolitiqueConfidentialitePage() {
           <tr><td>Firebase (Google)</td><td>Données d&apos;authentification</td><td>Connexion sécurisée</td><td>Contrat</td></tr>
           <tr><td>Google Cloud Storage</td><td>Fichiers utilisateurs (avatars, GIFs d&apos;exercices, PDFs de contrats signés)</td><td>Stockage privé chiffré</td><td>Contrat</td></tr>
           <tr><td>Brevo (Sib SA, France)</td><td>Email, nom des signataires, PDF du contrat en pièce jointe</td><td>Envoi des invitations à signer et déclaration au CDO</td><td>Contrat</td></tr>
+          <tr><td>PostHog Inc. (hébergement UE)</td><td>Navigation sur le site vitrine (pages vues, clics, enregistrement des sessions avec saisies masquées)</td><td>Mesure d&apos;audience du site vitrine</td><td>Consentement</td></tr>
+          <tr><td>Meta Platforms Ireland Ltd</td><td>Visites et inscriptions issues de nos publicités, identifiants des cookies Meta</td><td>Mesure de l&apos;efficacité de nos publicités Facebook et Instagram</td><td>Consentement</td></tr>
+          <tr><td>Anthropic</td><td>Messages saisis dans le chatbot du site vitrine</td><td>Génération des réponses du chatbot</td><td>[À COMPLÉTER : base légale retenue pour le chatbot]</td></tr>
           <tr><td>Conseils départementaux de l&apos;Ordre des MK</td><td>Contrat signé complet (état civil, n° RPPS, n° ordinal, conditions)</td><td>Déclaration déontologique (article R.4321-128 du Code de la santé publique)</td><td>Obligation légale</td></tr>
         </tbody>
       </table>
-      <p>Les données ne sont jamais vendues, louées, ni partagées à des fins commerciales ou publicitaires.</p>
+      <p>
+        Les données ne sont jamais vendues ni louées. Les données de l&apos;application (et notamment
+        les données patients) ne sont jamais partagées à des fins commerciales ou publicitaires.
+        Seules les données de navigation sur le site vitrine peuvent être transmises à Meta, et
+        uniquement si vous avez accepté les cookies « Publicité » (voir « Cookies et traceurs »).
+      </p>
 
       <h2>Sécurité et protection</h2>
       <h3>Mesures techniques</h3>
@@ -245,39 +253,82 @@ export default function PolitiqueConfidentialitePage() {
         de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — www.cnil.fr.
       </p>
 
-      <h2>Cookies et traceurs</h2>
+      <h2 id="cookies">Cookies et traceurs</h2>
+
+      <h3>Sur le site www.monassistantkine.fr</h3>
       <p>
-        Mon Assistant Kiné utilise des cookies strictement nécessaires au fonctionnement de la
-        plateforme, ainsi qu&apos;un cookie de mesure d&apos;audience soumis à consentement
-        explicite :
+        Lors de votre première visite, une bannière vous permet d&apos;accepter, de refuser ou de
+        choisir finalité par finalité les traceurs soumis à consentement. Aucun traceur de mesure
+        d&apos;audience ou de publicité n&apos;est déposé avant votre choix, ni après un refus.
+        Refuser est aussi simple qu&apos;accepter. Vous pouvez modifier ou retirer votre
+        consentement à tout moment via le lien « Gérer mes cookies » en bas de chaque page.
+        Votre choix est conservé 6 mois, puis vous est redemandé.
       </p>
+      <table>
+        <thead>
+          <tr><th>Cookie / traceur</th><th>Outil</th><th>Finalité</th><th>Durée</th><th>Consentement</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mak_consent</td><td>Mon Assistant Kiné</td><td>Mémorise vos choix sur les cookies (partagé avec app.monassistantkine.fr)</td><td>6 mois</td><td>Non requis (strictement nécessaire)</td></tr>
+          <tr><td>ph_*_posthog</td><td>PostHog</td><td>Mesure d&apos;audience : pages vues, clics, enregistrement des sessions</td><td>1 an</td><td>Oui, « Mesure d&apos;audience »</td></tr>
+          <tr><td>_fbp, _fbc</td><td>Meta (pixel)</td><td>Publicité : mesure des visites et inscriptions issues de nos publicités Facebook et Instagram</td><td>90 jours</td><td>Oui, « Publicité »</td></tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Mesure d&apos;audience — PostHog :</strong> PostHog n&apos;est chargé qu&apos;après
+        votre accord. Il collecte les pages consultées, les clics et un enregistrement des sessions
+        de navigation dans lequel tous les champs de saisie sont masqués. Les données sont
+        hébergées dans l&apos;Union européenne (instance PostHog EU). Base légale : consentement
+        (article 6.1.a du RGPD). Durée de conservation des données : [À COMPLÉTER]. En cas de
+        retrait du consentement, la collecte s&apos;arrête et les cookies PostHog sont supprimés de
+        votre navigateur.
+      </p>
+      <p>
+        <strong>Publicité — pixel Meta :</strong> le pixel de Meta Platforms Ireland Ltd
+        n&apos;est chargé qu&apos;après votre accord. Il permet de mesurer les visites et les
+        inscriptions (par exemple au guide FAMI) provenant de nos publicités sur Facebook et
+        Instagram. Meta peut associer ces informations à votre compte Facebook ou Instagram, selon
+        sa propre politique de confidentialité. Base légale : consentement (article 6.1.a du RGPD).
+        Ces données peuvent être transférées aux États-Unis vers Meta Platforms, Inc., dans le
+        cadre du Data Privacy Framework (décision d&apos;adéquation de la Commission européenne du
+        10 juillet 2023). Durée de conservation par Meta : [À COMPLÉTER]. En cas de retrait du
+        consentement, le pixel n&apos;est plus chargé et les cookies Meta sont supprimés de votre
+        navigateur.
+      </p>
+      <p>
+        <strong>Stockage de session :</strong> le site utilise aussi le stockage de session du
+        navigateur (effacé à la fermeture de l&apos;onglet) pour ne pas réafficher une fenêtre déjà
+        fermée et pour mémoriser la source d&apos;une visite (paramètres utm) afin de
+        l&apos;associer à une inscription au guide FAMI.
+      </p>
+
+      <h3 id="chatbot">Chatbot du site</h3>
+      <p>
+        Les messages que vous saisissez dans le chatbot du site sont transmis à notre prestataire
+        d&apos;intelligence artificielle, Anthropic, afin de générer les réponses. Ils ne sont pas
+        enregistrés dans nos bases de données. Si vous demandez à être recontacté via le chatbot,
+        votre nom, votre email et votre message nous sont envoyés par email (via Brevo) pour vous
+        répondre. Ne saisissez aucune donnée de santé ni aucune information sur un patient dans le
+        chatbot. Durée de conservation des messages par Anthropic : [À COMPLÉTER]. Garanties
+        encadrant le transfert hors de l&apos;Union européenne : [À COMPLÉTER].
+      </p>
+
+      <h3>Sur l&apos;application app.monassistantkine.fr</h3>
       <table>
         <thead>
           <tr><th>Cookie</th><th>Finalité</th><th>Durée</th><th>Obligatoire</th></tr>
         </thead>
         <tbody>
+          <tr><td>mak_consent</td><td>Mémorise vos choix sur les cookies (partagé avec le site)</td><td>6 mois</td><td>Oui (strictement nécessaire)</td></tr>
           <tr><td>Auth Firebase</td><td>Authentification utilisateur</td><td>Session</td><td>Oui</td></tr>
           <tr><td>Stripe Session</td><td>Paiement sécurisé</td><td>24h</td><td>Oui (paiement)</td></tr>
           <tr><td>Theme</td><td>Préférence visuelle</td><td>1 an</td><td>Non</td></tr>
-          <tr><td>cookie_consent</td><td>Mémorise le choix sur les cookies de mesure d&apos;audience</td><td>6 mois</td><td>Non</td></tr>
-          <tr><td>_ga, _ga_*</td><td>Mesure d&apos;audience (Google Analytics 4) — déposés uniquement après consentement</td><td>13 mois</td><td>Non — soumis à consentement</td></tr>
         </tbody>
       </table>
       <p>
-        <strong>Mesure d&apos;audience — Google Analytics 4 :</strong> sous-traitant Google
-        Ireland Limited. Données collectées : identifiant client GA, pages vues, durée de
-        session, événement d&apos;inscription, adresse IP anonymisée. Base légale : consentement
-        (article 6.1.a du RGPD). Durée de conservation : 13 mois. Les données sont susceptibles
-        d&apos;être transférées aux États-Unis dans le cadre du Data Privacy Framework (décision
-        d&apos;adéquation de la Commission européenne du 10 juillet 2023). Mesures de
-        protection : anonymisation de l&apos;IP, désactivation du partage avec Google Ads,
-        absence de profilage publicitaire. Le consentement peut être retiré à tout moment via le
-        lien « Gérer mes cookies » en bas de page.
-      </p>
-      <p>
-        Mon Assistant Kiné n&apos;utilise pas de cookies publicitaires, de traceurs de réseaux
-        sociaux, ni de cookies de profilage commercial, et ne partage pas les données GA4 avec
-        Google Ads ou des annonceurs tiers.
+        [À COMPLÉTER : liste à jour des cookies et traceurs de mesure d&apos;audience ou de
+        publicité utilisés par l&apos;application, à confirmer avec l&apos;équipe technique de
+        l&apos;application.]
       </p>
 
       <h2>Transferts internationaux</h2>
@@ -295,6 +346,13 @@ export default function PolitiqueConfidentialitePage() {
         désactivée sur le compte API OpenAI (zero data retention). Le détail des sous-traitants
         ultérieurs et des garanties associées est disponible dans le Contrat de Sous-traitance
         (DPA).
+      </p>
+      <p>
+        Site vitrine : les données de mesure d&apos;audience (PostHog) sont hébergées dans
+        l&apos;Union européenne. Les données du pixel Meta, collectées uniquement avec votre
+        consentement, peuvent être transférées aux États-Unis dans le cadre du Data Privacy
+        Framework. Les messages du chatbot sont traités par Anthropic : voir la section
+        « Chatbot du site ».
       </p>
 
       <h2>Mineurs</h2>
