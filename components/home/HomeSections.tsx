@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Moon, ListChecks, Eye } from "lucide-react";
 import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
 import { FAMI_HREF, MODULES, ALL_FEATURES_HREF } from "@/lib/modules";
@@ -150,33 +151,19 @@ export function Benefits() {
   );
 }
 
-const TESTIMONIALS = [
-  { quote: "Je ne pense plus pouvoir me passer de l'app maintenant.", who: "Constance", role: "Kinésithérapeute, [Ville]" },
-  { quote: "J'ai vraiment pris du plaisir à faire mes bilans.", who: null, role: "Kinésithérapeute, utilisateur Pionnier" },
-  { quote: "Ça change mon quotidien et celui de mes patients.", who: null, role: "Kinésithérapeute, utilisateur Pionnier" },
-  { quote: "C'est que le début, mais l'app est déjà très agréable à utiliser.", who: null, role: "Kinésithérapeute, utilisateur Pionnier" },
-];
-
 export function Proof() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 sm:py-28" style={{ background: GROUND }}>
+      <div className="px-4 sm:px-6 max-w-6xl mx-auto">
         <h2 className={h2}>Ils l&apos;utilisent au cabinet.</h2>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {TESTIMONIALS.map((t) => (
-            <figure key={t.quote} className="m-0 rounded-3xl bg-white p-7 sm:p-9 flex flex-col justify-between gap-6">
-              <blockquote className="text-lg sm:text-xl text-[#0f172a] leading-relaxed">« {t.quote} »</blockquote>
-              <figcaption className="text-sm sm:text-[15px] text-[#475569]">
-                {t.who && <strong className="block text-[#0f172a] font-semibold">{t.who}</strong>}
-                {t.role}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-10 text-base sm:text-lg text-[#475569] text-center">
-          Présenté par l&apos;ITMP lors de la conférence sur l&apos;IA en kinésithérapie au salon Rééduca 2026.
-        </p>
       </div>
+      {/* Bande déroulante pleine largeur (pause au survol) */}
+      <div className="mt-12">
+        <TestimonialsCarousel />
+      </div>
+      <p className="mt-10 px-4 sm:px-6 text-base sm:text-lg text-[#475569] text-center">
+        Présenté par l&apos;ITMP lors de la conférence sur l&apos;IA en kinésithérapie au salon Rééduca 2026.
+      </p>
     </section>
   );
 }
