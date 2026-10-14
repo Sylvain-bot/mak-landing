@@ -16,7 +16,7 @@ export function HomeHero() {
     <section className="px-4 sm:px-6 pt-28 pb-12 sm:pt-36 sm:pb-16" style={{ background: GROUND }}>
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-[#236f7d]">Bilan kiné dicté</p>
-        <h1 className="mt-5 text-[2.75rem] leading-[1.02] sm:text-7xl lg:text-[5.5rem] font-bold text-[#0f172a] tracking-tight">
+        <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.25rem] font-bold text-[#0f172a] tracking-tight">
           Tu parles.
           <br />
           <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
@@ -32,7 +32,7 @@ export function HomeHero() {
       </div>
 
       {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
-      <div className="mx-auto mt-10 sm:mt-14 w-full max-w-[460px]">
+      <div className="mx-auto mt-8 sm:mt-10 w-full max-w-[640px]">
         <BilanComposition priority />
       </div>
     </section>

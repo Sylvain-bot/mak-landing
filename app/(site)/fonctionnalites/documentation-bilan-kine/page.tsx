@@ -89,7 +89,7 @@ export default function DocumentationBilanPage() {
           "Tu relis, tu valides, tu exportes en PDF en 1 clic.",
         ]}
         visual={
-          <div className="mx-auto w-full max-w-[440px]">
+          <div className="mx-auto w-full max-w-[600px]">
             <BilanComposition priority />
           </div>
         }

@@ -130,7 +130,7 @@ export function BilanComposition({ priority = false }: { priority?: boolean }) {
   }, []);
 
   return (
-    <div ref={ref} className="relative w-full" style={{ aspectRatio: "1 / 1.2" }}>
+    <div ref={ref} className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
       <div
         className="absolute rounded-lg overflow-hidden"
         style={{
