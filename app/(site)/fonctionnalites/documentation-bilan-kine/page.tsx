@@ -85,7 +85,7 @@ export default function DocumentationBilanPage() {
         title="Tu parles pendant ta séance, ton bilan se rédige."
         points={[
           "Tu lances l'écoute et tu restes concentré sur ton patient.",
-          "MAK retranscrit et structure un bilan clinique complet, conforme NGAP.",
+          "Mon Assistant Kiné retranscrit et structure un bilan clinique complet, conforme NGAP.",
           "Tu relis, tu valides, tu exportes en PDF en 1 clic.",
         ]}
         visual={

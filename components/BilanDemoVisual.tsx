@@ -163,7 +163,7 @@ export function BilanComposition({ priority = false }: { priority?: boolean }) {
       >
         <Image
           src="/pdffinal1.png"
-          alt="Bilan kiné rédigé par MAK, page 1"
+          alt="Bilan kiné rédigé par Mon Assistant Kiné, page 1"
           width={440}
           height={622}
           sizes="(min-width: 1024px) 290px, 50vw"

@@ -3,7 +3,7 @@ import { ArrowRight, Moon, ListChecks, Eye } from "lucide-react";
 import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
-import { FAMI_HREF } from "@/lib/modules";
+import { FAMI_HREF, MODULES, ALL_FEATURES_HREF } from "@/lib/modules";
 
 // Disposition inspirée de la maquette « Page d'accueil V3 » : sections centrées,
 // alternance blanc / fond clair, grandes cartes arrondies. Typo et couleurs du site.
@@ -22,7 +22,7 @@ export function HomeHero() {
           <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
         </h1>
         <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed max-w-2xl">
-          MAK écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier. Et l&apos;aide FAMI
+          Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier. Et l&apos;aide FAMI
           peut couvrir ton abonnement.
         </p>
         <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
@@ -69,7 +69,7 @@ export function HowItWorks() {
         <div className="mt-10 sm:mt-12">
           <div className="flex justify-between text-xs sm:text-sm font-semibold mb-2 px-1">
             <span className="text-[#64748b]">Ce que tu dis</span>
-            <span className="text-[#236f7d]">Ce que MAK rédige</span>
+            <span className="text-[#236f7d]">Ce que Mon Assistant Kiné rédige</span>
           </div>
           <EncoderStrip />
         </div>
@@ -90,7 +90,7 @@ export function FamiBlock() {
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         <h2 className={h2}>Gratuit. Et même mieux.</h2>
         <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
-          MAK inclut un module de vidéotransmission sécurisée qui te rend éligible au forfait FAMI.
+          Mon Assistant Kiné inclut un module de vidéotransmission sécurisée qui te rend éligible au forfait FAMI.
         </p>
 
         <div className="mt-10 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5">
@@ -100,7 +100,7 @@ export function FamiBlock() {
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="moins">−</span>
           <div className="rounded-3xl bg-white px-8 py-7 sm:min-w-[210px]">
-            <p className="text-sm text-[#475569]">Abonnement MAK annuel</p>
+            <p className="text-sm text-[#475569]">Abonnement Mon Assistant Kiné</p>
             <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">199 €<span className="text-lg font-semibold">/an</span></p>
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="égale">=</span>
@@ -127,7 +127,7 @@ export function FamiBlock() {
 
 const BENEFITS = [
   { icon: Moon, title: "Tes soirées te reviennent", text: "Ton bilan est rédigé pendant la séance, plus de rattrapage le soir." },
-  { icon: ListChecks, title: "Des bilans plus complets", text: "MAK n'oublie rien de ce que tu as dit pendant l'examen." },
+  { icon: ListChecks, title: "Des bilans plus complets", text: "Mon Assistant Kiné n'oublie rien de ce que tu as dit pendant l'examen." },
   { icon: Eye, title: "Ton attention reste sur ton patient", text: "Tu regardes ton patient, pas ton clavier." },
 ];
 
@@ -176,6 +176,44 @@ export function Proof() {
         <p className="mt-10 text-base sm:text-lg text-[#475569] text-center">
           Présenté par l&apos;ITMP lors de la conférence sur l&apos;IA en kinésithérapie au salon Rééduca 2026.
         </p>
+      </div>
+    </section>
+  );
+}
+
+// Les autres modules, en liste discrète : on montre que l'outil couvre tout le cabinet
+// sans détourner de l'appel à l'action principal (liens vers les pages, pas vers l'inscription).
+export function AlsoInside() {
+  const others = MODULES.filter((m) => m.slug !== "documentation-bilan-kine");
+  return (
+    <section className="px-4 sm:px-6 pt-20 sm:pt-28 pb-4 bg-white">
+      <div className="max-w-3xl mx-auto">
+        <h2 className={h2}>Et autour du bilan, tout ton cabinet.</h2>
+        <p className="mt-4 text-lg text-[#475569] text-center">Un seul outil pour la séance, le suivi et l&apos;administratif.</p>
+        <ul className="mt-10 divide-y divide-[#dcecef] border-y border-[#dcecef]">
+          {others.map((m) => (
+            <li key={m.href}>
+              <Link
+                href={m.href}
+                className="group flex items-center justify-between gap-4 py-5 px-1 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+              >
+                <span className="min-w-0">
+                  <span className="block text-lg font-semibold text-[#0f172a] group-hover:text-[#236f7d] transition-colors">{m.name}</span>
+                  <span className="block text-base text-[#475569] mt-0.5">{m.pitch}</span>
+                </span>
+                <ArrowRight className="size-5 shrink-0 text-[#236f7d] transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-8 text-center">
+          <Link
+            href={ALL_FEATURES_HREF}
+            className="inline-flex items-center gap-1.5 text-base font-semibold text-[#236f7d] underline underline-offset-4 decoration-[#3899aa]/40 hover:decoration-[#236f7d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+          >
+            Voir toutes les fonctionnalités <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
       </div>
     </section>
   );

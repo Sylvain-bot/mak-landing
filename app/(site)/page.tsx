@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
-import { HomeHero, HowItWorks, FamiBlock, Benefits, Proof } from "@/components/home/HomeSections";
+import { HomeHero, HowItWorks, FamiBlock, Benefits, Proof, AlsoInside } from "@/components/home/HomeSections";
 import { FinalBanner } from "@/components/FinalBanner";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -10,13 +10,13 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Mon Assistant Kiné | Tu parles, ton bilan s'écrit — l'IA des kinés libéraux",
   description:
-    "MAK écoute ta séance et rédige ton bilan kiné en entier, structuré, prêt à vérifier. L'aide FAMI peut couvrir ton abonnement. Essaie gratuitement 14 jours.",
+    "Mon Assistant Kiné écoute ta séance et rédige ton bilan kiné en entier, structuré, prêt à vérifier. L'aide FAMI peut couvrir ton abonnement. Essaie gratuitement 14 jours.",
   alternates: {
     canonical: "https://www.monassistantkine.fr",
   },
   openGraph: {
     title: "Mon Assistant Kiné | Tu parles, ton bilan s'écrit",
-    description: "MAK écoute ta séance et rédige ton bilan kiné, structuré et prêt à vérifier. Essai gratuit 14 jours.",
+    description: "Mon Assistant Kiné écoute ta séance et rédige ton bilan kiné, structuré et prêt à vérifier. Essai gratuit 14 jours.",
     url: "https://www.monassistantkine.fr",
     type: "website",
     locale: "fr_FR",
@@ -44,6 +44,7 @@ export default function Home() {
         <FamiBlock />
         <Benefits />
         <Proof />
+        <AlsoInside />
         <FinalBanner />
       </main>
       <Footer />

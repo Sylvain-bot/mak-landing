@@ -76,7 +76,7 @@ export default function GestionAdministrativePage() {
         title="Tes courriers et relances rédigés en un clic."
         points={[
           "Courriers médecins, relances et documents générés depuis tes modèles.",
-          "Pas encore de modèle ? MAK le crée pour toi.",
+          "Pas encore de modèle ? Mon Assistant Kiné le crée pour toi.",
           "Tu envoies directement, sans copier-coller.",
         ]}
         visual={

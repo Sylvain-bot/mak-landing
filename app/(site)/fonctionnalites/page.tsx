@@ -23,7 +23,7 @@ export default function FonctionnalitesPage() {
     <main className="px-4 sm:px-6 pt-24 pb-16 sm:pt-32 sm:pb-24 bg-white">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl sm:text-5xl font-bold text-[#0f172a] leading-tight text-balance">
-          Tout ce que MAK fait pour ton cabinet
+          Tout ce que Mon Assistant Kiné fait pour ton cabinet
         </h1>
         <p className="mt-4 text-lg text-[#475569] max-w-2xl">
           Le bilan dicté d&apos;abord, et les outils qui t&apos;accompagnent autour de la séance.

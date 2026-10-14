@@ -12,7 +12,7 @@ export type MakModule = {
 };
 
 export const MODULE_GROUPS: { id: ModuleGroup; label: string }[] = [
-  { id: "coeur", label: "Le cœur de MAK" },
+  { id: "coeur", label: "Le cœur de Mon Assistant Kiné" },
   { id: "cabinet", label: "Les outils du cabinet" },
 ];
 
