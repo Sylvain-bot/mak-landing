@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ModuleHero } from "@/components/ModuleHero";
+import { BilanDemoVisual } from "@/components/BilanDemoVisual";
 import { JsonLd } from "@/components/JsonLd";
-import Image from "next/image";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
 
 export const metadata: Metadata = {
   title: "Bilan NGAP automatique — Enregistre ta séance | Mon Assistant Kiné",
@@ -81,41 +79,19 @@ export default function DocumentationBilanPage() {
     <>
       <JsonLd data={schema} />
 
-      {/* Hero */}
-      <section className="bg-white pt-28 pb-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-4">
-            <span
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
-              style={{ background: "rgba(232,176,77,0.12)", color: "#e8b04d", border: "1px solid rgba(232,176,77,0.4)" }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e8b04d] animate-pulse" />
-              NOUVEAU · Module Bilans
-            </span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Enregistre ta séance.<br />
-            <span className="text-[#3899aa]">Ton bilan NGAP est prêt en quelques secondes.</span>
-          </h1>
-          <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            Plus besoin de tout noter. Tu lances l&apos;enregistrement, tu te concentres sur ton patient. Mon Assistant Kiné retranscrit et structure un bilan clinique complet, conforme NGAP — prêt à exporter en PDF.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href={CTA_SIGNUP_URL}
-              className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
-            >
-              Essayer 14 jours <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/replay"
-              className="inline-flex items-center justify-center h-12 px-6 rounded-lg border border-[#d4ecea] text-[#3899aa] font-medium hover:bg-[#eef7f6] transition-all"
-            >
-              Voir une démo
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Haut de page : gabarit commun des modules */}
+      <ModuleHero
+        name="Bilan dicté"
+        title="Tu parles pendant ta séance, ton bilan se rédige."
+        points={[
+          "Tu lances l'écoute et tu restes concentré sur ton patient.",
+          "MAK retranscrit et structure un bilan clinique complet, conforme NGAP.",
+          "Tu relis, tu valides, tu exportes en PDF en 1 clic.",
+        ]}
+        visual={
+          <BilanDemoVisual />
+        }
+      />
 
       {/* Pourquoi */}
       <section className="py-20 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
@@ -155,54 +131,6 @@ export default function DocumentationBilanPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Visuels — Téléphone + PDF */}
-      <section className="py-16 px-4 sm:px-6" style={{ background: "#0f172a" }}>
-        <div className="max-w-5xl mx-auto">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-3 text-center">En situation réelle</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-10">L&apos;enregistrement en cours · Le PDF généré</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
-            {/* Phone mockup */}
-            <div className="flex justify-center">
-              <div
-                className="relative"
-                style={{
-                  width: 240,
-                  background: "#1e293b",
-                  borderRadius: "2.4rem",
-                  border: "6px solid #334155",
-                  boxShadow: "0 32px 64px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05)",
-                  overflow: "hidden",
-                }}
-              >
-                <Image
-                  src="/mobilbilan.png"
-                  alt="Enregistrement de séance en cours sur l'application Mon Assistant Kiné"
-                  width={240}
-                  height={480}
-                  className="w-full h-auto"
-                />
-              </div>
-            </div>
-            {/* PDF preview */}
-            <div className="flex flex-col gap-4">
-              <div
-                className="rounded-2xl overflow-hidden"
-                style={{ border: "1px solid rgba(56,153,170,0.3)", boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}
-              >
-                <Image
-                  src="/pdffinal1.png"
-                  alt="Bilan kinésithérapique NGAP généré automatiquement — export PDF"
-                  width={600}
-                  height={800}
-                  className="w-full h-auto"
-                />
-              </div>
-              <p className="text-sm text-[#94a3b8] text-center">Bilan NGAP complet, signable — en quelques secondes</p>
-            </div>
           </div>
         </div>
       </section>
@@ -251,19 +179,6 @@ export default function DocumentationBilanPage() {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer les bilans — 14 jours gratuits</h2>
-          <p className="text-white/80 mb-8">14 jours d&apos;essai · Accès immédiat</p>
-          <Link
-            href={CTA_SIGNUP_URL}
-            className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
-          >
-            Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { MODULES, MODULE_GROUPS } from "@/lib/modules";
 
 export const metadata: Metadata = {
   title: "Fonctionnalités | Mon Assistant Kiné — L'IA pour kinésithérapeutes",
-  description: "Découvrez tous les modules de Mon Assistant Kiné : copilote IA clinique, bilans NGAP, suivi patient, gestion administrative et contrats de remplacement gratuits.",
+  description:
+    "Tous les modules de Mon Assistant Kiné : bilan dicté, suivi patient et exercices, copilot IA clinique, vidéotransmission éligible FAMI, gestion administrative et contrats de remplacement gratuits.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites" },
   openGraph: {
     title: "Fonctionnalités — Mon Assistant Kiné",
@@ -16,94 +18,42 @@ export const metadata: Metadata = {
   twitter: DEFAULT_TWITTER,
 };
 
-const FEATURES = [
-  {
-    href: "/fonctionnalites/aide-decision-clinique",
-    icon: "🧠",
-    title: "Copilote IA Kiné",
-    desc: "Clinique & bibliographique — pose ta question comme à un confrère, l'IA détecte drapeaux rouges et mobilise 56 000+ ressources scientifiques.",
-  },
-  {
-    href: "/fonctionnalites/documentation-bilan-kine",
-    icon: "📋",
-    title: "Bilans NGAP",
-    desc: "Enregistre ta séance, le bilan NGAP complet est généré automatiquement en quelques secondes. Export PDF en 1 clic. Nouveau module.",
-  },
-  {
-    href: "/fonctionnalites/suivi-patient",
-    icon: "💬",
-    title: "Suivi patient",
-    desc: "Programmes d'exercices envoyés sur WhatsApp avec vidéos, chatbot guidé par ton protocole, suivi de l'observance.",
-  },
-  {
-    href: "/fonctionnalites/gestion-administrative",
-    icon: "📨",
-    title: "Administratif",
-    desc: "Courriers, relances et ordonnances générés en un clic à partir de tes templates, envoyés directement depuis Mon Assistant Kiné.",
-  },
-  {
-    href: "/fonctionnalites/contrats-remplacement",
-    icon: "📑",
-    title: "Contrats de remplacement",
-    desc: "Rédaction, signature électronique et déclaration à l'Ordre en 1 clic — 100 % gratuit pour tous les kinés.",
-    free: true,
-  },
-];
-
 export default function FonctionnalitesPage() {
   return (
-    <>
-      <section className="bg-white pt-28 pb-12 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4">
-            Fonctionnalités
-          </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Tout ce que Mon Assistant Kiné<br />fait pour ton cabinet
-          </h1>
-          <p className="text-lg text-[#475569] max-w-2xl mx-auto leading-relaxed">
-            Cinq modules, un seul outil. Chaque fonctionnalité résout un problème réel du
-            quotidien d&apos;un kinésithérapeute libéral.
-          </p>
-        </div>
-      </section>
+    <main className="px-4 sm:px-6 pt-24 pb-16 sm:pt-32 sm:pb-24 bg-white">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-3xl sm:text-5xl font-bold text-[#0f172a] leading-tight text-balance">
+          Tout ce que MAK fait pour ton cabinet
+        </h1>
+        <p className="mt-4 text-lg text-[#475569] max-w-2xl">
+          Le bilan dicté d&apos;abord, et les outils qui t&apos;accompagnent autour de la séance.
+        </p>
 
-      <section className="py-12 px-4 sm:px-6 bg-white">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {FEATURES.map((f) => (
-            <Link
-              key={f.href}
-              href={f.href}
-              className="group rounded-2xl p-6 flex flex-col bg-white transition-all hover:-translate-y-0.5"
-              style={f.free
-                ? { border: "1px solid #86efac", boxShadow: "0 1px 4px rgba(22,163,74,0.08)" }
-                : { border: "1px solid #d4ecea", boxShadow: "0 1px 4px rgba(56,153,170,0.06)" }
-              }
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-2xl">{f.icon}</span>
-                <h2 className="text-base font-bold text-[#0f172a]">{f.title}</h2>
-                {f.free && (
-                  <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full ml-auto"
-                    style={{ background: "#dcfce7", border: "1px solid #86efac", color: "#15803d" }}
+        {MODULE_GROUPS.map((g) => (
+          <section key={g.id} className="mt-12" aria-labelledby={`grp-${g.id}`}>
+            <h2 id={`grp-${g.id}`} className="text-xs font-semibold uppercase tracking-[0.1em] text-[#236f7d]">
+              {g.label}
+            </h2>
+            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {MODULES.filter((m) => m.group === g.id).map((m) => (
+                <li key={m.href}>
+                  <Link
+                    href={m.href}
+                    className="group h-full flex flex-col rounded-2xl p-6 bg-white transition-colors hover:bg-[#f2f9fa] outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+                    style={{ border: "1px solid #dcecef" }}
                   >
-                    Gratuit
-                  </span>
-                )}
-              </div>
-              <p className="text-sm text-[#475569] leading-relaxed mb-4 flex-1">{f.desc}</p>
-              <span
-                className="inline-flex items-center gap-1.5 text-sm font-semibold"
-                style={{ color: f.free ? "#15803d" : "#3899aa" }}
-              >
-                En savoir plus
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-    </>
+                    <span className="text-lg font-semibold text-[#0f172a]">{m.name}</span>
+                    <span className="mt-2 text-base text-[#475569] leading-relaxed flex-1">{m.pitch}</span>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#236f7d]">
+                      Découvrir <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </main>
   );
 }

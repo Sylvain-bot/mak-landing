@@ -14,7 +14,8 @@ export function ExitIntentPopup() {
   const triggered = useRef(false);
 
   useEffect(() => {
-    if (pathname.startsWith("/admin") || pathname.startsWith("/guide-fami")) return;
+    // Pas de popup concurrente sur l'accueil (un seul appel à l'action) ni sur les pages guide FAMI
+    if (pathname === "/" || pathname.startsWith("/admin") || pathname.startsWith("/guide-fami")) return;
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
     let mobileTimer: ReturnType<typeof setTimeout>;

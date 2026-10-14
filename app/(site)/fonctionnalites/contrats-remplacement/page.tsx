@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ModuleHero, ModuleScreenshot } from "@/components/ModuleHero";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { ArrowRight } from "lucide-react";
@@ -87,30 +88,31 @@ export default function ContratsRemplacementPage() {
     <>
       <JsonLd data={schema} />
 
-      {/* Hero */}
-      <section className="bg-white pt-28 pb-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5"
-            style={{ background: "#dcfce7", border: "1px solid #86efac", color: "#15803d" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-            100 % gratuit — pour tous les kinés
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Tes contrats de remplacement.<br />
-            <span className="text-[#3899aa]">Signés, déclarés, archivés.</span>
-          </h1>
-          <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            De la rédaction à la déclaration ordinale — tout se passe dans Mon Assistant Kiné, en 2 minutes.
-            Offert à toute la communauté des kinés libéraux. Sans abonnement.
-          </p>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
-            className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
-          >
-            Accéder au module — c'est gratuit <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      {/* Haut de page : gabarit commun des modules */}
+      <ModuleHero
+        name="Contrats de remplacement"
+        title="Tes contrats de remplacement signés, déclarés, archivés."
+        points={[
+          "Les informations sont pré-remplies : ton contrat est prêt en 2 minutes.",
+          "Toi et ton remplaçant signez en ligne.",
+          "Déclaration à l'Ordre en 1 clic, archivage automatique.",
+        ]}
+        note="Le module contrats est gratuit pour tous les kinés libéraux, sans abonnement."
+        visual={
+          <ModuleScreenshot>
+              <video
+                src="/contrat.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Création d'un contrat de remplacement dans Mon Assistant Kiné"
+                className="w-full h-auto block"
+              />
+            </ModuleScreenshot>
+        }
+      />
 
       {/* Problème */}
       <section className="py-20 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
@@ -224,25 +226,6 @@ export default function ContratsRemplacementPage() {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Accéder au module contrats</h2>
-          <p className="text-white/80 mb-8">Gratuit · Accès immédiat</p>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
-            className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
-          >
-            Créer mon compte <ArrowRight className="w-4 h-4" />
-          </Link>
-          <p className="text-white/60 text-sm mt-4">
-            Déjà un compte ?{" "}
-            <a href="https://app.monassistantkine.fr/login" className="underline text-white/80 hover:text-white">
-              Se connecter
-            </a>
-          </p>
-        </div>
-      </section>
     </>
   );
 }
