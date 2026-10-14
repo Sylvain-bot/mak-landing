@@ -1,33 +1,39 @@
 import Link from "next/link";
 import { ArrowRight, Moon, ListChecks, Eye } from "lucide-react";
-import { BilanDemoVisual } from "@/components/BilanDemoVisual";
+import { BilanDemoSplit } from "@/components/BilanDemoVisual";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
 import { FAMI_HREF } from "@/lib/modules";
 
-const eyebrow = "text-xs font-semibold uppercase tracking-[0.1em] text-[#236f7d]";
-const h2 = "text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight text-balance";
+// Disposition inspirée de la maquette « Page d'accueil V3 » : sections centrées,
+// alternance blanc / fond clair, grandes cartes arrondies. Typo et couleurs du site.
+
+const GROUND = "#f2f9fa";
+const h2 = "text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance text-center";
 
 export function HomeHero() {
   return (
-    <section className="px-4 sm:px-6 pt-24 pb-14 sm:pt-32 sm:pb-20 bg-white">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-14 items-center">
-        <div className="min-w-0">
-          <h1 className="text-[2.6rem] leading-[1.05] sm:text-6xl font-bold text-[#0f172a] tracking-tight text-balance">
-            Tu parles. <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl text-[#475569] leading-relaxed max-w-xl">
-            MAK écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier. Et l&apos;aide FAMI
-            peut couvrir ton abonnement.
-          </p>
-          <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-13 px-7 text-base w-full sm:w-auto`} style={primaryCtaStyle}>
-            Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
-          </TrackedSignupLink>
-          <p className="mt-4 text-sm text-[#64748b]">[sans engagement, données hébergées en France chez un hébergeur HDS]</p>
-        </div>
-        <div className="min-w-0">
-          <BilanDemoVisual />
-        </div>
+    <section className="px-4 sm:px-6 pt-28 pb-12 sm:pt-36 sm:pb-16" style={{ background: GROUND }}>
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-[#236f7d]">Bilan kiné dicté</p>
+        <h1 className="mt-5 text-[2.75rem] leading-[1.02] sm:text-7xl lg:text-[5.5rem] font-bold text-[#0f172a] tracking-tight">
+          Tu parles.
+          <br />
+          <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
+        </h1>
+        <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed max-w-2xl">
+          MAK écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier. Et l&apos;aide FAMI
+          peut couvrir ton abonnement.
+        </p>
+        <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
+          Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
+        </TrackedSignupLink>
+        <p className="mt-4 text-sm text-[#64748b]">[sans engagement, données hébergées en France chez un hébergeur HDS]</p>
+      </div>
+
+      {/* Démo : l'écoute puis le bilan rédigé */}
+      <div className="max-w-6xl mx-auto mt-12 sm:mt-16">
+        <BilanDemoSplit />
       </div>
     </section>
   );
@@ -41,25 +47,26 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="px-4 sm:px-6 py-16 sm:py-24" style={{ background: "#f2f9fa" }}>
-      <div className="max-w-5xl mx-auto">
-        <p className={eyebrow}>Comment ça marche</p>
-        <h2 className={`${h2} mt-3`}>Ta séance, sans clavier.</h2>
-        <ol className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <h2 className={h2}>Ta séance, sans clavier.</h2>
+        <ol className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {STEPS.map((s, i) => (
-            <li key={s} className="flex md:flex-col items-start gap-4 rounded-2xl bg-white p-5 sm:p-6" style={{ border: "1px solid #dcecef" }}>
+            <li key={s} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-5" style={{ background: GROUND }}>
               <span
-                className="shrink-0 size-10 rounded-full inline-flex items-center justify-center text-base font-bold text-white"
+                className="size-12 rounded-full inline-flex items-center justify-center text-lg font-bold text-white"
                 style={{ background: "#237584" }}
                 aria-hidden
               >
                 {i + 1}
               </span>
-              <p className="text-lg font-semibold text-[#0f172a] leading-snug">{s}</p>
+              <p className="text-xl font-semibold text-[#0f172a] leading-snug">{s}</p>
             </li>
           ))}
         </ol>
-        <p className="mt-6 text-base text-[#475569]">Rien n&apos;est enregistré dans le dossier sans ta validation.</p>
+        <p className="mt-8 text-base sm:text-lg text-[#475569] text-center">
+          Rien n&apos;est enregistré dans le dossier sans ta validation.
+        </p>
       </div>
     </section>
   );
@@ -67,37 +74,39 @@ export function HowItWorks() {
 
 export function FamiBlock() {
   return (
-    <section id="fami" className="px-4 sm:px-6 py-16 sm:py-24 bg-white scroll-mt-20">
+    <section id="fami" className="px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20" style={{ background: GROUND }}>
       {/* Ancien ancrage de la section guide FAMI, gardé pour les liens déjà diffusés */}
       <span id="guide-fami" className="block relative -top-20" aria-hidden />
-      <div className="max-w-5xl mx-auto">
-        <p className={eyebrow}>Aide FAMI</p>
-        <h2 className={`${h2} mt-3`}>Gratuit. Et même mieux.</h2>
+      <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+        <h2 className={h2}>Gratuit. Et même mieux.</h2>
+        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
+          MAK inclut un module de vidéotransmission sécurisée qui te rend éligible au forfait FAMI.
+        </p>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-3 sm:gap-4">
-          <div className="rounded-2xl p-5 sm:p-6 text-center" style={{ background: "#f2f9fa", border: "1px solid #dcecef" }}>
+        <div className="mt-10 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5">
+          <div className="rounded-3xl bg-white px-8 py-7 sm:min-w-[210px]">
             <p className="text-sm text-[#475569]">Forfait FAMI</p>
-            <p className="mt-1 text-3xl font-bold text-[#0f172a] tabular-nums">350 €<span className="text-base font-semibold">/an</span></p>
+            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">350 €<span className="text-lg font-semibold">/an</span></p>
           </div>
-          <span className="self-center text-center text-2xl font-bold text-[#94a3b8]" aria-label="moins">−</span>
-          <div className="rounded-2xl p-5 sm:p-6 text-center" style={{ background: "#f2f9fa", border: "1px solid #dcecef" }}>
-            <p className="text-sm text-[#475569]">Abonnement MAK</p>
-            <p className="mt-1 text-3xl font-bold text-[#0f172a] tabular-nums">199 €<span className="text-base font-semibold">/an</span></p>
+          <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="moins">−</span>
+          <div className="rounded-3xl bg-white px-8 py-7 sm:min-w-[210px]">
+            <p className="text-sm text-[#475569]">Abonnement MAK annuel</p>
+            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">199 €<span className="text-lg font-semibold">/an</span></p>
           </div>
-          <span className="self-center text-center text-2xl font-bold text-[#94a3b8]" aria-label="égale">=</span>
-          <div className="rounded-2xl p-5 sm:p-6 text-center text-white" style={{ background: "#1f6976" }}>
+          <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="égale">=</span>
+          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px] text-white" style={{ background: "#1f6976" }}>
             <p className="text-sm text-white">Pour toi</p>
-            <p className="mt-1 text-3xl font-bold tabular-nums">+151 €<span className="text-base font-semibold">/an</span></p>
+            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold tabular-nums">+151 €<span className="text-lg font-semibold">/an</span></p>
           </div>
         </div>
 
-        <p className="mt-5 text-sm text-[#64748b] max-w-2xl">
+        <p className="mt-6 text-sm text-[#64748b] max-w-xl leading-relaxed">
           Si tu ne perçois pas déjà le forfait FAMI via un autre logiciel de vidéotransmission. Forfait fixe à déclarer
           sur amelipro.
         </p>
         <Link
           href={FAMI_HREF}
-          className="mt-6 inline-flex items-center gap-1.5 text-base font-semibold text-[#236f7d] underline underline-offset-4 decoration-[#3899aa]/40 hover:decoration-[#236f7d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+          className="mt-6 inline-flex items-center gap-1.5 text-base sm:text-lg font-semibold text-[#236f7d] underline underline-offset-4 decoration-[#3899aa]/40 hover:decoration-[#236f7d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
         >
           Télécharger le guide FAMI gratuit <ArrowRight className="size-4" aria-hidden />
         </Link>
@@ -114,17 +123,15 @@ const BENEFITS = [
 
 export function Benefits() {
   return (
-    <section className="px-4 sm:px-6 py-16 sm:py-24" style={{ background: "#f2f9fa" }}>
-      <div className="max-w-5xl mx-auto">
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+      <div className="max-w-6xl mx-auto">
         <h2 className={h2}>Moins d&apos;écran. Plus de patients.</h2>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {BENEFITS.map(({ icon: Icon, title, text }) => (
-            <div key={title}>
-              <span className="size-11 rounded-xl inline-flex items-center justify-center bg-white" style={{ border: "1px solid #dcecef" }}>
-                <Icon className="size-5 text-[#2a8494]" aria-hidden />
-              </span>
-              <h3 className="mt-4 text-lg font-semibold text-[#0f172a]">{title}</h3>
-              <p className="mt-2 text-base text-[#475569] leading-relaxed">{text}</p>
+            <div key={title} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-4" style={{ background: GROUND }}>
+              <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
+              <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h3>
+              <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
             </div>
           ))}
         </div>
@@ -134,26 +141,29 @@ export function Benefits() {
 }
 
 const TESTIMONIALS = [
-  { quote: "Je ne pense plus pouvoir me passer de l'app maintenant.", who: "Constance, kinésithérapeute, [Ville]" },
-  { quote: "J'ai vraiment pris du plaisir à faire mes bilans.", who: "Kinésithérapeute, utilisateur Pionnier" },
-  { quote: "Ça change mon quotidien et celui de mes patients.", who: "Kinésithérapeute, utilisateur Pionnier" },
-  { quote: "C'est que le début, mais l'app est déjà très agréable à utiliser.", who: "Kinésithérapeute, utilisateur Pionnier" },
+  { quote: "Je ne pense plus pouvoir me passer de l'app maintenant.", who: "Constance", role: "Kinésithérapeute, [Ville]" },
+  { quote: "J'ai vraiment pris du plaisir à faire mes bilans.", who: null, role: "Kinésithérapeute, utilisateur Pionnier" },
+  { quote: "Ça change mon quotidien et celui de mes patients.", who: null, role: "Kinésithérapeute, utilisateur Pionnier" },
+  { quote: "C'est que le début, mais l'app est déjà très agréable à utiliser.", who: null, role: "Kinésithérapeute, utilisateur Pionnier" },
 ];
 
 export function Proof() {
   return (
-    <section className="px-4 sm:px-6 py-16 sm:py-24 bg-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
+      <div className="max-w-6xl mx-auto">
         <h2 className={h2}>Ils l&apos;utilisent au cabinet.</h2>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {TESTIMONIALS.map((t) => (
-            <figure key={t.quote} className="rounded-2xl p-6 sm:p-7" style={{ background: "#f2f9fa", border: "1px solid #dcecef" }}>
-              <blockquote className="text-lg text-[#0f172a] leading-relaxed">« {t.quote} »</blockquote>
-              <figcaption className="mt-4 text-sm text-[#475569]">{t.who}</figcaption>
+            <figure key={t.quote} className="m-0 rounded-3xl bg-white p-7 sm:p-9 flex flex-col justify-between gap-6">
+              <blockquote className="text-lg sm:text-xl text-[#0f172a] leading-relaxed">« {t.quote} »</blockquote>
+              <figcaption className="text-sm sm:text-[15px] text-[#475569]">
+                {t.who && <strong className="block text-[#0f172a] font-semibold">{t.who}</strong>}
+                {t.role}
+              </figcaption>
             </figure>
           ))}
         </div>
-        <p className="mt-8 text-base text-[#475569]">
+        <p className="mt-10 text-base sm:text-lg text-[#475569] text-center">
           Présenté par l&apos;ITMP lors de la conférence sur l&apos;IA en kinésithérapie au salon Rééduca 2026.
         </p>
       </div>
