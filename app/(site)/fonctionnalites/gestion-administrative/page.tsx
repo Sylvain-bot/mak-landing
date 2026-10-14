@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ModuleHero, ModuleScreenshot } from "@/components/ModuleHero";
+import { ModuleHero } from "@/components/ModuleHero";
+import { ModuleVideo } from "@/components/ModuleVideo";
 import { JsonLd } from "@/components/JsonLd";
-import Image from "next/image";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -80,17 +80,7 @@ export default function GestionAdministrativePage() {
           "Tu envoies directement, sans copier-coller.",
         ]}
         visual={
-          <ModuleScreenshot>
-              <Image
-                src="/gestion-administrative.png"
-                alt="Gestion administrative automatisée dans Mon Assistant Kiné"
-                width={1200}
-                height={800}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="w-full h-auto block"
-                priority
-              />
-            </ModuleScreenshot>
+          <ModuleVideo src="/admini.mp4" label="Démo : génération d'un courrier administratif depuis un modèle" />
         }
       />
 

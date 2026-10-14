@@ -106,7 +106,8 @@ export function EncoderStrip() {
   );
 }
 
-export function BilanComposition() {
+/** Téléphone pendant l'écoute devant les deux pages du bilan rédigé, sans fond (pour fond clair). */
+export function BilanComposition({ priority = false }: { priority?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -138,8 +139,8 @@ export function BilanComposition() {
           left: "30%",
           transform: "rotate(6deg)",
           transformOrigin: "bottom center",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+          border: "1px solid #e2e8f0",
+          boxShadow: "0 8px 24px rgba(15,23,42,0.10)",
           zIndex: 1,
           opacity: 0.85,
         }}
@@ -155,8 +156,8 @@ export function BilanComposition() {
           left: "8%",
           transform: "rotate(-3deg)",
           transformOrigin: "bottom center",
-          border: "1px solid rgba(255,255,255,0.15)",
-          boxShadow: "0 20px 56px rgba(0,0,0,0.65)",
+          border: "1px solid #e2e8f0",
+          boxShadow: "0 20px 48px rgba(15,23,42,0.18)",
           zIndex: 2,
         }}
       >
@@ -167,13 +168,14 @@ export function BilanComposition() {
           height={622}
           sizes="(min-width: 1024px) 290px, 50vw"
           className="w-full block"
+          priority={priority}
         />
       </div>
 
       <div className="absolute" style={{ zIndex: 3, left: "50%", transform: "translateX(-50%)", bottom: 0, width: "26%" }}>
         <div
           className="relative rounded-[1.8rem] p-[4px]"
-          style={{ background: "#1e293b", boxShadow: "0 20px 50px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
+          style={{ background: "#1e293b", boxShadow: "0 24px 48px rgba(15,23,42,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
         >
           <div className="rounded-[1.4rem] overflow-hidden" style={{ background: "#fff" }}>
             <video
@@ -185,107 +187,6 @@ export function BilanComposition() {
               preload="none"
               aria-label="Écoute de la séance en cours dans l'application"
               style={{ width: "100%", display: "block", mixBlendMode: "multiply", aspectRatio: "9 / 19" }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** Bloc complet pour le hero et la page Bilan dicté. */
-export function BilanDemoVisual() {
-  return (
-    <div className="rounded-3xl p-4 sm:p-6" style={{ background: "#0f172a" }}>
-      <div className="flex justify-between text-[11px] font-mono mb-2 px-1">
-        <span className="text-[#94a3b8]">Ce que tu dis</span>
-        <span style={{ color: "#5bb8c8" }}>Ce que MAK rédige</span>
-      </div>
-      <EncoderStrip />
-      <div className="mt-4 max-w-[420px] mx-auto">
-        <BilanComposition />
-      </div>
-    </div>
-  );
-}
-
-/** Version « maquette V3 » : l'écoute à gauche, le bilan rédigé à droite, dans un grand bloc sombre. */
-export function BilanDemoSplit() {
-  const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    const el = ref.current;
-    if (!v || !el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) v.play().catch(() => {});
-        else v.pause();
-      },
-      { rootMargin: "100px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className="rounded-[28px] p-4 sm:p-8 lg:p-10 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" style={{ background: "#0f172a" }}>
-      {/* Écoute en cours */}
-      <div className="min-w-0 rounded-[20px] p-5 sm:p-7 flex flex-col gap-5" style={{ background: "#1b2a3d" }}>
-        <div className="flex items-center gap-3">
-          <span className="size-3 rounded-full bg-[#f08a4b] animate-pulse motion-reduce:animate-none" aria-hidden />
-          <span className="text-sm font-semibold uppercase tracking-[0.08em] text-[#e2e8f0]">Écoute en cours</span>
-        </div>
-        <EncoderStrip />
-        <div className="flex justify-center pt-2">
-          <div className="w-[46%] max-w-[190px]">
-            <div
-              className="relative rounded-[1.8rem] p-[4px]"
-              style={{ background: "#0b1220", boxShadow: "0 20px 50px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
-            >
-              <div className="rounded-[1.4rem] overflow-hidden" style={{ background: "#fff" }}>
-                <video
-                  ref={videoRef}
-                  src="/bongifbilan.mp4"
-                  muted
-                  playsInline
-                  loop
-                  preload="none"
-                  aria-label="Écoute de la séance en cours dans l'application"
-                  style={{ width: "100%", display: "block", mixBlendMode: "multiply", aspectRatio: "9 / 19" }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bilan rédigé */}
-      <div className="min-w-0 rounded-[20px] p-5 sm:p-7 flex flex-col gap-5 bg-white">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <span className="text-lg sm:text-xl font-bold text-[#0f172a]">Ton bilan, rédigé</span>
-          <span className="text-xs font-semibold text-[#236f7d] bg-[#e2f1f3] px-3 py-1.5 rounded-full">Prêt à vérifier</span>
-        </div>
-        <div className="relative w-full" style={{ aspectRatio: "1 / 1.02" }}>
-          <div
-            className="absolute rounded-lg overflow-hidden"
-            style={{ width: "62%", top: "6%", left: "34%", transform: "rotate(5deg)", border: "1px solid #e2e8f0", boxShadow: "0 8px 24px rgba(15,23,42,0.12)", opacity: 0.9 }}
-          >
-            <Image src="/pdffinal2.png" alt="" width={440} height={622} sizes="(min-width: 768px) 280px, 55vw" className="w-full block" />
-          </div>
-          <div
-            className="absolute rounded-lg overflow-hidden"
-            style={{ width: "68%", top: 0, left: "4%", transform: "rotate(-2deg)", border: "1px solid #e2e8f0", boxShadow: "0 16px 40px rgba(15,23,42,0.18)" }}
-          >
-            <Image
-              src="/pdffinal1.png"
-              alt="Bilan kiné rédigé par MAK, page 1"
-              width={440}
-              height={622}
-              sizes="(min-width: 768px) 300px, 60vw"
-              className="w-full block"
             />
           </div>
         </div>

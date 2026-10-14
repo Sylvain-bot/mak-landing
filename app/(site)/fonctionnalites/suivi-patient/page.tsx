@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ModuleHero, ModuleScreenshot } from "@/components/ModuleHero";
+import { ModuleHero } from "@/components/ModuleHero";
+import { ModuleVideo } from "@/components/ModuleVideo";
 import { JsonLd } from "@/components/JsonLd";
-import Image from "next/image";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -89,17 +89,7 @@ export default function SuiviPatientPage() {
           "Tu suis tout depuis ton tableau de bord, sans appel ni SMS.",
         ]}
         visual={
-          <ModuleScreenshot>
-              <Image
-                src="/chatbot.png"
-                alt="Suivi patient sur WhatsApp et programme d'exercices dans Mon Assistant Kiné"
-                width={1200}
-                height={800}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="w-full h-auto block"
-                priority
-              />
-            </ModuleScreenshot>
+          <ModuleVideo src="/prog-suivi.mp4" label="Démo : prescription d'un programme d'exercices et suivi du patient sur WhatsApp" />
         }
       />
 

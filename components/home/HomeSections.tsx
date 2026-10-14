@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Moon, ListChecks, Eye } from "lucide-react";
-import { BilanDemoSplit } from "@/components/BilanDemoVisual";
+import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
 import { FAMI_HREF } from "@/lib/modules";
@@ -31,9 +31,9 @@ export function HomeHero() {
         <p className="mt-4 text-sm text-[#64748b]">[sans engagement, données hébergées en France chez un hébergeur HDS]</p>
       </div>
 
-      {/* Démo : l'écoute puis le bilan rédigé */}
-      <div className="max-w-6xl mx-auto mt-12 sm:mt-16">
-        <BilanDemoSplit />
+      {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
+      <div className="mx-auto mt-10 sm:mt-14 w-full max-w-[460px]">
+        <BilanComposition priority />
       </div>
     </section>
   );
@@ -64,6 +64,16 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
+
+        {/* Bande déroulante : de la dictée (à gauche) au bilan structuré (à droite) */}
+        <div className="mt-10 sm:mt-12">
+          <div className="flex justify-between text-xs sm:text-sm font-semibold mb-2 px-1">
+            <span className="text-[#64748b]">Ce que tu dis</span>
+            <span className="text-[#236f7d]">Ce que MAK rédige</span>
+          </div>
+          <EncoderStrip />
+        </div>
+
         <p className="mt-8 text-base sm:text-lg text-[#475569] text-center">
           Rien n&apos;est enregistré dans le dossier sans ta validation.
         </p>

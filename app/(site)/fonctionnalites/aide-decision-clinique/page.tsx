@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ModuleHero, ModuleScreenshot } from "@/components/ModuleHero";
+import { ModuleHero } from "@/components/ModuleHero";
+import { ModuleVideo } from "@/components/ModuleVideo";
 import { JsonLd } from "@/components/JsonLd";
-import Image from "next/image";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -117,17 +117,7 @@ export default function CopiloteIAKinePage() {
           "Drapeaux rouges, hypothèses et références issues de 56 000+ études.",
         ]}
         visual={
-          <ModuleScreenshot>
-              <Image
-                src="/copilote-ia-kine.png"
-                alt="Copilot IA de Mon Assistant Kiné : aide à la décision clinique et recherche bibliographique"
-                width={1200}
-                height={800}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="w-full h-auto block"
-                priority
-              />
-            </ModuleScreenshot>
+          <ModuleVideo src="/copilote-video.mp4" label="Démo : une question clinique posée au Copilot IA et sa réponse sourcée" />
         }
       />
 

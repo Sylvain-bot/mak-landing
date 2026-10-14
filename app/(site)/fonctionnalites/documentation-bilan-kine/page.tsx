@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ModuleHero } from "@/components/ModuleHero";
-import { BilanDemoVisual } from "@/components/BilanDemoVisual";
+import { BilanComposition } from "@/components/BilanDemoVisual";
 import { JsonLd } from "@/components/JsonLd";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
@@ -89,7 +89,9 @@ export default function DocumentationBilanPage() {
           "Tu relis, tu valides, tu exportes en PDF en 1 clic.",
         ]}
         visual={
-          <BilanDemoVisual />
+          <div className="mx-auto w-full max-w-[440px]">
+            <BilanComposition priority />
+          </div>
         }
       />
 

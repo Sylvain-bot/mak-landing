@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ModuleHero, ModuleScreenshot } from "@/components/ModuleHero";
+import { ModuleHero } from "@/components/ModuleHero";
+import { ModuleVideo } from "@/components/ModuleVideo";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { ArrowRight } from "lucide-react";
@@ -99,18 +100,7 @@ export default function ContratsRemplacementPage() {
         ]}
         note="Le module contrats est gratuit pour tous les kinés libéraux, sans abonnement."
         visual={
-          <ModuleScreenshot>
-              <video
-                src="/contrat.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label="Création d'un contrat de remplacement dans Mon Assistant Kiné"
-                className="w-full h-auto block"
-              />
-            </ModuleScreenshot>
+          <ModuleVideo src="/contrat.mp4" label="Démo : création et signature d'un contrat de remplacement" />
         }
       />
 
