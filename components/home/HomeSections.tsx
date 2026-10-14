@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Moon, ListChecks, Eye } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone } from "lucide-react";
 import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
@@ -29,7 +30,7 @@ export function HomeHero() {
         <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
           Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
         </TrackedSignupLink>
-        <p className="mt-4 text-sm text-[#64748b]">[sans engagement, données hébergées en France chez un hébergeur HDS]</p>
+        <p className="mt-4 text-sm text-[#64748b]">Données de santé hébergées en France chez un hébergeur certifié HDS</p>
       </div>
 
       {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
@@ -153,7 +154,7 @@ export function Benefits() {
 
 export function Proof() {
   return (
-    <section className="py-20 sm:py-28" style={{ background: GROUND }}>
+    <section className="py-20 sm:py-28 bg-white">
       <div className="px-4 sm:px-6 max-w-6xl mx-auto">
         <h2 className={h2}>Ils l&apos;utilisent au cabinet.</h2>
       </div>
@@ -173,7 +174,7 @@ export function Proof() {
 export function AlsoInside() {
   const others = MODULES.filter((m) => m.slug !== "documentation-bilan-kine");
   return (
-    <section className="px-4 sm:px-6 pt-20 sm:pt-28 pb-4 bg-white">
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
       <div className="max-w-3xl mx-auto">
         <h2 className={h2}>Et autour du bilan, tout ton cabinet.</h2>
         <p className="mt-4 text-lg text-[#475569] text-center">Un seul outil pour la séance, le suivi et l&apos;administratif.</p>
@@ -201,6 +202,42 @@ export function AlsoInside() {
             Voir toutes les fonctionnalités <ArrowRight className="size-4" aria-hidden />
           </Link>
         </div>
+      </div>
+    </section>
+  );
+}
+
+const DEVICES = [
+  { icon: Monitor, label: "Ordinateur" },
+  { icon: Tablet, label: "Tablette" },
+  { icon: Smartphone, label: "Téléphone" },
+];
+
+export function Devices() {
+  return (
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
+      <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+        <h2 className={h2}>Sur tous tes écrans, sans installation.</h2>
+        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
+          Mon Assistant Kiné fonctionne directement dans ton navigateur : au cabinet, en déplacement ou entre deux
+          patients. Aucune application à installer, aucune synchronisation à gérer.
+        </p>
+        <Image
+          src="/new_se-removebg-preview.png"
+          alt="Mon Assistant Kiné affiché sur un ordinateur, une tablette et un téléphone"
+          width={707}
+          height={353}
+          sizes="(min-width: 768px) 640px, 92vw"
+          className="mt-10 w-full max-w-[640px] h-auto"
+        />
+        <ul className="mt-8 flex flex-wrap justify-center gap-3">
+          {DEVICES.map(({ icon: Icon, label }) => (
+            <li key={label} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0f172a]">
+              <Icon className="size-4 text-[#236f7d]" aria-hidden />
+              {label}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
