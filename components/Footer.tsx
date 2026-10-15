@@ -23,6 +23,7 @@ export function Footer() {
           <Link href="/guide-fami" className={linkClass}>Guide FAMI gratuit</Link>
           <Link href="/blog" className={linkClass}>Blog</Link>
           <Link href="/equipe" className={linkClass}>L&apos;équipe</Link>
+          <Link href="/replay" className={linkClass}>Replay de lancement</Link>
           <Link href="/comparatif-outils-ia-kine" className={linkClass}>Comparatif</Link>
           <Link href="/cgu" className={linkClass}>CGU</Link>
         </nav>
