@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone } from "lucide-react";
 import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
+import { TrackedLink } from "@/components/TrackedLink";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
 import { FAMI_HREF, MODULES, ALL_FEATURES_HREF } from "@/lib/modules";
@@ -78,6 +79,17 @@ export function HowItWorks() {
 
         <p className="mt-8 text-base sm:text-lg text-[#475569] text-center">
           Rien n&apos;est enregistré dans le dossier sans ta validation.
+        </p>
+        <p className="mt-6 text-base text-[#475569] text-center">
+          Tu veux voir Mon Assistant Kiné en situation réelle ?{" "}
+          <TrackedLink
+            href="/replay"
+            event="cta_replay_click"
+            properties={{ location: "how-it-works" }}
+            className="inline-flex items-center gap-1 font-semibold text-[#236f7d] underline underline-offset-4 decoration-[#3899aa]/40 hover:decoration-[#236f7d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+          >
+            Regarde le replay de lancement <ArrowRight className="size-4" aria-hidden />
+          </TrackedLink>
         </p>
       </div>
     </section>
