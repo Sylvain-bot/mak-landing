@@ -120,7 +120,7 @@ export default function EquipePage() {
                 )}
               </div>
               <p className="text-[#475569] leading-relaxed mb-4">
-                {FOUNDER_2_NAME} pilote le développement produit de Mon Assistant Kiné. Son ancrage dans la pratique clinique quotidienne guide chaque décision produit : si ce n&apos;est pas utile au cabinet, ça n&apos;entre pas dans Mon Assistant Kiné.
+                {FOUNDER_2_NAME}{" "}pilote le développement produit de Mon Assistant Kiné. Son ancrage dans la pratique clinique quotidienne guide chaque décision produit : si ce n&apos;est pas utile au cabinet, ça n&apos;entre pas dans Mon Assistant Kiné.
               </p>
               <blockquote className="border-l-4 border-[#3899aa] pl-4 italic text-[#475569] text-sm">
                 &ldquo;On ne construit pas des features. On résout des problèmes réels que nos collègues kinés rencontrent chaque jour.&rdquo;

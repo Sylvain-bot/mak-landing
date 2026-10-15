@@ -137,6 +137,7 @@ export function Navbar() {
           <Link href={FAMI_HREF} className={linkClass}>Aide FAMI</Link>
           <Link href="/tarifs" className={linkClass}>Tarifs</Link>
           <Link href="/blog" className={linkClass}>Blog</Link>
+          <Link href="/equipe" className={linkClass}>L&apos;équipe</Link>
           <a href={CTA_LOGIN_URL} className={linkClass}>Connexion</a>
           <TrackedSignupLink location="header" className={`${primaryCtaClass} ml-2 h-10 px-5 text-sm`} style={primaryCtaStyle}>
             Essayer
@@ -182,6 +183,7 @@ export function Navbar() {
             <Link href={FAMI_HREF} className="px-3 py-3 text-base font-medium text-[#0f172a]">Aide FAMI</Link>
             <Link href="/tarifs" className="px-3 py-3 text-base font-medium text-[#0f172a]">Tarifs</Link>
             <Link href="/blog" className="px-3 py-3 text-base font-medium text-[#0f172a]">Blog</Link>
+            <Link href="/equipe" className="px-3 py-3 text-base font-medium text-[#0f172a]">L&apos;équipe</Link>
             <a href={CTA_LOGIN_URL} className="px-3 py-3 text-base font-medium text-[#0f172a]">Connexion</a>
           </div>
         </nav>
