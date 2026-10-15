@@ -46,6 +46,10 @@ export default function ReplayPage() {
                 <p className="text-sm font-bold text-[#92400e] mb-1">L&apos;app a évolué depuis ce live !</p>
                 <p className="text-xs text-[#a16207] leading-relaxed">
                   Grâce aux retours des premiers utilisateurs, Mon Assistant Kiné a été considérablement amélioré depuis ce replay. Les fonctionnalités présentées sont toujours là — mais l&apos;expérience est aujourd&apos;hui bien meilleure.
+                  Et une nouveauté majeure est arrivée depuis : le bilan dicté, tu parles, ton bilan s&apos;écrit.{" "}
+                  <Link href="/fonctionnalites/documentation-bilan-kine" className="font-semibold underline underline-offset-2">
+                    Découvre le bilan dicté
+                  </Link>
                 </p>
               </div>
             </div>
