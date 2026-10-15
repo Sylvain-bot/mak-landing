@@ -9,7 +9,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Comparatif outils IA kinésithérapeutes 2026 | Mon Assistant Kiné vs ChatGPT",
-  description: "Mon Assistant Kiné vs ChatGPT — quel outil IA choisir pour votre cabinet kiné ? Comparatif honnête par des kinésithérapeutes praticiens.",
+  description: "Mon Assistant Kiné vs ChatGPT — quel outil IA choisir pour ton cabinet kiné ? Comparatif honnête par des kinésithérapeutes praticiens.",
   alternates: { canonical: "https://www.monassistantkine.fr/comparatif-outils-ia-kine" },
   openGraph: {
     title: "Comparatif outils IA kiné 2026 | Mon Assistant Kiné",

@@ -13,4 +13,4 @@ export const GUIDE_FAMI = {
   cover: "/images/guide-fami-cover.png",
 };
 
-export const LEADMAGNET_CONTACT_EMAIL = "contact@monassistantkine.fr";
+export const LEADMAGNET_CONTACT_EMAIL = "sylvain@monassistantkine.fr";

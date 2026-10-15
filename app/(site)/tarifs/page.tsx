@@ -102,7 +102,7 @@ const FAQ_ITEMS = [
     a: `Oui. ${COMPLIANCE_CLAIM}. Les données patients ne sont jamais utilisées pour entraîner des modèles IA tiers.`,
   },
   {
-    q: "Comment vous contacter ?",
+    q: "Comment nous contacter ?",
     a: "Par mail à sylvain@monassistantkine.fr. Sylvain répond personnellement et rapidement.",
   },
 ];

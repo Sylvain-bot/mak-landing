@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ModuleHero } from "@/components/ModuleHero";
+import { ModuleVideo } from "@/components/ModuleVideo";
 import { JsonLd } from "@/components/JsonLd";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -71,25 +70,19 @@ export default function GestionAdministrativePage() {
     <>
       <JsonLd data={schema} />
 
-      {/* Hero */}
-      <section className="bg-white pt-28 pb-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4">Fonctionnalité</p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Ton administratif en 1 clic.<br />
-            <span className="text-[#3899aa]">Tes soirées t&apos;appartiennent.</span>
-          </h1>
-          <p className="text-lg text-[#475569] mb-8 max-w-2xl mx-auto leading-relaxed">
-            Courriers médecins, relances, documents administratifs — Mon Assistant Kiné les génère depuis tes templates ou les crée de zéro si tu n&apos;en as pas. Envoi direct, sans copier-coller.
-          </p>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
-            className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
-          >
-            Essayer 14 jours <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      {/* Haut de page : gabarit commun des modules */}
+      <ModuleHero
+        name="Gestion administrative"
+        title="Tes courriers et relances rédigés en un clic."
+        points={[
+          "Courriers médecins, relances et documents générés depuis tes modèles.",
+          "Pas encore de modèle ? Mon Assistant Kiné le crée pour toi.",
+          "Tu envoies directement, sans copier-coller.",
+        ]}
+        visual={
+          <ModuleVideo src="/admini.mp4" label="Démo : génération d'un courrier administratif depuis un modèle" />
+        }
+      />
 
       {/* Problème */}
       <section className="py-20 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
@@ -129,21 +122,6 @@ export default function GestionAdministrativePage() {
         </div>
       </section>
 
-      {/* Screenshot */}
-      <section className="py-10 px-4 sm:px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #d4ecea", boxShadow: "0 4px 24px rgba(56,153,170,0.08)" }}>
-            <Image
-              src="/gestion-administrative.png"
-              alt="Capture d'écran de la gestion administrative automatisée de Mon Assistant Kiné"
-              width={1200}
-              height={800}
-              className="w-full h-auto"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Stats */}
       <section className="py-16 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
         <div className="max-w-4xl mx-auto">
@@ -174,19 +152,6 @@ export default function GestionAdministrativePage() {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Simplifier mon administratif — 14 jours gratuits</h2>
-          <p className="text-white/80 mb-8">14 jours d&apos;essai · Accès immédiat</p>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
-            className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
-          >
-            Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

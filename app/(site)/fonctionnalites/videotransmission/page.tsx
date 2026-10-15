@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ModuleHero, ModuleScreenshot } from "@/components/ModuleHero";
 import Link from "next/link";
 import Image from "next/image";
 import { JsonLd } from "@/components/JsonLd";
@@ -8,7 +9,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Vidéotransmission sécurisée pour kinés | Éligible FAMI | Mon Assistant Kiné",
-  description: "Réalisez vos téléconsultations de kinésithérapie depuis Mon Assistant Kiné. Module de vidéotransmission sécurisée éligible à l'aide FAMI de votre CPAM — jusqu'à 350 €/an.",
+  description: "Réalise tes téléconsultations de kinésithérapie depuis Mon Assistant Kiné. Module de vidéotransmission sécurisée éligible à l'aide FAMI de ta CPAM — jusqu'à 350 €/an.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/videotransmission" },
   openGraph: {
     title: "Vidéotransmission pour kinésithérapeutes — Éligible aide FAMI | Mon Assistant Kiné",
@@ -81,58 +82,29 @@ export default function VideotransmissionPage() {
     <>
       <JsonLd data={schema} />
 
-      {/* Hero */}
-      <section className="bg-white pt-28 pb-16 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[#3899aa] text-xs font-semibold uppercase tracking-widest mb-4">Fonctionnalité</p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f172a] leading-tight mb-5">
-            Ne perds jamais le fil<br />
-            <span className="text-[#3899aa]">avec un patient.</span>
-          </h1>
-          <p className="text-lg text-[#475569] mb-4 max-w-2xl mx-auto leading-relaxed">
-            Tu n&apos;achètes pas un outil de visioconférence.
-            Tu achètes la certitude de ne jamais perdre le fil avec un patient —
-            qu&apos;il soit cloué chez lui après une opération, trop loin pour se déplacer,
-            ou juste indisponible ce jour-là.
-          </p>
-          <p className="text-sm text-[#64748b] mb-8 max-w-xl mx-auto">
-            Lien envoyé par SMS ou WhatsApp, zéro installation côté patient. Compte-rendu généré automatiquement à exporter en PDF. Chiffré de bout en bout.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href={CTA_SIGNUP_URL}
-              className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/25"
-            >
-              Essayer 14 jours <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="#fami"
-              className="inline-flex items-center justify-center h-12 px-6 rounded-lg border border-[#d4ecea] text-[#3899aa] font-medium hover:bg-[#eef7f6] transition-all"
-            >
-              Aide FAMI — en savoir plus →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Screenshot */}
-      <section className="pb-16 px-4 sm:px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{ border: "1px solid #d4ecea", boxShadow: "0 8px 40px rgba(56,153,170,0.1)" }}
-          >
-            <Image
-              src="/videotransmission-kine.png"
-              alt="Interface du module vidéotransmission de Mon Assistant Kiné — téléconsultation kinésithérapie"
-              width={1200}
-              height={800}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
-        </div>
-      </section>
+      {/* Haut de page : gabarit commun des modules */}
+      <ModuleHero
+        name="Vidéotransmission et FAMI"
+        title="Suis tes patients à distance, sans perdre le fil."
+        points={[
+          "Tu envoies le lien par SMS ou WhatsApp, rien à installer pour ton patient.",
+          "Le compte-rendu est généré automatiquement, prêt à exporter en PDF.",
+          "Le module est éligible à l'aide FAMI de ta CPAM.",
+        ]}
+        visual={
+          <ModuleScreenshot>
+              <Image
+                src="/videotransmission-kine.png"
+                alt="Module de vidéotransmission de Mon Assistant Kiné pour la téléconsultation en kinésithérapie"
+                width={1200}
+                height={800}
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="w-full h-auto block"
+                priority
+              />
+            </ModuleScreenshot>
+        }
+      />
 
       {/* Stats */}
       <section className="py-14 px-4 sm:px-6" style={{ background: "#f0f9fa" }}>
@@ -314,23 +286,6 @@ export default function VideotransmissionPage() {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="py-20 px-4 sm:px-6" style={{ background: "#3899aa" }}>
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Essayer la vidéotransmission — 14 jours gratuits
-          </h2>
-          <p className="text-white/80 mb-8">
-            Module inclus dans l&apos;offre Pionnier · Accès immédiat
-          </p>
-          <Link
-            href={CTA_SIGNUP_URL}
-            className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
-          >
-            Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

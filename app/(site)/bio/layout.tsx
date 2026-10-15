@@ -20,7 +20,7 @@ const dmSerif = DM_Serif_Display({
 
 export const metadata = {
   title: "À propos — Mon Assistant Kiné, l'IA créée par des kinés pour des kinés",
-  description: "Découvrez Mon Assistant Kiné : deux kinésithérapeutes diplômés d'État qui ont créé l'IA pour transformer la pratique clinique des kinés libéraux.",
+  description: "Découvre Mon Assistant Kiné : deux kinésithérapeutes diplômés d'État qui ont créé l'IA pour transformer la pratique clinique des kinés libéraux.",
   alternates: {
     canonical: "https://www.monassistantkine.fr/bio",
   },

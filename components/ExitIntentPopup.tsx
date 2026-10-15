@@ -14,6 +14,7 @@ export function ExitIntentPopup() {
   const triggered = useRef(false);
 
   useEffect(() => {
+    // Pas de popup sur les pages guide FAMI (formulaire déjà présent) ni sur l'admin
     if (pathname.startsWith("/admin") || pathname.startsWith("/guide-fami")) return;
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 

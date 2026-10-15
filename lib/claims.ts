@@ -36,9 +36,8 @@ export const CTA_MAIN = "Essayer 14 jours";
 export const CTA_SIGNUP_URL = APP_URL + "/signup";
 export const CTA_LOGIN_URL = APP_URL + "/login";
 
-// Conformité — valeur conservatrice en attendant confirmation HDS
-// TODO-FONDATEUR: si hébergeur certifié HDS → remplacer par "Hébergement certifié HDS 🇫🇷"
-export const COMPLIANCE_CLAIM = "RGPD · Données de santé hébergées en France";
+// Conformité — hébergement certifié HDS confirmé par le fondateur (14/10/2026)
+export const COMPLIANCE_CLAIM = "RGPD · Hébergement certifié HDS en France";
 
 // Garantie — désactivée jusqu'à mise en place opérationnelle
 // TODO-FONDATEUR: décommenter et câbler quand le process de remboursement est en place
