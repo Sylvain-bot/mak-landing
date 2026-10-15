@@ -11,7 +11,7 @@ export const bioSchema = {
       "@type": "AboutPage",
       "@id": "https://www.monassistantkine.fr/bio#webpage",
       "name": "À propos — Mon Assistant Kiné",
-      "description": "Découvrez Mon Assistant Kiné : deux kinésithérapeutes diplômés d'État qui ont créé l'IA pour transformer la pratique clinique des kinés libéraux.",
+      "description": "Découvre Mon Assistant Kiné : deux kinésithérapeutes diplômés d'État qui ont créé l'IA pour transformer la pratique clinique des kinés libéraux.",
       "url": "https://www.monassistantkine.fr/bio",
       "isPartOf": { "@id": "https://www.monassistantkine.fr/#organization" },
     },

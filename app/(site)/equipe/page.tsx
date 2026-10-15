@@ -35,7 +35,7 @@ const schema = {
 };
 
 const WONT_DO = [
-  "Vendre vos données de santé",
+  "Vendre tes données de santé",
   "Construire un outil qui prétend remplacer le raisonnement clinique",
   "Ajouter des fonctionnalités gadgets qui n'ont pas été testées au cabinet",
 ];

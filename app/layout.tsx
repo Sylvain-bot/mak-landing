@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.monassistantkine.fr"),
   title: "Mon Assistant Kiné — L'IA pour kinésithérapeutes",
   description:
-    "Tes bilans en 3 minutes. Tes drapeaux rouges détectés. L'assistant IA conçu par des kinés, pour des kinés.",
+    "Tu parles, ton bilan s'écrit. L'assistant IA conçu par des kinés libéraux, pour les kinés libéraux.",
   openGraph: {
     locale: "fr_FR",
     siteName: "Mon Assistant Kiné",

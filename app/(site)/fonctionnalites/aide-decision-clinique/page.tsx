@@ -109,15 +109,15 @@ export default function CopiloteIAKinePage() {
 
       {/* Haut de page : gabarit commun des modules */}
       <ModuleHero
-        name="Copilot IA clinique"
+        name="Copilote IA clinique"
         title="Une question clinique ? Une réponse sourcée en quelques secondes."
         points={[
           "Tu poses ta question comme à un confrère.",
-          "Le copilot détecte si elle est clinique, bibliographique ou pratique.",
+          "Le Copilote détecte si elle est clinique, bibliographique ou pratique.",
           "Drapeaux rouges, hypothèses et références issues de 56 000+ études.",
         ]}
         visual={
-          <ModuleVideo src="/copilote-video.mp4" label="Démo : une question clinique posée au Copilot IA et sa réponse sourcée" />
+          <ModuleVideo src="/copilote-video.mp4" label="Démo : une question clinique posée au Copilote IA et sa réponse sourcée" />
         }
       />
 

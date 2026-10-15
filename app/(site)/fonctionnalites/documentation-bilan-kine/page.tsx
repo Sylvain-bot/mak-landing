@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/documentation-bilan-kine" },
   openGraph: {
     title: "Documentation bilan kiné automatisée | Mon Assistant Kiné",
-    description: "Générez vos bilans kinésithérapiques conformes NGAP en quelques minutes.",
+    description: "Génère tes bilans kiné conformes NGAP en quelques minutes.",
     url: "https://www.monassistantkine.fr/fonctionnalites/documentation-bilan-kine",
     type: "website",
     images: [DEFAULT_OG_IMAGE],

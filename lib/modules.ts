@@ -34,7 +34,7 @@ export const MODULES: MakModule[] = [
   {
     slug: "aide-decision-clinique",
     href: "/fonctionnalites/aide-decision-clinique",
-    name: "Copilot IA clinique",
+    name: "Copilote IA clinique",
     pitch: "Questions cliniques et bibliographiques, réponses sourcées.",
     group: "coeur",
   },

@@ -9,7 +9,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Vidéotransmission sécurisée pour kinés | Éligible FAMI | Mon Assistant Kiné",
-  description: "Réalisez vos téléconsultations de kinésithérapie depuis Mon Assistant Kiné. Module de vidéotransmission sécurisée éligible à l'aide FAMI de votre CPAM — jusqu'à 350 €/an.",
+  description: "Réalise tes téléconsultations de kinésithérapie depuis Mon Assistant Kiné. Module de vidéotransmission sécurisée éligible à l'aide FAMI de ta CPAM — jusqu'à 350 €/an.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/videotransmission" },
   openGraph: {
     title: "Vidéotransmission pour kinésithérapeutes — Éligible aide FAMI | Mon Assistant Kiné",
