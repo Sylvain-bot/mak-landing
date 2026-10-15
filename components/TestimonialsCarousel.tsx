@@ -6,7 +6,6 @@ const TESTIMONIALS: { quote: string; author: string; location?: string; tag?: st
   {
     quote: "Je ne pense plus pouvoir me passer de l'app maintenant.",
     author: "Constance",
-    location: "[Ville]",
   },
   {
     quote: "Je rédige mes bilans directement pendant les séances. Mes soirées m'appartiennent à nouveau.",

@@ -41,7 +41,7 @@ const STEPS = [
   {
     n: "01",
     title: "Tu lances l'enregistrement",
-    body: "En un tap depuis l'app mobile. Ta séance entière est captée en arrière-plan pendant que tu te concentres sur ton patient — sans noter, sans dicter, sans interrompre le soin.",
+    body: "En un tap depuis ton téléphone, ta tablette ou ton ordinateur, directement dans le navigateur. Ta séance entière est captée en arrière-plan pendant que tu te concentres sur ton patient — sans noter, sans dicter, sans interrompre le soin.",
   },
   {
     n: "02",
@@ -58,7 +58,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Faut-il s'arrêter de traiter pour utiliser l'enregistrement ?",
-    a: "Non. Tu lances l'enregistrement en un tap et l'app tourne en arrière-plan. Tu continues ta séance normalement — la retranscription et la structuration NGAP se font après, en quelques secondes.",
+    a: "Non. Tu lances l'enregistrement en un tap et il tourne en arrière-plan. Tu continues ta séance normalement — la retranscription et la structuration NGAP se font après, en quelques secondes.",
   },
   {
     q: "Le bilan généré est-il vraiment conforme NGAP ?",
@@ -66,7 +66,7 @@ const FAQ = [
   },
   {
     q: "L'enregistrement fonctionne-t-il en déplacement (kiné à domicile) ?",
-    a: "Oui. L'app mobile enregistre même sans connexion stable. La transcription se lance dès que tu as du réseau.",
+    a: "Oui. Mon Assistant Kiné s'ouvre dans le navigateur de ton téléphone ou de ta tablette et s'adapte à leur écran, au cabinet comme chez le patient.",
   },
   {
     q: "Mes données patients sont-elles sécurisées ?",

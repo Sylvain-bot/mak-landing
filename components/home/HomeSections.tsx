@@ -102,7 +102,7 @@ export function FamiBlock() {
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="moins">−</span>
           <div className="rounded-3xl bg-white px-8 py-7 sm:min-w-[210px]">
-            <p className="text-sm text-[#475569]">Abonnement Mon Assistant Kiné</p>
+            <p className="text-sm text-[#475569]">Abonnement Pionnier annuel</p>
             <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">199 €<span className="text-lg font-semibold">/an</span></p>
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="égale">=</span>
@@ -219,8 +219,8 @@ export function Devices() {
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         <h2 className={h2}>Sur tous tes écrans, sans installation.</h2>
         <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
-          Mon Assistant Kiné fonctionne directement dans ton navigateur : au cabinet, en déplacement ou entre deux
-          patients. Aucune application à installer, aucune synchronisation à gérer.
+          Mon Assistant Kiné fonctionne directement dans ton navigateur et s&apos;adapte à ton ordinateur, ta tablette
+          et ton téléphone : au cabinet, en déplacement ou entre deux patients. Aucune application à installer.
         </p>
         <Image
           src="/new_se-removebg-preview.png"
