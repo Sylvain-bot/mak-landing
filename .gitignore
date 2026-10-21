@@ -46,3 +46,8 @@ next-env.d.ts
 # fichiers de clés locaux (ne jamais commiter)
 /api brevo/
 /api posthog/
+api*.txt
+*api key*
+*apikey*
+secrets.txt
+secrets.json
