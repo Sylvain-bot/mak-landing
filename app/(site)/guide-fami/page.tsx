@@ -35,9 +35,8 @@ export default function GuideFamiPage() {
     <div className="flex flex-col min-h-svh" style={{ background: "#f2f9fa" }}>
       <header className="px-4 sm:px-6 py-5">
         <div className="max-w-5xl mx-auto">
-          <Link href="/" aria-label="Mon Assistant Kiné — accueil" className="inline-block">
-            <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain" priority />
-          </Link>
+          {/* Tunnel de vente : logo non cliquable, pour ne pas faire sortir le visiteur de la page */}
+          <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain" priority />
         </div>
       </header>
 
