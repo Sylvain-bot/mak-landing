@@ -7,7 +7,7 @@ import { ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 
 const METRICS = [
-  { value: "3 min", label: "par bilan complet", before: "20 min", afterRatio: 15, icon: "📋" },
+  { value: "2 min", label: "par bilan complet", before: "20 min", afterRatio: 10, icon: "📋" },
   { value: "30 sec", label: "pour une recherche biblio", before: "1-2h sur PubMed", afterRatio: 4, icon: "📚" },
   { value: "+2h", label: "par semaine dégagées", before: "Perdues en admin", afterRatio: 0, icon: "⏱️", highlight: true },
 ];

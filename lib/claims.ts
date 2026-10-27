@@ -4,7 +4,7 @@
 export const APP_URL = "https://app.monassistantkine.fr";
 
 // Temps
-export const BILAN_TIME = "3 minutes";
+export const BILAN_TIME = "2 minutes";
 export const ADMIN_TIME = "2 minutes";
 export const TIME_SAVED_DAY = "45 minutes par jour";
 export const TIME_SAVED_WEEK = "4 heures par semaine";
@@ -13,8 +13,10 @@ export const TIME_SAVED_WEEK = "4 heures par semaine";
 export const STUDY_COUNT = "56 000+";
 
 // Temps de rédaction d'un bilan, avant / avec Mon Assistant Kiné (accueil, carte « Tes soirées te reviennent »).
-// TODO-FONDATEUR: chiffre MESURÉ à fournir, format « X min → Y min par bilan ». Tant que c'est vide, rien ne s'affiche.
-export const TIME_SAVED_PER_BILAN = "";
+// Chiffre fourni par le fondateur (27/10/2026) : environ 20 min à la main, 2 min avec Mon Assistant Kiné (aligné sur BILAN_TIME).
+// Vide = rien ne s'affiche.
+// Espaces insécables : la ligne ne peut se couper qu'après la flèche.
+export const TIME_SAVED_PER_BILAN = "≈ 20 min → 2 min";
 
 // Prix mensuel
 export const PRICE_PIONNIER = "19";

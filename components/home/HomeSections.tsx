@@ -180,7 +180,12 @@ export function Benefits() {
             <div key={title} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-4">
               <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
               {/* TODO: chiffre mesuré à fournir — masqué tant qu'il est vide */}
-              {stat ? <p className="text-2xl sm:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</p> : null}
+              {stat ? (
+                <p className="flex flex-col">
+                  <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
+                  <span className="text-sm text-[#64748b]">par bilan</span>
+                </p>
+              ) : null}
               <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h3>
               <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
             </div>
