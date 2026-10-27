@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone } from "lucide-react";
+import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award } from "lucide-react";
 import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedLink } from "@/components/TrackedLink";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
 import { FAMI_HREF, MODULES, ALL_FEATURES_HREF } from "@/lib/modules";
+import { TIME_SAVED_PER_BILAN } from "@/lib/claims";
 
 // Disposition inspirée de la maquette « Page d'accueil V3 » : sections centrées,
 // alternance blanc / fond clair, grandes cartes arrondies. Typo et couleurs du site.
@@ -32,6 +33,10 @@ export function HomeHero() {
           Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
         </TrackedSignupLink>
         <p className="mt-4 text-sm text-[#64748b]">Données de santé hébergées en France chez un hébergeur certifié HDS</p>
+        <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-[#334155]" style={{ border: "1px solid #dcecef" }}>
+          <Award className="size-4 text-[#236f7d]" aria-hidden />
+          Présenté par l&apos;ITMP au salon Rééduca 2026
+        </p>
       </div>
 
       {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
@@ -50,12 +55,12 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
       <div className="max-w-6xl mx-auto">
         <h2 className={h2}>Ta séance, sans clavier.</h2>
         <ol className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {STEPS.map((s, i) => (
-            <li key={s} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-5" style={{ background: GROUND }}>
+            <li key={s} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-5">
               <span
                 className="size-12 rounded-full inline-flex items-center justify-center text-lg font-bold text-white"
                 style={{ background: "#237584" }}
@@ -87,7 +92,7 @@ export function HowItWorks() {
 
 export function FamiBlock() {
   return (
-    <section id="fami" className="px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20" style={{ background: GROUND }}>
+    <section id="fami" className="px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20 bg-white">
       {/* Ancien ancrage de la section guide FAMI, gardé pour les liens déjà diffusés */}
       <span id="guide-fami" className="block relative -top-20" aria-hidden />
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
@@ -97,12 +102,12 @@ export function FamiBlock() {
         </p>
 
         <div className="mt-10 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5">
-          <div className="rounded-3xl bg-white px-8 py-7 sm:min-w-[210px]">
+          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px]" style={{ background: GROUND }}>
             <p className="text-sm text-[#475569]">Forfait FAMI</p>
             <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">350 €<span className="text-lg font-semibold">/an</span></p>
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="moins">−</span>
-          <div className="rounded-3xl bg-white px-8 py-7 sm:min-w-[210px]">
+          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px]" style={{ background: GROUND }}>
             <p className="text-sm text-[#475569]">Abonnement Pionnier annuel</p>
             <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">199 €<span className="text-lg font-semibold">/an</span></p>
           </div>
@@ -128,21 +133,29 @@ export function FamiBlock() {
   );
 }
 
-const BENEFITS = [
-  { icon: Moon, title: "Tes soirées te reviennent", text: "Ton bilan est rédigé pendant la séance, plus de rattrapage le soir." },
+const BENEFITS: { icon: typeof Moon; title: string; text: string; stat?: string }[] = [
+  {
+    icon: Moon,
+    title: "Tes soirées te reviennent",
+    text: "Ton bilan est rédigé pendant la séance, plus de rattrapage le soir.",
+    // TODO: chiffre mesuré à fournir (lib/claims.ts → TIME_SAVED_PER_BILAN). Vide = rien d'affiché.
+    stat: TIME_SAVED_PER_BILAN,
+  },
   { icon: ListChecks, title: "Des bilans plus complets", text: "Mon Assistant Kiné n'oublie rien de ce que tu as dit pendant l'examen." },
   { icon: Eye, title: "Ton attention reste sur ton patient", text: "Tu regardes ton patient, pas ton clavier." },
 ];
 
 export function Benefits() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
       <div className="max-w-6xl mx-auto">
         <h2 className={h2}>Moins d&apos;écran. Plus de patients.</h2>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {BENEFITS.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-4" style={{ background: GROUND }}>
+          {BENEFITS.map(({ icon: Icon, title, text, stat }) => (
+            <div key={title} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-4">
               <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
+              {/* TODO: chiffre mesuré à fournir — masqué tant qu'il est vide */}
+              {stat ? <p className="text-2xl sm:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</p> : null}
               <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h3>
               <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
             </div>
@@ -155,7 +168,7 @@ export function Benefits() {
 
 export function Proof() {
   return (
-    <section className="py-20 sm:py-28 bg-white">
+    <section className="py-20 sm:py-28" style={{ background: GROUND }}>
       <div className="px-4 sm:px-6 max-w-6xl mx-auto">
         <h2 className={h2}>Ils l&apos;utilisent au cabinet.</h2>
       </div>
@@ -163,9 +176,6 @@ export function Proof() {
       <div className="mt-12">
         <TestimonialsCarousel />
       </div>
-      <p className="mt-10 px-4 sm:px-6 text-base sm:text-lg text-[#475569] text-center">
-        Présenté par l&apos;ITMP lors de la conférence sur l&apos;IA en kinésithérapie au salon Rééduca 2026.
-      </p>
     </section>
   );
 }
@@ -175,7 +185,7 @@ export function Proof() {
 export function AlsoInside() {
   const others = MODULES.filter((m) => m.slug !== "documentation-bilan-kine");
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
       <div className="max-w-3xl mx-auto">
         <h2 className={h2}>Et autour du bilan, tout ton cabinet.</h2>
         <p className="mt-4 text-lg text-[#475569] text-center">Un seul outil pour la séance, le suivi et l&apos;administratif.</p>
@@ -227,7 +237,7 @@ const DEVICES = [
 
 export function Devices() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         <h2 className={h2}>Sur tous tes écrans, sans installation.</h2>
         <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
@@ -244,12 +254,57 @@ export function Devices() {
         />
         <ul className="mt-8 flex flex-wrap justify-center gap-3">
           {DEVICES.map(({ icon: Icon, label }) => (
-            <li key={label} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0f172a]">
+            <li key={label} className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#0f172a]" style={{ background: GROUND }}>
               <Icon className="size-4 text-[#236f7d]" aria-hidden />
               {label}
             </li>
           ))}
         </ul>
+      </div>
+    </section>
+  );
+}
+
+// Témoignages Copilote (réels, publiés avec accord) : sortis du carrousel pour illustrer ce bloc.
+const COPILOTE_QUOTES = [
+  {
+    quote: "J'avais un doute sur une prise en charge cervicale. En 30 secondes j'avais une orientation structurée.",
+    author: "Amandine S.",
+    location: "Toulouse",
+  },
+  {
+    quote: "Le Copilote, c'est vraiment un game changer. Une simple question peut changer ma pratique.",
+    author: "Pierre L.",
+    location: "Quimper",
+  },
+];
+
+// Le Copilote éclaire la décision, il ne la prend pas : on parle de réponse « sourcée » et d'« orientation ».
+export function CopiloteBlock() {
+  return (
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+      <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-[#236f7d]">Copilote IA clinique</p>
+        <h2 className={`${h2} mt-4`}>Un doute clinique ? Une réponse sourcée en 30 secondes.</h2>
+        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
+          Pose ta question comme à un confrère. Le Copilote te donne une orientation structurée, avec ses références.
+        </p>
+        <div className="mt-10 w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">
+          {COPILOTE_QUOTES.map((t) => (
+            <figure key={t.author} className="m-0 rounded-3xl p-7 sm:p-9 flex flex-col justify-between gap-5" style={{ background: GROUND }}>
+              <blockquote className="text-lg sm:text-xl text-[#0f172a] leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
+              <figcaption className="text-sm sm:text-[15px] text-[#475569]">
+                <strong className="font-semibold text-[#0f172a]">{t.author}</strong> · {t.location}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <Link
+          href="/fonctionnalites/aide-decision-clinique"
+          className="mt-8 inline-flex items-center gap-1.5 text-base sm:text-lg font-semibold text-[#236f7d] underline underline-offset-4 decoration-[#3899aa]/40 hover:decoration-[#236f7d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+        >
+          Découvrir le Copilote <ArrowRight className="size-4" aria-hidden />
+        </Link>
       </div>
     </section>
   );

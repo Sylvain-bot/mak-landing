@@ -16,6 +16,13 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
           <span style={{ color: "#5bb8c8" }}>Ton bilan s&apos;écrit.</span>
         </h2>
         <p className="mt-6 text-base sm:text-lg text-[#cbd5e1]">Offre Pionnier : 199 €/an (ou 19 €/mois), tarif garanti à vie, réservée aux 100 premiers inscrits.</p>
+        <p className="mt-4 max-w-2xl text-base sm:text-lg text-white leading-relaxed">
+          Et l&apos;accès au groupe Pionnier : des kinés libéraux qui échangent sur leur pratique, s&apos;entraident et
+          décident avec nous des prochaines fonctionnalités.
+        </p>
+        {/* TODO-FONDATEUR: exemple de fonctionnalité née d'une demande du groupe Pionnier (texte à fournir), par ex. :
+        <p className="mt-3 max-w-2xl text-sm text-[#cbd5e1]">Exemple : « … », demandé par le groupe et livré en … .</p>
+        */}
         <TrackedSignupLink
           location={location}
           className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl h-14 px-5 sm:px-8 whitespace-nowrap text-base sm:text-lg font-semibold w-full sm:w-auto bg-white text-[#0f172a] hover:bg-[#e2f1f3] transition-colors outline-none focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
