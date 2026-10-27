@@ -52,9 +52,13 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
               Des kinés libéraux qui échangent sur leur pratique, s&apos;entraident et décident avec nous des prochaines
               fonctionnalités.
             </p>
-            {/* TODO-FONDATEUR: exemple de fonctionnalité née d'une demande du groupe Pionnier (texte à fournir), par ex. :
-            <p className="mt-2 text-sm text-[#94a3b8]">Exemple : « … », demandé par le groupe et livré en … .</p>
-            */}
+            {/* Exemple réel de fonctionnalité née d'une demande du groupe (fondateur, 27/10/2026) */}
+            <p className="mt-3 text-sm text-[#e2e8f0]">
+              <span className="font-semibold" style={{ color: "#e8b04d" }}>
+                Né d&apos;une demande du groupe :
+              </span>{" "}
+              le body chart, désormais intégré au bilan.
+            </p>
           </div>
         </div>
         <TrackedSignupLink
