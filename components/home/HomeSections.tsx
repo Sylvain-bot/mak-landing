@@ -13,6 +13,10 @@ import { TIME_SAVED_PER_BILAN } from "@/lib/claims";
 // alternance blanc / fond clair, grandes cartes arrondies. Typo et couleurs du site.
 
 const GROUND = "#f2f9fa";
+const NAVY = "#0f172a";
+// Or de la page /tarifs, réservé à l'argent et à la rareté (FAMI, prix, places).
+const GOLD = "#e8b04d"; // sur fond sombre
+const GOLD_ON_LIGHT = "#a16207"; // version foncée, lisible sur fond clair
 const h2 = "text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance text-center";
 
 export function HomeHero() {
@@ -26,8 +30,10 @@ export function HomeHero() {
           <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
         </h1>
         <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed max-w-2xl">
-          Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier. Et l&apos;aide FAMI
-          peut couvrir ton abonnement.
+          Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
+          <strong className="font-semibold" style={{ color: GOLD_ON_LIGHT }}>
+            Et l&apos;aide FAMI peut couvrir ton abonnement.
+          </strong>
         </p>
         <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
           Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
@@ -92,39 +98,58 @@ export function HowItWorks() {
 
 export function FamiBlock() {
   return (
-    <section id="fami" className="px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20 bg-white">
+    <section id="fami" className="relative overflow-hidden px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20" style={{ background: NAVY }}>
       {/* Ancien ancrage de la section guide FAMI, gardé pour les liens déjà diffusés */}
       <span id="guide-fami" className="block relative -top-20" aria-hidden />
-      <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-        <h2 className={h2}>Gratuit. Et même mieux.</h2>
-        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(56,153,170,0.18) 0%, transparent 70%)" }}
+      />
+      <div className="relative max-w-5xl mx-auto flex flex-col items-center text-center">
+        <span
+          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold"
+          style={{ background: "rgba(232,176,77,0.12)", border: "1px solid rgba(232,176,77,0.4)", color: GOLD }}
+        >
+          ★ Aide FAMI · versée par ta CPAM
+        </span>
+        <h2 className="mt-5 text-3xl sm:text-5xl font-bold text-white leading-[1.08] tracking-tight text-balance">
+          Gratuit. <span style={{ color: GOLD }}>Et même mieux.</span>
+        </h2>
+        <p className="mt-5 text-lg sm:text-xl text-[#cbd5e1] max-w-2xl leading-relaxed">
           Mon Assistant Kiné inclut un module de vidéotransmission sécurisée qui te rend éligible au forfait FAMI.
         </p>
 
         <div className="mt-10 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5">
-          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px]" style={{ background: GROUND }}>
-            <p className="text-sm text-[#475569]">Forfait FAMI</p>
-            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">350 €<span className="text-lg font-semibold">/an</span></p>
+          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px]" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <p className="text-sm text-[#cbd5e1]">Forfait FAMI</p>
+            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-white tabular-nums">350 €<span className="text-lg font-semibold">/an</span></p>
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="moins">−</span>
-          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px]" style={{ background: GROUND }}>
-            <p className="text-sm text-[#475569]">Abonnement Pionnier annuel</p>
-            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-[#0f172a] tabular-nums">199 €<span className="text-lg font-semibold">/an</span></p>
+          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px]" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <p className="text-sm text-[#cbd5e1]">Abonnement Pionnier annuel</p>
+            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold text-white tabular-nums">199 €<span className="text-lg font-semibold">/an</span></p>
           </div>
           <span className="text-3xl sm:text-4xl text-[#94a3b8]" aria-label="égale">=</span>
-          <div className="rounded-3xl px-8 py-7 sm:min-w-[210px] text-white" style={{ background: "#1f6976" }}>
-            <p className="text-sm text-white">Pour toi</p>
-            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold tabular-nums">+151 €<span className="text-lg font-semibold">/an</span></p>
+          <div
+            className="rounded-3xl px-8 py-7 sm:min-w-[210px]"
+            style={{ background: "rgba(232,176,77,0.1)", border: "1.5px solid rgba(232,176,77,0.6)", boxShadow: "0 0 40px rgba(232,176,77,0.15)" }}
+          >
+            <p className="text-sm font-semibold" style={{ color: GOLD }}>Pour toi</p>
+            <p className="mt-1 text-4xl sm:text-[2.6rem] font-bold tabular-nums" style={{ color: GOLD }}>
+              +151 €<span className="text-lg font-semibold">/an</span>
+            </p>
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-[#64748b] max-w-xl leading-relaxed">
+        <p className="mt-6 text-sm text-[#94a3b8] max-w-xl leading-relaxed">
           Si tu ne perçois pas déjà le forfait FAMI via un autre logiciel de vidéotransmission. Forfait fixe à déclarer
           sur amelipro.
         </p>
         <Link
           href={FAMI_HREF}
-          className="mt-6 inline-flex items-center gap-1.5 text-base sm:text-lg font-semibold text-[#236f7d] underline underline-offset-4 decoration-[#3899aa]/40 hover:decoration-[#236f7d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
+          className="mt-6 inline-flex items-center gap-1.5 text-base sm:text-lg font-semibold underline underline-offset-4 decoration-[#e8b04d]/40 hover:decoration-[#e8b04d] rounded outline-none focus-visible:ring-2 focus-visible:ring-[#e8b04d]/50"
+          style={{ color: GOLD }}
         >
           Télécharger le guide FAMI gratuit <ArrowRight className="size-4" aria-hidden />
         </Link>
@@ -285,7 +310,9 @@ export function CopiloteBlock() {
     <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-[#236f7d]">Copilote IA clinique</p>
-        <h2 className={`${h2} mt-4`}>Un doute clinique ? Une réponse sourcée en 30 secondes.</h2>
+        <h2 className={`${h2} mt-4`}>
+          Un doute clinique ? Une réponse sourcée en <span className="text-[#2a8494]">30 secondes</span>.
+        </h2>
         <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
           Pose ta question comme à un confrère. Le Copilote te donne une orientation structurée, avec ses références.
         </p>
