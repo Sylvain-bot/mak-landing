@@ -12,13 +12,15 @@ export function ExitIntentPopup() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "success" | "fallback">("idle");
   const triggered = useRef(false);
+  // Pas de popup sur les pages guide FAMI (tunnel de vente, formulaire déjà présent) ni sur l'admin
+  const hiddenHere = pathname.startsWith("/admin") || pathname.startsWith("/guide-fami");
 
+  // Revérifié à chaque changement de page : sans ça, un visiteur arrivé sur l'accueil
+  // puis passé sur /guide-fami (navigation sans rechargement) gardait la popup armée.
   useEffect(() => {
-    // Pas de popup sur les pages guide FAMI (formulaire déjà présent) ni sur l'admin
-    if (pathname.startsWith("/admin") || pathname.startsWith("/guide-fami")) return;
+    if (hiddenHere) return;
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
-    let mobileTimer: ReturnType<typeof setTimeout>;
 
     function handleMouseLeave(e: MouseEvent) {
       if (triggered.current) return;
@@ -29,7 +31,7 @@ export function ExitIntentPopup() {
     }
 
     // Mobile — 40 s de navigation
-    mobileTimer = setTimeout(() => {
+    const mobileTimer = setTimeout(() => {
       if (triggered.current) return;
       triggered.current = true;
       setOpen(true);
@@ -40,7 +42,7 @@ export function ExitIntentPopup() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       clearTimeout(mobileTimer);
     };
-  }, []);
+  }, [hiddenHere]);
 
   useEffect(() => {
     if (!open) return;
@@ -77,7 +79,7 @@ export function ExitIntentPopup() {
     }
   }
 
-  if (!open) return null;
+  if (!open || hiddenHere) return null;
 
   return (
     <div
