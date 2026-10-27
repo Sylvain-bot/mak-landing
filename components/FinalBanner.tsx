@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Users } from "lucide-react";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 
 // Bandeau final commun : accueil, pages modules, page « Toutes les fonctionnalités ».
@@ -32,13 +32,31 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
           </strong>
           , réservée aux 100 premiers inscrits.
         </p>
-        <p className="mt-4 max-w-2xl text-base sm:text-lg text-white leading-relaxed">
-          Et l&apos;accès au groupe Pionnier : des kinés libéraux qui échangent sur leur pratique, s&apos;entraident et
-          décident avec nous des prochaines fonctionnalités.
-        </p>
-        {/* TODO-FONDATEUR: exemple de fonctionnalité née d'une demande du groupe Pionnier (texte à fournir), par ex. :
-        <p className="mt-3 max-w-2xl text-sm text-[#cbd5e1]">Exemple : « … », demandé par le groupe et livré en … .</p>
-        */}
+        {/* Encart groupe Pionnier : avantage réservé aux 100 premiers, mis en avant comme l'offre */}
+        <div
+          className="mt-8 w-full max-w-2xl rounded-2xl px-5 py-5 sm:px-7 sm:py-6 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left"
+          style={{ background: "rgba(232,176,77,0.07)", border: "1px solid rgba(232,176,77,0.35)" }}
+        >
+          <span
+            className="shrink-0 size-12 rounded-full inline-flex items-center justify-center"
+            style={{ background: "rgba(232,176,77,0.15)" }}
+            aria-hidden
+          >
+            <Users className="size-6" style={{ color: "#e8b04d" }} />
+          </span>
+          <div className="min-w-0">
+            <p className="text-lg sm:text-xl font-bold text-white">
+              Et l&apos;accès au <span style={{ color: "#e8b04d" }}>groupe Pionnier</span>
+            </p>
+            <p className="mt-1.5 text-base text-[#cbd5e1] leading-relaxed">
+              Des kinés libéraux qui échangent sur leur pratique, s&apos;entraident et décident avec nous des prochaines
+              fonctionnalités.
+            </p>
+            {/* TODO-FONDATEUR: exemple de fonctionnalité née d'une demande du groupe Pionnier (texte à fournir), par ex. :
+            <p className="mt-2 text-sm text-[#94a3b8]">Exemple : « … », demandé par le groupe et livré en … .</p>
+            */}
+          </div>
+        </div>
         <TrackedSignupLink
           location={location}
           className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl h-14 px-5 sm:px-8 whitespace-nowrap text-base sm:text-lg font-semibold w-full sm:w-auto bg-white text-[#0f172a] hover:bg-[#e2f1f3] transition-colors outline-none focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
