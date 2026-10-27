@@ -91,6 +91,8 @@ export function HowItWorks() {
         <p className="mt-8 text-base sm:text-lg text-[#475569] text-center">
           Rien n&apos;est enregistré dans le dossier sans ta validation.
         </p>
+
+        <BenefitsGrid />
       </div>
     </section>
   );
@@ -170,35 +172,36 @@ const BENEFITS: { icon: typeof Moon; title: string; text: string; stat?: string 
   { icon: Eye, title: "Ton attention reste sur ton patient", text: "Tu regardes ton patient, pas ton clavier." },
 ];
 
-export function Benefits() {
+// Bénéfices du bilan dicté : affichés sous « Ta séance, sans clavier », pour raconter le bilan d'un seul tenant.
+function BenefitsGrid() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
-      <div className="max-w-6xl mx-auto">
-        <h2 className={h2}>Moins d&apos;écran. Plus de patients.</h2>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {BENEFITS.map(({ icon: Icon, title, text, stat }) => (
-            <div key={title} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-4">
-              <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
-              {/* TODO: chiffre mesuré à fournir — masqué tant qu'il est vide */}
-              {stat ? (
-                <p className="flex flex-col">
-                  <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
-                  <span className="text-sm text-[#64748b]">par bilan</span>
-                </p>
-              ) : null}
-              <h3 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h3>
-              <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
-            </div>
-          ))}
-        </div>
+    <div className="mt-16 sm:mt-20">
+      <h3 className="text-2xl sm:text-4xl font-bold text-[#0f172a] leading-[1.1] tracking-tight text-balance text-center">
+        Moins d&apos;écran. Plus de patients.
+      </h3>
+      <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        {BENEFITS.map(({ icon: Icon, title, text, stat }) => (
+          <div key={title} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-4">
+            <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
+            {/* Chiffre mesuré (lib/claims.ts → TIME_SAVED_PER_BILAN) — masqué s'il est vide */}
+            {stat ? (
+              <p className="flex flex-col">
+                <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
+                <span className="text-sm text-[#64748b]">par bilan</span>
+              </p>
+            ) : null}
+            <h4 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h4>
+            <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
 
 export function Proof() {
   return (
-    <section className="py-20 sm:py-28" style={{ background: GROUND }}>
+    <section className="py-20 sm:py-28 bg-white">
       <div className="px-4 sm:px-6 max-w-6xl mx-auto">
         <h2 className={h2}>Ils l&apos;utilisent au cabinet.</h2>
       </div>
@@ -215,7 +218,7 @@ export function Proof() {
 export function AlsoInside() {
   const others = MODULES.filter((m) => m.slug !== "documentation-bilan-kine");
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
       <div className="max-w-3xl mx-auto">
         <h2 className={h2}>Et autour du bilan, tout ton cabinet.</h2>
         <p className="mt-4 text-lg text-[#475569] text-center">Un seul outil pour la séance, le suivi et l&apos;administratif.</p>
@@ -267,7 +270,7 @@ const DEVICES = [
 
 export function Devices() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         <h2 className={h2}>Sur tous tes écrans, sans installation.</h2>
         <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
@@ -284,7 +287,7 @@ export function Devices() {
         />
         <ul className="mt-8 flex flex-wrap justify-center gap-3">
           {DEVICES.map(({ icon: Icon, label }) => (
-            <li key={label} className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#0f172a]" style={{ background: GROUND }}>
+            <li key={label} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0f172a]">
               <Icon className="size-4 text-[#236f7d]" aria-hidden />
               {label}
             </li>
