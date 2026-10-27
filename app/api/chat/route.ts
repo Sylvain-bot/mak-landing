@@ -7,7 +7,7 @@ const SYSTEM = `Tu es l'assistant virtuel de Mon Assistant Kiné, un SaaS IA con
 
 PRODUIT :
 Mon Assistant Kiné aide les kinés libéraux à :
-- Générer leurs bilans NGAP en 3 minutes (dictée vocale, templates personnalisables, export PDF)
+- Générer leurs bilans NGAP en 2 minutes (dictée vocale, templates personnalisables, export PDF)
 - Rédiger leurs courriers et documents administratifs en 2 minutes
 - Suivre leurs patients à domicile via WhatsApp (programmes d'exercices avec vidéos, chatbot guidé par leur protocole)
 - Utiliser un copilote clinique (56 000+ ressources scientifiques dont Cleland, détection drapeaux rouges, réponse sourcée en 30 secondes)

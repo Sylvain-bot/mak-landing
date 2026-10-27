@@ -203,7 +203,7 @@ export default function ContratsRemplacementPage() {
             Découvre ce que Mon Assistant Kiné fait d&apos;autre pour ton cabinet
           </h2>
           <p className="text-[#475569] text-base mb-6 leading-relaxed">
-            Bilans en 3 minutes, copilote clinique sourcé (56 000+ études dont Cleland), suivi patient WhatsApp.
+            Bilans en 2 minutes, copilote clinique sourcé (56 000+ études dont Cleland), suivi patient WhatsApp.
             Un seul outil, conçu par des kinés libéraux.
           </p>
           <Link

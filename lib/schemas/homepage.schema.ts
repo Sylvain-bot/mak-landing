@@ -6,7 +6,7 @@ export const homepageSchema = {
       "@id": "https://www.monassistantkine.fr/#software",
       "name": "Mon Assistant Kiné",
       "alternateName": "MAK",
-      "description": "Assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Génère des bilans cliniques en 3 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 56 000 ressources scientifiques validées.",
+      "description": "Assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Génère des bilans cliniques en 2 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 56 000 ressources scientifiques validées.",
       "applicationCategory": "HealthcareApplication",
       "applicationSubCategory": "Clinical Decision Support",
       "operatingSystem": "Web",
@@ -21,7 +21,7 @@ export const homepageSchema = {
         "description": "Offre réservée aux 100 premiers inscrits — tarif garanti à vie",
       },
       "featureList": [
-        "Génération de bilans cliniques en 3 minutes",
+        "Génération de bilans cliniques en 2 minutes",
         "Détection des drapeaux rouges en temps réel",
         "Accès à 56 000+ ressources scientifiques (dont Cleland)",
         "Dictée vocale",
@@ -59,7 +59,7 @@ export const homepageSchema = {
           "name": "Qu'est-ce que Mon Assistant Kiné ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Mon Assistant Kiné est un assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Il génère des bilans cliniques en 3 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 56 000 ressources scientifiques validées, dont les ouvrages de Cleland.",
+            "text": "Mon Assistant Kiné est un assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Il génère des bilans cliniques en 2 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 56 000 ressources scientifiques validées, dont les ouvrages de Cleland.",
           },
         },
         {
@@ -67,7 +67,7 @@ export const homepageSchema = {
           "name": "Comment Mon Assistant Kiné réduit-il le temps de bilan ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "L'IA guide le kinésithérapeute à travers un processus structuré de raisonnement clinique. En intégrant les données du patient, elle génère un bilan complet en 3 minutes au lieu de 18 à 25 minutes en moyenne.",
+            "text": "L'IA guide le kinésithérapeute à travers un processus structuré de raisonnement clinique. En intégrant les données du patient, elle génère un bilan complet en 2 minutes au lieu de 18 à 25 minutes en moyenne.",
           },
         },
         {

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { CTA_SIGNUP_URL } from "@/lib/claims";
 
 const FEATURES = [
-  { icon: "📋", label: "Bilans cliniques NGAP en 3 minutes", new: false },
+  { icon: "📋", label: "Bilans cliniques NGAP en 2 minutes", new: false },
   { icon: "📨", label: "Gestion administrative (courriers, relances)", new: false },
   { icon: "💬", label: "Suivi patient WhatsApp + programme d'exercices", new: false },
   { icon: "🧠", label: "Copilote clinique (56 000+ études, Cleland inclus)", new: false },

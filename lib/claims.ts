@@ -4,7 +4,7 @@
 export const APP_URL = "https://app.monassistantkine.fr";
 
 // Temps
-export const BILAN_TIME = "3 minutes";
+export const BILAN_TIME = "2 minutes";
 export const ADMIN_TIME = "2 minutes";
 export const TIME_SAVED_DAY = "45 minutes par jour";
 export const TIME_SAVED_WEEK = "4 heures par semaine";
