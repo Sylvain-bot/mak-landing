@@ -12,6 +12,10 @@ export const TIME_SAVED_WEEK = "4 heures par semaine";
 // Contenu
 export const STUDY_COUNT = "56 000+";
 
+// Temps de rédaction d'un bilan, avant / avec Mon Assistant Kiné (accueil, carte « Tes soirées te reviennent »).
+// TODO-FONDATEUR: chiffre MESURÉ à fournir, format « X min → Y min par bilan ». Tant que c'est vide, rien ne s'affiche.
+export const TIME_SAVED_PER_BILAN = "";
+
 // Prix mensuel
 export const PRICE_PIONNIER = "19";
 export const PRICE_DECOUVERTE = "9";

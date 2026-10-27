@@ -62,7 +62,6 @@ export function EncoderStrip() {
     <div
       className="relative overflow-hidden rounded-2xl"
       style={{ height: "88px", border: "1px solid rgba(56,153,170,0.2)" }}
-      aria-hidden
     >
       <div className="absolute inset-y-0 left-0" style={{ width: "50%", background: "#f8fafc", overflow: "hidden" }}>
         <div
@@ -71,8 +70,11 @@ export function EncoderStrip() {
         >
           <span className="text-[13px] text-[#64748b] pr-8">
             {RAW_TEXT}
-            {RAW_TEXT}
-            {RAW_TEXT}
+            {/* Copies pour la boucle : masquées aux lecteurs d'écran et aux extraits Google */}
+            <span aria-hidden data-nosnippet="">
+              {RAW_TEXT}
+              {RAW_TEXT}
+            </span>
           </span>
         </div>
         <div
@@ -92,13 +94,15 @@ export function EncoderStrip() {
         >
           <span className="text-[13px] font-semibold text-white pr-8">
             {FORMATTED_TEXT}
-            {FORMATTED_TEXT}
-            {FORMATTED_TEXT}
+            <span aria-hidden data-nosnippet="">
+              {FORMATTED_TEXT}
+              {FORMATTED_TEXT}
+            </span>
           </span>
         </div>
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden>
         <WaveformPill />
       </div>
       <style>{MOTION_CSS}</style>

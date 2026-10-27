@@ -2,21 +2,12 @@
 
 // Témoignages réels d'utilisateurs (noms publiés avec leur accord).
 // Les kinés qui ne souhaitent pas être nommés apparaissent comme « Kiné libéral · utilisateur Pionnier ».
+// Ordre : temps gagné, suivi patient, puis les autres. Les témoignages Copilote sont dans le bloc Copilote de l'accueil.
 const TESTIMONIALS: { quote: string; author: string; location?: string; tag?: string }[] = [
-  {
-    quote: "Je ne pense plus pouvoir me passer de l'app maintenant.",
-    author: "Constance",
-  },
   {
     quote: "Je rédige mes bilans directement pendant les séances. Mes soirées m'appartiennent à nouveau.",
     author: "Marion D.",
     location: "Biot",
-    tag: "Bilans",
-  },
-  {
-    quote: "J'ai vraiment pris du plaisir à faire mes bilans.",
-    author: "Kiné libéral",
-    location: "utilisateur Pionnier",
     tag: "Bilans",
   },
   {
@@ -26,26 +17,24 @@ const TESTIMONIALS: { quote: string; author: string; location?: string; tag?: st
     tag: "Suivi patient",
   },
   {
+    quote: "Je ne pense plus pouvoir me passer de l'app maintenant.",
+    author: "Constance",
+  },
+  {
+    quote: "J'ai vraiment pris du plaisir à faire mes bilans.",
+    author: "Kiné libéral",
+    location: "utilisateur Pionnier",
+    tag: "Bilans",
+  },
+  {
     quote: "Ça change mon quotidien et celui de mes patients.",
     author: "Kiné libéral",
     location: "utilisateur Pionnier",
   },
   {
-    quote: "Le Copilote, c'est vraiment un game changer. Une simple question peut changer ma pratique.",
-    author: "Pierre L.",
-    location: "Quimper",
-    tag: "Copilote",
-  },
-  {
     quote: "C'est que le début, mais l'app est déjà très agréable à utiliser.",
     author: "Kiné libéral",
     location: "utilisateur Pionnier",
-  },
-  {
-    quote: "J'avais un doute sur une prise en charge cervicale. En 30 secondes j'avais une orientation structurée.",
-    author: "Amandine S.",
-    location: "Toulouse",
-    tag: "Copilote",
   },
 ];
 
@@ -65,6 +54,8 @@ export function TestimonialsCarousel() {
           <li
             key={i}
             aria-hidden={i >= TESTIMONIALS.length}
+            // Copie servant à la boucle : ignorée par les lecteurs d'écran et par les extraits Google
+            {...(i >= TESTIMONIALS.length ? { "data-nosnippet": "" } : {})}
             className="shrink-0 w-[280px] sm:w-[340px] rounded-2xl bg-white px-5 py-4 sm:px-6 sm:py-5 flex flex-col"
             style={{ border: "1px solid #d4ecea" }}
           >

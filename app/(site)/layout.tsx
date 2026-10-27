@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
-import { ChatBot } from "@/components/ChatBot";
+import { ChatBotGate } from "@/components/ChatBotGate";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import { MetaPixel } from "@/components/MetaPixel";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -13,7 +13,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <PostHogProvider>
       {children}
       <ExitIntentPopup />
-      <ChatBot />
+      <ChatBotGate />
       <Suspense fallback={null}>
         <UtmCapture />
       </Suspense>

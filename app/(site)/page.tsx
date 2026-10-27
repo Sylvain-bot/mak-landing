@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
-import { HomeHero, HowItWorks, FamiBlock, Benefits, Devices, Proof, AlsoInside } from "@/components/home/HomeSections";
+import { HomeHero, HowItWorks, FamiBlock, CopiloteBlock, Benefits, Devices, Proof, AlsoInside } from "@/components/home/HomeSections";
 import { FinalBanner } from "@/components/FinalBanner";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -40,8 +40,9 @@ export default function Home() {
       <Navbar />
       <main>
         <HomeHero />
-        <HowItWorks />
         <FamiBlock />
+        <HowItWorks />
+        <CopiloteBlock />
         <Benefits />
         <Devices />
         <Proof />
