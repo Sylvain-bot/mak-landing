@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin } from "lucide-react";
-import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
+import { EncoderStrip } from "@/components/BilanDemoVisual";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedLink } from "@/components/TrackedLink";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
@@ -19,6 +19,7 @@ const EYEBROW = "text-xs font-semibold uppercase tracking-[0.22em] text-[#64748b
 const NAVY = "#0f172a";
 // Or de la page /tarifs, réservé à l'argent et à la rareté (FAMI, prix, places).
 const GOLD = "#e8b04d"; // sur fond sombre
+const GOLD_ON_LIGHT = "#a16207"; // version foncée, lisible sur fond clair
 const h2 = "text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance text-center";
 
 const HERO_BADGES = [
@@ -27,40 +28,30 @@ const HERO_BADGES = [
   { icon: MapPin, label: "Données de santé en France" },
 ];
 
+// Photo du hero : un kiné en plein bilan, le téléphone qui enregistre posé derrière.
+const HERO_IMAGE = "/images/hero-kine.webp";
+
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden px-4 sm:px-6 pt-32 pb-16 sm:pt-40 sm:pb-24">
-      {/* Photo du cabinet de Sylvain (vraie salle de kiné), assombrie pour la lisibilité */}
-      <Image
-        src="/images/cabinet-hero.webp"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center hero-kenburns"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 hidden lg:block"
-        style={{ background: "linear-gradient(90deg, rgba(10,18,32,0.9) 0%, rgba(10,18,32,0.78) 42%, rgba(10,18,32,0.35) 100%)" }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 lg:hidden"
-        style={{ background: "linear-gradient(180deg, rgba(10,18,32,0.88) 0%, rgba(10,18,32,0.8) 55%, rgba(10,18,32,0.6) 100%)" }}
-      />
+    <section className="relative overflow-hidden px-4 sm:px-6 pt-28 pb-12 sm:pt-36 xl:pt-44 xl:pb-32" style={{ background: GROUND }}>
+      {/* Grand écran : la photo occupe un panneau à droite (cadrée pour garder le téléphone et les deux personnes),
+          le texte reste sur le fond clair à gauche */}
+      <div aria-hidden className="absolute inset-y-0 right-0 w-[60%] hidden xl:block overflow-hidden">
+        <Image src={HERO_IMAGE} alt="" fill priority sizes="60vw" className="object-cover object-[72%_center] 2xl:object-[88%_center] hero-kenburns" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #f7f5f0 0%, rgba(247,245,240,0) 8%)" }} />
+      </div>
 
-      <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-12 items-center">
-        <div className="min-w-0 text-left">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-white/70">Bilan kiné dicté</p>
-          <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.1rem] font-bold text-white tracking-tight">
+      <div className="relative max-w-6xl mx-auto">
+        <div className="min-w-0 max-w-xl xl:max-w-[460px] 2xl:max-w-[500px]">
+          <p className={EYEBROW}>Bilan kiné dicté</p>
+          <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.1rem] font-bold text-[#0f172a] tracking-tight">
             Tu parles.
             <br />
-            <span style={{ color: "#5bb8c8" }}>Ton bilan s&apos;écrit.</span>
+            <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-white/85 leading-relaxed max-w-xl">
+          <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed">
             Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
-            <strong className="font-semibold" style={{ color: GOLD }}>
+            <strong className="font-semibold" style={{ color: GOLD_ON_LIGHT }}>
               Et l&apos;aide FAMI peut couvrir ton abonnement.
             </strong>
           </p>
@@ -69,23 +60,23 @@ export function HomeHero() {
           </TrackedSignupLink>
 
           {/* Réassurance en badges (inspiration Delta) */}
-          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/80" aria-label="Garanties">
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#475569]" aria-label="Garanties">
             {HERO_BADGES.map(({ icon: Icon, label }) => (
               <li key={label} className="inline-flex items-center gap-1.5">
-                <Icon className="size-4 text-white/70" aria-hidden />
+                <Icon className="size-4 text-[#236f7d]" aria-hidden />
                 {label}
               </li>
             ))}
           </ul>
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-white" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>
-            <Award className="size-4" style={{ color: GOLD }} aria-hidden />
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-[#334155]" style={{ border: "1px solid #e7e5df" }}>
+            <Award className="size-4 text-[#236f7d]" aria-hidden />
             Présenté par l&apos;ITMP au salon Rééduca 2026
           </p>
         </div>
 
-        {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
-        <div className="min-w-0 mx-auto w-full max-w-[520px]">
-          <BilanComposition priority />
+        {/* Mobile, tablette et petit ordinateur : la photo passe sous le texte, en carte arrondie */}
+        <div className="xl:hidden relative mt-10 w-full overflow-hidden rounded-3xl aspect-[16/10]" style={{ boxShadow: "0 18px 40px rgba(15,23,42,0.12)" }}>
+          <Image src={HERO_IMAGE} alt="Un kiné fait un bilan de genou pendant que son téléphone enregistre la séance" fill priority sizes="100vw" className="object-cover object-[72%_center]" />
         </div>
       </div>
     </section>
