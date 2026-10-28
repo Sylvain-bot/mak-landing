@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin } from "lucide-react";
 import { EncoderStrip } from "@/components/BilanDemoVisual";
+import { HeroVideo } from "@/components/HeroVideo";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedLink } from "@/components/TrackedLink";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
@@ -12,7 +13,7 @@ import { TIME_SAVED_PER_BILAN } from "@/lib/claims";
 // Disposition inspirée de la maquette « Page d'accueil V3 » : sections centrées,
 // alternance blanc / fond clair, grandes cartes arrondies. Typo et couleurs du site.
 
-// Fond clair chaud (inspiration Delta) : plus doux qu'un blanc teinté froid.
+// Fond clair des sections (bleu-gris très léger, couleur d'origine du site).
 const GROUND = "#f2f9fa";
 // Sur-titre discret en petites capitales espacées, au-dessus des titres de section.
 const EYEBROW = "text-xs font-semibold uppercase tracking-[0.22em] text-[#64748b]";
@@ -28,7 +29,7 @@ const HERO_BADGES = [
   { icon: MapPin, label: "Données de santé en France" },
 ];
 
-// Photo du hero : un kiné en plein bilan, le téléphone qui enregistre posé derrière.
+// Photo du hero : une patiente explique sa douleur au kiné, le téléphone enregistre sur le rebord de la fenêtre.
 const HERO_IMAGE = "/images/hero-kine-v5.webp";
 
 export function HomeHero() {
@@ -37,7 +38,8 @@ export function HomeHero() {
       {/* Grand écran : la photo occupe un panneau à droite (cadrée pour garder le téléphone et les deux personnes),
           le texte reste sur le fond clair à gauche */}
       <div aria-hidden className="absolute inset-y-0 right-0 w-[60%] hidden xl:block overflow-hidden">
-        <Image src={HERO_IMAGE} alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[92%_center] hero-kenburns" />
+        <Image src={HERO_IMAGE} alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[92%_center]" />
+        <HeroVideo className="absolute inset-0 size-full object-cover object-[92%_center]" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #f2f9fa 0%, rgba(242,249,250,0) 8%)" }} />
       </div>
 
