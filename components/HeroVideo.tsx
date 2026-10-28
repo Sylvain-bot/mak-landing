@@ -29,8 +29,8 @@ export function HeroVideo({ className }: { className?: string }) {
       onPlaying={() => setPlaying(true)}
       className={`${className ?? ""} transition-opacity duration-700 ${playing ? "opacity-100" : "opacity-0"}`}
     >
-      <source src="/videos/hero-entretien.webm" type="video/webm" />
-      <source src="/videos/hero-entretien.mp4" type="video/mp4" />
+      <source src="/videos/hero-entretien-v2.webm" type="video/webm" />
+      <source src="/videos/hero-entretien-v2.mp4" type="video/mp4" />
     </video>
   );
 }
