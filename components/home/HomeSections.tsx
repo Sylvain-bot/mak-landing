@@ -331,8 +331,8 @@ export function Devices() {
         </p>
         {/* Écrans posés sur la photo floutée du cabinet (inspiration Delta) */}
         <div className="relative mt-10 w-full overflow-hidden rounded-[28px] px-4 py-10 sm:px-12 sm:py-14">
-          <Image src="/images/cabinet-blur.webp" alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover scale-110" />
-          <div aria-hidden className="absolute inset-0" style={{ background: "rgba(255,255,255,0.15)" }} />
+          {/* TODO: image de fond dédiée (brief Nano Banana « fond-ecrans ») — dégradé doux en attendant */}
+          <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 40%, #e3f1f3 0%, #efe9df 60%, #e7e1d6 100%)" }} />
           <Image
             src="/new_se-removebg-preview.png"
             alt="Mon Assistant Kiné affiché sur un ordinateur, une tablette et un téléphone"
