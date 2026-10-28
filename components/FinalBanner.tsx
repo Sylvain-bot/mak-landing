@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, Users } from "lucide-react";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 
@@ -7,9 +8,13 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
   return (
     <section className="px-4 sm:px-6 py-16 sm:py-24 bg-white">
       <div
-        className="max-w-6xl mx-auto rounded-[32px] px-4 sm:px-6 py-14 sm:py-24 flex flex-col items-center text-center"
+        className="relative overflow-hidden max-w-6xl mx-auto rounded-[32px] px-4 sm:px-6 py-14 sm:py-24 flex flex-col items-center text-center"
         style={{ background: "#0f172a", border: "1.5px solid rgba(56,153,170,0.45)", boxShadow: "0 0 60px rgba(56,153,170,0.18)" }}
       >
+        {/* Photo du cabinet en fond, très assombrie (inspiration Delta) */}
+        <Image src="/images/cabinet-hero.webp" alt="" fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover" />
+        <div aria-hidden className="absolute inset-0" style={{ background: "rgba(10,18,32,0.88)" }} />
+        <div className="relative flex flex-col items-center w-full">
         <span
           className="mb-6 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold"
           style={{ background: "rgba(232,176,77,0.12)", border: "1px solid rgba(232,176,77,0.4)", color: "#e8b04d" }}
@@ -67,6 +72,7 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
         >
           Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
         </TrackedSignupLink>
+        </div>
       </div>
     </section>
   );

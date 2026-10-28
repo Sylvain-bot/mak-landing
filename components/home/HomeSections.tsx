@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award } from "lucide-react";
+import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin } from "lucide-react";
 import { BilanComposition, EncoderStrip } from "@/components/BilanDemoVisual";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedLink } from "@/components/TrackedLink";
@@ -12,42 +12,81 @@ import { TIME_SAVED_PER_BILAN } from "@/lib/claims";
 // Disposition inspirée de la maquette « Page d'accueil V3 » : sections centrées,
 // alternance blanc / fond clair, grandes cartes arrondies. Typo et couleurs du site.
 
-const GROUND = "#f2f9fa";
+// Fond clair chaud (inspiration Delta) : plus doux qu'un blanc teinté froid.
+const GROUND = "#f7f5f0";
+// Sur-titre discret en petites capitales espacées, au-dessus des titres de section.
+const EYEBROW = "text-xs font-semibold uppercase tracking-[0.22em] text-[#64748b]";
 const NAVY = "#0f172a";
 // Or de la page /tarifs, réservé à l'argent et à la rareté (FAMI, prix, places).
 const GOLD = "#e8b04d"; // sur fond sombre
-const GOLD_ON_LIGHT = "#a16207"; // version foncée, lisible sur fond clair
 const h2 = "text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance text-center";
+
+const HERO_BADGES = [
+  { icon: ShieldCheck, label: "RGPD" },
+  { icon: Lock, label: "Hébergement certifié HDS" },
+  { icon: MapPin, label: "Données de santé en France" },
+];
 
 export function HomeHero() {
   return (
-    <section className="px-4 sm:px-6 pt-28 pb-12 sm:pt-36 sm:pb-16" style={{ background: GROUND }}>
-      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-[#236f7d]">Bilan kiné dicté</p>
-        <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.25rem] font-bold text-[#0f172a] tracking-tight">
-          Tu parles.
-          <br />
-          <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
-        </h1>
-        <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed max-w-2xl">
-          Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
-          <strong className="font-semibold" style={{ color: GOLD_ON_LIGHT }}>
-            Et l&apos;aide FAMI peut couvrir ton abonnement.
-          </strong>
-        </p>
-        <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
-          Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
-        </TrackedSignupLink>
-        <p className="mt-4 text-sm text-[#64748b]">Données de santé hébergées en France chez un hébergeur certifié HDS</p>
-        <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-[#334155]" style={{ border: "1px solid #dcecef" }}>
-          <Award className="size-4 text-[#236f7d]" aria-hidden />
-          Présenté par l&apos;ITMP au salon Rééduca 2026
-        </p>
-      </div>
+    <section className="relative overflow-hidden px-4 sm:px-6 pt-32 pb-16 sm:pt-40 sm:pb-24">
+      {/* Photo du cabinet de Sylvain (vraie salle de kiné), assombrie pour la lisibilité */}
+      <Image
+        src="/images/cabinet-hero.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center hero-kenburns"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 hidden lg:block"
+        style={{ background: "linear-gradient(90deg, rgba(10,18,32,0.9) 0%, rgba(10,18,32,0.78) 42%, rgba(10,18,32,0.35) 100%)" }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 lg:hidden"
+        style={{ background: "linear-gradient(180deg, rgba(10,18,32,0.88) 0%, rgba(10,18,32,0.8) 55%, rgba(10,18,32,0.6) 100%)" }}
+      />
 
-      {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
-      <div className="mx-auto mt-8 sm:mt-10 w-full max-w-[640px]">
-        <BilanComposition priority />
+      <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-12 items-center">
+        <div className="min-w-0 text-left">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-white/70">Bilan kiné dicté</p>
+          <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.1rem] font-bold text-white tracking-tight">
+            Tu parles.
+            <br />
+            <span style={{ color: "#5bb8c8" }}>Ton bilan s&apos;écrit.</span>
+          </h1>
+          <p className="mt-6 text-lg sm:text-xl text-white/85 leading-relaxed max-w-xl">
+            Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
+            <strong className="font-semibold" style={{ color: GOLD }}>
+              Et l&apos;aide FAMI peut couvrir ton abonnement.
+            </strong>
+          </p>
+          <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
+            Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
+          </TrackedSignupLink>
+
+          {/* Réassurance en badges (inspiration Delta) */}
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/80" aria-label="Garanties">
+            {HERO_BADGES.map(({ icon: Icon, label }) => (
+              <li key={label} className="inline-flex items-center gap-1.5">
+                <Icon className="size-4 text-white/70" aria-hidden />
+                {label}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-white" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>
+            <Award className="size-4" style={{ color: GOLD }} aria-hidden />
+            Présenté par l&apos;ITMP au salon Rééduca 2026
+          </p>
+        </div>
+
+        {/* Illustration : le téléphone pendant l'écoute devant le bilan rédigé */}
+        <div className="min-w-0 mx-auto w-full max-w-[520px]">
+          <BilanComposition priority />
+        </div>
       </div>
     </section>
   );
@@ -61,12 +100,13 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
-      <div className="max-w-6xl mx-auto">
-        <h2 className={h2}>Ta séance, sans clavier.</h2>
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+      <div className="max-w-6xl mx-auto" data-reveal>
+        <p className={`${EYEBROW} text-center`}>Comment ça marche</p>
+        <h2 className={`${h2} mt-4`}>Ta séance, sans clavier.</h2>
         <ol className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {STEPS.map((s, i) => (
-            <li key={s} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-5">
+            <li key={s} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-5" style={{ background: GROUND }}>
               <span
                 className="size-12 rounded-full inline-flex items-center justify-center text-lg font-bold text-white"
                 style={{ background: "#237584" }}
@@ -100,9 +140,10 @@ export function HowItWorks() {
 
 export function FamiBlock() {
   return (
-    <section id="fami" className="relative overflow-hidden px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20" style={{ background: NAVY }}>
+    <section id="fami" className="px-4 sm:px-6 py-16 sm:py-24 scroll-mt-20" style={{ background: GROUND }}>
       {/* Ancien ancrage de la section guide FAMI, gardé pour les liens déjà diffusés */}
       <span id="guide-fami" className="block relative -top-20" aria-hidden />
+      <div className="relative overflow-hidden max-w-6xl mx-auto rounded-[32px] px-4 sm:px-10 py-14 sm:py-20" style={{ background: NAVY }} data-reveal>
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -156,6 +197,7 @@ export function FamiBlock() {
           Télécharger le guide FAMI gratuit <ArrowRight className="size-4" aria-hidden />
         </Link>
       </div>
+      </div>
     </section>
   );
 }
@@ -181,12 +223,19 @@ function BenefitsGrid() {
       </h3>
       <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         {BENEFITS.map(({ icon: Icon, title, text, stat }) => (
-          <div key={title} className="rounded-3xl bg-white p-7 sm:p-9 flex flex-col gap-4">
+          <div key={title} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-4" style={{ background: GROUND }}>
             <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
             {/* Chiffre mesuré (lib/claims.ts → TIME_SAVED_PER_BILAN) — masqué s'il est vide */}
             {stat ? (
               <p className="flex flex-col">
-                <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
+                {stat.includes("→") ? (
+                  <span className="flex flex-wrap items-baseline gap-x-2 tabular-nums">
+                    <s className="text-xl md:text-lg lg:text-2xl font-semibold text-[#94a3b8] decoration-2">{stat.split("→")[0].trim()}</s>
+                    <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d]">{stat.split("→")[1].trim()}</span>
+                  </span>
+                ) : (
+                  <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
+                )}
                 <span className="text-sm text-[#64748b]">par bilan</span>
               </p>
             ) : null}
@@ -201,9 +250,10 @@ function BenefitsGrid() {
 
 export function Proof() {
   return (
-    <section className="py-20 sm:py-28 bg-white">
-      <div className="px-4 sm:px-6 max-w-6xl mx-auto">
-        <h2 className={h2}>Ils l&apos;utilisent au cabinet.</h2>
+    <section className="py-20 sm:py-28" style={{ background: GROUND }}>
+      <div className="px-4 sm:px-6 max-w-6xl mx-auto" data-reveal>
+        <p className={`${EYEBROW} text-center`}>Témoignages</p>
+        <h2 className={`${h2} mt-4`}>Ils l&apos;utilisent au cabinet.</h2>
       </div>
       {/* Bande déroulante pleine largeur (pause au survol) */}
       <div className="mt-12">
@@ -218,9 +268,10 @@ export function Proof() {
 export function AlsoInside() {
   const others = MODULES.filter((m) => m.slug !== "documentation-bilan-kine");
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
-      <div className="max-w-3xl mx-auto">
-        <h2 className={h2}>Et autour du bilan, tout ton cabinet.</h2>
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+      <div className="max-w-3xl mx-auto" data-reveal>
+        <p className={`${EYEBROW} text-center`}>Fonctionnalités</p>
+        <h2 className={`${h2} mt-4`}>Et autour du bilan, tout ton cabinet.</h2>
         <p className="mt-4 text-lg text-[#475569] text-center">Un seul outil pour la séance, le suivi et l&apos;administratif.</p>
         <ul className="mt-10 divide-y divide-[#dcecef] border-y border-[#dcecef]">
           {others.map((m) => (
@@ -270,24 +321,30 @@ const DEVICES = [
 
 export function Devices() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
-      <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-        <h2 className={h2}>Sur tous tes écrans, sans installation.</h2>
+    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
+      <div className="max-w-5xl mx-auto flex flex-col items-center text-center" data-reveal>
+        <p className={EYEBROW}>Disponibilité</p>
+        <h2 className={`${h2} mt-4`}>Sur tous tes écrans, sans installation.</h2>
         <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
           Mon Assistant Kiné fonctionne directement dans ton navigateur et s&apos;adapte à ton ordinateur, ta tablette
           et ton téléphone : au cabinet, en déplacement ou entre deux patients. Aucune application à installer.
         </p>
-        <Image
-          src="/new_se-removebg-preview.png"
-          alt="Mon Assistant Kiné affiché sur un ordinateur, une tablette et un téléphone"
-          width={707}
-          height={353}
-          sizes="(min-width: 768px) 640px, 92vw"
-          className="mt-10 w-full max-w-[640px] h-auto"
-        />
+        {/* Écrans posés sur la photo floutée du cabinet (inspiration Delta) */}
+        <div className="relative mt-10 w-full overflow-hidden rounded-[28px] px-4 py-10 sm:px-12 sm:py-14">
+          <Image src="/images/cabinet-blur.webp" alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover scale-110" />
+          <div aria-hidden className="absolute inset-0" style={{ background: "rgba(255,255,255,0.15)" }} />
+          <Image
+            src="/new_se-removebg-preview.png"
+            alt="Mon Assistant Kiné affiché sur un ordinateur, une tablette et un téléphone"
+            width={707}
+            height={353}
+            sizes="(min-width: 768px) 640px, 92vw"
+            className="relative mx-auto w-full max-w-[640px] h-auto drop-shadow-[0_24px_40px_rgba(15,23,42,0.25)]"
+          />
+        </div>
         <ul className="mt-8 flex flex-wrap justify-center gap-3">
           {DEVICES.map(({ icon: Icon, label }) => (
-            <li key={label} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0f172a]">
+            <li key={label} className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#0f172a]" style={{ background: GROUND }}>
               <Icon className="size-4 text-[#236f7d]" aria-hidden />
               {label}
             </li>
@@ -315,9 +372,9 @@ const COPILOTE_QUOTES = [
 // Le Copilote éclaire la décision, il ne la prend pas : on parle de réponse « sourcée » et d'« orientation ».
 export function CopiloteBlock() {
   return (
-    <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
-      <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-[#236f7d]">Copilote IA clinique</p>
+    <section className="px-4 sm:px-6 py-20 sm:py-28" style={{ background: GROUND }}>
+      <div className="max-w-5xl mx-auto flex flex-col items-center text-center" data-reveal>
+        <p className={EYEBROW}>Copilote IA clinique</p>
         <h2 className={`${h2} mt-4`}>
           Un doute clinique ? Une réponse sourcée en <span className="text-[#2a8494]">30 secondes</span>.
         </h2>
@@ -326,7 +383,7 @@ export function CopiloteBlock() {
         </p>
         <div className="mt-10 w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">
           {COPILOTE_QUOTES.map((t) => (
-            <figure key={t.author} className="m-0 rounded-3xl p-7 sm:p-9 flex flex-col justify-between gap-5" style={{ background: GROUND }}>
+            <figure key={t.author} className="m-0 rounded-3xl bg-white p-7 sm:p-9 flex flex-col justify-between gap-5">
               <blockquote className="text-lg sm:text-xl text-[#0f172a] leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
               <figcaption className="text-sm sm:text-[15px] text-[#475569]">
                 <strong className="font-semibold text-[#0f172a]">{t.author}</strong> · {t.location}
