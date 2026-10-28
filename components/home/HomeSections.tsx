@@ -325,7 +325,7 @@ export function Devices() {
         </p>
         {/* Écrans posés sur la photo floutée du cabinet (inspiration Delta) */}
         <div className="relative mt-10 w-full overflow-hidden rounded-[28px] px-4 py-10 sm:px-12 sm:py-14">
-          <Image src="/images/fond-ecrans-v4.webp" alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
+          <Image src="/images/fond-ecrans-v6.webp" alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover object-[30%_center]" />
           <div aria-hidden className="absolute inset-0" style={{ background: "rgba(242,249,250,0.18)" }} />
           <Image
             src="/new_se-removebg-preview.png"
