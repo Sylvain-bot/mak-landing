@@ -12,8 +12,8 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
         style={{ background: "#0f172a", border: "1.5px solid rgba(56,153,170,0.45)", boxShadow: "0 0 60px rgba(56,153,170,0.18)" }}
       >
         {/* Photo de séance sous un voile sombre : le texte reste lisible */}
-        <Image src="/images/fond-final.webp" alt="" fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover object-[70%_center]" />
-        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.86) 0%, rgba(15,23,42,0.92) 100%)" }} />
+        <Image src="/images/fond-final-v2.webp" alt="" fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover object-[75%_center]" />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.80) 0%, rgba(15,23,42,0.90) 100%)" }} />
         <div className="relative flex flex-col items-center w-full">
         <span
           className="mb-6 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold"

@@ -29,7 +29,7 @@ const HERO_BADGES = [
 ];
 
 // Photo du hero : un kiné en plein bilan, le téléphone qui enregistre posé derrière.
-const HERO_IMAGE = "/images/hero-kine-v4.webp";
+const HERO_IMAGE = "/images/hero-kine-v5.webp";
 
 export function HomeHero() {
   return (
@@ -37,7 +37,7 @@ export function HomeHero() {
       {/* Grand écran : la photo occupe un panneau à droite (cadrée pour garder le téléphone et les deux personnes),
           le texte reste sur le fond clair à gauche */}
       <div aria-hidden className="absolute inset-y-0 right-0 w-[60%] hidden xl:block overflow-hidden">
-        <Image src={HERO_IMAGE} alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[83%_center] hero-kenburns" />
+        <Image src={HERO_IMAGE} alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[92%_center] hero-kenburns" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #f2f9fa 0%, rgba(242,249,250,0) 8%)" }} />
       </div>
 
@@ -76,7 +76,7 @@ export function HomeHero() {
 
         {/* Mobile, tablette et petit ordinateur : la photo passe sous le texte, en carte arrondie */}
         <div className="xl:hidden relative mt-10 w-full overflow-hidden rounded-3xl aspect-[16/10]" style={{ boxShadow: "0 18px 40px rgba(15,23,42,0.12)" }}>
-          <Image src={HERO_IMAGE} alt="Une patiente explique sa douleur à son kiné pendant que son téléphone enregistre l'échange" fill priority quality={90} sizes="100vw" className="object-cover object-[80%_center]" />
+          <Image src={HERO_IMAGE} alt="Une patiente explique sa douleur à son kiné, le téléphone enregistre l'échange sur le rebord de la fenêtre" fill priority quality={90} sizes="100vw" className="object-cover object-[85%_center]" />
         </div>
       </div>
     </section>
@@ -322,8 +322,8 @@ export function Devices() {
         </p>
         {/* Écrans posés sur la photo floutée du cabinet (inspiration Delta) */}
         <div className="relative mt-10 w-full overflow-hidden rounded-[28px] px-4 py-10 sm:px-12 sm:py-14">
-          <Image src="/images/fond-ecrans.webp" alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
-          <div aria-hidden className="absolute inset-0" style={{ background: "rgba(242,249,250,0.35)" }} />
+          <Image src="/images/fond-ecrans-v4.webp" alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
+          <div aria-hidden className="absolute inset-0" style={{ background: "rgba(242,249,250,0.18)" }} />
           <Image
             src="/new_se-removebg-preview.png"
             alt="Mon Assistant Kiné affiché sur un ordinateur, une tablette et un téléphone"
