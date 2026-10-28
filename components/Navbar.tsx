@@ -88,7 +88,7 @@ export function Navbar() {
       {/* En-tête flottant arrondi */}
       <div
         className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3 rounded-2xl bg-white/90 backdrop-blur-md"
-        style={{ border: "1px solid #e7e5df", boxShadow: "0 10px 30px rgba(15,23,42,0.08)" }}
+        style={{ border: "1px solid #e2e8f0", boxShadow: "0 10px 30px rgba(15,23,42,0.08)" }}
       >
         <Link href="/" className="shrink-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50" aria-label="Mon Assistant Kiné, accueil">
           <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain" priority />
