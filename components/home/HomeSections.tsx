@@ -38,8 +38,9 @@ export function HomeHero() {
       {/* Grand écran : la photo occupe un panneau à droite (cadrée pour garder le téléphone et les deux personnes),
           le texte reste sur le fond clair à gauche */}
       <div aria-hidden className="absolute inset-y-0 right-0 w-[60%] hidden xl:block overflow-hidden">
-        <Image src={HERO_IMAGE} alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[92%_center]" />
-        <HeroVideo className="absolute inset-0 size-full object-cover object-[92%_center]" />
+        {/* Première image de la boucle vidéo : la vidéo prend le relais sans saut */}
+        <Image src="/images/hero-poster-v3.webp" alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[92%_center]" />
+        <HeroVideo className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #f2f9fa 0%, rgba(242,249,250,0) 8%)" }} />
       </div>
 
