@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check, FileCheck, ArrowLeftRight } from "lucide-react";
+import { ArrowRight, Moon, ListChecks, Eye, Monitor, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check, FileCheck, ArrowLeftRight } from "lucide-react";
 import { HowItWorksDemo } from "@/components/home/HowItWorksDemo";
 import { HeroVideo } from "@/components/HeroVideo";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
@@ -286,12 +286,6 @@ export function AlsoInside() {
   );
 }
 
-const DEVICES = [
-  { icon: Monitor, label: "Ordinateur" },
-  { icon: Tablet, label: "Tablette" },
-  { icon: Smartphone, label: "Téléphone" },
-];
-
 // Étiquettes de compatibilité (questions fréquentes des kinés). pos : emplacement autour des écrans sur grand écran.
 const DEVICE_CHIPS = [
   { icon: Check, label: "Aucune installation", pos: "lg:top-[7%] lg:left-1/2 lg:-translate-x-1/2" },
@@ -336,14 +330,6 @@ export function Devices() {
             ))}
           </ul>
         </div>
-        <ul className="mt-8 flex flex-wrap justify-center gap-3">
-          {DEVICES.map(({ icon: Icon, label }) => (
-            <li key={label} className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#0f172a]" style={{ background: GROUND }}>
-              <Icon className="size-4 text-[#236f7d]" aria-hidden />
-              {label}
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );
