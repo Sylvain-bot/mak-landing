@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin } from "lucide-react";
-import { EncoderStrip } from "@/components/BilanDemoVisual";
+import { HowItWorksDemo } from "@/components/home/HowItWorksDemo";
 import { HeroVideo } from "@/components/HeroVideo";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedLink } from "@/components/TrackedLink";
@@ -98,29 +98,8 @@ export function HowItWorks() {
       <div className="max-w-6xl mx-auto" data-reveal>
         <p className={`${EYEBROW} text-center`}>Comment ça marche</p>
         <h2 className={`${h2} mt-4`}>Ta séance, sans clavier.</h2>
-        <ol className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {STEPS.map((s, i) => (
-            <li key={s} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-5" style={{ background: GROUND }}>
-              <span
-                className="size-12 rounded-full inline-flex items-center justify-center text-lg font-bold text-white"
-                style={{ background: "#237584" }}
-                aria-hidden
-              >
-                {i + 1}
-              </span>
-              <p className="text-xl font-semibold text-[#0f172a] leading-snug">{s}</p>
-            </li>
-          ))}
-        </ol>
-
-        {/* Bande déroulante : de la dictée (à gauche) au bilan structuré (à droite) */}
-        <div className="mt-10 sm:mt-12">
-          <div className="flex justify-between text-xs sm:text-sm font-semibold mb-2 px-1">
-            <span className="text-[#64748b]">Ce que tu dis</span>
-            <span className="text-[#236f7d]">Ce que Mon Assistant Kiné rédige</span>
-          </div>
-          <EncoderStrip />
-        </div>
+        {/* Étapes + démonstration animée : téléphone qui enregistre, phrases dites, bilan rédigé */}
+        <HowItWorksDemo steps={STEPS} />
 
         <p className="mt-8 text-base sm:text-lg text-[#475569] text-center">
           Rien n&apos;est enregistré dans le dossier sans ta validation.
