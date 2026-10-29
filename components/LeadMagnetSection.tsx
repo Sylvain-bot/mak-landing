@@ -12,7 +12,7 @@ export function GuideFamiPitch({ headingLevel = "h2" }: { headingLevel?: "h1" | 
       <Heading className="text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight mb-5">
         {GUIDE_FAMI.title}
       </Heading>
-      <p className="text-[#64748b] text-base leading-relaxed mb-6">{GUIDE_FAMI.text}</p>
+      <p className="text-[#475569] text-base leading-relaxed mb-6">{GUIDE_FAMI.text}</p>
       <ul className="space-y-2.5 mb-8">
         {GUIDE_FAMI.bullets.map((item) => (
           <li key={item} className="flex items-start gap-2.5 text-sm text-[#2a7a8a] font-medium">

@@ -187,7 +187,7 @@ export function BilanVocalSection() {
           className="mb-6"
         >
           <div className="flex justify-between text-[11px] font-mono mb-2 px-1">
-            <span className="text-[#64748b]">Ce que tu dis</span>
+            <span className="text-[#475569]">Ce que tu dis</span>
             <span style={{ color: "#3899aa" }}>Ce que ça génère</span>
           </div>
           <EncoderStrip />

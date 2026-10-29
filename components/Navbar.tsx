@@ -18,7 +18,7 @@ function ModuleList({ onNavigate, compact }: { onNavigate?: () => void; compact?
     <div className={compact ? "flex flex-col gap-6" : "grid grid-cols-2 gap-x-6 gap-y-2"}>
       {MODULE_GROUPS.map((g) => (
         <div key={g.id}>
-          <p className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#64748b]">{g.label}</p>
+          <p className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#475569]">{g.label}</p>
           <ul className="flex flex-col">
             {MODULES.filter((m) => m.group === g.id).map((m) => (
               <li key={m.href}>
@@ -28,7 +28,7 @@ function ModuleList({ onNavigate, compact }: { onNavigate?: () => void; compact?
                   className="block px-3 py-2.5 rounded-xl hover:bg-[#f0f9fa] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
                 >
                   <span className="block text-sm font-semibold text-[#0f172a]">{m.name}</span>
-                  <span className="block text-[13px] text-[#64748b] leading-snug mt-0.5">{m.pitch}</span>
+                  <span className="block text-[13px] text-[#475569] leading-snug mt-0.5">{m.pitch}</span>
                 </Link>
               </li>
             ))}
@@ -84,11 +84,12 @@ export function Navbar() {
 
   return (
     <>
-    <header
-      className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md"
-      style={{ borderBottom: "1px solid #e2eef0" }}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+    <header className="fixed top-3 inset-x-3 sm:inset-x-6 z-50">
+      {/* En-tête flottant arrondi */}
+      <div
+        className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3 rounded-2xl bg-white/90 backdrop-blur-md"
+        style={{ border: "1px solid #e2e8f0", boxShadow: "0 10px 30px rgba(15,23,42,0.08)" }}
+      >
         <Link href="/" className="shrink-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50" aria-label="Mon Assistant Kiné, accueil">
           <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain" priority />
         </Link>
@@ -169,7 +170,7 @@ export function Navbar() {
         <nav
           id={mobileId}
           aria-label="Menu"
-          className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto bg-white px-4 pt-4 pb-10"
+          className="lg:hidden fixed inset-x-0 top-[84px] bottom-0 z-50 overflow-y-auto bg-white px-4 pt-4 pb-10"
         >
           <p className="px-3 mb-3 text-base font-bold text-[#0f172a]">Fonctionnalités</p>
           <ModuleList compact onNavigate={() => setMobileOpen(false)} />

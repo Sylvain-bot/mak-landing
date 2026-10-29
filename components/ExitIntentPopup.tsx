@@ -102,7 +102,7 @@ export function ExitIntentPopup() {
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3899aa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <h2 className="text-xl font-bold text-[#0f172a] mb-2">Tu es dans la boucle !</h2>
-              <p className="text-sm text-[#64748b] mb-6 leading-relaxed">
+              <p className="text-sm text-[#475569] mb-6 leading-relaxed">
                 On te tient au courant des nouveautés Mon Assistant Kiné et on partage les meilleures ressources cliniques — sans spam.
               </p>
               <button onClick={dismiss} className="text-sm font-medium text-[#3899aa] hover:underline">
@@ -116,7 +116,7 @@ export function ExitIntentPopup() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
               <h2 className="text-lg font-bold text-[#0f172a] mb-2">On prépare tout ça !</h2>
-              <p className="text-sm text-[#64748b] mb-5 leading-relaxed">
+              <p className="text-sm text-[#475569] mb-5 leading-relaxed">
                 L&apos;inscription automatique n&apos;est pas encore disponible. Envoie-nous un mail et on t&apos;ajoute manuellement — promis, c&apos;est rapide.
               </p>
               <a
@@ -139,7 +139,7 @@ export function ExitIntentPopup() {
                   <h2 className="text-xl font-bold text-[#0f172a] leading-snug mb-1">
                     Reste à jour —<br />sans y passer du temps.
                   </h2>
-                  <p className="text-sm text-[#64748b]">
+                  <p className="text-sm text-[#475569]">
                     Ressources EBP + coulisses de Mon Assistant Kiné · 1 mail par semaine max.
                   </p>
                 </div>

@@ -18,9 +18,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-poppins);
+  /* Interlignes plus aérés pour le texte courant (lisibilité mobile) */
+  --text-sm--line-height: 1.6;
+  --text-base--line-height: 1.6;
+  --text-lg--line-height: 1.6;
+  --text-xl--line-height: 1.5;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -138,6 +143,10 @@
   html {
     @apply font-sans;
   }
+  /* Titres en Poppins, semi-gras : identité du site, hiérarchie plus légère */
+  h1, h2, h3, h4 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+  }
 }
 
 /* Article body styles */
@@ -198,3 +207,36 @@
   color: #1e293b;
 }
 
+
+/* ---- Animations légères de l'accueil (inspiration Delta) ---- */
+/* Bloc « Sur tous tes écrans » : taches de lumière qui dérivent, écrans et étiquettes qui flottent */
+.devices-blob { position: absolute; border-radius: 9999px; filter: blur(60px); opacity: 0.75; pointer-events: none; }
+.devices-blob-a { width: 55%; aspect-ratio: 1; left: -10%; top: -30%; background: #9fd6df; animation: mak-drift-a 18s ease-in-out infinite alternate; }
+.devices-blob-b { width: 45%; aspect-ratio: 1; right: -8%; bottom: -35%; background: #b9d8f5; animation: mak-drift-b 22s ease-in-out infinite alternate; }
+.devices-blob-c { width: 30%; aspect-ratio: 1; left: 45%; top: 10%; background: #ffffff; opacity: 0.9; animation: mak-drift-c 15s ease-in-out infinite alternate; }
+@keyframes mak-drift-a { to { transform: translate(18%, 22%) scale(1.15); } }
+@keyframes mak-drift-b { to { transform: translate(-20%, -18%) scale(1.1); } }
+@keyframes mak-drift-c { to { transform: translate(-60%, 25%) scale(1.3); } }
+.devices-float { animation: mak-float 6s ease-in-out infinite; }
+@keyframes mak-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.devices-chip {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; white-space: nowrap;
+  border-radius: 9999px; background: rgba(255,255,255,0.9); border: 1px solid #d6e9ed;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.08); font-size: 0.875rem; font-weight: 600; color: #0f172a;
+  backdrop-filter: blur(6px);
+}
+/* Sur petit écran les étiquettes passent à la ligne sous les écrans, sans flotter */
+@media (max-width: 1023px) { .devices-chip { white-space: normal; text-align: left; } }
+@media (min-width: 1024px) { .devices-chip { animation: mak-float 7s ease-in-out infinite; } }
+
+/* Fondu des sections au défilement (masquage actif seulement quand le script est prêt) */
+.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(18px); }
+.reveal-ready [data-reveal] { transition: opacity 0.7s ease, transform 0.7s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .devices-blob, .devices-float, .devices-chip { animation: none; }
+  .reveal-ready [data-reveal]:not(.is-visible) { opacity: 1; transform: none; }
+}
+
+/* Titres en semi-gras plutôt qu'en gras : hors @layer pour primer sur la classe font-bold */
+h1.font-bold, h2.font-bold, h3.font-bold { font-weight: 600; }

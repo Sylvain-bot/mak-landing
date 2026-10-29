@@ -6,7 +6,7 @@ const linkClass = "hover:text-[#236f7d] transition-colors";
 export function Footer() {
   return (
     <footer className="px-4 sm:px-6 py-8 bg-white" style={{ borderTop: "1px solid #e2eef0" }}>
-      <div className="max-w-6xl mx-auto flex flex-col gap-4 text-sm text-[#64748b]">
+      <div className="max-w-6xl mx-auto flex flex-col gap-4 text-sm text-[#475569]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <p>© 2026 Mon Assistant Kiné</p>
           <nav aria-label="Informations légales" className="flex flex-wrap gap-x-5 gap-y-2">
@@ -17,7 +17,7 @@ export function Footer() {
           </nav>
         </div>
         {/* Liens secondaires : gardent les pages existantes reliées au site (référencement) */}
-        <nav aria-label="Plus de pages" className="flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-[#64748b]">
+        <nav aria-label="Plus de pages" className="flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-[#475569]">
           <Link href="/fonctionnalites" className={linkClass}>Fonctionnalités</Link>
           <Link href="/tarifs" className={linkClass}>Tarifs</Link>
           <Link href="/guide-fami" className={linkClass}>Guide FAMI gratuit</Link>

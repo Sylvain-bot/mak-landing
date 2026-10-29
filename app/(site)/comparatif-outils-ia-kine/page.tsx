@@ -93,7 +93,7 @@ export default function ComparatifPage() {
                 <tr style={{ background: "#f0f9fa", borderBottom: "1px solid #d4ecea" }}>
                   <th className="text-left p-4 font-semibold text-[#0f172a]">Fonctionnalité</th>
                   <th className="text-center p-4 font-bold text-[#3899aa]">Mon Assistant Kiné</th>
-                  <th className="text-center p-4 font-semibold text-[#64748b]">ChatGPT</th>
+                  <th className="text-center p-4 font-semibold text-[#475569]">ChatGPT</th>
                 </tr>
               </thead>
               <tbody>

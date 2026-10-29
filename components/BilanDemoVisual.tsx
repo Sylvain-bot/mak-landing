@@ -68,7 +68,7 @@ export function EncoderStrip() {
           className="flex items-center h-full bilan-anim"
           style={{ whiteSpace: "nowrap", animation: "bilan-scroll-right 2s linear infinite", willChange: "transform" }}
         >
-          <span className="text-[13px] text-[#64748b] pr-8">
+          <span className="text-[13px] text-[#475569] pr-8">
             {RAW_TEXT}
             {/* Copies pour la boucle : masquées aux lecteurs d'écran et aux extraits Google */}
             <span aria-hidden data-nosnippet="">

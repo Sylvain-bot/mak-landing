@@ -314,7 +314,7 @@ export function ToolsShowcase() {
                     </span>
                     <div>
                       <p className="text-sm font-semibold text-[#0f172a] leading-snug">{step.title}</p>
-                      <p className="text-xs text-[#64748b] leading-relaxed mt-0.5">{step.desc}</p>
+                      <p className="text-xs text-[#475569] leading-relaxed mt-0.5">{step.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -383,7 +383,7 @@ export function ToolsShowcase() {
                                 </span>
                                 <span>
                                   <span className="font-semibold text-[#0f172a]">{h.label}</span>
-                                  <span className="text-[#64748b]"> — {h.desc}</span>
+                                  <span className="text-[#475569]"> — {h.desc}</span>
                                 </span>
                               </li>
                             ))}

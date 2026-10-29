@@ -58,7 +58,7 @@ export function SocialProof() {
 
           <div className="hidden sm:block w-px h-8" style={{ background: "#d4ecea" }} />
 
-          <p className="text-[#64748b] text-sm sm:text-base text-center sm:text-left">
+          <p className="text-[#475569] text-sm sm:text-base text-center sm:text-left">
             Rejoins les{" "}
             <span className="text-[#0f172a] font-semibold">200+ kinés libéraux</span>{" "}
             qui suivent Mon Assistant Kiné

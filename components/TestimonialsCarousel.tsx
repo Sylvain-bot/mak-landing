@@ -56,7 +56,7 @@ export function TestimonialsCarousel() {
             aria-hidden={i >= TESTIMONIALS.length}
             // Copie servant à la boucle : ignorée par les lecteurs d'écran et par les extraits Google
             {...(i >= TESTIMONIALS.length ? { "data-nosnippet": "" } : {})}
-            className="shrink-0 w-[280px] sm:w-[340px] rounded-2xl bg-white px-5 py-4 sm:px-6 sm:py-5 flex flex-col"
+            className="shrink-0 w-[300px] sm:w-[340px] rounded-2xl bg-white px-5 py-4 sm:px-6 sm:py-5 flex flex-col"
             style={{ border: "1px solid #d4ecea" }}
           >
             <div className="flex items-center gap-1 mb-2">
@@ -69,8 +69,8 @@ export function TestimonialsCarousel() {
                 </span>
               )}
             </div>
-            <p className="text-[15px] sm:text-base text-[#0f172a] leading-snug flex-1">&ldquo;{t.quote}&rdquo;</p>
-            <p className="mt-3 text-sm text-[#64748b]">
+            <p className="text-base text-[#1e293b] leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
+            <p className="mt-3 text-sm text-[#475569]">
               <span className="font-semibold text-[#334155]">{t.author}</span>
               {t.location && <> · {t.location}</>}
             </p>

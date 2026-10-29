@@ -37,7 +37,7 @@ export function ModuleHero({
           <TrackedSignupLink location="module-hero" className={`${primaryCtaClass} mt-8 h-13 px-7 text-base w-full sm:w-auto`} style={primaryCtaStyle}>
             Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
           </TrackedSignupLink>
-          {note && <p className="mt-4 text-sm text-[#64748b]">{note}</p>}
+          {note && <p className="mt-4 text-sm text-[#475569]">{note}</p>}
         </div>
         <div className="min-w-0">{visual}</div>
       </div>

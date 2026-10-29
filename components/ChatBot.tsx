@@ -318,7 +318,7 @@ export function ChatBot() {
                 <p className="text-sm font-semibold text-[#0f172a] mb-1">
                   Être recontacté par Sylvain
                 </p>
-                <p className="text-xs text-[#64748b] leading-relaxed">
+                <p className="text-xs text-[#475569] leading-relaxed">
                   Sylvain est co-fondateur et kiné D.E. Il te répondra personnellement sous 24h.
                 </p>
               </div>
@@ -377,7 +377,7 @@ export function ChatBot() {
                 ✅
               </div>
               <p className="text-sm font-semibold text-[#0f172a]">Message envoyé !</p>
-              <p className="text-xs text-[#64748b] leading-relaxed">
+              <p className="text-xs text-[#475569] leading-relaxed">
                 Sylvain te répondra sous 24h à l&apos;adresse indiquée.
                 En attendant, tu peux essayer Mon Assistant Kiné gratuitement.
               </p>
@@ -390,7 +390,7 @@ export function ChatBot() {
               </a>
               <button
                 onClick={() => setView("chat")}
-                className="text-xs text-[#94a3b8] hover:text-[#64748b] transition-colors"
+                className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors"
               >
                 Retour au chat
               </button>

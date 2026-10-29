@@ -172,7 +172,7 @@ export default function ContratsRemplacementPage() {
             Ce module est notre contribution à la communauté. Pas un produit d'appel — un vrai service,
             entièrement gratuit, sans limite de durée, que tu aies un abonnement Mon Assistant Kiné ou non.
           </p>
-          <blockquote className="mt-8 pl-5 italic text-[#64748b] text-sm leading-relaxed"
+          <blockquote className="mt-8 pl-5 italic text-[#475569] text-sm leading-relaxed"
             style={{ borderLeft: "2px solid #d4ecea" }}>
             &ldquo;On a voulu que chaque remplacement soit simple, traçable, et conforme — pour le titulaire comme pour le remplaçant.&rdquo;
             <span className="block mt-2 not-italic text-xs text-[#94a3b8]">— Sylvain & Valentin, co-fondateurs kinés D.E.</span>

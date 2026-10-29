@@ -1,4 +1,5 @@
 import { ArrowRight, Users } from "lucide-react";
+import { BackgroundVideo } from "@/components/BackgroundVideo";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 
 // Bandeau final commun : accueil, pages modules, page « Toutes les fonctionnalités ».
@@ -7,9 +8,17 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
   return (
     <section className="px-4 sm:px-6 py-16 sm:py-24 bg-white">
       <div
-        className="max-w-6xl mx-auto rounded-[32px] px-4 sm:px-6 py-14 sm:py-24 flex flex-col items-center text-center"
+        className="relative overflow-hidden max-w-6xl mx-auto rounded-[32px] px-4 sm:px-6 py-14 sm:py-24 flex flex-col items-center text-center"
         style={{ background: "#0f172a", border: "1.5px solid rgba(56,153,170,0.45)", boxShadow: "0 0 60px rgba(56,153,170,0.18)" }}
       >
+        {/* Boucle animée du hero sous un voile sombre : le texte reste lisible */}
+        <BackgroundVideo
+          src="/videos/hero-entretien-v3"
+          poster="/images/hero-poster-v3.webp"
+          className="absolute inset-0 size-full object-cover object-[75%_center]"
+        />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.80) 0%, rgba(15,23,42,0.90) 100%)" }} />
+        <div className="relative flex flex-col items-center w-full">
         <span
           className="mb-6 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold"
           style={{ background: "rgba(232,176,77,0.12)", border: "1px solid rgba(232,176,77,0.4)", color: "#e8b04d" }}
@@ -53,7 +62,7 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
               fonctionnalités.
             </p>
             {/* Exemple réel de fonctionnalité née d'une demande du groupe (fondateur, 27/10/2026) */}
-            <p className="mt-3 text-sm text-[#e2e8f0]">
+            <p className="mt-3 text-[15px] text-[#e2e8f0]">
               <span className="font-semibold" style={{ color: "#e8b04d" }}>
                 Né d&apos;une demande du groupe :
               </span>{" "}
@@ -67,6 +76,7 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
         >
           Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
         </TrackedSignupLink>
+        </div>
       </div>
     </section>
   );

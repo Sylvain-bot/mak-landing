@@ -30,7 +30,7 @@ export function GuideFamiImage({
           style={{ background: "linear-gradient(160deg, #f0f9fa, #ffffff)" }}>
           <FileText className="size-10 text-[#3899aa]" aria-hidden />
           <p className="text-xs font-semibold uppercase tracking-widest text-[#3899aa] font-mono">Guide FAMI 2027</p>
-          {label && <p className="text-xs text-[#64748b]">{label}</p>}
+          {label && <p className="text-xs text-[#475569]">{label}</p>}
         </div>
       ) : (
         <Image

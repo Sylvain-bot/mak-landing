@@ -10,7 +10,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Mon Assistant Kiné | Tu parles, ton bilan s'écrit — l'IA des kinés libéraux",
   description:
-    "Mon Assistant Kiné écoute ta séance et rédige ton bilan kiné en entier, structuré, prêt à vérifier. L'aide FAMI peut couvrir ton abonnement. Essaie gratuitement 14 jours.",
+    "Mon Assistant Kiné écoute ta séance et rédige ton bilan kiné conforme NGAP, prêt à vérifier. L'aide FAMI peut couvrir ton abonnement. Essai gratuit 14 jours.",
   alternates: {
     canonical: "https://www.monassistantkine.fr",
   },
