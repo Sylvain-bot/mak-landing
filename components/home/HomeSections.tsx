@@ -23,6 +23,7 @@ const GOLD = "#e8b04d"; // sur fond sombre
 const h2 = "text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance text-center";
 
 const HERO_BADGES = [
+  { icon: FileCheck, label: "Bilans conformes NGAP" },
   { icon: ShieldCheck, label: "RGPD" },
   { icon: Lock, label: "Hébergement certifié HDS" },
   { icon: MapPin, label: "Données de santé en France" },
@@ -58,7 +59,7 @@ export function HomeHero() {
             <span className="text-[#5bb8c8]">Ton bilan s&apos;écrit.</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-[#e2e8f0] leading-relaxed">
-            Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
+            Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, conforme NGAP, prêt à vérifier.{" "}
             <strong className="font-semibold" style={{ color: GOLD }}>
               Et l&apos;aide FAMI peut couvrir ton abonnement.
             </strong>
@@ -108,7 +109,7 @@ export function HomeHeroLight() {
             <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed">
-            Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
+            Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, conforme NGAP, prêt à vérifier.{" "}
             <strong className="font-semibold" style={{ color: "#a16207" }}>
               Et l&apos;aide FAMI peut couvrir ton abonnement.
             </strong>

@@ -187,7 +187,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
             className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-[#236f7d] transition-opacity duration-500"
             style={{ border: "1px solid #cfe6ea", opacity: showBilan ? 1 : 0.4 }}
           >
-            <Check className="size-4" aria-hidden /> Bilan structuré, prêt à vérifier
+            <Check className="size-4" aria-hidden /> Bilan conforme NGAP, prêt à vérifier
           </p>
         </div>
       </div>

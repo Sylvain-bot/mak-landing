@@ -22,6 +22,7 @@ export const homepageSchema = {
       },
       "featureList": [
         "Génération de bilans cliniques en 2 minutes",
+        "Bilans kinésithérapiques conformes NGAP",
         "Détection des drapeaux rouges en temps réel",
         "Accès à 56 000+ ressources scientifiques (dont Cleland)",
         "Dictée vocale",
