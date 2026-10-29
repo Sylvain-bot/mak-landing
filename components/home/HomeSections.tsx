@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Moon, ListChecks, Eye, Monitor, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check, FileCheck, ArrowLeftRight } from "lucide-react";
 import { HowItWorksDemo } from "@/components/home/HowItWorksDemo";
-import { HeroVideo } from "@/components/HeroVideo";
+import { BackgroundVideo } from "@/components/BackgroundVideo";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { TrackedLink } from "@/components/TrackedLink";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
@@ -20,7 +20,6 @@ const EYEBROW = "text-xs font-semibold uppercase tracking-[0.22em] text-[#475569
 const NAVY = "#0f172a";
 // Or de la page /tarifs, réservé à l'argent et à la rareté (FAMI, prix, places).
 const GOLD = "#e8b04d"; // sur fond sombre
-const GOLD_ON_LIGHT = "#a16207"; // version foncée, lisible sur fond clair
 const h2 = "text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance text-center";
 
 const HERO_BADGES = [
@@ -29,32 +28,38 @@ const HERO_BADGES = [
   { icon: MapPin, label: "Données de santé en France" },
 ];
 
-// Photo du hero : une patiente explique sa douleur au kiné, le téléphone enregistre sur le rebord de la fenêtre.
-const HERO_IMAGE = "/images/hero-kine-v5.webp";
+// Vidéo du hero : une patiente explique sa douleur au kiné, le téléphone enregistre (vrai écran de l'app incrusté).
+const HERO_VIDEO = "/videos/hero-newhero";
+const HERO_POSTER = "/images/hero-newhero-poster.webp";
 
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden px-4 sm:px-6 pt-28 pb-12 sm:pt-36 xl:pt-44 xl:pb-32" style={{ background: GROUND }}>
-      {/* Grand écran : la photo occupe un panneau à droite (cadrée pour garder le téléphone et les deux personnes),
-          le texte reste sur le fond clair à gauche */}
-      <div aria-hidden className="absolute inset-y-0 right-0 w-[60%] hidden xl:block overflow-hidden">
-        {/* Première image de la boucle vidéo : la vidéo prend le relais sans saut */}
-        <Image src="/images/hero-poster-v3.webp" alt="" fill priority quality={90} sizes="60vw" className="object-cover object-[92%_center]" />
-        <HeroVideo className="absolute inset-0 size-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #f2f9fa 0%, rgba(242,249,250,0) 8%)" }} />
+    <section className="relative overflow-hidden px-4 sm:px-6 pt-32 pb-16 sm:pt-40 sm:pb-24 xl:pt-48 xl:pb-36 lg:min-h-[720px]" style={{ background: NAVY }}>
+      {/* Vidéo en plein écran sous un voile sombre (inspiration Delta) : le texte reste lisible
+          et le voile adoucit le rendu « généré par IA ». Sur mobile, l'image fixe suffit. */}
+      {/* Sur ordinateur la vidéo est décalée à droite : le téléphone apparaît à côté du texte, pas dessous */}
+      <div aria-hidden className="absolute inset-y-0 right-0 w-full lg:w-[78%] lg:[mask-image:linear-gradient(90deg,transparent_0%,#000_22%)]">
+        <Image src={HERO_POSTER} alt="" fill priority quality={85} sizes="(min-width: 1024px) 78vw, 100vw" className="object-cover object-[72%_center] lg:object-[70%_center]" />
+        <BackgroundVideo src={HERO_VIDEO} poster={HERO_POSTER} minWidth={1024} className="absolute inset-0 size-full object-cover object-[70%_center]" />
       </div>
+      <div aria-hidden className="absolute inset-0 lg:hidden" style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.72) 0%, rgba(15,23,42,0.82) 100%)" }} />
+      <div
+        aria-hidden
+        className="absolute inset-0 hidden lg:block"
+        style={{ background: "linear-gradient(90deg, rgba(15,23,42,1) 0%, rgba(15,23,42,0.92) 24%, rgba(15,23,42,0.55) 46%, rgba(15,23,42,0.25) 70%, rgba(15,23,42,0.2) 100%)" }}
+      />
 
       <div className="relative max-w-6xl mx-auto">
-        <div className="min-w-0 max-w-xl xl:max-w-[460px] 2xl:max-w-[500px]">
-          <p className={EYEBROW}>Bilan kiné dicté</p>
-          <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.1rem] font-bold text-[#0f172a] tracking-tight">
+        <div className="min-w-0 max-w-xl">
+          <p className={EYEBROW.replace("text-[#475569]", "text-[#cbd5e1]")}>Bilan kiné dicté</p>
+          <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.1rem] font-bold text-white tracking-tight">
             Tu parles.
             <br />
-            <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
+            <span className="text-[#5bb8c8]">Ton bilan s&apos;écrit.</span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed">
+          <p className="mt-6 text-lg sm:text-xl text-[#e2e8f0] leading-relaxed">
             Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
-            <strong className="font-semibold" style={{ color: GOLD_ON_LIGHT }}>
+            <strong className="font-semibold" style={{ color: GOLD }}>
               Et l&apos;aide FAMI peut couvrir ton abonnement.
             </strong>
           </p>
@@ -63,23 +68,21 @@ export function HomeHero() {
           </TrackedSignupLink>
 
           {/* Réassurance en badges (inspiration Delta) */}
-          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#475569]" aria-label="Garanties">
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#cbd5e1]" aria-label="Garanties">
             {HERO_BADGES.map(({ icon: Icon, label }) => (
               <li key={label} className="inline-flex items-center gap-1.5">
-                <Icon className="size-4 text-[#236f7d]" aria-hidden />
+                <Icon className="size-4 text-[#5bb8c8]" aria-hidden />
                 {label}
               </li>
             ))}
           </ul>
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-[#334155]" style={{ border: "1px solid #e2e8f0" }}>
-            <Award className="size-4 text-[#236f7d]" aria-hidden />
+          <p
+            className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm"
+            style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.22)" }}
+          >
+            <Award className="size-4 text-[#5bb8c8]" aria-hidden />
             Présenté par l&apos;ITMP au salon Rééduca 2026
           </p>
-        </div>
-
-        {/* Mobile, tablette et petit ordinateur : la photo passe sous le texte, en carte arrondie */}
-        <div className="xl:hidden relative mt-10 w-full overflow-hidden rounded-3xl aspect-[16/10]" style={{ boxShadow: "0 18px 40px rgba(15,23,42,0.12)" }}>
-          <Image src={HERO_IMAGE} alt="Une patiente explique sa douleur à son kiné, le téléphone enregistre l'échange sur le rebord de la fenêtre" fill priority quality={90} sizes="100vw" className="object-cover object-[85%_center]" />
         </div>
       </div>
     </section>

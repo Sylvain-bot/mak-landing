@@ -13,8 +13,8 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
       >
         {/* Boucle animée du hero sous un voile sombre : le texte reste lisible */}
         <BackgroundVideo
-          src="/videos/hero-entretien-v3"
-          poster="/images/hero-poster-v3.webp"
+          src="/videos/hero-newhero"
+          poster="/images/hero-newhero-poster.webp"
           className="absolute inset-0 size-full object-cover object-[75%_center]"
         />
         <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.80) 0%, rgba(15,23,42,0.90) 100%)" }} />
