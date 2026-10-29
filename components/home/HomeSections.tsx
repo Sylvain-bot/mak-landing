@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check } from "lucide-react";
+import { ArrowRight, Moon, ListChecks, Eye, Monitor, Tablet, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check, FileCheck, ArrowLeftRight } from "lucide-react";
 import { HowItWorksDemo } from "@/components/home/HowItWorksDemo";
 import { HeroVideo } from "@/components/HeroVideo";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
@@ -292,6 +292,16 @@ const DEVICES = [
   { icon: Smartphone, label: "Téléphone" },
 ];
 
+// Étiquettes de compatibilité (questions fréquentes des kinés). pos : emplacement autour des écrans sur grand écran.
+const DEVICE_CHIPS = [
+  { icon: Check, label: "Aucune installation", pos: "lg:top-[7%] lg:left-1/2 lg:-translate-x-1/2" },
+  { icon: Globe, label: "Dans ton navigateur", pos: "lg:top-[20%] lg:left-[4%]" },
+  { icon: Smartphone, label: "iPhone et Android", pos: "lg:top-[20%] lg:right-[4%]" },
+  { icon: Monitor, label: "Mac, PC et tablette", pos: "lg:top-[58%] lg:left-[3%]" },
+  { icon: FileCheck, label: "Mêmes bilans sur tous tes écrans", pos: "lg:top-[58%] lg:right-[3%]" },
+  { icon: ArrowLeftRight, label: "Commence sur ton téléphone, finis sur ton ordinateur", pos: "lg:bottom-[7%] lg:left-1/2 lg:-translate-x-1/2" },
+];
+
 export function Devices() {
   return (
     <section className="px-4 sm:px-6 py-20 sm:py-28 bg-white">
@@ -303,7 +313,7 @@ export function Devices() {
           et ton téléphone : au cabinet, en déplacement ou entre deux patients. Aucune application à installer.
         </p>
         {/* Écrans qui flottent sur un fond lumineux animé (taches de couleur qui dérivent lentement) */}
-        <div className="devices-stage relative mt-10 w-full overflow-hidden rounded-[28px] px-4 py-12 sm:px-12 sm:py-16" style={{ background: "#eaf5f7" }}>
+        <div className="devices-stage relative mt-10 w-full overflow-hidden rounded-[28px] px-4 py-10 sm:px-12 sm:py-14 lg:py-28" style={{ background: "#eaf5f7" }}>
           <span aria-hidden className="devices-blob devices-blob-a" />
           <span aria-hidden className="devices-blob devices-blob-b" />
           <span aria-hidden className="devices-blob devices-blob-c" />
@@ -317,12 +327,14 @@ export function Devices() {
               className="w-full h-auto drop-shadow-[0_24px_40px_rgba(15,23,42,0.22)]"
             />
           </div>
-          <span aria-hidden className="devices-chip devices-chip-a">
-            <Globe className="size-4 text-[#236f7d]" /> Dans ton navigateur
-          </span>
-          <span aria-hidden className="devices-chip devices-chip-b">
-            <Check className="size-4 text-[#236f7d]" /> Aucune installation
-          </span>
+          {/* Réponses aux questions fréquentes de compatibilité : autour des écrans sur grand écran, en liste en dessous sinon */}
+          <ul className="relative lg:static mt-8 lg:mt-0 flex flex-wrap justify-center gap-2">
+            {DEVICE_CHIPS.map(({ icon: Icon, label, pos }, i) => (
+              <li key={label} className={`devices-chip lg:absolute ${pos}`} style={{ animationDelay: `${-i * 1.3}s` }}>
+                <Icon className="size-4 shrink-0 text-[#236f7d]" aria-hidden /> {label}
+              </li>
+            ))}
+          </ul>
         </div>
         <ul className="mt-8 flex flex-wrap justify-center gap-3">
           {DEVICES.map(({ icon: Icon, label }) => (

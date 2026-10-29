@@ -211,14 +211,14 @@
 .devices-float { animation: mak-float 6s ease-in-out infinite; }
 @keyframes mak-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .devices-chip {
-  position: absolute; display: none; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem;
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; white-space: nowrap;
   border-radius: 9999px; background: rgba(255,255,255,0.9); border: 1px solid #d6e9ed;
   box-shadow: 0 8px 24px rgba(15,23,42,0.08); font-size: 0.875rem; font-weight: 600; color: #0f172a;
   backdrop-filter: blur(6px);
 }
-@media (min-width: 768px) { .devices-chip { display: inline-flex; } }
-.devices-chip-a { left: 6%; top: 16%; animation: mak-float 7s ease-in-out infinite; }
-.devices-chip-b { right: 6%; bottom: 18%; animation: mak-float 7s ease-in-out -3.5s infinite; }
+/* Sur petit écran les étiquettes passent à la ligne sous les écrans, sans flotter */
+@media (max-width: 1023px) { .devices-chip { white-space: normal; text-align: left; } }
+@media (min-width: 1024px) { .devices-chip { animation: mak-float 7s ease-in-out infinite; } }
 
 /* Fondu des sections au défilement (masquage actif seulement quand le script est prêt) */
 .reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(18px); }
