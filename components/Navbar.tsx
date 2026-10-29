@@ -18,7 +18,7 @@ function ModuleList({ onNavigate, compact }: { onNavigate?: () => void; compact?
     <div className={compact ? "flex flex-col gap-6" : "grid grid-cols-2 gap-x-6 gap-y-2"}>
       {MODULE_GROUPS.map((g) => (
         <div key={g.id}>
-          <p className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#64748b]">{g.label}</p>
+          <p className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#475569]">{g.label}</p>
           <ul className="flex flex-col">
             {MODULES.filter((m) => m.group === g.id).map((m) => (
               <li key={m.href}>
@@ -28,7 +28,7 @@ function ModuleList({ onNavigate, compact }: { onNavigate?: () => void; compact?
                   className="block px-3 py-2.5 rounded-xl hover:bg-[#f0f9fa] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/50"
                 >
                   <span className="block text-sm font-semibold text-[#0f172a]">{m.name}</span>
-                  <span className="block text-[13px] text-[#64748b] leading-snug mt-0.5">{m.pitch}</span>
+                  <span className="block text-[13px] text-[#475569] leading-snug mt-0.5">{m.pitch}</span>
                 </Link>
               </li>
             ))}

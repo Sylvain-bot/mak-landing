@@ -62,7 +62,7 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
               fonctionnalités.
             </p>
             {/* Exemple réel de fonctionnalité née d'une demande du groupe (fondateur, 27/10/2026) */}
-            <p className="mt-3 text-sm text-[#e2e8f0]">
+            <p className="mt-3 text-[15px] text-[#e2e8f0]">
               <span className="font-semibold" style={{ color: "#e8b04d" }}>
                 Né d&apos;une demande du groupe :
               </span>{" "}

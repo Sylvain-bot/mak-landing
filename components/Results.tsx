@@ -44,7 +44,7 @@ function MetricCard({ metric, index }: { metric: typeof METRICS[0]; index: numbe
         >
           {metric.value}
         </div>
-        <p className="text-[#64748b] text-sm font-medium">{metric.label}</p>
+        <p className="text-[#475569] text-sm font-medium">{metric.label}</p>
       </div>
 
       <div className="space-y-2">
@@ -113,7 +113,7 @@ export function Results() {
             </div>
             <div className="flex-1 text-center sm:text-left">
               <p className="text-[#0f172a] font-bold text-base">100h récupérées par an.</p>
-              <p className="text-[#64748b] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés récupèrent 45 minutes par jour dès le premier jour.</p>
+              <p className="text-[#475569] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés récupèrent 45 minutes par jour dès le premier jour.</p>
             </div>
             <Link
               href="https://app.monassistantkine.fr/signup"

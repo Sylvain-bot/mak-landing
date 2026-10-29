@@ -57,7 +57,7 @@ export default function GuideFamiPage() {
               <GuideFamiPitch headingLevel="h1" />
               <div className="max-w-md">
                 <LeadMagnetForm source="page-guide" />
-                <p className="text-xs text-[#64748b] mt-5 text-center">
+                <p className="text-xs text-[#475569] mt-5 text-center">
                   Par Sylvain, kiné libéral et co-fondateur de Mon Assistant Kiné
                 </p>
               </div>

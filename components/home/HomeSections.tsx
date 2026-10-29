@@ -16,7 +16,7 @@ import { TIME_SAVED_PER_BILAN } from "@/lib/claims";
 // Fond clair des sections (bleu-gris très léger, couleur d'origine du site).
 const GROUND = "#f2f9fa";
 // Sur-titre discret en petites capitales espacées, au-dessus des titres de section.
-const EYEBROW = "text-xs font-semibold uppercase tracking-[0.22em] text-[#64748b]";
+const EYEBROW = "text-xs font-semibold uppercase tracking-[0.22em] text-[#475569]";
 const NAVY = "#0f172a";
 // Or de la page /tarifs, réservé à l'argent et à la rareté (FAMI, prix, places).
 const GOLD = "#e8b04d"; // sur fond sombre
@@ -158,7 +158,7 @@ export function FamiBlock() {
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-[#94a3b8] max-w-xl leading-relaxed">
+        <p className="mt-6 text-[15px] text-[#cbd5e1] max-w-xl leading-relaxed">
           Si tu ne perçois pas déjà le forfait FAMI via un autre logiciel de vidéotransmission. Forfait fixe à déclarer
           sur amelipro.
         </p>
@@ -196,7 +196,7 @@ function BenefitsGrid() {
       </h3>
       <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         {BENEFITS.map(({ icon: Icon, title, text, stat }) => (
-          <div key={title} className="rounded-3xl p-7 sm:p-9 flex flex-col gap-4" style={{ background: GROUND }}>
+          <div key={title} className="rounded-3xl p-6 sm:p-9 flex flex-col gap-4" style={{ background: GROUND }}>
             <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
             {/* Chiffre mesuré (lib/claims.ts → TIME_SAVED_PER_BILAN) — masqué s'il est vide */}
             {stat ? (
@@ -209,7 +209,7 @@ function BenefitsGrid() {
                 ) : (
                   <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
                 )}
-                <span className="text-sm text-[#64748b]">par bilan</span>
+                <span className="text-sm text-[#475569]">par bilan</span>
               </p>
             ) : null}
             <h4 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h4>
@@ -363,7 +363,7 @@ export function CopiloteBlock() {
         </p>
         <div className="mt-10 w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">
           {COPILOTE_QUOTES.map((t) => (
-            <figure key={t.author} className="m-0 rounded-3xl bg-white p-7 sm:p-9 flex flex-col justify-between gap-5">
+            <figure key={t.author} className="m-0 rounded-3xl bg-white p-6 sm:p-9 flex flex-col justify-between gap-5">
               <blockquote className="text-lg sm:text-xl text-[#0f172a] leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
               <figcaption className="text-sm sm:text-[15px] text-[#475569]">
                 <strong className="font-semibold text-[#0f172a]">{t.author}</strong> · {t.location}

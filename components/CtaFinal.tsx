@@ -47,7 +47,7 @@ export function CtaFinal() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.25} className="mt-4 mb-6">
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[#64748b]">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[#475569]">
             {["14 jours d'essai gratuit", "Places limitées aux 100 premiers"].map(
               (item) => (
                 <span key={item} className="flex items-center gap-1.5">
@@ -64,7 +64,7 @@ export function CtaFinal() {
             {["Conçu par deux kinés libéraux D.E.", COMPLIANCE_CLAIM].map((badge) => (
               <span
                 key={badge}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-[#64748b] bg-white"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-[#475569] bg-white"
                 style={{ border: "1px solid #d4ecea" }}
               >
                 <Shield className="w-3 h-3 text-[#3899aa]" />

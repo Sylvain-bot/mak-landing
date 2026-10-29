@@ -75,7 +75,7 @@ export function VideotransmissionSection() {
                     >
                       {p.title}
                     </p>
-                    <p className="text-sm text-[#64748b] leading-relaxed">{p.body}</p>
+                    <p className="text-sm text-[#475569] leading-relaxed">{p.body}</p>
                   </div>
                 </li>
               ))}

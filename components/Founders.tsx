@@ -80,7 +80,7 @@ export function Founders() {
             ].map((item) => (
               <div key={item.label} className="flex flex-col items-center gap-1 min-w-[140px]">
                 <span className="text-2xl font-bold text-[#3899aa]">{item.value}</span>
-                <span className="text-xs text-[#64748b] max-w-[130px] leading-snug">{item.label}</span>
+                <span className="text-xs text-[#475569] max-w-[130px] leading-snug">{item.label}</span>
               </div>
             ))}
           </div>

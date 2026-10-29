@@ -31,7 +31,7 @@ export default function GuideFamiMerciPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight mb-5">
             C&apos;est envoyé ! Regarde ta boîte mail.
           </h1>
-          <p className="text-[#64748b] text-base leading-relaxed mb-5">
+          <p className="text-[#475569] text-base leading-relaxed mb-5">
             Ton guide arrive dans quelques minutes, envoyé par{" "}
             <strong className="text-[#0f172a] font-semibold">sylvain@monassistantkine.fr</strong>. Pas reçu ?
             Vérifie tes spams ou l&apos;onglet Promotions, et ajoute cette adresse à tes contacts.
@@ -46,7 +46,7 @@ export default function GuideFamiMerciPage() {
         {/* Bloc secondaire */}
         <div className="max-w-xl mx-auto mt-14 sm:mt-20 rounded-2xl bg-white p-7 sm:p-9 text-center" style={{ border: "1px solid #d4ecea" }}>
           <h2 className="text-lg sm:text-xl font-semibold text-[#0f172a] mb-3">Envie de t&apos;équiper avant le 31/12 ?</h2>
-          <p className="text-sm text-[#64748b] leading-relaxed mb-6">
+          <p className="text-sm text-[#475569] leading-relaxed mb-6">
             Mon Assistant Kiné inclut une vidéotransmission sécurisée, dédiée à la télésanté et éligible aux 350 € du FAMI.
           </p>
           <a

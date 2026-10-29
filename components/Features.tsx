@@ -55,7 +55,7 @@ export function Features() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f172a] leading-tight max-w-lg">
             Un outil. Tout ce qu&apos;il faut au cabinet.
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#64748b] max-w-2xl">
+          <p className="mt-4 text-base sm:text-lg text-[#475569] max-w-2xl">
             Bilans, courriers, suivi patient — chaque tâche chronophage devient une affaire de minutes.
           </p>
         </ScrollReveal>

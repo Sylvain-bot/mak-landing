@@ -90,7 +90,7 @@ export function Problem() {
                       {p.stat}
                     </span>
                   </div>
-                  <p className="text-[#64748b] text-sm leading-relaxed">{p.desc}</p>
+                  <p className="text-[#475569] text-sm leading-relaxed">{p.desc}</p>
                 </div>
               </div>
               <div

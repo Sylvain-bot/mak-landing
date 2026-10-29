@@ -46,7 +46,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="shrink-0"
           >
-            <ChevronDown className="w-4 h-4 text-[#94a3b8] group-hover:text-[#64748b] transition-colors" />
+            <ChevronDown className="w-4 h-4 text-[#94a3b8] group-hover:text-[#475569] transition-colors" />
           </motion.div>
         </button>
 
@@ -59,7 +59,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
               transition={{ duration: 0.28, ease: "easeOut" }}
               style={{ overflow: "hidden" }}
             >
-              <p className="text-[#64748b] text-sm leading-relaxed pb-4 pr-8">{a}</p>
+              <p className="text-[#475569] text-sm leading-relaxed pb-4 pr-8">{a}</p>
             </motion.div>
           )}
         </AnimatePresence>

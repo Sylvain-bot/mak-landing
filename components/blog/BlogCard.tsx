@@ -48,7 +48,7 @@ export function BlogCard({ article }: { article: Article }) {
           {article.titre}
         </h3>
         {article.extrait && (
-          <p className="text-[#64748b] text-sm leading-relaxed line-clamp-3 flex-1">{article.extrait}</p>
+          <p className="text-[#475569] text-sm leading-relaxed line-clamp-3 flex-1">{article.extrait}</p>
         )}
         <p className="text-[#94a3b8] text-xs mt-auto">{date}</p>
       </div>

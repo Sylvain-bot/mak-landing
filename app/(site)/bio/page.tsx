@@ -325,7 +325,7 @@ export default function BioPage() {
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex justify-center gap-6 flex-wrap mb-3">
             {FOOTER_LINKS.map((l) => (
-              <Link key={l.label} href={l.href} className="text-xs text-[#94a3b8] hover:text-[#64748b] transition-colors">
+              <Link key={l.label} href={l.href} className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors">
                 {l.label}
               </Link>
             ))}

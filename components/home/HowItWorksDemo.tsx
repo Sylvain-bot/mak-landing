@@ -110,7 +110,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
       >
         {/* Ce que dit le kiné */}
         <div className="order-2 lg:order-1 flex flex-col gap-3 lg:items-end">
-          <p className="text-xs sm:text-sm font-semibold text-[#64748b] lg:text-right">Ce que tu dis</p>
+          <p className="text-sm font-semibold text-[#475569] lg:text-right">Ce que tu dis</p>
           {SPOKEN.map(({ at, text }) => {
             const on = time >= at;
             return (
@@ -120,8 +120,8 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
                 style={{
                   boxShadow: "0 6px 20px rgba(15,23,42,0.08)",
                   border: "1px solid #e2e8f0",
-                  opacity: on ? 1 : 0,
-                  transform: on ? "none" : "translateY(10px)",
+                  opacity: on ? 1 : 0.35,
+                  transform: on ? "none" : "translateY(4px)",
                 }}
               >
                 <Mic className="mt-0.5 size-4 shrink-0 text-[#c8102e]" aria-hidden />
@@ -161,7 +161,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
 
         {/* Ce que Mon Assistant Kiné rédige */}
         <div className="order-3 flex flex-col gap-3 lg:items-start">
-          <p className="text-xs sm:text-sm font-semibold text-[#236f7d]">Ce que Mon Assistant Kiné rédige</p>
+          <p className="text-sm font-semibold text-[#236f7d]">Ce que Mon Assistant Kiné rédige</p>
           <div className="relative h-[250px] sm:h-[300px] w-full max-w-sm">
             {["/images/pdffinal2.webp", "/images/pdffinal1.webp"].map((src, i) => (
               <div

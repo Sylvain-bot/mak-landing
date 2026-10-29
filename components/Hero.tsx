@@ -153,7 +153,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28, ease: "easeOut" }}
-              className="text-xs text-[#64748b] rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
+              className="text-xs text-[#475569] rounded-lg px-4 py-2.5 mb-7 border border-[#d4ecea]"
               style={{ background: "#f0f9fa" }}
             >
               <span className="font-semibold text-[#475569]">Le Copilote</span> : pose ta question clinique, il répond en 30 secondes en citant ses sources parmi 56&nbsp;000+ études (Cleland inclus). Tu restes informé. Tu décides toujours.

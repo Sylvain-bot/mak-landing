@@ -27,7 +27,7 @@ function Toggle({
     <div className="flex items-start justify-between gap-4 py-3" style={{ borderTop: "1px solid #e2eef0" }}>
       <div className="min-w-0">
         <p id={`${id}-label`} className="text-sm font-semibold text-[#0f172a]">{label}</p>
-        <p id={`${id}-desc`} className="text-xs text-[#64748b] leading-relaxed mt-0.5">{description}</p>
+        <p id={`${id}-desc`} className="text-xs text-[#475569] leading-relaxed mt-0.5">{description}</p>
       </div>
       <button
         id={id}
@@ -149,7 +149,7 @@ export function CookieBanner() {
             setDraft({ analytics: false, ads: false });
             setMode("custom");
           }}
-          className="mt-3 text-xs text-[#64748b] underline hover:text-[#2a7a8a] outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/40 rounded"
+          className="mt-3 text-xs text-[#475569] underline hover:text-[#2a7a8a] outline-none focus-visible:ring-2 focus-visible:ring-[#3899aa]/40 rounded"
         >
           Personnaliser
         </button>

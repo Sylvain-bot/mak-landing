@@ -127,7 +127,7 @@ export function ContratSection() {
         {/* Quote communautaire */}
         <ScrollReveal delay={0.2} className="mt-10">
           <div className="text-center" style={{ borderTop: "1px solid #d4ecea", paddingTop: "32px" }}>
-            <p className="text-[#64748b] text-sm italic max-w-xl mx-auto leading-relaxed">
+            <p className="text-[#475569] text-sm italic max-w-xl mx-auto leading-relaxed">
               &ldquo;Les remplacements font partie du quotidien du kiné libéral. On a voulu que chaque remplacement soit simple, traçable, et conforme — pour le titulaire comme pour le remplaçant.&rdquo;
             </p>
             <p className="text-xs text-[#94a3b8] mt-2">— Sylvain & Valentin, co-fondateurs kinés D.E.</p>
