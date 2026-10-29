@@ -89,6 +89,56 @@ export function HomeHero() {
   );
 }
 
+// Variante claire du hero (test, page /test-hero-clair) : texte sombre sur fond clair, vidéo dans un panneau à droite sans voile.
+export function HomeHeroLight() {
+  return (
+    <section className="relative overflow-hidden px-4 sm:px-6 pt-28 pb-12 sm:pt-36 xl:pt-44 xl:pb-32" style={{ background: GROUND }}>
+      <div aria-hidden className="absolute inset-y-0 right-0 w-[60%] hidden xl:block overflow-hidden">
+        <Image src={HERO_POSTER} alt="" fill priority quality={85} sizes="60vw" className="object-cover object-[83%_center]" />
+        <BackgroundVideo src={HERO_VIDEO} poster={HERO_POSTER} minWidth={1280} className="absolute inset-0 size-full object-cover object-[83%_center]" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #f2f9fa 0%, rgba(242,249,250,0) 10%)" }} />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto">
+        <div className="min-w-0 max-w-xl xl:max-w-[460px] 2xl:max-w-[500px]">
+          <p className={EYEBROW}>Bilan kiné dicté</p>
+          <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.1rem] font-bold text-[#0f172a] tracking-tight">
+            Tu parles.
+            <br />
+            <span className="text-[#2a8494]">Ton bilan s&apos;écrit.</span>
+          </h1>
+          <p className="mt-6 text-lg sm:text-xl text-[#475569] leading-relaxed">
+            Mon Assistant Kiné écoute ta séance et retranscrit ton bilan en entier, structuré, prêt à vérifier.{" "}
+            <strong className="font-semibold" style={{ color: "#a16207" }}>
+              Et l&apos;aide FAMI peut couvrir ton abonnement.
+            </strong>
+          </p>
+          <TrackedSignupLink location="hero" className={`${primaryCtaClass} mt-8 h-14 px-8 text-base sm:text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
+            Essayer gratuitement 14 jours <ArrowRight className="size-5" aria-hidden />
+          </TrackedSignupLink>
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#475569]" aria-label="Garanties">
+            {HERO_BADGES.map(({ icon: Icon, label }) => (
+              <li key={label} className="inline-flex items-center gap-1.5">
+                <Icon className="size-4 text-[#236f7d]" aria-hidden />
+                {label}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-[#334155]" style={{ border: "1px solid #e2e8f0" }}>
+            <Award className="size-4 text-[#236f7d]" aria-hidden />
+            Présenté par l&apos;ITMP au salon Rééduca 2026
+          </p>
+        </div>
+
+        {/* Mobile, tablette et petit ordinateur : l'image passe sous le texte, en carte arrondie */}
+        <div className="xl:hidden relative mt-10 w-full overflow-hidden rounded-3xl aspect-[16/10]" style={{ boxShadow: "0 18px 40px rgba(15,23,42,0.12)" }}>
+          <Image src={HERO_POSTER} alt="Une patiente explique sa douleur à son kiné, le téléphone enregistre l'échange" fill priority quality={85} sizes="100vw" className="object-cover object-[70%_center]" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const STEPS = [
   "Lance l'écoute en début de séance",
   "Fais ton bilan normalement, en parlant",
