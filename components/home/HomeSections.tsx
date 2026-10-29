@@ -132,7 +132,7 @@ export function FamiBlock() {
         <h2 className="mt-5 text-3xl sm:text-5xl font-bold text-white leading-[1.08] tracking-tight text-balance">
           Gratuit. <span style={{ color: GOLD }}>Et même mieux.</span>
         </h2>
-        <p className="mt-5 text-lg sm:text-xl text-[#cbd5e1] max-w-2xl leading-relaxed">
+        <p className="mt-5 text-lg sm:text-xl text-[#cbd5e1] max-w-2xl leading-relaxed text-left sm:text-center">
           Mon Assistant Kiné inclut un module de vidéotransmission sécurisée qui te rend éligible au forfait FAMI.
         </p>
 
@@ -158,7 +158,7 @@ export function FamiBlock() {
           </div>
         </div>
 
-        <p className="mt-6 text-[15px] text-[#cbd5e1] max-w-xl leading-relaxed">
+        <p className="mt-6 text-[15px] text-[#cbd5e1] max-w-xl leading-relaxed text-left sm:text-center">
           Si tu ne perçois pas déjà le forfait FAMI via un autre logiciel de vidéotransmission. Forfait fixe à déclarer
           sur amelipro.
         </p>
@@ -302,7 +302,7 @@ export function Devices() {
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center" data-reveal>
         <p className={EYEBROW}>Disponibilité</p>
         <h2 className={`${h2} mt-4`}>Sur tous tes écrans, sans installation.</h2>
-        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
+        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed text-left sm:text-center">
           Mon Assistant Kiné fonctionne directement dans ton navigateur et s&apos;adapte à ton ordinateur, ta tablette
           et ton téléphone : au cabinet, en déplacement ou entre deux patients. Aucune application à installer.
         </p>
@@ -358,7 +358,7 @@ export function CopiloteBlock() {
         <h2 className={`${h2} mt-4`}>
           Un doute clinique ? Une réponse sourcée en <span className="text-[#2a8494]">30 secondes</span>.
         </h2>
-        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed">
+        <p className="mt-5 text-lg sm:text-xl text-[#475569] max-w-2xl leading-relaxed text-left sm:text-center">
           Pose ta question comme à un confrère. Le Copilote te donne une orientation structurée, avec ses références.
         </p>
         <div className="mt-10 w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">

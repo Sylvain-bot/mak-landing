@@ -171,10 +171,11 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
                   left: i === 0 ? "38%" : "0%",
                   boxShadow: "0 14px 34px rgba(15,23,42,0.16)",
                   border: "1px solid #e2e8f0",
-                  opacity: showBilan ? 1 : 0,
+                  opacity: showBilan ? 1 : 0.4,
+                  filter: showBilan ? "none" : "grayscale(0.6)",
                   transform: showBilan
-                    ? `translateX(0) rotate(${i === 0 ? 4 : -2}deg)`
-                    : "translateX(-40px) rotate(0deg)",
+                    ? `translateX(0) rotate(${i === 0 ? 4 : -2}deg) scale(1)`
+                    : `translateX(-12px) rotate(${i === 0 ? 2 : -1}deg) scale(0.96)`,
                   transitionDelay: showBilan ? `${i === 0 ? 250 : 0}ms` : "0ms",
                 }}
               >
@@ -184,7 +185,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
           </div>
           <p
             className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-[#236f7d] transition-opacity duration-500"
-            style={{ border: "1px solid #cfe6ea", opacity: showBilan ? 1 : 0 }}
+            style={{ border: "1px solid #cfe6ea", opacity: showBilan ? 1 : 0.4 }}
           >
             <Check className="size-4" aria-hidden /> Bilan structuré, prêt à vérifier
           </p>
