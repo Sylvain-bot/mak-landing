@@ -9,6 +9,8 @@ const noSubscribe = () => () => {};
 const VARIANTS = {
   entretien: { src: "/videos/hero-entretien-v3", poster: "/images/hero-poster-v3.webp", position: "92% center" },
   bilan: { src: "/videos/hero-bilan-test", poster: "/images/hero-poster-bilan-test.webp", position: "100% center" },
+  // Montage de 3 photos (lent zoom + fondus), en attendant de pouvoir les animer : ?hero=montage
+  montage: { src: "/videos/hero-montage", poster: "/images/hero-poster-montage.webp", position: "50% center" },
 } as const;
 
 // Posée par-dessus la photo (image LCP) avec la première image de la boucle en poster.
@@ -17,7 +19,10 @@ export function HeroVideo({ className }: { className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const variant: keyof typeof VARIANTS = useSyncExternalStore(
     noSubscribe,
-    () => (new URLSearchParams(window.location.search).get("hero") === "bilan" ? "bilan" : "entretien"),
+    () => {
+      const v = new URLSearchParams(window.location.search).get("hero");
+      return v && v in VARIANTS ? (v as keyof typeof VARIANTS) : "entretien";
+    },
     () => "entretien"
   );
 
