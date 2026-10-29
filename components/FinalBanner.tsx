@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { ArrowRight, Users } from "lucide-react";
+import { BackgroundVideo } from "@/components/BackgroundVideo";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 
 // Bandeau final commun : accueil, pages modules, page « Toutes les fonctionnalités ».
@@ -11,8 +11,12 @@ export function FinalBanner({ location = "final-banner" }: { location?: string }
         className="relative overflow-hidden max-w-6xl mx-auto rounded-[32px] px-4 sm:px-6 py-14 sm:py-24 flex flex-col items-center text-center"
         style={{ background: "#0f172a", border: "1.5px solid rgba(56,153,170,0.45)", boxShadow: "0 0 60px rgba(56,153,170,0.18)" }}
       >
-        {/* Photo de séance sous un voile sombre : le texte reste lisible */}
-        <Image src="/images/fond-final-v2.webp" alt="" fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover object-[75%_center]" />
+        {/* Boucle animée du hero sous un voile sombre : le texte reste lisible */}
+        <BackgroundVideo
+          src="/videos/hero-entretien-v3"
+          poster="/images/hero-poster-v3.webp"
+          className="absolute inset-0 size-full object-cover object-[75%_center]"
+        />
         <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.80) 0%, rgba(15,23,42,0.90) 100%)" }} />
         <div className="relative flex flex-col items-center w-full">
         <span
