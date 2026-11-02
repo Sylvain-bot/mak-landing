@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import { FOUNDER_1_NAME, FOUNDER_1_LINKEDIN, FOUNDER_2_NAME, FOUNDER_2_LINKEDIN } from "@/lib/schemas/bio.schema";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { SignupLink } from "@/components/SignupLink";
 
 export const metadata: Metadata = {
   title: "L'équipe | Mon Assistant Kiné — Créé par des kinés, pour des kinés",
@@ -169,12 +170,11 @@ export default function EquipePage() {
           <a href="mailto:sylvain@monassistantkine.fr" className="text-[#3899aa] font-semibold hover:underline block mb-8">
             sylvain@monassistantkine.fr
           </a>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
+          <SignupLink
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base transition-all hover:scale-[1.02]"
           >
             Essayer 14 jours <ArrowRight className="w-4 h-4" />
-          </Link>
+          </SignupLink>
           <p className="text-xs text-[#94a3b8] mt-3">Ou découvrez <Link href="/tarifs" className="text-[#3899aa] hover:underline">nos formules →</Link></p>
         </div>
       </section>

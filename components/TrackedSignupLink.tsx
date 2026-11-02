@@ -1,9 +1,10 @@
 "use client";
 
 import posthog from "posthog-js";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 // Lien « Essayer » : suit le clic (PostHog, si consentement) avec son emplacement.
+// Passe par SignupLink, qui ajoute les UTM et le fbclid de la visite.
 export function TrackedSignupLink({
   location,
   className,
@@ -16,8 +17,7 @@ export function TrackedSignupLink({
   children: React.ReactNode;
 }) {
   return (
-    <a
-      href={CTA_SIGNUP_URL}
+    <SignupLink
       className={className}
       style={style}
       onClick={() => {
@@ -27,7 +27,6 @@ export function TrackedSignupLink({
       }}
     >
       {children}
-    </a>
+    </SignupLink>
   );
 }
-

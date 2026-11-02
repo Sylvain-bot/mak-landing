@@ -7,11 +7,11 @@ import { Footer } from "@/components/Footer";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 import {
-  CTA_SIGNUP_URL,
   CTA_MAIN,
   COMPLIANCE_CLAIM,
   PRICE_PIONNIER,
 } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 
 export const metadata: Metadata = {
@@ -170,12 +170,11 @@ export default function TarifsPage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer Mon Assistant Kiné — 14 jours gratuits</h2>
           <p className="text-white/80 mb-4">14 jours d&apos;essai · Sans engagement</p>
-          <Link
-            href={CTA_SIGNUP_URL}
+          <SignupLink
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02] mb-4"
           >
             {CTA_MAIN} <ArrowRight className="w-4 h-4" />
-          </Link>
+          </SignupLink>
           <p className="text-xs text-white/60 mt-4">
             Une question ?{" "}
             <a href="mailto:sylvain@monassistantkine.fr" className="underline hover:text-white">

@@ -3,9 +3,9 @@
 import { ScrollReveal } from "./ScrollReveal";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
 import { ArrowRight, CheckCircle2, Shield, Zap } from "lucide-react";
-import { CTA_SIGNUP_URL, CTA_MAIN, COMPLIANCE_CLAIM } from "@/lib/claims";
+import { CTA_MAIN, COMPLIANCE_CLAIM } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 export function CtaFinal() {
   return (
@@ -33,8 +33,7 @@ export function CtaFinal() {
 
         <ScrollReveal delay={0.2}>
           <div className="flex justify-center">
-            <Link
-              href={CTA_SIGNUP_URL}
+            <SignupLink
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "w-full sm:w-auto bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 text-base gap-2 transition-all hover:scale-[1.02] shadow-lg shadow-[#3899aa]/20 whitespace-normal h-auto min-h-[48px] py-3 text-center justify-center"
@@ -42,7 +41,7 @@ export function CtaFinal() {
             >
               {CTA_MAIN}
               <ArrowRight className="w-4 h-4 shrink-0" />
-            </Link>
+            </SignupLink>
           </div>
         </ScrollReveal>
 

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
 import { ArrowRight, Clock } from "lucide-react";
-import Link from "next/link";
+import { SignupLink } from "@/components/SignupLink";
 
 const METRICS = [
   { value: "2 min", label: "par bilan complet", before: "20 min", afterRatio: 10, icon: "📋" },
@@ -115,13 +115,12 @@ export function Results() {
               <p className="text-[#0f172a] font-bold text-base">100h récupérées par an.</p>
               <p className="text-[#475569] text-sm mt-0.5">Avec Mon Assistant Kiné, des kinés récupèrent 45 minutes par jour dès le premier jour.</p>
             </div>
-            <Link
-              href="https://app.monassistantkine.fr/signup"
+            <SignupLink
               className="flex items-center gap-2 text-[#3899aa] text-sm font-semibold shrink-0 hover:text-[#2d8a9a] transition-colors"
             >
               <span>Essayer — 14 jours gratuits</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </SignupLink>
           </div>
         </ScrollReveal>
       </div>

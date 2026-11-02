@@ -6,6 +6,7 @@ import Link from "next/link";
 import posthog from "posthog-js";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SignupLink } from "@/components/SignupLink";
 
 const YT_ID = "i4jnfqxYzwQ";
 
@@ -147,8 +148,7 @@ export default function ReplayPage() {
             >
               <p className="text-white font-bold text-xl mb-1">Prêt à rejoindre les pionniers ?</p>
               <p className="text-white/60 text-sm mb-6">19€/mois · À vie · Limité aux 100 premiers</p>
-              <Link
-                href="https://app.monassistantkine.fr/signup"
+              <SignupLink
                 onClick={() => {
                   try {
                     if (posthog.__loaded) posthog.capture("cta_signup_click", { location: "replay" });
@@ -158,7 +158,7 @@ export default function ReplayPage() {
                 style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 20px rgba(56,153,170,0.35)" }}
               >
                 Rejoindre l&apos;offre Pionnier — 19€/mois
-              </Link>
+              </SignupLink>
               <p className="text-white/40 text-xs mt-3">Sans engagement · Résiliable à tout moment</p>
             </div>
           </div>

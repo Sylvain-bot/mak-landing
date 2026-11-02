@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { JsonLd } from "@/components/JsonLd";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { SignupLink } from "@/components/SignupLink";
 
 export const metadata: Metadata = {
   title: "Vidéotransmission sécurisée pour kinés | Éligible FAMI | Mon Assistant Kiné",
@@ -212,13 +212,12 @@ export default function VideotransmissionPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href={CTA_SIGNUP_URL}
+            <SignupLink
               className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-lg text-sm font-bold text-white transition-all hover:scale-[1.02]"
               style={{ background: "#e8b04d", color: "#0f172a" }}
             >
               Essayer 14 jours <ArrowRight className="w-4 h-4" />
-            </Link>
+            </SignupLink>
             <Link
               href="/tarifs"
               className="inline-flex items-center justify-center h-12 px-6 rounded-lg text-sm font-semibold transition-all hover:opacity-90"

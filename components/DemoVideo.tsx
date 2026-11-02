@@ -4,8 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
 import { ArrowRight, ExternalLink, Play } from "lucide-react";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
-import Link from "next/link";
+import { SignupLink } from "@/components/SignupLink";
 
 export function DemoVideo() {
   const videoRef = useRef<HTMLDivElement>(null);
@@ -69,14 +68,13 @@ export function DemoVideo() {
               <p className="text-base font-bold text-[#0f172a]">Convaincu ?</p>
               <p className="text-sm text-[#475569]">14 jours d&apos;essai.</p>
             </div>
-            <Link
-              href={CTA_SIGNUP_URL}
+            <SignupLink
               className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 whitespace-nowrap"
               style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.3)" }}
             >
               Essayer 14 jours gratuitement
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </SignupLink>
           </div>
         </ScrollReveal>
       </div>

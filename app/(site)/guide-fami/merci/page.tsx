@@ -4,13 +4,12 @@ import Link from "next/link";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { MailCheck } from "lucide-react";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
+import { SignupLink } from "@/components/SignupLink";
 
 export const metadata: Metadata = {
   title: "C'est envoyé ! | Guide FAMI 2027 — Mon Assistant Kiné",
   robots: { index: false, follow: false },
 };
-
-const TRIAL_URL = "https://app.monassistantkine.fr";
 
 export default function GuideFamiMerciPage() {
   return (
@@ -49,13 +48,12 @@ export default function GuideFamiMerciPage() {
           <p className="text-sm text-[#475569] leading-relaxed mb-6">
             Mon Assistant Kiné inclut une vidéotransmission sécurisée, dédiée à la télésanté et éligible aux 350 € du FAMI.
           </p>
-          <a
-            href={TRIAL_URL}
+          <SignupLink
             className="inline-flex items-center justify-center h-11 px-6 rounded-xl font-semibold text-sm text-[#2a7a8a] transition-colors hover:bg-[#f0f9fa] outline-none focus-visible:ring-3 focus-visible:ring-[#3899aa]/40"
             style={{ border: "1.5px solid #3899aa" }}
           >
             Tester 14 jours gratuitement
-          </a>
+          </SignupLink>
         </div>
       </main>
 

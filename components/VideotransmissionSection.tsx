@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 const POINTS = [
   {
@@ -89,13 +89,12 @@ export function VideotransmissionSection() {
               >
                 Découvrir le module <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link
-                href={CTA_SIGNUP_URL}
+              <SignupLink
                 className="inline-flex items-center justify-center gap-2 px-6 h-11 rounded-lg text-sm font-semibold transition-all hover:bg-[#eef7f6]"
                 style={{ border: "1px solid #d4ecea", color: "#3899aa" }}
               >
                 Essayer 14 jours — gratuit
-              </Link>
+              </SignupLink>
             </div>
           </ScrollReveal>
 

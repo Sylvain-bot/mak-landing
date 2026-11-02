@@ -3,9 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 const RAW_TEXT =
   "le patient présente une gonalgie droite apparue lors d'un faux mouvement en pivot · douleur mécanique · EVA à 6/10 · aggravée à l'accroupissement et dans les escaliers · épanchement rotulien · j'note que le McMurray est positif côté médial · le Lachman est négatif · le tiroir antérieur aussi · appui monopodal 15 secondes · squat douloureux · ";
@@ -286,13 +285,12 @@ export function BilanVocalSection() {
               ))}
             </div>
 
-            <Link
-              href={CTA_SIGNUP_URL}
+            <SignupLink
               className="inline-flex items-center gap-1.5 px-5 h-11 rounded-xl text-sm font-bold text-white w-fit transition-all hover:brightness-110 mt-2"
               style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.35)" }}
             >
               Essayer le module Bilans <ArrowRight className="w-4 h-4" />
-            </Link>
+            </SignupLink>
           </motion.div>
         </div>
       </div>
