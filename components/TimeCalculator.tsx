@@ -2,9 +2,8 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 const ROWS = [
   { id: "bilans",     emoji: "📋", label: "Bilans rédigés",               unit: "/ sem.",  saved: 15, default: 1, max: 60 },
@@ -145,13 +144,12 @@ export function TimeCalculator() {
               </div>
             ))}
           </div>
-          <Link
-            href={CTA_SIGNUP_URL}
+          <SignupLink
             className="inline-flex items-center justify-center gap-1.5 px-4 h-9 rounded-lg text-xs font-bold text-white shrink-0 transition-all hover:brightness-110"
             style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)" }}
           >
             Essayer <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          </SignupLink>
         </motion.div>
 
         <p className="text-[11px] text-[#94a3b8] text-center mt-2">

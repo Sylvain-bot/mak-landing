@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { X, Send, MessageCircle, ChevronDown } from "lucide-react";
+import { SignupLink } from "@/components/SignupLink";
 
 function RobotIcon() {
   return (
@@ -381,13 +382,12 @@ export function ChatBot() {
                 Sylvain te répondra sous 24h à l&apos;adresse indiquée.
                 En attendant, tu peux essayer Mon Assistant Kiné gratuitement.
               </p>
-              <a
-                href="https://app.monassistantkine.fr/signup"
+              <SignupLink
                 className="mt-2 inline-flex items-center justify-center w-full py-2.5 rounded-xl text-sm font-semibold text-white"
                 style={{ background: "#3899aa" }}
               >
                 Essayer 14 jours
-              </a>
+              </SignupLink>
               <button
                 onClick={() => setView("chat")}
                 className="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors"

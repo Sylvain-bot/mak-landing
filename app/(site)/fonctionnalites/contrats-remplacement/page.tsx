@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { ModuleHero } from "@/components/ModuleHero";
 import { ModuleVideo } from "@/components/ModuleVideo";
-import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { ArrowRight } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { SignupLink } from "@/components/SignupLink";
 
 export const metadata: Metadata = {
   title: "Contrats de remplacement pour kinésithérapeutes | Mon Assistant Kiné",
@@ -206,13 +206,12 @@ export default function ContratsRemplacementPage() {
             Bilans en 2 minutes, copilote clinique sourcé (56 000+ études dont Cleland), suivi patient WhatsApp.
             Un seul outil, conçu par des kinés libéraux.
           </p>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
+          <SignupLink
             className="inline-flex items-center justify-center gap-2 bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-8 h-12 rounded-lg text-base hover:scale-[1.02] transition-all shadow-lg shadow-[#3899aa]/20"
           >
             Essayer Mon Assistant Kiné — 14 jours gratuits
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </SignupLink>
         </div>
       </section>
 

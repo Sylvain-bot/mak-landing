@@ -4,15 +4,14 @@ import { useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Zap } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  CTA_SIGNUP_URL,
   CTA_MAIN,
   PRICE_PIONNIER,
   PRICE_PIONNIER_ANNUAL,
   FAMI_AMOUNT,
 } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 const PIONNIER_FEATURES = [
   "Bilans NGAP dictés et mis en forme",
@@ -150,13 +149,12 @@ export function Pricing() {
                   >
                     ★ Passe à l&apos;annuel → gagne 151€ net avec le FAMI
                   </button>
-                  <Link
-                    href={CTA_SIGNUP_URL}
+                  <SignupLink
                     className="block w-full text-center px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110"
                     style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.35)" }}
                   >
                     {CTA_MAIN}
-                  </Link>
+                  </SignupLink>
                   <p className="text-white/30 text-xs mt-2">Sans engagement · Résiliable à tout moment</p>
                 </div>
               </div>
@@ -192,13 +190,12 @@ export function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    href={CTA_SIGNUP_URL}
+                  <SignupLink
                     className="block w-full text-center px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110"
                     style={{ background: "linear-gradient(135deg, #3899aa, #2a7a8a)", boxShadow: "0 4px 16px rgba(56,153,170,0.35)" }}
                   >
                     {CTA_MAIN}
-                  </Link>
+                  </SignupLink>
                   <p className="text-white/30 text-xs mt-2 text-center">Engagement 12 mois · Paiement en une fois</p>
                 </div>
 

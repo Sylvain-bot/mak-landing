@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
+import { SignupLink } from "@/components/SignupLink";
 
 const NEXT_STEPS = [
   {
@@ -119,8 +120,7 @@ export default function BioMerciPage() {
         </div>
 
         {/* CTA */}
-        <Link
-          href="https://app.monassistantkine.fr/signup"
+        <SignupLink
           style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             width: "100%", background: "linear-gradient(135deg, #3899aa 0%, #2a7a8a 100%)",
@@ -134,7 +134,7 @@ export default function BioMerciPage() {
         >
           Essayer 14 jours
           <span style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>→</span>
-        </Link>
+        </SignupLink>
         <p style={{ fontSize: 11.5, color: "#94a3b8", textAlign: "center", marginBottom: 20 }}>
           14 jours d&apos;essai · Accès immédiat
         </p>

@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { usePostHog } from "posthog-js/react";
-import { CTA_SIGNUP_URL, COMPLIANCE_CLAIM } from "@/lib/claims";
+import { COMPLIANCE_CLAIM } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 function useCountUp(target: number, duration: number, active: boolean): number {
   const [count, setCount] = useState(target);
@@ -165,8 +165,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               className="flex flex-col gap-3 mb-7 w-full sm:max-w-sm"
             >
-              <Link
-                href={CTA_SIGNUP_URL}
+              <SignupLink
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "w-full justify-center bg-[#3899aa] hover:bg-[#2d8a9a] text-white font-semibold px-6 text-base gap-2 shadow-lg shadow-[#3899aa]/25 transition-all hover:scale-[1.03] hover:shadow-[#3899aa]/40 whitespace-normal h-auto min-h-[48px] py-3 text-center"
@@ -175,7 +174,7 @@ export function Hero() {
               >
                 Essayer 14 jours
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </SignupLink>
               <a
                 href="/replay"
                 className="w-full inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-lg border border-[#d4ecea] bg-white text-[#3899aa] hover:bg-[#eef7f6] hover:border-[#3899aa]/40 transition-all"

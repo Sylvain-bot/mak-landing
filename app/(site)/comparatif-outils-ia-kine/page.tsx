@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
 import { FeatureNav } from "@/components/FeatureNav";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, CheckCircle2, XCircle, MinusCircle } from "lucide-react";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { SignupLink } from "@/components/SignupLink";
 
 export const metadata: Metadata = {
   title: "Comparatif outils IA kinésithérapeutes 2026 | Mon Assistant Kiné vs ChatGPT",
@@ -199,12 +199,11 @@ export default function ComparatifPage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Essayer Mon Assistant Kiné — 14 jours gratuits</h2>
           <p className="text-white/80 mb-8">14 jours d&apos;essai · Sans engagement</p>
-          <Link
-            href="https://app.monassistantkine.fr/signup"
+          <SignupLink
             className="inline-flex items-center justify-center gap-2 bg-white text-[#3899aa] font-semibold px-8 h-12 rounded-lg text-base hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
           >
             Commencer — 14 jours d&apos;essai gratuit <ArrowRight className="w-4 h-4" />
-          </Link>
+          </SignupLink>
         </div>
       </section>
 

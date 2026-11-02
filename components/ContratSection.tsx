@@ -1,6 +1,6 @@
 import { ScrollReveal } from "./ScrollReveal";
-import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { SignupLink } from "@/components/SignupLink";
 
 const BENEFITS = [
   {
@@ -106,13 +106,12 @@ export function ContratSection() {
                   <CheckCircle2 className="w-4 h-4 text-white/80 shrink-0" />
                   <span className="text-white/90 text-sm font-medium">Accès immédiat, gratuit à vie</span>
                 </div>
-                <Link
-                  href="https://app.monassistantkine.fr/signup"
+                <SignupLink
                   className="inline-flex items-center justify-center gap-2 w-full bg-white text-[#3899aa] font-semibold px-6 py-3.5 rounded-xl text-sm hover:bg-[#f0f9fa] transition-all hover:scale-[1.02]"
                 >
                   Accéder au module contrats
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </SignupLink>
                 <p className="text-white/60 text-xs text-center mt-3">
                   Déjà un compte ?{" "}
                   <a href="https://app.monassistantkine.fr/login" className="underline text-white/80 hover:text-white">

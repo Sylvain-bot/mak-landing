@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
-import Link from "next/link";
-import { CTA_SIGNUP_URL } from "@/lib/claims";
+import { SignupLink } from "@/components/SignupLink";
 
 const FEATURES = [
   { icon: "📋", label: "Bilans cliniques NGAP en 2 minutes", new: false },
@@ -241,8 +240,7 @@ export function FamiSection() {
 
         {/* CTA */}
         <ScrollReveal delay={0.15} className="text-center">
-          <Link
-            href={CTA_SIGNUP_URL}
+          <SignupLink
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 mb-4"
             style={{
               background: "linear-gradient(135deg, #3899aa, #2a7a8a)",
@@ -250,7 +248,7 @@ export function FamiSection() {
             }}
           >
             Essayer 14 jours →
-          </Link>
+          </SignupLink>
           <p className="text-white/30 text-xs max-w-xl mx-auto leading-relaxed">
             *L&apos;éligibilité au FAMI dépend de ta CPAM et du respect des conditions du cahier des charges CNAM.
             L&apos;aide est déclarée chaque année en janvier-mars sur Amelipro, au titre de l&apos;année précédente
