@@ -244,8 +244,8 @@ const BENEFITS: { icon: typeof Moon; title: string; text: string; stat?: string 
 const BILAN_REVIEW = {
   quote:
     "L'enregistrement de séance, c'est génial ! Les bilans sont plus complets car plus besoin de se creuser le soir pour se souvenir de ce qui a été dit, et donc d'en oublier la moitié (je suis nulle en prise de notes en même temps que je fais mon bilan !). Plus qu'à relire et enregistrer, et plus jamais de bilans en retard : le rêve. Ça retranscrit très bien je trouve et c'est facile de modifier 2-3 trucs dans la partie tests et mesures. Et l'ajout du body chart, c'est top, merci. Quel gain de temps grâce à vous !",
-  author: "Constance de G.",
-  role: "Kinésithérapeute",
+  author: "Constance",
+  location: "Gueugnon",
 };
 
 // Bénéfices du bilan dicté : affichés sous « Ta séance, sans clavier », pour raconter le bilan d'un seul tenant.
@@ -290,7 +290,7 @@ function BenefitsGrid() {
           &ldquo;{BILAN_REVIEW.quote}&rdquo;
         </blockquote>
         <figcaption className="mt-4 text-sm sm:text-[15px] text-[#475569]">
-          <strong className="font-semibold text-[#0f172a]">{BILAN_REVIEW.author}</strong> · {BILAN_REVIEW.role}
+          <strong className="font-semibold text-[#0f172a]">{BILAN_REVIEW.author}</strong> · {BILAN_REVIEW.location}
         </figcaption>
       </figure>
     </div>
