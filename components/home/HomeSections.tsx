@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Moon, ListChecks, Eye, Monitor, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check, FileCheck, ArrowLeftRight } from "lucide-react";
+import { ArrowRight, Moon, ListChecks, Eye, Monitor, Smartphone, Award, ShieldCheck, Lock, MapPin, Globe, Check, FileCheck, ArrowLeftRight, Star } from "lucide-react";
 import { HowItWorksDemo } from "@/components/home/HowItWorksDemo";
 import { BackgroundVideo } from "@/components/BackgroundVideo";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
@@ -241,6 +241,13 @@ const BENEFITS: { icon: typeof Moon; title: string; text: string; stat?: string 
   { icon: Eye, title: "Ton attention reste sur ton patient", text: "Tu regardes ton patient, pas ton clavier." },
 ];
 
+const BILAN_REVIEW = {
+  quote:
+    "L'enregistrement de séance, c'est génial ! Les bilans sont plus complets car plus besoin de se creuser le soir pour se souvenir de ce qui a été dit, et donc d'en oublier la moitié (je suis nulle en prise de notes en même temps que je fais mon bilan !). Plus qu'à relire et enregistrer, et plus jamais de bilans en retard : le rêve. Ça retranscrit très bien je trouve et c'est facile de modifier 2-3 trucs dans la partie tests et mesures. Et l'ajout du body chart, c'est top, merci. Quel gain de temps grâce à vous !",
+  author: "Constance",
+  location: "Gueugnon",
+};
+
 // Bénéfices du bilan dicté : affichés sous « Ta séance, sans clavier », pour raconter le bilan d'un seul tenant.
 function BenefitsGrid() {
   return (
@@ -252,25 +259,40 @@ function BenefitsGrid() {
         {BENEFITS.map(({ icon: Icon, title, text, stat }) => (
           <div key={title} className="rounded-3xl p-6 sm:p-9 flex flex-col gap-4" style={{ background: GROUND }}>
             <Icon className="size-9 text-[#236f7d]" strokeWidth={1.8} aria-hidden />
-            {/* Chiffre mesuré (lib/claims.ts → TIME_SAVED_PER_BILAN) — masqué s'il est vide */}
+            <h4 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h4>
+            <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
+            {/* Chiffre mesuré (lib/claims.ts → TIME_SAVED_PER_BILAN), en bas de carte pour garder les titres alignés — masqué s'il est vide */}
             {stat ? (
-              <p className="flex flex-col">
+              <p className="mt-auto pt-4 flex flex-wrap items-baseline gap-x-2" style={{ borderTop: "1px solid #d4ecea" }}>
                 {stat.includes("→") ? (
-                  <span className="flex flex-wrap items-baseline gap-x-2 tabular-nums">
-                    <s className="text-xl md:text-lg lg:text-2xl font-semibold text-[#94a3b8] decoration-2">{stat.split("→")[0].trim()}</s>
-                    <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d]">{stat.split("→")[1].trim()}</span>
-                  </span>
+                  <>
+                    <s className="text-lg lg:text-xl font-semibold text-[#94a3b8] decoration-2 tabular-nums">{stat.split("→")[0].trim()}</s>
+                    <span className="text-2xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat.split("→")[1].trim()}</span>
+                  </>
                 ) : (
-                  <span className="text-2xl md:text-xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
+                  <span className="text-2xl lg:text-3xl font-bold text-[#236f7d] tabular-nums">{stat}</span>
                 )}
                 <span className="text-sm text-[#475569]">par bilan</span>
               </p>
             ) : null}
-            <h4 className="text-xl sm:text-2xl font-bold text-[#0f172a] leading-snug">{title}</h4>
-            <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed">{text}</p>
           </div>
         ))}
       </div>
+
+      {/* Avis d'une utilisatrice (citée avec son accord, 03/11/2026) */}
+      <figure className="m-0 mt-6 sm:mt-8 mx-auto max-w-3xl rounded-3xl p-6 sm:p-9" style={{ background: GROUND }}>
+        <div className="flex gap-1" role="img" aria-label="5 étoiles sur 5">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <Star key={i} className="size-5 fill-[#e8b04d] text-[#e8b04d]" aria-hidden />
+          ))}
+        </div>
+        <blockquote className="mt-4 text-lg sm:text-xl text-[#0f172a] leading-relaxed">
+          &ldquo;{BILAN_REVIEW.quote}&rdquo;
+        </blockquote>
+        <figcaption className="mt-4 text-sm sm:text-[15px] text-[#475569]">
+          <strong className="font-semibold text-[#0f172a]">{BILAN_REVIEW.author}</strong> · {BILAN_REVIEW.location}
+        </figcaption>
+      </figure>
     </div>
   );
 }
