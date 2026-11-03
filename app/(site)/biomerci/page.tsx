@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { SignupLink } from "@/components/SignupLink";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 const NEXT_STEPS = [
   {
@@ -151,7 +152,7 @@ export default function BioMerciPage() {
         <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
           {[
             { label: "CGU", href: "/cgu" },
-            { label: "Confidentialité", href: "/politique-confidentialite" },
+            { label: "Confidentialité", href: PRIVACY_POLICY_URL },
             { label: "Mentions légales", href: "/mentions-legales" },
           ].map((l) => (
             <Link key={l.label} href={l.href} style={{ fontSize: 11, color: "#94a3b8", textDecoration: "none" }}>{l.label}</Link>

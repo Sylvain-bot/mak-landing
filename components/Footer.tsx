@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 const linkClass = "hover:text-[#236f7d] transition-colors";
 
@@ -11,7 +12,7 @@ export function Footer() {
           <p>© 2026 Mon Assistant Kiné</p>
           <nav aria-label="Informations légales" className="flex flex-wrap gap-x-5 gap-y-2">
             <Link href="/mentions-legales" className={linkClass}>Mentions légales</Link>
-            <Link href="/politique-confidentialite" className={linkClass}>Confidentialité</Link>
+            <Link href={PRIVACY_POLICY_URL} className={linkClass}>Confidentialité</Link>
             <a href="mailto:sylvain@monassistantkine.fr" className={linkClass}>Contact</a>
             <ManageCookiesButton className={`${linkClass} text-left`} />
           </nav>

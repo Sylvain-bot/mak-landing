@@ -41,6 +41,8 @@ export const FAMI_NET_EXPERT = "149";
 export const CTA_MAIN = "Essayer 14 jours";
 export const CTA_SIGNUP_URL = APP_URL + "/signup";
 export const CTA_LOGIN_URL = APP_URL + "/login";
+// Politique de confidentialité unique, celle de l'app, pour les deux sites (#cookies = section cookies)
+export const PRIVACY_POLICY_URL = APP_URL + "/legal/politique-confidentialite.html";
 
 // Conformité — hébergement certifié HDS confirmé par le fondateur (14/10/2026)
 export const COMPLIANCE_CLAIM = "RGPD · Hébergement certifié HDS en France";

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 export const metadata: Metadata = {
   title: "Conditions Générales d'Utilisation (CGU) | Mon Assistant Kiné",
@@ -27,7 +28,7 @@ export default function CguPage() {
       </p>
       <p>
         Ces CGU complètent les Conditions Générales de Vente pour les aspects commerciaux, la{" "}
-        <a href="/politique-confidentialite">Politique de Confidentialité</a> pour la protection
+        <a href={PRIVACY_POLICY_URL}>Politique de Confidentialité</a> pour la protection
         des données du kinésithérapeute, et le Contrat de Sous-traitance (DPA) pour le traitement
         des données patients.
       </p>
