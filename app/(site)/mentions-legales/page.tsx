@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
 import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 export const metadata: Metadata = {
   title: "Mentions légales | Mon Assistant Kiné",
@@ -63,7 +64,7 @@ export default function MentionsLegalesPage() {
       <h2>Données personnelles</h2>
       <p>
         Le traitement des données personnelles est encadré par la{" "}
-        <a href="/politique-confidentialite">Politique de confidentialité</a>. Les principes
+        <a href={PRIVACY_POLICY_URL}>Politique de confidentialité</a>. Les principes
         appliqués sont les suivants :
       </p>
       <ul>
@@ -83,7 +84,7 @@ export default function MentionsLegalesPage() {
       </ul>
       <p>
         Détails (durées, finalités, chatbot) dans la{" "}
-        <a href="/politique-confidentialite#cookies">Politique de confidentialité</a>.
+        <a href={`${PRIVACY_POLICY_URL}#cookies`}>Politique de confidentialité</a>.
       </p>
 
       <h2>Conditions d&apos;utilisation</h2>
@@ -91,7 +92,7 @@ export default function MentionsLegalesPage() {
       <ul>
         <li><a href="/cgu">Conditions Générales d&apos;Utilisation (CGU)</a></li>
         <li>Conditions Générales de Vente (CGV)</li>
-        <li><a href="/politique-confidentialite">Politique de Confidentialité</a></li>
+        <li><a href={PRIVACY_POLICY_URL}>Politique de Confidentialité</a></li>
         <li>Contrat de Sous-traitance (DPA)</li>
       </ul>
 

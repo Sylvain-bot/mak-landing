@@ -6,6 +6,7 @@ import { LeadMagnetForm } from "@/components/LeadMagnetForm";
 import { GuideFamiImage } from "@/components/GuideFamiImage";
 import { GuideFamiPitch } from "@/components/LeadMagnetSection";
 import { GUIDE_FAMI } from "@/lib/guideFami";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 const TITLE = "Guide FAMI 2027 gratuit pour kinés libéraux | Mon Assistant Kiné";
 const DESCRIPTION =
@@ -71,7 +72,7 @@ export default function GuideFamiPage() {
           <p>© 2026 Mon Assistant Kiné</p>
           <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             <Link href="/mentions-legales" className="hover:text-[#475569] transition-colors">Mentions légales</Link>
-            <Link href="/politique-confidentialite" className="hover:text-[#475569] transition-colors">Politique de confidentialité</Link>
+            <Link href={PRIVACY_POLICY_URL} className="hover:text-[#475569] transition-colors">Politique de confidentialité</Link>
             <ManageCookiesButton className="hover:text-[#475569] transition-colors" />
           </nav>
         </div>

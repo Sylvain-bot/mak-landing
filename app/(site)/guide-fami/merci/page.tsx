@@ -5,6 +5,7 @@ import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { MailCheck } from "lucide-react";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
 import { SignupLink } from "@/components/SignupLink";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 export const metadata: Metadata = {
   title: "C'est envoyé ! | Guide FAMI 2027 — Mon Assistant Kiné",
@@ -62,7 +63,7 @@ export default function GuideFamiMerciPage() {
           <p>© 2026 Mon Assistant Kiné</p>
           <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             <Link href="/mentions-legales" className="hover:text-[#475569] transition-colors">Mentions légales</Link>
-            <Link href="/politique-confidentialite" className="hover:text-[#475569] transition-colors">Politique de confidentialité</Link>
+            <Link href={PRIVACY_POLICY_URL} className="hover:text-[#475569] transition-colors">Politique de confidentialité</Link>
             <ManageCookiesButton className="hover:text-[#475569] transition-colors" />
           </nav>
         </div>

@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Une seule politique de confidentialité, celle de l'app, pour les deux sites.
+  // L'ancre (#cookies) n'est pas envoyée au serveur : le navigateur la conserve après la redirection.
+  async redirects() {
+    return [
+      {
+        source: "/politique-confidentialite",
+        destination: "https://app.monassistantkine.fr/legal/politique-confidentialite.html",
+        permanent: true,
+      },
+    ];
+  },
   turbopack: {
     root: __dirname,
   },

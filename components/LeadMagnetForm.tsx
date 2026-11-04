@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { getStoredUtmSource } from "@/lib/utm";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
 import { trackMetaEvent } from "@/components/MetaPixel";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -173,7 +174,7 @@ export function LeadMagnetForm({ source }: { source: string }) {
       <p className="text-[11px] text-[#94a3b8] text-center leading-relaxed">
         Tu recevras le guide par email, puis quelques conseils FAMI. Désinscription en 1 clic.
         Tes données ne sont jamais revendues.{" "}
-        <Link href="/politique-confidentialite" className="underline hover:text-[#3899aa] transition-colors">
+        <Link href={PRIVACY_POLICY_URL} className="underline hover:text-[#3899aa] transition-colors">
           Politique de confidentialité
         </Link>
       </p>

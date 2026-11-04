@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { getConsent, saveConsent, OPEN_CONSENT_EVENT, type Consent } from "@/lib/consent";
 import { useConsentState } from "@/lib/useConsent";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 
 const choiceBtn =
@@ -96,11 +97,12 @@ export function CookieBanner() {
         Cookies
       </h2>
       <p className="text-[13px] text-[#475569] leading-relaxed">
-        Avec ton accord, on utilise <strong>PostHog</strong>{" "}(mesure d&apos;audience, données hébergées dans
-        l&apos;UE) pour comprendre comment le site est utilisé, et le <strong>pixel Meta</strong>{" "}(publicité)
-        pour mesurer l&apos;efficacité de nos publicités Facebook et Instagram. Rien n&apos;est activé sans ton
-        accord, et tu peux changer d&apos;avis à tout moment via « Gérer mes cookies » en bas de page.{" "}
-        <Link href="/politique-confidentialite#cookies" className="underline text-[#2a7a8a]">
+        Avec ton accord, on mesure l&apos;audience de nos deux sites (PostHog sur www.monassistantkine.fr, Google
+        Analytics sur app.monassistantkine.fr) et l&apos;efficacité de nos publicités Facebook et Instagram (pixel
+        Meta sur le site ; sur l&apos;application, envoi à Meta de ton inscription, du début de ton essai et de ton
+        abonnement). Ton choix vaut pour les deux sites. Rien n&apos;est activé sans ton accord, et tu peux changer
+        d&apos;avis à tout moment via « Gérer mes cookies ».{" "}
+        <Link href={`${PRIVACY_POLICY_URL}#cookies`} className="underline text-[#2a7a8a]">
           Politique de confidentialité
         </Link>
       </p>
@@ -110,14 +112,14 @@ export function CookieBanner() {
           <Toggle
             id="consent-analytics"
             label="Mesure d'audience"
-            description="PostHog : pages vues, clics et enregistrement anonymisé des sessions (saisies masquées)."
+            description="PostHog (site) : pages vues, clics, enregistrement des sessions avec saisies masquées. Google Analytics (application) : pages vues et inscriptions."
             checked={draft.analytics}
             onChange={(v) => setDraft((d) => ({ ...d, analytics: v }))}
           />
           <Toggle
             id="consent-ads"
             label="Publicité"
-            description="Pixel Meta : mesure des visites et inscriptions issues de nos publicités Facebook et Instagram."
+            description="Meta : pixel sur le site (visites et inscriptions issues de nos publicités) ; depuis nos serveurs, inscription, début d'essai et abonnement, avec ton email sous forme d'empreinte (hachée)."
             checked={draft.ads}
             onChange={(v) => setDraft((d) => ({ ...d, ads: v }))}
           />

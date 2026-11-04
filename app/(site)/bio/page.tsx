@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import { FOUNDER_1_NAME, FOUNDER_1_LINKEDIN, FOUNDER_2_NAME, FOUNDER_2_LINKEDIN } from "@/lib/schemas/bio.schema";
 import { SignupLink } from "@/components/SignupLink";
+import { PRIVACY_POLICY_URL } from "@/lib/claims";
 
 const YT_ID = "ZrA7d4CvRRE";
 
@@ -41,7 +42,7 @@ const TESTIMONIALS = [
 
 const FOOTER_LINKS = [
   { label: "CGU", href: "/cgu" },
-  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+  { label: "Politique de confidentialité", href: PRIVACY_POLICY_URL },
   { label: "Mentions légales", href: "/mentions-legales" },
 ];
 

@@ -33,7 +33,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${site}/fonctionnalites/contrats-remplacement`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site}/mentions-legales`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${site}/cgu`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${site}/politique-confidentialite`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     ...articleUrls,
   ];
 }
