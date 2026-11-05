@@ -98,8 +98,8 @@ export function CookieBanner() {
       </h2>
       <p className="text-[13px] text-[#475569] leading-relaxed">
         Avec ton accord, on mesure l&apos;audience de nos deux sites (PostHog sur www.monassistantkine.fr, Google
-        Analytics sur app.monassistantkine.fr) et l&apos;efficacité de nos publicités Facebook et Instagram (pixel
-        Meta sur le site ; sur l&apos;application, envoi à Meta de ton inscription, du début de ton essai et de ton
+        Analytics sur app.monassistantkine.fr) et l&apos;efficacité de nos publicités Facebook et Instagram, et on peut
+        te montrer nos publicités après ta visite du site (pixel Meta sur le site ; sur l&apos;application, envoi à Meta de ton inscription, du début de ton essai et de ton
         abonnement). Ton choix vaut pour les deux sites. Rien n&apos;est activé sans ton accord, et tu peux changer
         d&apos;avis à tout moment via « Gérer mes cookies ».{" "}
         <Link href={`${PRIVACY_POLICY_URL}#cookies`} className="underline text-[#2a7a8a]">
@@ -119,7 +119,7 @@ export function CookieBanner() {
           <Toggle
             id="consent-ads"
             label="Publicité"
-            description="Meta : pixel sur le site (visites et inscriptions issues de nos publicités) ; depuis nos serveurs, inscription, début d'essai et abonnement, avec ton email sous forme d'empreinte (hachée)."
+            description="Meta : pixel sur le site (visites et inscriptions issues de nos publicités, affichage de nos publicités aux visiteurs du site) ; depuis nos serveurs, inscription, début d'essai et abonnement, avec ton email sous forme d'empreinte (hachée)."
             checked={draft.ads}
             onChange={(v) => setDraft((d) => ({ ...d, ads: v }))}
           />
