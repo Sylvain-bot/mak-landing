@@ -165,24 +165,33 @@ export default async function GuideFamiMerciPage() {
         {/* 1. Titre + vidéo + bouton */}
         <section className="px-4 sm:px-6 pt-10 pb-16 sm:pt-14 sm:pb-20" style={{ background: GROUND }}>
           <div className="max-w-3xl mx-auto text-center">
-            <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#236f7d]">
-              <MailCheck className="size-4" aria-hidden /> Ton guide FAMI arrive dans ta boîte mail
+            <p className="text-sm font-semibold text-[#236f7d] text-balance">
+              <MailCheck className="inline size-4 mr-1.5 -mt-0.5 align-middle" aria-hidden />Ton guide est en route : il arrive par mail d&apos;ici quelques minutes.
             </p>
+            <p className="mt-1 text-sm font-semibold text-[#9a6b12]">Ne ferme pas cette page tout de suite.</p>
             <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance">
               Je t&apos;offre le guide.
               <br />
               <span className="text-[#236f7d]">Tu m&apos;offres 2 minutes ?</span>
             </h1>
             <p className="mt-5 text-lg text-[#475569] leading-relaxed text-balance">
-              En attendant ton mail, je te montre comment récupérer les {FAMI_AMOUNT} € de la vidéotransmission, et
-              rentrer chez toi avec tes bilans déjà écrits.
+              Le guide t&apos;explique les règles du FAMI. Dans cette vidéo, je te montre comment toucher les{" "}
+              {FAMI_AMOUNT} € de la vidéotransmission avant le 31 décembre, et rentrer chez toi avec tes bilans déjà écrits.
             </p>
-            <p
-              className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm sm:text-[15px] font-bold"
-              style={{ background: "rgba(232,176,77,0.16)", border: "1px solid rgba(232,176,77,0.55)", color: "#7a5410" }}
+            {/* Le cadeau avec sa raison : il a pris le guide, il doit être équipé avant le 31/12 */}
+            <div
+              className="mt-6 mx-auto max-w-xl rounded-2xl px-5 py-4 text-left flex items-start gap-3"
+              style={{ background: "rgba(232,176,77,0.14)", border: "1px solid rgba(232,176,77,0.55)" }}
             >
-              <Gift className="size-4" aria-hidden /> Cadeau : -{FIRST_YEAR_DISCOUNT * 100} % sur l&apos;abonnement annuel, uniquement depuis cette page
-            </p>
+              <Gift className="size-6 mt-0.5 shrink-0 text-[#9a6b12]" aria-hidden />
+              <p className="text-[15px] leading-relaxed text-[#5c4210]">
+                <strong className="font-bold">
+                  {`Ton cadeau pour avoir pris le guide : -${FIRST_YEAR_DISCOUNT * 100} % sur l'abonnement annuel.`}
+                </strong>{" "}
+                Pour t&apos;aider à être équipé avant le 31 décembre et ne pas perdre ton forfait. Uniquement depuis cette
+                page.
+              </p>
+            </div>
             <div className="mt-8 sm:mt-10">
               <MerciVideo src={VIDEO_SRC} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
             </div>
@@ -248,7 +257,7 @@ export default async function GuideFamiMerciPage() {
                 <span className="text-lg font-semibold text-white">/an</span>
               </p>
               <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
-                -{FIRST_YEAR_DISCOUNT * 100} % sur l&apos;annuel la première année, réservé à cette page
+                {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'annuel la première année, réservé à cette page`}
               </p>
               <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois sans engagement (remise réservée à l&apos;annuel).</p>
 
