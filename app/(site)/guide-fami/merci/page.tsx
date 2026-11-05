@@ -7,7 +7,7 @@ import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { MerciVideo } from "@/components/merci/MerciVideo";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
 import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
-import { MODULES } from "@/lib/modules";
+import { getPionnierPlacesLeft, PIONNIER_TOTAL_PLACES } from "@/lib/pionniers";
 import {
   FAMI_AMOUNT,
   PRICE_PIONNIER,
@@ -28,12 +28,34 @@ const VIDEO_SRC = "";
 const VIDEO_POSTER = undefined;
 const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
 
+// Offre réservée à cette page : -10 % la première année, via un lien de paiement dédié (fourni par Valentin).
+// Tant que le lien est vide, les boutons mènent à l'inscription standard.
+const MERCI_SIGNUP_URL = "";
+const FIRST_YEAR_DISCOUNT = 0.1;
+
 const NAVY = "#0f172a";
 const GOLD = "#e8b04d";
 const GROUND = "#f2f9fa";
-const NET_GAIN = Number(FAMI_AMOUNT) - Number(PRICE_PIONNIER_ANNUAL);
 
-const PIONNIER_EXTRAS = ["Prix bloqué à vie, même quand les tarifs augmenteront", "Communauté privée avec les fondateurs"];
+const eur = (n: number) =>
+  new Intl.NumberFormat("fr-FR", { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }).format(n) + " €";
+
+// TODO-FONDATEUR : valeurs estimées par module (ce que coûterait un outil équivalent), à valider avant la mise en ligne.
+// null = « offert ».
+const VALUE_STACK: { name: string; detail: string; value: number | null }[] = [
+  { name: "Bilan dicté", detail: "Tu parles pendant la séance, ton bilan NGAP se rédige.", value: 360 },
+  { name: "Copilote IA clinique", detail: "Questions cliniques et bibliographiques, 60 000+ textes, réponses sourcées.", value: 240 },
+  { name: "Suivi patient et exercices", detail: "Programme d'exercices sur WhatsApp, suivi entre les séances.", value: 240 },
+  { name: "Vidéotransmission sécurisée", detail: "Téléconsultation dédiée à la télésanté, éligible au FAMI.", value: 180 },
+  { name: "Gestion administrative", detail: "Courriers et relances rédigés depuis tes modèles.", value: 120 },
+  { name: "Contrats de remplacement", detail: "Rédigés, signés et déclarés à l'Ordre.", value: 60 },
+  { name: "Prix Pionnier bloqué à vie", detail: "Même quand les tarifs augmenteront.", value: null },
+  { name: "Communauté privée avec les fondateurs", detail: "Tes retours façonnent l'outil.", value: null },
+];
+const STACK_TOTAL = VALUE_STACK.reduce((s, x) => s + (x.value ?? 0), 0);
+const ANNUAL = Number(PRICE_PIONNIER_ANNUAL);
+const FIRST_YEAR_PRICE = Math.round(ANNUAL * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
+const NET_GAIN = Math.round((Number(FAMI_AMOUNT) - FIRST_YEAR_PRICE) * 100) / 100;
 
 const REVIEWS = [
   {
@@ -69,18 +91,56 @@ const QUESTIONS = [
   },
 ];
 
-function Cta({ location }: { location: string }) {
+function Cta({ location, placesLeft }: { location: string; placesLeft: number | null }) {
   return (
     <div className="flex flex-col items-center gap-3">
-      <TrackedSignupLink location={location} className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
+      <TrackedSignupLink
+        location={location}
+        href={MERCI_SIGNUP_URL}
+        className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`}
+        style={primaryCtaStyle}
+      >
         Je teste 14 jours <ArrowRight className="size-5" aria-hidden />
       </TrackedSignupLink>
-      <p className="text-sm text-[#475569] text-center">Résiliable à tout moment · débit seulement si tu gardes l&apos;abonnement</p>
+      <p className="text-sm text-[#475569] text-center">
+        -{FIRST_YEAR_DISCOUNT * 100} % la première année, réservé à cette page
+        {placesLeft !== null && (
+          <>
+            {" "}· <strong className="font-semibold text-[#9a6b12]">plus que {placesLeft} places Pionnier</strong>
+          </>
+        )}
+      </p>
     </div>
   );
 }
 
-export default function GuideFamiMerciPage() {
+function PlacesCounter({ placesLeft }: { placesLeft: number }) {
+  const taken = PIONNIER_TOTAL_PLACES - placesLeft;
+  return (
+    <div className="mt-4">
+      <div className="flex items-baseline justify-between text-sm">
+        <span className="font-bold text-[#0f172a] tabular-nums">
+          {placesLeft} places restantes
+        </span>
+        <span className="text-[#475569] tabular-nums">sur {PIONNIER_TOTAL_PLACES}</span>
+      </div>
+      <div
+        className="mt-2 h-2.5 rounded-full overflow-hidden"
+        style={{ background: "rgba(232,176,77,0.18)" }}
+        role="progressbar"
+        aria-label="Places Pionnier déjà prises"
+        aria-valuemin={0}
+        aria-valuemax={PIONNIER_TOTAL_PLACES}
+        aria-valuenow={taken}
+      >
+        <div className="h-full rounded-full" style={{ width: `${(taken / PIONNIER_TOTAL_PLACES) * 100}%`, background: GOLD }} />
+      </div>
+    </div>
+  );
+}
+
+export default async function GuideFamiMerciPage() {
+  const placesLeft = await getPionnierPlacesLeft();
   return (
     <div className="flex flex-col min-h-svh bg-white">
       <header className="px-4 sm:px-6 py-4" style={{ background: GROUND }}>
@@ -122,7 +182,7 @@ export default function GuideFamiMerciPage() {
               <MerciVideo src={VIDEO_SRC} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
             </div>
             <div className="mt-8 sm:mt-10">
-              <Cta location="merci-video" />
+              <Cta location="merci-video" placesLeft={placesLeft} />
             </div>
           </div>
         </section>
@@ -134,40 +194,55 @@ export default function GuideFamiMerciPage() {
             <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
               Tout ce que tu as dès aujourd&apos;hui
             </h2>
-            <ul className="mt-10 rounded-3xl p-6 sm:p-8 grid gap-4" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
-              {MODULES.map((m) => (
-                <li key={m.slug} className="flex items-start gap-3">
-                  <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
-                  <span>
-                    <strong className="font-semibold text-[#0f172a]">{m.name}</strong>
-                    <span className="text-[#475569]"> : {m.pitch}</span>
-                  </span>
-                </li>
-              ))}
-              {PIONNIER_EXTRAS.map((x) => (
-                <li key={x} className="flex items-start gap-3">
-                  <Check className="size-5 mt-0.5 shrink-0" style={{ color: "#b07d1a" }} aria-hidden />
-                  <strong className="font-semibold text-[#0f172a]">{x}</strong>
-                </li>
-              ))}
-            </ul>
+            {/* La pile de valeur : chaque module avec sa valeur estimée, puis le prix réel */}
+            <div className="mt-10 rounded-3xl overflow-hidden" style={{ border: "1px solid #d4ecea" }}>
+              <ul className="divide-y divide-[#dcecef]" style={{ background: GROUND }}>
+                {VALUE_STACK.map((x) => (
+                  <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
+                    <Check className="size-5 mt-0.5 shrink-0" style={{ color: x.value === null ? "#b07d1a" : "#236f7d" }} aria-hidden />
+                    <span className="flex-1 min-w-0">
+                      <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                      <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                    </span>
+                    <span className="shrink-0 text-right text-sm sm:text-base font-semibold tabular-nums text-[#475569]">
+                      {x.value === null ? <span style={{ color: "#9a6b12" }}>Offert</span> : <>{eur(x.value)}/an</>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-baseline justify-between gap-4 px-5 sm:px-7 py-4 bg-white">
+                <span className="font-semibold text-[#0f172a]">Valeur estimée</span>
+                <span className="text-lg font-bold tabular-nums text-[#0f172a]">{eur(STACK_TOTAL)}/an</span>
+              </div>
+            </div>
 
-            {/* Le calcul FAMI */}
-            <div className="mt-8 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
-              <p className="text-sm text-[#cbd5e1]">
-                {PRICE_PIONNIER} €/mois, ou {PRICE_PIONNIER_ANNUAL} €/an. Et avec le forfait FAMI vidéotransmission :
+            {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
+            <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
+              <p className="text-sm text-[#cbd5e1]">Ton prix Pionnier</p>
+              <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 tabular-nums">
+                <span className="text-xl text-[#94a3b8] line-through decoration-[#94a3b8]/70">{eur(ANNUAL)}/an</span>
+                <span className="text-4xl sm:text-5xl font-bold text-white">{eur(FIRST_YEAR_PRICE)}</span>
+                <span className="text-lg font-semibold text-white">/an</span>
               </p>
-              <p className="mt-4 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-2xl sm:text-3xl font-bold text-white tabular-nums">
-                <span>{FAMI_AMOUNT} €</span>
-                <span className="text-[#94a3b8]" aria-label="moins">−</span>
-                <span>{PRICE_PIONNIER_ANNUAL} €</span>
-                <span className="text-[#94a3b8]" aria-label="égale">=</span>
-                <span style={{ color: GOLD }}>+{NET_GAIN} €/an pour toi</span>
+              <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
+                -{FIRST_YEAR_DISCOUNT * 100} % la première année, réservé à cette page
               </p>
-              <p className="mt-4 text-sm text-[#cbd5e1] max-w-xl mx-auto leading-relaxed">
-                Si tu ne perçois pas déjà le forfait via un autre logiciel de vidéotransmission. Forfait fixe à déclarer sur
-                amelipro, versé par ta CPAM.
-              </p>
+              <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois, sans engagement.</p>
+
+              <div className="mt-7 pt-7 border-t border-white/10">
+                <p className="text-sm text-[#cbd5e1]">Et avec le forfait FAMI vidéotransmission :</p>
+                <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-2xl sm:text-3xl font-bold text-white tabular-nums">
+                  <span>{eur(Number(FAMI_AMOUNT))}</span>
+                  <span className="text-[#94a3b8]" aria-label="moins">−</span>
+                  <span>{eur(FIRST_YEAR_PRICE)}</span>
+                  <span className="text-[#94a3b8]" aria-label="égale">=</span>
+                  <span style={{ color: GOLD }}>+{eur(NET_GAIN)} pour toi</span>
+                </p>
+                <p className="mt-4 text-sm text-[#cbd5e1] max-w-xl mx-auto leading-relaxed">
+                  La première année. Si tu ne perçois pas déjà le forfait via un autre logiciel de vidéotransmission. Forfait
+                  fixe à déclarer sur amelipro, versé par ta CPAM.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -187,13 +262,14 @@ export default function GuideFamiMerciPage() {
               <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
               <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
               <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
-                Le tarif à {PRICE_PIONNIER} €/mois, bloqué à vie, est réservé aux 100 premiers kinés. Ensuite, l&apos;offre
+                Le tarif Pionnier, bloqué à vie, est réservé aux {`${PIONNIER_TOTAL_PLACES} premiers`} kinés. Ensuite, l&apos;offre
                 ferme.
               </p>
+              {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
             </div>
           </div>
           <div className="mt-10">
-            <Cta location="merci-offre" />
+            <Cta location="merci-offre" placesLeft={placesLeft} />
           </div>
         </section>
 
@@ -230,7 +306,7 @@ export default function GuideFamiMerciPage() {
             </dl>
             <p className="mt-6 text-sm text-[#475569] text-center">{COMPLIANCE_CLAIM}</p>
             <div className="mt-10">
-              <Cta location="merci-bas" />
+              <Cta location="merci-bas" placesLeft={placesLeft} />
             </div>
 
             {/* Rappel mail, en bas : la vidéo passe d'abord */}
