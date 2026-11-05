@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, CheckCircle2, CalendarClock, Users, MailCheck, ArrowRight } from "lucide-react";
+import { Check, CheckCircle2, CalendarClock, Users, MailCheck, ArrowRight, Gift } from "lucide-react";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { MerciVideo } from "@/components/merci/MerciVideo";
@@ -40,19 +40,18 @@ const GROUND = "#f2f9fa";
 const eur = (n: number) =>
   new Intl.NumberFormat("fr-FR", { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }).format(n) + " €";
 
-// TODO-FONDATEUR : valeurs estimées par module (ce que coûterait un outil équivalent), à valider avant la mise en ligne.
-// null = « offert ».
-const VALUE_STACK: { name: string; detail: string; value: number | null }[] = [
-  { name: "Bilan dicté", detail: "Tu parles pendant la séance, ton bilan NGAP se rédige.", value: 360 },
-  { name: "Copilote IA clinique", detail: "Questions cliniques et bibliographiques, 60 000+ textes, réponses sourcées.", value: 240 },
-  { name: "Suivi patient et exercices", detail: "Programme d'exercices sur WhatsApp, suivi entre les séances.", value: 240 },
-  { name: "Vidéotransmission sécurisée", detail: "Téléconsultation dédiée à la télésanté, éligible au FAMI.", value: 180 },
-  { name: "Gestion administrative", detail: "Courriers et relances rédigés depuis tes modèles.", value: 120 },
-  { name: "Contrats de remplacement", detail: "Rédigés, signés et déclarés à l'Ordre.", value: 60 },
-  { name: "Prix Pionnier bloqué à vie", detail: "Même quand les tarifs augmenteront.", value: null },
-  { name: "Communauté privée avec les fondateurs", detail: "Tes retours façonnent l'outil.", value: null },
+// Ce que reçoit un Pionnier : un bénéfice concret par ligne, sans valeur en euros
+// (les modules ne sont pas vendus séparément : aucun prix de référence réel à afficher).
+const STACK: { name: string; detail: string; extra?: boolean }[] = [
+  { name: "Bilan dicté", detail: "Tu parles pendant la séance, ton bilan NGAP se rédige. Plus de bilans le soir." },
+  { name: "Copilote IA clinique", detail: "Un doute en séance ? Une réponse sourcée en quelques secondes, 60 000+ textes." },
+  { name: "Suivi patient et exercices", detail: "Le programme d'exercices sur WhatsApp, tes patients suivis entre les séances." },
+  { name: "Vidéotransmission sécurisée", detail: "Dédiée à la télésanté : c'est elle qui te rend éligible aux 350 € du FAMI." },
+  { name: "Gestion administrative", detail: "Courriers et relances rédigés depuis tes modèles." },
+  { name: "Contrats de remplacement", detail: "Rédigés, signés et déclarés à l'Ordre." },
+  { name: "Prix Pionnier bloqué à vie", detail: "Ton tarif ne bougera jamais, même quand les prix augmenteront.", extra: true },
+  { name: "Communauté privée avec les fondateurs", detail: "Tes retours décident des prochaines fonctionnalités.", extra: true },
 ];
-const STACK_TOTAL = VALUE_STACK.reduce((s, x) => s + (x.value ?? 0), 0);
 const ANNUAL = Number(PRICE_PIONNIER_ANNUAL);
 const FIRST_YEAR_PRICE = Math.round(ANNUAL * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
 const NET_GAIN = Math.round((Number(FAMI_AMOUNT) - FIRST_YEAR_PRICE) * 100) / 100;
@@ -100,10 +99,10 @@ function Cta({ location, placesLeft }: { location: string; placesLeft: number | 
         className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`}
         style={primaryCtaStyle}
       >
-        Je teste 14 jours <ArrowRight className="size-5" aria-hidden />
+        Je profite des -{FIRST_YEAR_DISCOUNT * 100} % <ArrowRight className="size-5" aria-hidden />
       </TrackedSignupLink>
       <p className="text-sm text-[#475569] text-center">
-        -{FIRST_YEAR_DISCOUNT * 100} % la première année, réservé à cette page
+        14 jours d&apos;essai, résiliable à tout moment
         {placesLeft !== null && (
           <>
             {" "}· <strong className="font-semibold text-[#9a6b12]">plus que {placesLeft} places Pionnier</strong>
@@ -178,6 +177,12 @@ export default async function GuideFamiMerciPage() {
               En attendant ton mail, je te montre comment récupérer les {FAMI_AMOUNT} € de la vidéotransmission, et
               rentrer chez toi avec tes bilans déjà écrits.
             </p>
+            <p
+              className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm sm:text-[15px] font-bold"
+              style={{ background: "rgba(232,176,77,0.16)", border: "1px solid rgba(232,176,77,0.55)", color: "#7a5410" }}
+            >
+              <Gift className="size-4" aria-hidden /> Cadeau : -{FIRST_YEAR_DISCOUNT * 100} % la première année, uniquement depuis cette page
+            </p>
             <div className="mt-8 sm:mt-10">
               <MerciVideo src={VIDEO_SRC} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
             </div>
@@ -194,27 +199,18 @@ export default async function GuideFamiMerciPage() {
             <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
               Tout ce que tu as dès aujourd&apos;hui
             </h2>
-            {/* La pile de valeur : chaque module avec sa valeur estimée, puis le prix réel */}
-            <div className="mt-10 rounded-3xl overflow-hidden" style={{ border: "1px solid #d4ecea" }}>
-              <ul className="divide-y divide-[#dcecef]" style={{ background: GROUND }}>
-                {VALUE_STACK.map((x) => (
-                  <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
-                    <Check className="size-5 mt-0.5 shrink-0" style={{ color: x.value === null ? "#b07d1a" : "#236f7d" }} aria-hidden />
-                    <span className="flex-1 min-w-0">
-                      <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
-                      <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
-                    </span>
-                    <span className="shrink-0 text-right text-sm sm:text-base font-semibold tabular-nums text-[#475569]">
-                      {x.value === null ? <span style={{ color: "#9a6b12" }}>Offert</span> : <>{eur(x.value)}/an</>}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-baseline justify-between gap-4 px-5 sm:px-7 py-4 bg-white">
-                <span className="font-semibold text-[#0f172a]">Valeur estimée</span>
-                <span className="text-lg font-bold tabular-nums text-[#0f172a]">{eur(STACK_TOTAL)}/an</span>
-              </div>
-            </div>
+            {/* Ce qu'il reçoit, ligne par ligne */}
+            <ul className="mt-10 rounded-3xl overflow-hidden divide-y divide-[#dcecef]" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
+              {STACK.map((x) => (
+                <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
+                  <Check className="size-5 mt-0.5 shrink-0" style={{ color: x.extra ? "#b07d1a" : "#236f7d" }} aria-hidden />
+                  <span className="min-w-0">
+                    <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                    <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
 
             {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
             <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
@@ -262,7 +258,7 @@ export default async function GuideFamiMerciPage() {
               <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
               <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
               <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
-                Le tarif Pionnier, bloqué à vie, est réservé aux {`${PIONNIER_TOTAL_PLACES} premiers`} kinés. Ensuite, l&apos;offre
+                {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés.`} Ensuite, l&apos;offre
                 ferme.
               </p>
               {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
