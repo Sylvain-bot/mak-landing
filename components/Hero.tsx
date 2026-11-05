@@ -254,7 +254,7 @@ export function Hero() {
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />
               <StatItem
-                target={56000} suffix="+" label="Ressources scientifiques accessibles (dont Cleland)"
+                target={60000} suffix="+" label="Ressources scientifiques accessibles (dont Cleland)"
                 frenchFormat active={inView}
                 className="sm:border-l sm:border-[#d4ecea] sm:pl-7"
               />

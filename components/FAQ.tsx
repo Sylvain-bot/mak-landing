@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 const FAQS = [
   {
     q: "L'IA est-elle fiable pour la clinique ?",
-    a: "Mon Assistant Kiné s'appuie sur une base spécifique à la kinésithérapie — plus de 56 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
+    a: "Mon Assistant Kiné s'appuie sur une base spécifique à la kinésithérapie — plus de 60 000 études dont les références Cleland et les guidelines internationales. Ce n'est pas une IA généraliste : c'est un outil calibré pour ta pratique.",
   },
   {
     q: "Est-ce que l'abonnement est vraiment rentable ?",

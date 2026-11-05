@@ -36,7 +36,7 @@ type Status = "yes" | "no" | "partial";
 const ROWS: { feature: string; mak: Status; chatgpt: Status; notes?: string }[] = [
   { feature: "Conçu par des kinés", mak: "yes", chatgpt: "no" },
   { feature: "Bilan conforme NGAP", mak: "yes", chatgpt: "partial", notes: "ChatGPT : à reformater manuellement" },
-  { feature: "Copilote IA Kiné (clinique & bibliographique)", mak: "yes", chatgpt: "no", notes: "Mon Assistant Kiné : Mistral (IA européenne), 56 000+ études, zéro hallucination · ChatGPT : non spécialisé, sources non fiables" },
+  { feature: "Copilote IA Kiné (clinique & bibliographique)", mak: "yes", chatgpt: "no", notes: "Mon Assistant Kiné : Mistral (IA européenne), 60 000+ études, zéro hallucination · ChatGPT : non spécialisé, sources non fiables" },
   { feature: "Suivi patient WhatsApp", mak: "yes", chatgpt: "no" },
   { feature: "Programme exercices + vidéos", mak: "yes", chatgpt: "no" },
   { feature: "Gestion administrative", mak: "yes", chatgpt: "partial", notes: "ChatGPT : usage manuel uniquement" },
