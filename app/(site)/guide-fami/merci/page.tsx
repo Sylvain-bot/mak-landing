@@ -296,8 +296,7 @@ export default async function GuideFamiMerciPage() {
               <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
               <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
               <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
-                {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés.`} Ensuite, l&apos;offre
-                ferme.
+                {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés. Ensuite, l'offre ferme.`}
               </p>
               {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
             </div>
@@ -316,6 +315,11 @@ export default async function GuideFamiMerciPage() {
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               {REVIEWS.map((r) => (
                 <figure key={r.author} className="rounded-3xl bg-white p-6 sm:p-7 flex flex-col" style={{ border: "1px solid #d4ecea" }}>
+                  <div className="flex gap-1 mb-3" role="img" aria-label="5 étoiles sur 5">
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <Star key={i} className="size-4 fill-[#e8b04d] text-[#e8b04d]" aria-hidden />
+                    ))}
+                  </div>
                   <blockquote className="text-[15px] text-[#0f172a] leading-relaxed flex-1">&ldquo;{r.quote}&rdquo;</blockquote>
                   <figcaption className="mt-4 text-sm text-[#475569]">
                     <strong className="font-semibold text-[#0f172a]">{r.author}</strong> · {r.location}

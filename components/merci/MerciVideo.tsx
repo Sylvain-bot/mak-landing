@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import posthog from "posthog-js";
 import { PlayCircle, Volume2 } from "lucide-react";
 
@@ -9,6 +9,8 @@ import { PlayCircle, Volume2 } from "lucide-react";
 // la relance depuis le début avec le son et les contrôles. Si le navigateur bloque la lecture
 // automatique (économie d'énergie, préférences), le même bouton la lance.
 // Tant que `src` est vide, un cadre « Vidéo à venir » réserve la place.
+// Tant que le son n'est pas activé, la vidéo se met en pause quand elle sort de l'écran (elle ne distrait
+// pas pendant la lecture de l'offre, économise les données mobiles) et reprend quand elle revient.
 // Suivi PostHog (si consentement) : son activé, fin de lecture.
 export function MerciVideo({
   src,
@@ -24,6 +26,22 @@ export function MerciVideo({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [withSound, setWithSound] = useState(false);
+  const soundOn = useRef(false);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (soundOn.current) return;
+        if (entry.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, [src]);
   const vertical = ratio === "9/16";
   const frame = `relative mx-auto w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#0f172a] ${vertical ? "max-w-[380px]" : ""}`;
   const frameStyle = { aspectRatio: ratio, boxShadow: "0 24px 60px rgba(15,23,42,0.25)" };
@@ -50,6 +68,7 @@ export function MerciVideo({
     v.currentTime = 0;
     v.muted = false;
     v.loop = false;
+    soundOn.current = true;
     setWithSound(true);
     v.play().catch(() => {});
     capture("merci_video_sound_on");
