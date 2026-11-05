@@ -25,6 +25,8 @@ export const metadata: Metadata = {
 // titre qui demande 2 minutes, vidéo, un seul bouton, l'offre, deux échéances réelles, avis, questions.
 // Vidéo : déposer le fichier dans public/videos/ puis renseigner VIDEO_SRC (vide = cadre « Vidéo à venir »).
 const VIDEO_SRC = "";
+// Sous-titres WebVTT affichés pendant la lecture muette (générés depuis la vidéo une fois tournée).
+const VIDEO_CAPTIONS = "";
 const VIDEO_POSTER = undefined;
 const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
 
@@ -50,7 +52,8 @@ const STACK: { name: string; detail: string; extra?: boolean }[] = [
   { name: "Gestion administrative", detail: "Courriers et relances rédigés depuis tes modèles." },
   { name: "Contrats de remplacement", detail: "Rédigés, signés et déclarés à l'Ordre." },
   { name: "Prix Pionnier bloqué à vie", detail: "Ton tarif ne bougera jamais, même quand les prix augmenteront.", extra: true },
-  { name: "Communauté privée avec les fondateurs", detail: "Tes retours décident des prochaines fonctionnalités.", extra: true },
+  { name: "Accès à la roadmap", detail: "Tu vois ce qui arrive et tu donnes ton avis sur les prochaines fonctionnalités.", extra: true },
+  { name: "Groupe privé Pionniers", detail: "Entraide entre kinés et échanges directs avec nous, les fondateurs.", extra: true },
 ];
 const ANNUAL = Number(PRICE_PIONNIER_ANNUAL);
 const FIRST_YEAR_PRICE = Math.round(ANNUAL * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
@@ -144,9 +147,8 @@ export default async function GuideFamiMerciPage() {
     <div className="flex flex-col min-h-svh bg-white">
       <header className="px-4 sm:px-6 py-4" style={{ background: GROUND }}>
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
-          <Link href="/" aria-label="Mon Assistant Kiné — accueil" className="inline-block shrink-0">
-            <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain" priority />
-          </Link>
+          {/* Logo non cliquable : pas de sortie du tunnel vers l'accueil */}
+          <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain shrink-0" priority />
           {/* Deux étapes : le guide est envoyé, il reste la vidéo */}
           <ol className="flex items-center gap-2 text-xs sm:text-sm font-semibold" aria-label="Étapes">
             <li className="flex items-center gap-1.5 text-[#236f7d]">
@@ -193,7 +195,7 @@ export default async function GuideFamiMerciPage() {
               </p>
             </div>
             <div className="mt-8 sm:mt-10">
-              <MerciVideo src={VIDEO_SRC} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
+              <MerciVideo src={VIDEO_SRC} captions={VIDEO_CAPTIONS || undefined} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
             </div>
             <div className="mt-8 sm:mt-10">
               <Cta location="merci-video" placesLeft={placesLeft} />
