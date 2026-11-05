@@ -6,7 +6,7 @@ export const homepageSchema = {
       "@id": "https://www.monassistantkine.fr/#software",
       "name": "Mon Assistant Kiné",
       "alternateName": "MAK",
-      "description": "Assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Génère des bilans cliniques en 2 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 56 000 ressources scientifiques validées.",
+      "description": "Assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Génère des bilans cliniques en 2 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 60 000 ressources scientifiques validées.",
       "applicationCategory": "HealthcareApplication",
       "applicationSubCategory": "Clinical Decision Support",
       "operatingSystem": "Web",
@@ -24,7 +24,7 @@ export const homepageSchema = {
         "Génération de bilans cliniques en 2 minutes",
         "Bilans kinésithérapiques conformes NGAP",
         "Détection des drapeaux rouges en temps réel",
-        "Accès à 56 000+ ressources scientifiques (dont Cleland)",
+        "Accès à 60 000+ ressources scientifiques (dont Cleland)",
         "Dictée vocale",
         "Export PDF",
         "Chatbot patient entre les séances",
@@ -60,7 +60,7 @@ export const homepageSchema = {
           "name": "Qu'est-ce que Mon Assistant Kiné ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Mon Assistant Kiné est un assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Il génère des bilans cliniques en 2 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 56 000 ressources scientifiques validées, dont les ouvrages de Cleland.",
+            "text": "Mon Assistant Kiné est un assistant IA conçu exclusivement pour les kinésithérapeutes libéraux. Il génère des bilans cliniques en 2 minutes, détecte les drapeaux rouges en temps réel et donne accès à plus de 60 000 ressources scientifiques validées, dont les ouvrages de Cleland.",
           },
         },
         {

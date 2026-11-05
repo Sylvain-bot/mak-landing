@@ -6,7 +6,7 @@ import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Copilote IA Kiné — Clinique & Bibliographique | Mon Assistant Kiné",
-  description: "Pose ta question comme à un confrère. Le copilote IA détecte automatiquement si elle est clinique ou bibliographique — drapeaux rouges, hypothèses, 56 000+ études en 30 secondes.",
+  description: "Pose ta question comme à un confrère. Le copilote IA détecte automatiquement si elle est clinique ou bibliographique — drapeaux rouges, hypothèses, 60 000+ études en 30 secondes.",
   alternates: { canonical: "https://www.monassistantkine.fr/fonctionnalites/aide-decision-clinique" },
   openGraph: {
     title: "Copilote IA Kiné | Mon Assistant Kiné",
@@ -38,7 +38,7 @@ const CAPABILITIES = [
   {
     icon: "📚",
     label: "Recherche bibliographique EBP",
-    desc: "56 000+ études PubMed & PEDro — résumé clinique pratique en 30 secondes, sources citées et cliquables",
+    desc: "60 000+ études PubMed & PEDro — résumé clinique pratique en 30 secondes, sources citées et cliquables",
   },
   {
     icon: "🔀",
@@ -69,7 +69,7 @@ const USE_CASES = [
 ];
 
 const STATS = [
-  { icon: "📚", value: "56 000+", label: "études cliniques intégrées (PubMed, PEDro)" },
+  { icon: "📚", value: "60 000+", label: "études cliniques intégrées (PubMed, PEDro)" },
   { icon: "⚡", value: "30 secondes", label: "temps moyen de réponse" },
   { icon: "🇪🇺", value: "Mistral", label: "IA européenne, données hébergées en Europe" },
   { icon: "🔗", value: "Sources citées", label: "accès direct à l'étude originale" },
@@ -114,7 +114,7 @@ export default function CopiloteIAKinePage() {
         points={[
           "Tu poses ta question comme à un confrère.",
           "Le Copilote détecte si elle est clinique, bibliographique ou pratique.",
-          "Drapeaux rouges, hypothèses et références issues de 56 000+ études.",
+          "Drapeaux rouges, hypothèses et références issues de 60 000+ études.",
         ]}
         visual={
           <ModuleVideo src="/copilote-video.mp4" label="Démo : une question clinique posée au Copilote IA et sa réponse sourcée" />

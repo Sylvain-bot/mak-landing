@@ -41,7 +41,7 @@ const TOOLS: Tool[] = [
     problem:
       "Un doute clinique entre deux patients. PubMed est inaccessible, ChatGPT invente des sources, et le Cleland est au bureau.",
     solution:
-      "56 000+ ressources EBP dont le Cleland. Pose ta question, obtiens une réponse sourcée en 30 secondes.",
+      "60 000+ ressources EBP dont le Cleland. Pose ta question, obtiens une réponse sourcée en 30 secondes.",
     steps: [
       {
         num: "01",

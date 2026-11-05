@@ -15,7 +15,7 @@ import { SignupLink } from "@/components/SignupLink";
 
 const PIONNIER_FEATURES = [
   "Bilans NGAP dictés et mis en forme",
-  "Copilote clinique — 56 000+ études, Cleland inclus",
+  "Copilote clinique — 60 000+ études, Cleland inclus",
   "Suivi patient WhatsApp + chatbot entre les séances",
   "Module Administratif — courriers, templates",
   "Vidéotransmission sécurisée",

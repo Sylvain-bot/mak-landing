@@ -10,7 +10,7 @@ export const TIME_SAVED_DAY = "45 minutes par jour";
 export const TIME_SAVED_WEEK = "4 heures par semaine";
 
 // Contenu
-export const STUDY_COUNT = "56 000+";
+export const STUDY_COUNT = "60 000+";
 
 // Temps de rédaction d'un bilan, avant / avec Mon Assistant Kiné (accueil, carte « Tes soirées te reviennent »).
 // Chiffre fourni par le fondateur (27/10/2026) : environ 20 min à la main, 2 min avec Mon Assistant Kiné (aligné sur BILAN_TIME).

@@ -14,7 +14,7 @@ const YT_ID = "ZrA7d4CvRRE";
 
 const FEATS = [
   { icon: "📋", label: "Bilans en 2 minutes", detail: "Enregistre ta séance, l'IA génère un bilan NGAP complet en quelques secondes — export PDF en 1 clic" },
-  { icon: "🧠", label: "IA clinique & bibliographique", detail: "56 000+ études intégrées — drapeaux rouges, raisonnement structuré, recherche EBP en 30 sec" },
+  { icon: "🧠", label: "IA clinique & bibliographique", detail: "60 000+ études intégrées — drapeaux rouges, raisonnement structuré, recherche EBP en 30 sec" },
   { icon: "💬", label: "Chatbot patient", detail: "Tes patients accompagnés entre les séances, sans SMS à gérer" },
 ];
 
@@ -68,7 +68,7 @@ export default function BioPage() {
             Gagne <em className="not-italic text-[#3899aa]">45 minutes par jour</em><br />au cabinet.
           </h1>
           <p className="text-lg text-[#475569] mb-2 leading-relaxed">
-            Mon Assistant Kiné mobilise 56 000+ ressources scientifiques dont le Cleland pour répondre à tes doutes cliniques — en 30 secondes, pendant ou entre les séances.
+            Mon Assistant Kiné mobilise 60 000+ ressources scientifiques dont le Cleland pour répondre à tes doutes cliniques — en 30 secondes, pendant ou entre les séances.
           </p>
           <p className="text-base text-[#94a3b8] mb-8">
             Bilans, administratif, suivi patient à domicile. Un seul outil.

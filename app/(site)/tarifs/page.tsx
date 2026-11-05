@@ -53,7 +53,7 @@ const PIONNIER_FEATURES = [
 
 const INCLUDED = [
   { icon: "📋", label: "Bilans NGAP conformes", desc: "Générés en 2 minutes" },
-  { icon: "📚", label: "56 000+ ressources EBP", desc: "PubMed, PEDro, Cleland" },
+  { icon: "📚", label: "60 000+ ressources EBP", desc: "PubMed, PEDro, Cleland" },
   { icon: "💬", label: "Suivi patient WhatsApp", desc: "Sans appli à installer" },
   { icon: "📨", label: "Gestion administrative", desc: "Templates + envoi direct" },
   { icon: "🧠", label: "Aide à la décision", desc: "Hypothèses + drapeaux rouges" },

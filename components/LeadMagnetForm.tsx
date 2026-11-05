@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
 import { Loader2 } from "lucide-react";
-import { getStoredUtmSource } from "@/lib/utm";
+import { getStoredUtmSource, getTrackingParams } from "@/lib/utm";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
 import { trackMetaEvent } from "@/components/MetaPixel";
 import { PRIVACY_POLICY_URL } from "@/lib/claims";
@@ -43,12 +43,14 @@ export function LeadMagnetForm({ source }: { source: string }) {
     if (errors.prenom || errors.email) return;
 
     const finalSource = getStoredUtmSource() || source;
+    // Campagne et pub d'origine (utm_campaign / utm_content = id de la pub Meta) pour suivre le tunnel par pub
+    const { utm_campaign: campaign, utm_content: ad } = getTrackingParams();
     setLoading(true);
     try {
       const res = await fetch("/api/leadmagnet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, prenom, source: finalSource, website }),
+        body: JSON.stringify({ email, prenom, source: finalSource, campaign, ad, website }),
       });
 
       if (res.ok) {

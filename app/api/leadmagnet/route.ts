@@ -29,6 +29,14 @@ function cleanSource(raw: unknown) {
   return source || "inconnu";
 }
 
+// Campagne ou id de pub : texte court, sans caractères spéciaux (les id de pub Meta sont numériques)
+function cleanTag(raw: unknown) {
+  return String(raw ?? "")
+    .replace(/[^\p{L}\p{N} _.\-|]/gu, "")
+    .trim()
+    .slice(0, 100);
+}
+
 function todayParis() {
   // en-CA → format YYYY-MM-DD
   return new Intl.DateTimeFormat("en-CA", {
@@ -71,27 +79,39 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "server_error" }, { status: 500 });
   }
 
-  try {
-    const res = await fetch("https://api.brevo.com/v3/contacts", {
+  const attributes: Record<string, string> = {
+    PRENOM: prenom,
+    LEADMAGNET: "fami-2027",
+    LM_SOURCE: cleanSource(body.source),
+    LM_DATE: todayParis(),
+  };
+  // Attribution par pub (attributs Brevo LM_CAMPAIGN / LM_AD), seulement si présents dans la visite
+  const campaign = cleanTag(body.campaign);
+  const ad = cleanTag(body.ad);
+  const attribution: Record<string, string> = {};
+  if (campaign) attribution.LM_CAMPAIGN = campaign;
+  if (ad) attribution.LM_AD = ad;
+
+  const send = (attrs: Record<string, string>) =>
+    fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
         "api-key": apiKey,
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({
-        email,
-        attributes: {
-          PRENOM: prenom,
-          LEADMAGNET: "fami-2027",
-          LM_SOURCE: cleanSource(body.source),
-          LM_DATE: todayParis(),
-        },
-        listIds: [listId],
-        updateEnabled: true,
-      }),
+      body: JSON.stringify({ email, attributes: attrs, listIds: [listId], updateEnabled: true }),
       signal: AbortSignal.timeout(BREVO_TIMEOUT_MS),
     });
+
+  try {
+    let res = await send({ ...attributes, ...attribution });
+    // Attributs d'attribution pas encore créés dans Brevo : on n'empêche pas l'inscription, on renvoie sans eux
+    if (res.status === 400 && Object.keys(attribution).length) {
+      const detail = await res.text().catch(() => "");
+      console.warn(`[leadmagnet] attribution ignorée (Brevo 400) : ${detail}`);
+      res = await send(attributes);
+    }
 
     // 201 = création, 204 = mise à jour
     if (res.ok) {
