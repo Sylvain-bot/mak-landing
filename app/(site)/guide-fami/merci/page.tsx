@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, CheckCircle2, CalendarClock, Users, MailCheck, ArrowRight, Gift } from "lucide-react";
+import { Check, CheckCircle2, CalendarClock, Users, MailCheck, ArrowRight, Gift, Crown, Star } from "lucide-react";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { MerciVideo } from "@/components/merci/MerciVideo";
@@ -181,7 +181,7 @@ export default async function GuideFamiMerciPage() {
               className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm sm:text-[15px] font-bold"
               style={{ background: "rgba(232,176,77,0.16)", border: "1px solid rgba(232,176,77,0.55)", color: "#7a5410" }}
             >
-              <Gift className="size-4" aria-hidden /> Cadeau : -{FIRST_YEAR_DISCOUNT * 100} % la première année, uniquement depuis cette page
+              <Gift className="size-4" aria-hidden /> Cadeau : -{FIRST_YEAR_DISCOUNT * 100} % sur l&apos;abonnement annuel, uniquement depuis cette page
             </p>
             <div className="mt-8 sm:mt-10">
               <MerciVideo src={VIDEO_SRC} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
@@ -201,9 +201,9 @@ export default async function GuideFamiMerciPage() {
             </h2>
             {/* Ce qu'il reçoit, ligne par ligne */}
             <ul className="mt-10 rounded-3xl overflow-hidden divide-y divide-[#dcecef]" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
-              {STACK.map((x) => (
+              {STACK.filter((x) => !x.extra).map((x) => (
                 <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
-                  <Check className="size-5 mt-0.5 shrink-0" style={{ color: x.extra ? "#b07d1a" : "#236f7d" }} aria-hidden />
+                  <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
                   <span className="min-w-0">
                     <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
                     <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
@@ -211,6 +211,33 @@ export default async function GuideFamiMerciPage() {
                 </li>
               ))}
             </ul>
+
+            {/* Avantages réservés aux 100 premiers : mis à part, en or, pour qu'ils se voient */}
+            <div
+              className="relative mt-6 rounded-3xl px-5 sm:px-7 pt-8 pb-5"
+              style={{ background: "linear-gradient(180deg, rgba(232,176,77,0.14), rgba(232,176,77,0.05))", border: "1.5px solid rgba(232,176,77,0.6)" }}
+            >
+              <span
+                className="absolute -top-3.5 left-5 sm:left-7 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white"
+                style={{ background: "linear-gradient(135deg, #c9932f, #a8761c)" }}
+              >
+                <Crown className="size-3.5" aria-hidden /> Exclusif Pionniers
+              </span>
+              <p className="text-[15px] text-[#7a5410] font-medium">
+                Réservé aux {`${PIONNIER_TOTAL_PLACES} premiers kinés`}, pour les remercier de leur confiance.
+              </p>
+              <ul className="mt-3 divide-y divide-[rgba(232,176,77,0.35)]">
+                {STACK.filter((x) => x.extra).map((x) => (
+                  <li key={x.name} className="flex items-start gap-3 py-3.5">
+                    <Star className="size-5 mt-0.5 shrink-0 fill-[#e8b04d] text-[#c9932f]" aria-hidden />
+                    <span className="min-w-0">
+                      <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                      <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
             <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
@@ -221,9 +248,9 @@ export default async function GuideFamiMerciPage() {
                 <span className="text-lg font-semibold text-white">/an</span>
               </p>
               <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
-                -{FIRST_YEAR_DISCOUNT * 100} % la première année, réservé à cette page
+                -{FIRST_YEAR_DISCOUNT * 100} % sur l&apos;annuel la première année, réservé à cette page
               </p>
-              <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois, sans engagement.</p>
+              <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois sans engagement (remise réservée à l&apos;annuel).</p>
 
               <div className="mt-7 pt-7 border-t border-white/10">
                 <p className="text-sm text-[#cbd5e1]">Et avec le forfait FAMI vidéotransmission :</p>
