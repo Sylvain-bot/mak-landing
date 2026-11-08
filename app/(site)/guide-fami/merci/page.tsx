@@ -24,10 +24,10 @@ export const metadata: Metadata = {
 // Page merci du guide FAMI, construite comme une page de vente courte (vidéo d'abord) :
 // titre qui demande 2 minutes, vidéo, un seul bouton, l'offre, deux échéances réelles, avis, questions.
 // Vidéo : déposer le fichier dans public/videos/ puis renseigner VIDEO_SRC (vide = cadre « Vidéo à venir »).
-const VIDEO_SRC = "";
+const VIDEO_SRC = "/videos/merci-fami.mp4";
 // Sous-titres WebVTT affichés pendant la lecture muette (générés depuis la vidéo une fois tournée).
 const VIDEO_CAPTIONS = "";
-const VIDEO_POSTER = undefined;
+const VIDEO_POSTER = "/images/merci-fami-poster.webp";
 const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
 
 // Offre réservée à cette page : -10 % la première année, via un lien de paiement dédié (fourni par Valentin).
