@@ -238,16 +238,25 @@ function PlanCard({ plan }: { plan: Plan }) {
         <span className="text-base font-semibold text-[#0f172a]">/an</span>
       </p>
       <p className="mt-1 text-xs text-center text-[#475569]">la 1re année, puis {eur(plan.annual)}/an · ou {plan.monthly} €/mois</p>
-      <p
-        className="mt-3 text-sm font-semibold text-center rounded-xl px-3 py-2"
-        style={plan.fami ? { background: "rgba(232,176,77,0.14)", color: "#7a5410" } : { background: "#f1f5f9", color: "#64748b" }}
-      >
-        {!plan.fami
-          ? "Non éligible au FAMI"
-          : famiNet >= 0
-            ? `Avec le FAMI : +${eur(famiNet)} pour toi`
-            : `Avec le FAMI : ${eur(-famiNet)} de coût net`}
-      </p>
+      {/* Le calcul FAMI posé en entier, lisible d'un coup d'œil */}
+      {plan.fami ? (
+        <div className="mt-3 rounded-xl px-3 py-3 text-center" style={{ background: "rgba(232,176,77,0.14)" }}>
+          <p className="text-xs font-semibold text-[#7a5410]">Avec le forfait FAMI, la 1re année</p>
+          <p className="mt-1 flex flex-wrap items-baseline justify-center gap-x-1.5 tabular-nums text-sm font-semibold text-[#0f172a]">
+            <span>{eur(Number(FAMI_AMOUNT))}</span>
+            <span className="text-[#94a3b8]" aria-label="moins">−</span>
+            <span>{eur(first)}</span>
+            <span className="text-[#94a3b8]" aria-label="égale">=</span>
+          </p>
+          <p className="mt-0.5 text-lg font-bold tabular-nums" style={{ color: famiNet >= 0 ? "#9a6b12" : "#0f172a" }}>
+            {famiNet >= 0 ? `+${eur(famiNet)} pour toi` : `${eur(-famiNet)} de coût net`}
+          </p>
+        </div>
+      ) : (
+        <p className="mt-3 text-sm font-semibold text-center rounded-xl px-3 py-3" style={{ background: "#f1f5f9", color: "#64748b" }}>
+          Non éligible au FAMI
+        </p>
+      )}
       <ul className="mt-5 grid gap-2.5 flex-1 content-start">
         {plan.features.map((f) => (
           <li key={f} className="flex items-start gap-2.5 text-[15px] text-[#0f172a]">
