@@ -119,7 +119,7 @@ export function CookieBanner() {
           <Toggle
             id="consent-ads"
             label="Publicité"
-            description="Meta : pixel sur le site (visites et inscriptions issues de nos publicités, affichage de nos publicités aux visiteurs du site) ; depuis nos serveurs, inscription, début d'essai et abonnement, avec ton email sous forme d'empreinte (hachée)."
+            description="Meta : pixel sur le site (pages visitées et inscriptions, pour mesurer nos publicités et les montrer aux visiteurs du site) ; depuis nos serveurs, inscription, début d'essai et abonnement (avec ton email sous forme d'empreinte hachée), qui servent aussi à ne plus te montrer nos publicités une fois inscrit."
             checked={draft.ads}
             onChange={(v) => setDraft((d) => ({ ...d, ads: v }))}
           />
