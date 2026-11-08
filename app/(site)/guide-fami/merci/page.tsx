@@ -12,6 +12,12 @@ import {
   FAMI_AMOUNT,
   PRICE_PIONNIER,
   PRICE_PIONNIER_ANNUAL,
+  PRICE_DECOUVERTE,
+  PRICE_DECOUVERTE_ANNUAL,
+  PRICE_PRATIQUE,
+  PRICE_PRATIQUE_ANNUAL,
+  PRICE_EXPERT,
+  PRICE_EXPERT_ANNUAL,
   PRIVACY_POLICY_URL,
   COMPLIANCE_CLAIM,
 } from "@/lib/claims";
@@ -22,17 +28,27 @@ export const metadata: Metadata = {
 };
 
 // Page merci du guide FAMI, construite comme une page de vente courte (vidéo d'abord) :
-// titre qui demande 2 minutes, vidéo, un seul bouton, l'offre, deux échéances réelles, avis, questions.
-// Vidéo : déposer le fichier dans public/videos/ puis renseigner VIDEO_SRC (vide = cadre « Vidéo à venir »).
-const VIDEO_SRC = "/videos/merci-fami.mp4";
-// Sous-titres WebVTT affichés pendant la lecture muette (générés depuis la vidéo une fois tournée).
+// titre qui demande 2 minutes, vidéo, un seul bouton, l'offre, échéances réelles, avis, questions.
+//
+// DEUX VERSIONS, une seule ligne à changer le jour où les 100 places Pionnier sont prises :
+//   "pionnier"  → offre Pionnier (avantages exclusifs, compteur de places), vidéo avec les mentions Pionnier
+//   "standard"  → grille Déclic / Pratique / Expert, vidéo sans mention Pionnier
+// En local uniquement, ?version=standard (ou pionnier) affiche l'autre version pour la relire.
+const OFFER: "pionnier" | "standard" = "pionnier";
+
+// Vidéos : fichier dans public/videos/ (vide = cadre « Vidéo à venir »).
+const VIDEOS = {
+  pionnier: { src: "/videos/merci-fami.mp4", poster: "/images/merci-fami-poster.webp" },
+  standard: { src: "", poster: undefined as string | undefined },
+};
+// Sous-titres WebVTT, seulement s'ils ne sont pas incrustés dans la vidéo.
 const VIDEO_CAPTIONS = "";
-const VIDEO_POSTER = "/images/merci-fami-poster.webp";
 const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
 
-// Offre réservée à cette page : -10 % la première année, via un lien de paiement dédié (fourni par Valentin).
-// Tant que le lien est vide, les boutons mènent à l'inscription standard.
-const MERCI_SIGNUP_URL = "";
+// Offre réservée à cette page : -10 % sur l'annuel la première année, via des liens de paiement dédiés (Valentin).
+// Tant qu'un lien est vide, le bouton mène à l'inscription standard.
+const MERCI_SIGNUP_URL = ""; // version Pionnier
+const PLAN_SIGNUP_URLS = { declic: "", pratique: "", expert: "" }; // version standard
 const FIRST_YEAR_DISCOUNT = 0.1;
 
 const NAVY = "#0f172a";
@@ -55,9 +71,55 @@ const STACK: { name: string; detail: string; extra?: boolean }[] = [
   { name: "Accès à la roadmap", detail: "Tu vois ce qui arrive et tu donnes ton avis sur les prochaines fonctionnalités.", extra: true },
   { name: "Groupe privé Pionniers", detail: "Entraide entre kinés et échanges directs avec nous, les fondateurs.", extra: true },
 ];
+const discounted = (annual: number) => Math.round(annual * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
 const ANNUAL = Number(PRICE_PIONNIER_ANNUAL);
-const FIRST_YEAR_PRICE = Math.round(ANNUAL * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
+const FIRST_YEAR_PRICE = discounted(ANNUAL);
 const NET_GAIN = Math.round((Number(FAMI_AMOUNT) - FIRST_YEAR_PRICE) * 100) / 100;
+
+// Grille après les Pionniers (celle de l'app). Déclic = PRICE_DECOUVERTE dans lib/claims.ts.
+type Plan = {
+  id: keyof typeof PLAN_SIGNUP_URLS;
+  name: string;
+  monthly: string;
+  annual: number;
+  fami: boolean;
+  highlight?: string;
+  features: string[];
+};
+const PLANS: Plan[] = [
+  {
+    id: "declic",
+    name: "Déclic",
+    monthly: PRICE_DECOUVERTE,
+    annual: Number(PRICE_DECOUVERTE_ANNUAL),
+    fami: false,
+    features: ["1 programme max", "Gestion patients", "Assistant IA, usage inclus"],
+  },
+  {
+    id: "pratique",
+    name: "Pratique",
+    monthly: PRICE_PRATIQUE,
+    annual: Number(PRICE_PRATIQUE_ANNUAL),
+    fami: true,
+    highlight: "Rentabilisé par le FAMI",
+    features: ["5 programmes max", "Gestion patients", "Assistant IA, 3× le plan Déclic", "Génération de bilans", "Outil de vidéotransmission"],
+  },
+  {
+    id: "expert",
+    name: "Expert",
+    monthly: PRICE_EXPERT,
+    annual: Number(PRICE_EXPERT_ANNUAL),
+    fami: true,
+    features: [
+      "Programmes illimités",
+      "Gestion patients",
+      "Assistant IA, 10× le plan Déclic",
+      "Génération de bilans",
+      "Module administratif",
+      "Outil de vidéotransmission",
+    ],
+  },
+];
 
 const REVIEWS = [
   {
@@ -93,7 +155,18 @@ const QUESTIONS = [
   },
 ];
 
-function Cta({ location, placesLeft }: { location: string; placesLeft: number | null }) {
+function Cta({ location, placesLeft, standard }: { location: string; placesLeft: number | null; standard?: boolean }) {
+  // Version standard : il faut d'abord choisir une formule, le bouton descend vers la grille.
+  if (standard) {
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <a href="#formules" className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
+          Je profite des -{FIRST_YEAR_DISCOUNT * 100} % <ArrowRight className="size-5" aria-hidden />
+        </a>
+        <p className="text-sm text-[#475569] text-center">14 jours d&apos;essai, résiliable à tout moment</p>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-center gap-3">
       <TrackedSignupLink
@@ -141,8 +214,66 @@ function PlacesCounter({ placesLeft }: { placesLeft: number }) {
   );
 }
 
-export default async function GuideFamiMerciPage() {
-  const placesLeft = await getPionnierPlacesLeft();
+function PlanCard({ plan }: { plan: Plan }) {
+  const first = discounted(plan.annual);
+  const famiNet = Math.round((Number(FAMI_AMOUNT) - first) * 100) / 100;
+  return (
+    <div
+      // Sur mobile (cartes empilées), la formule mise en avant passe en premier
+      className={`relative rounded-3xl bg-white p-6 sm:p-7 flex flex-col ${plan.highlight ? "order-first md:order-none" : ""}`}
+      style={{
+        border: plan.highlight ? "2px solid #236f7d" : "1px solid #d4ecea",
+        boxShadow: plan.highlight ? "0 18px 40px rgba(35,111,125,0.18)" : undefined,
+      }}
+    >
+      {plan.highlight && (
+        <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: "#236f7d" }}>
+          {plan.highlight}
+        </span>
+      )}
+      <h3 className="text-xl font-bold text-[#0f172a] text-center">{plan.name}</h3>
+      <p className="mt-3 text-center tabular-nums">
+        <span className="text-base text-[#94a3b8] line-through mr-2">{eur(plan.annual)}</span>
+        <span className="text-4xl font-bold text-[#0f172a]">{eur(first)}</span>
+        <span className="text-base font-semibold text-[#0f172a]">/an</span>
+      </p>
+      <p className="mt-1 text-xs text-center text-[#475569]">la 1re année, puis {eur(plan.annual)}/an · ou {plan.monthly} €/mois</p>
+      <p
+        className="mt-3 text-sm font-semibold text-center rounded-xl px-3 py-2"
+        style={plan.fami ? { background: "rgba(232,176,77,0.14)", color: "#7a5410" } : { background: "#f1f5f9", color: "#64748b" }}
+      >
+        {!plan.fami
+          ? "Non éligible au FAMI"
+          : famiNet >= 0
+            ? `Avec le FAMI : +${eur(famiNet)} pour toi`
+            : `Avec le FAMI : ${eur(-famiNet)} de coût net`}
+      </p>
+      <ul className="mt-5 grid gap-2.5 flex-1 content-start">
+        {plan.features.map((f) => (
+          <li key={f} className="flex items-start gap-2.5 text-[15px] text-[#0f172a]">
+            <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden /> {f}
+          </li>
+        ))}
+      </ul>
+      <TrackedSignupLink
+        location={`merci-plan-${plan.id}`}
+        href={PLAN_SIGNUP_URLS[plan.id]}
+        className={`${primaryCtaClass} mt-6 h-12 px-6 text-base w-full`}
+        style={plan.highlight ? primaryCtaStyle : { ...primaryCtaStyle, background: "#0f172a", boxShadow: "none" }}
+      >
+        Choisir {plan.name}
+      </TrackedSignupLink>
+    </div>
+  );
+}
+
+export default async function GuideFamiMerciPage({ searchParams }: { searchParams: Promise<{ version?: string }> }) {
+  const { version } = await searchParams;
+  const offer =
+    process.env.NODE_ENV === "development" && (version === "standard" || version === "pionnier") ? version : OFFER;
+  const standard = offer === "standard";
+  const video = VIDEOS[offer];
+  const placesLeft = standard ? null : await getPionnierPlacesLeft();
   return (
     <div className="flex flex-col min-h-svh bg-white">
       <header className="px-4 sm:px-6 py-4" style={{ background: GROUND }}>
@@ -195,52 +326,47 @@ export default async function GuideFamiMerciPage() {
               </p>
             </div>
             <div className="mt-8 sm:mt-10">
-              <MerciVideo src={VIDEO_SRC} captions={VIDEO_CAPTIONS || undefined} poster={VIDEO_POSTER} ratio={VIDEO_RATIO} />
+              <MerciVideo key={offer} src={video.src} captions={VIDEO_CAPTIONS || undefined} poster={video.poster} ratio={VIDEO_RATIO} />
             </div>
             <div className="mt-8 sm:mt-10">
-              <Cta location="merci-video" placesLeft={placesLeft} />
+              <Cta location="merci-video" placesLeft={placesLeft} standard={standard} />
             </div>
           </div>
         </section>
 
-        {/* 2. L'offre */}
-        <section className="px-4 sm:px-6 py-16 sm:py-24">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">L&apos;offre Pionnier</p>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
-              Tout ce que tu as dès aujourd&apos;hui
-            </h2>
-            {/* Ce qu'il reçoit, ligne par ligne */}
-            <ul className="mt-10 rounded-3xl overflow-hidden divide-y divide-[#dcecef]" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
-              {STACK.filter((x) => !x.extra).map((x) => (
-                <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
-                  <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
-                  <span className="min-w-0">
-                    <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
-                    <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Avantages réservés aux 100 premiers : mis à part, en or, pour qu'ils se voient */}
-            <div
-              className="relative mt-6 rounded-3xl px-5 sm:px-7 pt-8 pb-5"
-              style={{ background: "linear-gradient(180deg, rgba(232,176,77,0.14), rgba(232,176,77,0.05))", border: "1.5px solid rgba(232,176,77,0.6)" }}
-            >
-              <span
-                className="absolute -top-3.5 left-5 sm:left-7 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white"
-                style={{ background: "linear-gradient(135deg, #c9932f, #a8761c)" }}
-              >
-                <Crown className="size-3.5" aria-hidden /> Exclusif Pionniers
-              </span>
-              <p className="text-[15px] text-[#7a5410] font-medium">
-                Réservé aux {`${PIONNIER_TOTAL_PLACES} premiers kinés`}, pour les remercier de leur confiance.
+        {/* 2. L'offre : Pionnier, ou grille standard une fois les places prises */}
+        {standard ? (
+          <section id="formules" className="px-4 sm:px-6 py-16 sm:py-24 scroll-mt-4">
+            <div className="max-w-5xl mx-auto">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">Les formules</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
+                Choisis ta formule
+              </h2>
+              <p className="mt-4 text-center text-[#475569] text-balance">
+                {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'abonnement annuel la première année, réservé à cette page. 14 jours d'essai sur toutes les formules.`}
               </p>
-              <ul className="mt-3 divide-y divide-[rgba(232,176,77,0.35)]">
-                {STACK.filter((x) => x.extra).map((x) => (
-                  <li key={x.name} className="flex items-start gap-3 py-3.5">
-                    <Star className="size-5 mt-0.5 shrink-0 fill-[#e8b04d] text-[#c9932f]" aria-hidden />
+              <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">
+                {PLANS.map((plan) => (
+                  <PlanCard key={plan.id} plan={plan} />
+                ))}
+              </div>
+              <p className="mt-6 text-sm text-[#475569] text-center max-w-2xl mx-auto leading-relaxed">
+                {`Forfait FAMI vidéotransmission de ${FAMI_AMOUNT} €/an, si tu ne le perçois pas déjà via un autre logiciel. Forfait fixe à déclarer sur amelipro, versé par ta CPAM. Calcul sur le prix de la 1re année.`}
+              </p>
+            </div>
+          </section>
+        ) : (
+          <section className="px-4 sm:px-6 py-16 sm:py-24">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">L&apos;offre Pionnier</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
+                Tout ce que tu as dès aujourd&apos;hui
+              </h2>
+              {/* Ce qu'il reçoit, ligne par ligne */}
+              <ul className="mt-10 rounded-3xl overflow-hidden divide-y divide-[#dcecef]" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
+                {STACK.filter((x) => !x.extra).map((x) => (
+                  <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
+                    <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
                     <span className="min-w-0">
                       <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
                       <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
@@ -248,42 +374,69 @@ export default async function GuideFamiMerciPage() {
                   </li>
                 ))}
               </ul>
-            </div>
 
-            {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
-            <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
-              <p className="text-sm text-[#cbd5e1]">Ton prix Pionnier</p>
-              <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 tabular-nums">
-                <span className="text-xl text-[#94a3b8] line-through decoration-[#94a3b8]/70">{eur(ANNUAL)}/an</span>
-                <span className="text-4xl sm:text-5xl font-bold text-white">{eur(FIRST_YEAR_PRICE)}</span>
-                <span className="text-lg font-semibold text-white">/an</span>
-              </p>
-              <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
-                {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'annuel la première année, réservé à cette page`}
-              </p>
-              <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois sans engagement (remise réservée à l&apos;annuel).</p>
+              {/* Avantages réservés aux 100 premiers : mis à part, en or, pour qu'ils se voient */}
+              <div
+                className="relative mt-6 rounded-3xl px-5 sm:px-7 pt-8 pb-5"
+                style={{ background: "linear-gradient(180deg, rgba(232,176,77,0.14), rgba(232,176,77,0.05))", border: "1.5px solid rgba(232,176,77,0.6)" }}
+              >
+                <span
+                  className="absolute -top-3.5 left-5 sm:left-7 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white"
+                  style={{ background: "linear-gradient(135deg, #c9932f, #a8761c)" }}
+                >
+                  <Crown className="size-3.5" aria-hidden /> Exclusif Pionniers
+                </span>
+                <p className="text-[15px] text-[#7a5410] font-medium">
+                  Réservé aux {`${PIONNIER_TOTAL_PLACES} premiers kinés`}, pour les remercier de leur confiance.
+                </p>
+                <ul className="mt-3 divide-y divide-[rgba(232,176,77,0.35)]">
+                  {STACK.filter((x) => x.extra).map((x) => (
+                    <li key={x.name} className="flex items-start gap-3 py-3.5">
+                      <Star className="size-5 mt-0.5 shrink-0 fill-[#e8b04d] text-[#c9932f]" aria-hidden />
+                      <span className="min-w-0">
+                        <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                        <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-              <div className="mt-7 pt-7 border-t border-white/10">
-                <p className="text-sm text-[#cbd5e1]">Et avec le forfait FAMI vidéotransmission :</p>
-                <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-2xl sm:text-3xl font-bold text-white tabular-nums">
-                  <span>{eur(Number(FAMI_AMOUNT))}</span>
-                  <span className="text-[#94a3b8]" aria-label="moins">−</span>
-                  <span>{eur(FIRST_YEAR_PRICE)}</span>
-                  <span className="text-[#94a3b8]" aria-label="égale">=</span>
-                  <span style={{ color: GOLD }}>+{eur(NET_GAIN)} pour toi</span>
+              {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
+              <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
+                <p className="text-sm text-[#cbd5e1]">Ton prix Pionnier</p>
+                <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 tabular-nums">
+                  <span className="text-xl text-[#94a3b8] line-through decoration-[#94a3b8]/70">{eur(ANNUAL)}/an</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white">{eur(FIRST_YEAR_PRICE)}</span>
+                  <span className="text-lg font-semibold text-white">/an</span>
                 </p>
-                <p className="mt-4 text-sm text-[#cbd5e1] max-w-xl mx-auto leading-relaxed">
-                  La première année. Si tu ne perçois pas déjà le forfait via un autre logiciel de vidéotransmission. Forfait
-                  fixe à déclarer sur amelipro, versé par ta CPAM.
+                <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
+                  {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'annuel la première année, réservé à cette page`}
                 </p>
+                <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois sans engagement (remise réservée à l&apos;annuel).</p>
+
+                <div className="mt-7 pt-7 border-t border-white/10">
+                  <p className="text-sm text-[#cbd5e1]">Et avec le forfait FAMI vidéotransmission :</p>
+                  <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-2xl sm:text-3xl font-bold text-white tabular-nums">
+                    <span>{eur(Number(FAMI_AMOUNT))}</span>
+                    <span className="text-[#94a3b8]" aria-label="moins">−</span>
+                    <span>{eur(FIRST_YEAR_PRICE)}</span>
+                    <span className="text-[#94a3b8]" aria-label="égale">=</span>
+                    <span style={{ color: GOLD }}>+{eur(NET_GAIN)} pour toi</span>
+                  </p>
+                  <p className="mt-4 text-sm text-[#cbd5e1] max-w-xl mx-auto leading-relaxed">
+                    La première année. Si tu ne perçois pas déjà le forfait via un autre logiciel de vidéotransmission. Forfait
+                    fixe à déclarer sur amelipro, versé par ta CPAM.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* 3. Les deux échéances */}
         <section className="px-4 sm:px-6 pb-16 sm:pb-24">
-          <div className="max-w-3xl mx-auto grid gap-4 sm:grid-cols-2">
+          <div className={`mx-auto grid gap-4 ${standard ? "max-w-xl" : "max-w-3xl sm:grid-cols-2"}`}>
             <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
               <CalendarClock className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
               <h3 className="mt-3 text-lg font-bold text-[#0f172a]">Le 31 décembre compte</h3>
@@ -292,17 +445,19 @@ export default async function GuideFamiMerciPage() {
                 en moins.
               </p>
             </div>
-            <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
-              <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
-              <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
-              <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
-                {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés. Ensuite, l'offre ferme.`}
-              </p>
-              {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
-            </div>
+            {!standard && (
+              <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
+                <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
+                <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
+                <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
+                  {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés. Ensuite, l'offre ferme.`}
+                </p>
+                {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
+              </div>
+            )}
           </div>
           <div className="mt-10">
-            <Cta location="merci-offre" placesLeft={placesLeft} />
+            <Cta location="merci-offre" placesLeft={placesLeft} standard={standard} />
           </div>
         </section>
 
@@ -344,7 +499,7 @@ export default async function GuideFamiMerciPage() {
             </dl>
             <p className="mt-6 text-sm text-[#475569] text-center">{COMPLIANCE_CLAIM}</p>
             <div className="mt-10">
-              <Cta location="merci-bas" placesLeft={placesLeft} />
+              <Cta location="merci-bas" placesLeft={placesLeft} standard={standard} />
             </div>
 
             {/* Rappel mail, en bas : la vidéo passe d'abord */}
