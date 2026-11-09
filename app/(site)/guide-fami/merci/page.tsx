@@ -47,7 +47,7 @@ const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
 
 // Offre réservée à cette page : -10 % sur l'annuel la première année, via des liens de paiement dédiés (Valentin).
 // Tant qu'un lien est vide, le bouton mène à l'inscription standard.
-const MERCI_SIGNUP_URL = ""; // version Pionnier
+const MERCI_SIGNUP_URL = "https://app.monassistantkine.fr/signup/guide-fami10"; // version Pionnier (lien de Valentin, 9 nov. 2026)
 const PLAN_SIGNUP_URLS = { declic: "", pratique: "", expert: "" }; // version standard
 const FIRST_YEAR_DISCOUNT = 0.1;
 
