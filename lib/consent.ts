@@ -3,14 +3,16 @@
  * un seul choix vaut pour les deux sites.
  *
  * Cookie : mak_consent
- *   Valeur   : v2.a<0|1>.d<0|1>.<timestamp_unix>
- *              - v2        version du format / de la bannière. Si elle change, le consentement est redemandé.
+ *   Valeur   : v3.a<0|1>.d<0|1>.<timestamp_unix>
+ *              - v3        version du format / de la bannière. Si elle change, le consentement est redemandé.
  *                          v2 : l'accord « Publicité » couvre aussi les envois serveur de l'app à Meta
- *                          (inscription, début d'essai, 1er paiement) ; un choix v1 n'est plus valable.
+ *                          (inscription, début d'essai, 1er paiement).
+ *                          v3 : il couvre aussi l'affichage de nos pubs aux visiteurs du site (reciblage Meta) ;
+ *                          un choix v1 ou v2 n'est plus valable.
  *              - a<0|1>    « Mesure d'audience » (PostHog sur le site, Google Analytics sur l'app) — 1 = accepté, 0 = refusé
  *              - d<0|1>    « Publicité » (pixel Meta sur le site, envois serveur à Meta depuis l'app) — 1 = accepté, 0 = refusé
  *              - timestamp date du choix, en secondes Unix (UTC)
- *              Exemple : v2.a1.d0.1760000000  → audience acceptée, publicité refusée
+ *              Exemple : v3.a1.d0.1760000000  → audience acceptée, publicité refusée
  *   Domaine  : .monassistantkine.fr (partagé www + app). Hors de ce domaine (localhost, previews Vercel),
  *              le cookie est posé sur l'hôte courant.
  *   Attributs: path=/ ; SameSite=Lax ; Secure (en HTTPS) ; Max-Age = 6 mois (183 jours)
@@ -23,7 +25,7 @@
  */
 
 export const CONSENT_COOKIE = "mak_consent";
-export const CONSENT_VERSION = "v2";
+export const CONSENT_VERSION = "v3";
 export const CONSENT_MAX_AGE_SECONDS = 183 * 24 * 60 * 60;
 export const CONSENT_EVENT = "mak:consent";
 export const OPEN_CONSENT_EVENT = "mak:open-consent";
@@ -35,7 +37,7 @@ export type Consent = { analytics: boolean; ads: boolean };
 
 export function parseConsent(raw: string | null | undefined, nowSeconds = Date.now() / 1000): Consent | null {
   if (!raw) return null;
-  const m = /^v2\.a([01])\.d([01])\.(\d{9,11})$/.exec(decodeURIComponent(raw).trim());
+  const m = /^v3\.a([01])\.d([01])\.(\d{9,11})$/.exec(decodeURIComponent(raw).trim());
   if (!m) return null;
   const ts = Number(m[3]);
   if (nowSeconds - ts > CONSENT_MAX_AGE_SECONDS || ts - nowSeconds > 24 * 60 * 60) return null;
