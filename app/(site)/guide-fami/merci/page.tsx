@@ -1,61 +1,530 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Check, CheckCircle2, CalendarClock, Users, MailCheck, ArrowRight, Gift, Crown, Star } from "lucide-react";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
-import { MailCheck } from "lucide-react";
+import { TrackedSignupLink } from "@/components/TrackedSignupLink";
+import { MerciVideo } from "@/components/merci/MerciVideo";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
-import { SignupLink } from "@/components/SignupLink";
-import { PRIVACY_POLICY_URL } from "@/lib/claims";
+import { primaryCtaClass, primaryCtaStyle } from "@/lib/ctaStyles";
+import { getPionnierPlacesLeft, PIONNIER_TOTAL_PLACES } from "@/lib/pionniers";
+import {
+  FAMI_AMOUNT,
+  PRICE_PIONNIER,
+  PRICE_PIONNIER_ANNUAL,
+  PRICE_DECOUVERTE,
+  PRICE_DECOUVERTE_ANNUAL,
+  PRICE_PRATIQUE,
+  PRICE_PRATIQUE_ANNUAL,
+  PRICE_EXPERT,
+  PRICE_EXPERT_ANNUAL,
+  PRIVACY_POLICY_URL,
+  COMPLIANCE_CLAIM,
+} from "@/lib/claims";
 
 export const metadata: Metadata = {
   title: "C'est envoyé ! | Guide FAMI 2027 — Mon Assistant Kiné",
   robots: { index: false, follow: false },
 };
 
-export default function GuideFamiMerciPage() {
+// Page merci du guide FAMI, construite comme une page de vente courte (vidéo d'abord) :
+// titre qui demande 2 minutes, vidéo, un seul bouton, l'offre, échéances réelles, avis, questions.
+//
+// DEUX VERSIONS, une seule ligne à changer le jour où les 100 places Pionnier sont prises :
+//   "pionnier"  → offre Pionnier (avantages exclusifs, compteur de places), vidéo avec les mentions Pionnier
+//   "standard"  → grille Déclic / Pratique / Expert, vidéo sans mention Pionnier
+// En local uniquement, ?version=standard (ou pionnier) affiche l'autre version pour la relire.
+const OFFER: "pionnier" | "standard" = "pionnier";
+
+// Vidéos : fichier dans public/videos/ (vide = cadre « Vidéo à venir »).
+const VIDEOS = {
+  pionnier: { src: "/videos/merci-fami.mp4", poster: "/images/merci-fami-poster.webp" },
+  standard: { src: "", poster: undefined as string | undefined },
+};
+// Sous-titres WebVTT, seulement s'ils ne sont pas incrustés dans la vidéo.
+const VIDEO_CAPTIONS = "";
+const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
+
+// Offre réservée à cette page : -10 % sur l'annuel la première année, via des liens de paiement dédiés (Valentin).
+// Tant qu'un lien est vide, le bouton mène à l'inscription standard.
+const MERCI_SIGNUP_URL = "https://app.monassistantkine.fr/signup/guide-fami10"; // version Pionnier (lien de Valentin, 9 nov. 2026)
+const PLAN_SIGNUP_URLS = { declic: "", pratique: "", expert: "" }; // version standard
+const FIRST_YEAR_DISCOUNT = 0.1;
+
+const NAVY = "#0f172a";
+const GOLD = "#e8b04d";
+const GROUND = "#f2f9fa";
+
+const eur = (n: number) =>
+  new Intl.NumberFormat("fr-FR", { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }).format(n) + " €";
+
+// Ce que reçoit un Pionnier : un bénéfice concret par ligne, sans valeur en euros
+// (les modules ne sont pas vendus séparément : aucun prix de référence réel à afficher).
+const STACK: { name: string; detail: string; extra?: boolean }[] = [
+  { name: "Bilan dicté", detail: "Tu parles pendant la séance, ton bilan NGAP se rédige. Plus de bilans le soir." },
+  { name: "Copilote IA clinique", detail: "Un doute en séance ? Une réponse sourcée en quelques secondes, 60 000+ textes." },
+  { name: "Suivi patient et exercices", detail: "Le programme d'exercices sur WhatsApp, tes patients suivis entre les séances." },
+  { name: "Vidéotransmission sécurisée", detail: "Dédiée à la télésanté : c'est elle qui te rend éligible aux 350 € du FAMI." },
+  { name: "Gestion administrative", detail: "Courriers et relances rédigés depuis tes modèles." },
+  { name: "Contrats de remplacement", detail: "Rédigés, signés et déclarés à l'Ordre." },
+  { name: "Prix Pionnier bloqué à vie", detail: "Ton tarif ne bougera jamais, même quand les prix augmenteront.", extra: true },
+  { name: "Accès à la roadmap", detail: "Tu vois ce qui arrive et tu donnes ton avis sur les prochaines fonctionnalités.", extra: true },
+  { name: "Groupe privé Pionniers", detail: "Entraide entre kinés et échanges directs avec nous, les fondateurs.", extra: true },
+];
+const discounted = (annual: number) => Math.round(annual * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
+const ANNUAL = Number(PRICE_PIONNIER_ANNUAL);
+const FIRST_YEAR_PRICE = discounted(ANNUAL);
+const NET_GAIN = Math.round((Number(FAMI_AMOUNT) - FIRST_YEAR_PRICE) * 100) / 100;
+
+// Grille après les Pionniers (celle de l'app). Déclic = PRICE_DECOUVERTE dans lib/claims.ts.
+type Plan = {
+  id: keyof typeof PLAN_SIGNUP_URLS;
+  name: string;
+  monthly: string;
+  annual: number;
+  fami: boolean;
+  highlight?: string;
+  features: string[];
+};
+const PLANS: Plan[] = [
+  {
+    id: "declic",
+    name: "Déclic",
+    monthly: PRICE_DECOUVERTE,
+    annual: Number(PRICE_DECOUVERTE_ANNUAL),
+    fami: false,
+    features: ["1 programme max", "Gestion patients", "Assistant IA, usage inclus"],
+  },
+  {
+    id: "pratique",
+    name: "Pratique",
+    monthly: PRICE_PRATIQUE,
+    annual: Number(PRICE_PRATIQUE_ANNUAL),
+    fami: true,
+    highlight: "Rentabilisé par le FAMI",
+    features: ["5 programmes max", "Gestion patients", "Assistant IA, 3× le plan Déclic", "Génération de bilans", "Outil de vidéotransmission"],
+  },
+  {
+    id: "expert",
+    name: "Expert",
+    monthly: PRICE_EXPERT,
+    annual: Number(PRICE_EXPERT_ANNUAL),
+    fami: true,
+    features: [
+      "Programmes illimités",
+      "Gestion patients",
+      "Assistant IA, 10× le plan Déclic",
+      "Génération de bilans",
+      "Module administratif",
+      "Outil de vidéotransmission",
+    ],
+  },
+];
+
+const REVIEWS = [
+  {
+    quote:
+      "L'enregistrement de séance, c'est génial ! Les bilans sont plus complets car plus besoin de se creuser le soir pour se souvenir de ce qui a été dit. Plus qu'à relire et enregistrer, et plus jamais de bilans en retard : le rêve.",
+    author: "Constance",
+    location: "Gueugnon",
+  },
+  {
+    quote: "Je rédige mes bilans directement pendant les séances. Mes soirées m'appartiennent à nouveau.",
+    author: "Marion D.",
+    location: "Biot",
+  },
+  {
+    quote: "Avec le suivi patient, j'ai une bien meilleure observance. Mes patients font vraiment leurs exercices entre les séances.",
+    author: "Clément B.",
+    location: "Lyon",
+  },
+];
+
+const QUESTIONS = [
+  {
+    q: "Je vais être débité tout de suite ?",
+    a: "Non. Les 14 jours d'essai sont complets et gratuits. La carte bancaire est demandée à l'inscription, mais tu n'es débité qu'à la fin de l'essai, si tu gardes l'abonnement.",
+  },
+  {
+    q: "Je peux arrêter quand je veux ?",
+    a: "Oui. L'essai se résilie à tout moment, et l'abonnement mensuel est sans engagement. L'annuel engage sur 12 mois, payés en une fois, à un tarif plus bas.",
+  },
+  {
+    q: "Et les données de mes patients ?",
+    a: "Elles sont chiffrées, hébergées en France chez un hébergeur certifié HDS, et ne servent jamais à entraîner des modèles d'IA.",
+  },
+];
+
+function Cta({ location, placesLeft, standard }: { location: string; placesLeft: number | null; standard?: boolean }) {
+  // Version standard : il faut d'abord choisir une formule, le bouton descend vers la grille.
+  if (standard) {
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <a href="#formules" className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`} style={primaryCtaStyle}>
+          Je profite des -{FIRST_YEAR_DISCOUNT * 100} % <ArrowRight className="size-5" aria-hidden />
+        </a>
+        <p className="text-sm text-[#475569] text-center">14 jours d&apos;essai, résiliable à tout moment</p>
+      </div>
+    );
+  }
   return (
-    <div className="flex flex-col min-h-svh" style={{ background: "#f2f9fa" }}>
-      <header className="px-4 sm:px-6 py-5">
-        <div className="max-w-2xl mx-auto">
-          <Link href="/" aria-label="Mon Assistant Kiné — accueil" className="inline-block">
-            <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain" priority />
-          </Link>
+    <div className="flex flex-col items-center gap-3">
+      <TrackedSignupLink
+        location={location}
+        href={MERCI_SIGNUP_URL}
+        className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`}
+        style={primaryCtaStyle}
+      >
+        Je profite des -{FIRST_YEAR_DISCOUNT * 100} % <ArrowRight className="size-5" aria-hidden />
+      </TrackedSignupLink>
+      <p className="text-sm text-[#475569] text-center">
+        14 jours d&apos;essai, résiliable à tout moment
+        {placesLeft !== null && (
+          <>
+            {" "}· <strong className="font-semibold text-[#9a6b12]">plus que {placesLeft} places Pionnier</strong>
+          </>
+        )}
+      </p>
+    </div>
+  );
+}
+
+function PlacesCounter({ placesLeft }: { placesLeft: number }) {
+  const taken = PIONNIER_TOTAL_PLACES - placesLeft;
+  return (
+    <div className="mt-4">
+      <div className="flex items-baseline justify-between text-sm">
+        <span className="font-bold text-[#0f172a] tabular-nums">
+          {placesLeft} places restantes
+        </span>
+        <span className="text-[#475569] tabular-nums">sur {PIONNIER_TOTAL_PLACES}</span>
+      </div>
+      <div
+        className="mt-2 h-2.5 rounded-full overflow-hidden"
+        style={{ background: "rgba(232,176,77,0.18)" }}
+        role="progressbar"
+        aria-label="Places Pionnier déjà prises"
+        aria-valuemin={0}
+        aria-valuemax={PIONNIER_TOTAL_PLACES}
+        aria-valuenow={taken}
+      >
+        <div className="h-full rounded-full" style={{ width: `${(taken / PIONNIER_TOTAL_PLACES) * 100}%`, background: GOLD }} />
+      </div>
+    </div>
+  );
+}
+
+function PlanCard({ plan }: { plan: Plan }) {
+  const first = discounted(plan.annual);
+  const famiNet = Math.round((Number(FAMI_AMOUNT) - first) * 100) / 100;
+  return (
+    <div
+      // Sur mobile (cartes empilées), la formule mise en avant passe en premier
+      className={`relative rounded-3xl bg-white p-6 sm:p-7 flex flex-col ${plan.highlight ? "order-first md:order-none" : ""}`}
+      style={{
+        border: plan.highlight ? "2px solid #236f7d" : "1px solid #d4ecea",
+        boxShadow: plan.highlight ? "0 18px 40px rgba(35,111,125,0.18)" : undefined,
+      }}
+    >
+      {plan.highlight && (
+        <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold text-white" style={{ background: "#236f7d" }}>
+          {plan.highlight}
+        </span>
+      )}
+      <h3 className="text-xl font-bold text-[#0f172a] text-center">{plan.name}</h3>
+      <p className="mt-3 text-center tabular-nums">
+        <span className="text-base text-[#94a3b8] line-through mr-2">{eur(plan.annual)}</span>
+        <span className="text-4xl font-bold text-[#0f172a]">{eur(first)}</span>
+        <span className="text-base font-semibold text-[#0f172a]">/an</span>
+      </p>
+      <p className="mt-1 text-xs text-center text-[#475569]">la 1re année, puis {eur(plan.annual)}/an · ou {plan.monthly} €/mois</p>
+      {/* Le calcul FAMI posé en entier, lisible d'un coup d'œil */}
+      {plan.fami ? (
+        <div className="mt-3 rounded-xl px-3 py-3 text-center" style={{ background: "rgba(232,176,77,0.14)" }}>
+          <p className="text-xs font-semibold text-[#7a5410]">Avec le forfait FAMI, la 1re année</p>
+          <p className="mt-1 flex flex-wrap items-baseline justify-center gap-x-1.5 tabular-nums text-sm font-semibold text-[#0f172a]">
+            <span>{eur(Number(FAMI_AMOUNT))}</span>
+            <span className="text-[#94a3b8]" aria-label="moins">−</span>
+            <span>{eur(first)}</span>
+            <span className="text-[#94a3b8]" aria-label="égale">=</span>
+          </p>
+          <p className="mt-0.5 text-lg font-bold tabular-nums" style={{ color: famiNet >= 0 ? "#9a6b12" : "#0f172a" }}>
+            {famiNet >= 0 ? `+${eur(famiNet)} pour toi` : `${eur(-famiNet)} de coût net`}
+          </p>
+        </div>
+      ) : (
+        <p className="mt-3 text-sm font-semibold text-center rounded-xl px-3 py-3" style={{ background: "#f1f5f9", color: "#64748b" }}>
+          Non éligible au FAMI
+        </p>
+      )}
+      <ul className="mt-5 grid gap-2.5 flex-1 content-start">
+        {plan.features.map((f) => (
+          <li key={f} className="flex items-start gap-2.5 text-[15px] text-[#0f172a]">
+            <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden /> {f}
+          </li>
+        ))}
+      </ul>
+      <TrackedSignupLink
+        location={`merci-plan-${plan.id}`}
+        href={PLAN_SIGNUP_URLS[plan.id]}
+        className={`${primaryCtaClass} mt-6 h-12 px-6 text-base w-full`}
+        style={plan.highlight ? primaryCtaStyle : { ...primaryCtaStyle, background: "#0f172a", boxShadow: "none" }}
+      >
+        Choisir {plan.name}
+      </TrackedSignupLink>
+    </div>
+  );
+}
+
+export default async function GuideFamiMerciPage({ searchParams }: { searchParams: Promise<{ version?: string }> }) {
+  const { version } = await searchParams;
+  const offer =
+    process.env.NODE_ENV === "development" && (version === "standard" || version === "pionnier") ? version : OFFER;
+  const standard = offer === "standard";
+  const video = VIDEOS[offer];
+  const placesLeft = standard ? null : await getPionnierPlacesLeft();
+  return (
+    <div className="flex flex-col min-h-svh bg-white">
+      <header className="px-4 sm:px-6 py-4" style={{ background: GROUND }}>
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+          {/* Logo non cliquable : pas de sortie du tunnel vers l'accueil */}
+          <Image src="/logo-mak.webp" alt="Mon Assistant Kiné" width={120} height={36} className="h-8 w-auto object-contain shrink-0" priority />
+          {/* Deux étapes : le guide est envoyé, il reste la vidéo */}
+          <ol className="flex items-center gap-2 text-xs sm:text-sm font-semibold" aria-label="Étapes">
+            <li className="flex items-center gap-1.5 text-[#236f7d]">
+              <CheckCircle2 className="size-4" aria-hidden /> Guide envoyé
+            </li>
+            <li aria-hidden className="w-6 h-px bg-[#94a3b8]" />
+            <li className="flex items-center gap-1.5 text-[#0f172a]">
+              <span className="flex items-center justify-center size-4 rounded-full text-[10px] text-white" style={{ background: NAVY }}>2</span>
+              La vidéo
+            </li>
+          </ol>
         </div>
       </header>
 
-      <main className="flex-1 px-4 sm:px-6 py-10 sm:py-16">
-        <div className="max-w-xl mx-auto text-center">
-          <div className="mx-auto mb-6 w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "rgba(56,153,170,0.12)" }}>
-            <MailCheck className="size-7 text-[#3899aa]" aria-hidden />
+      <main className="flex-1">
+        {/* 1. Titre + vidéo + bouton */}
+        <section className="px-4 sm:px-6 pt-10 pb-16 sm:pt-14 sm:pb-20" style={{ background: GROUND }}>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-sm font-semibold text-[#236f7d] text-balance">
+              <MailCheck className="inline size-4 mr-1.5 -mt-0.5 align-middle" aria-hidden />Ton guide est en route : il arrive par mail d&apos;ici quelques minutes.
+            </p>
+            <p className="mt-1 text-sm font-semibold text-[#9a6b12]">Ne ferme pas cette page tout de suite.</p>
+            <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-[#0f172a] leading-[1.08] tracking-tight text-balance">
+              Je t&apos;offre le guide.
+              <br />
+              <span className="text-[#236f7d]">Tu m&apos;offres 2 minutes ?</span>
+            </h1>
+            <p className="mt-5 text-lg text-[#475569] leading-relaxed text-balance">
+              Le guide t&apos;explique les règles du FAMI. Dans cette vidéo, je te montre comment toucher les{" "}
+              {FAMI_AMOUNT} € de la vidéotransmission avant le 31 décembre, et rentrer chez toi avec tes bilans déjà écrits.
+            </p>
+            {/* Le cadeau avec sa raison : il a pris le guide, il doit être équipé avant le 31/12 */}
+            <div
+              className="mt-6 mx-auto max-w-xl rounded-2xl px-5 py-4 text-left flex items-start gap-3"
+              style={{ background: "rgba(232,176,77,0.14)", border: "1px solid rgba(232,176,77,0.55)" }}
+            >
+              <Gift className="size-6 mt-0.5 shrink-0 text-[#9a6b12]" aria-hidden />
+              <p className="text-[15px] leading-relaxed text-[#5c4210]">
+                <strong className="font-bold">
+                  {`Ton cadeau pour avoir pris le guide : -${FIRST_YEAR_DISCOUNT * 100} % sur l'abonnement annuel.`}
+                </strong>{" "}
+                Pour t&apos;aider à être équipé avant le 31 décembre et ne pas perdre ton forfait. Uniquement depuis cette
+                page.
+              </p>
+            </div>
+            <div className="mt-8 sm:mt-10">
+              <MerciVideo key={offer} src={video.src} captions={VIDEO_CAPTIONS || undefined} poster={video.poster} ratio={VIDEO_RATIO} />
+            </div>
+            <div className="mt-8 sm:mt-10">
+              <Cta location="merci-video" placesLeft={placesLeft} standard={standard} />
+            </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight mb-5">
-            C&apos;est envoyé ! Regarde ta boîte mail.
-          </h1>
-          <p className="text-[#475569] text-base leading-relaxed mb-5">
-            Ton guide arrive dans quelques minutes, envoyé par{" "}
-            <strong className="text-[#0f172a] font-semibold">sylvain@monassistantkine.fr</strong>. Pas reçu ?
-            Vérifie tes spams ou l&apos;onglet Promotions, et ajoute cette adresse à tes contacts.
-          </p>
-          <p className="text-xs text-[#94a3b8]">
-            <a href={`mailto:${LEADMAGNET_CONTACT_EMAIL}`} className="underline hover:text-[#3899aa] transition-colors">
-              Pas reçu après 10 minutes ? Écris-nous à {LEADMAGNET_CONTACT_EMAIL}
-            </a>
-          </p>
-        </div>
+        </section>
 
-        {/* Bloc secondaire */}
-        <div className="max-w-xl mx-auto mt-14 sm:mt-20 rounded-2xl bg-white p-7 sm:p-9 text-center" style={{ border: "1px solid #d4ecea" }}>
-          <h2 className="text-lg sm:text-xl font-semibold text-[#0f172a] mb-3">Envie de t&apos;équiper avant le 31/12 ?</h2>
-          <p className="text-sm text-[#475569] leading-relaxed mb-6">
-            Mon Assistant Kiné inclut une vidéotransmission sécurisée, dédiée à la télésanté et éligible aux 350 € du FAMI.
-          </p>
-          <SignupLink
-            className="inline-flex items-center justify-center h-11 px-6 rounded-xl font-semibold text-sm text-[#2a7a8a] transition-colors hover:bg-[#f0f9fa] outline-none focus-visible:ring-3 focus-visible:ring-[#3899aa]/40"
-            style={{ border: "1.5px solid #3899aa" }}
-          >
-            Tester 14 jours gratuitement
-          </SignupLink>
-        </div>
+        {/* 2. L'offre : Pionnier, ou grille standard une fois les places prises */}
+        {standard ? (
+          <section id="formules" className="px-4 sm:px-6 py-16 sm:py-24 scroll-mt-4">
+            <div className="max-w-5xl mx-auto">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">Les formules</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
+                Choisis ta formule
+              </h2>
+              <p className="mt-4 text-center text-[#475569] text-balance">
+                {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'abonnement annuel la première année, réservé à cette page. 14 jours d'essai sur toutes les formules.`}
+              </p>
+              <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">
+                {PLANS.map((plan) => (
+                  <PlanCard key={plan.id} plan={plan} />
+                ))}
+              </div>
+              <p className="mt-6 text-sm text-[#475569] text-center max-w-2xl mx-auto leading-relaxed">
+                {`Forfait FAMI vidéotransmission de ${FAMI_AMOUNT} €/an, si tu ne le perçois pas déjà via un autre logiciel. Forfait fixe à déclarer sur amelipro, versé par ta CPAM. Calcul sur le prix de la 1re année.`}
+              </p>
+            </div>
+          </section>
+        ) : (
+          <section className="px-4 sm:px-6 py-16 sm:py-24">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">L&apos;offre Pionnier</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
+                Tout ce que tu as dès aujourd&apos;hui
+              </h2>
+              {/* Ce qu'il reçoit, ligne par ligne */}
+              <ul className="mt-10 rounded-3xl overflow-hidden divide-y divide-[#dcecef]" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
+                {STACK.filter((x) => !x.extra).map((x) => (
+                  <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
+                    <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
+                    <span className="min-w-0">
+                      <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                      <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Avantages réservés aux 100 premiers : mis à part, en or, pour qu'ils se voient */}
+              <div
+                className="relative mt-6 rounded-3xl px-5 sm:px-7 pt-8 pb-5"
+                style={{ background: "linear-gradient(180deg, rgba(232,176,77,0.14), rgba(232,176,77,0.05))", border: "1.5px solid rgba(232,176,77,0.6)" }}
+              >
+                <span
+                  className="absolute -top-3.5 left-5 sm:left-7 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white"
+                  style={{ background: "linear-gradient(135deg, #c9932f, #a8761c)" }}
+                >
+                  <Crown className="size-3.5" aria-hidden /> Exclusif Pionniers
+                </span>
+                <p className="text-[15px] text-[#7a5410] font-medium">
+                  Réservé aux {`${PIONNIER_TOTAL_PLACES} premiers kinés`}, pour les remercier de leur confiance.
+                </p>
+                <ul className="mt-3 divide-y divide-[rgba(232,176,77,0.35)]">
+                  {STACK.filter((x) => x.extra).map((x) => (
+                    <li key={x.name} className="flex items-start gap-3 py-3.5">
+                      <Star className="size-5 mt-0.5 shrink-0 fill-[#e8b04d] text-[#c9932f]" aria-hidden />
+                      <span className="min-w-0">
+                        <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                        <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
+              <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
+                <p className="text-sm text-[#cbd5e1]">Ton prix Pionnier</p>
+                <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 tabular-nums">
+                  <span className="text-xl text-[#94a3b8] line-through decoration-[#94a3b8]/70">{eur(ANNUAL)}/an</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white">{eur(FIRST_YEAR_PRICE)}</span>
+                  <span className="text-lg font-semibold text-white">/an</span>
+                </p>
+                <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
+                  {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'annuel la première année, réservé à cette page`}
+                </p>
+                <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois sans engagement (remise réservée à l&apos;annuel).</p>
+
+                <div className="mt-7 pt-7 border-t border-white/10">
+                  <p className="text-sm text-[#cbd5e1]">Et avec le forfait FAMI vidéotransmission :</p>
+                  <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-2xl sm:text-3xl font-bold text-white tabular-nums">
+                    <span>{eur(Number(FAMI_AMOUNT))}</span>
+                    <span className="text-[#94a3b8]" aria-label="moins">−</span>
+                    <span>{eur(FIRST_YEAR_PRICE)}</span>
+                    <span className="text-[#94a3b8]" aria-label="égale">=</span>
+                    <span style={{ color: GOLD }}>+{eur(NET_GAIN)} pour toi</span>
+                  </p>
+                  <p className="mt-4 text-sm text-[#cbd5e1] max-w-xl mx-auto leading-relaxed">
+                    La première année. Si tu ne perçois pas déjà le forfait via un autre logiciel de vidéotransmission. Forfait
+                    fixe à déclarer sur amelipro, versé par ta CPAM.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 3. Les deux échéances */}
+        <section className="px-4 sm:px-6 pb-16 sm:pb-24">
+          <div className={`mx-auto grid gap-4 ${standard ? "max-w-xl" : "max-w-3xl sm:grid-cols-2"}`}>
+            <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
+              <CalendarClock className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
+              <h3 className="mt-3 text-lg font-bold text-[#0f172a]">Le 31 décembre compte</h3>
+              <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
+                Le FAMI est calculé sur ton équipement au 31 décembre. Équipé en janvier, c&apos;est une année de forfait
+                en moins.
+              </p>
+            </div>
+            {!standard && (
+              <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
+                <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
+                <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
+                <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
+                  {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés. Ensuite, l'offre ferme.`}
+                </p>
+                {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
+              </div>
+            )}
+          </div>
+          <div className="mt-10">
+            <Cta location="merci-offre" placesLeft={placesLeft} standard={standard} />
+          </div>
+        </section>
+
+        {/* 4. Avis */}
+        <section className="px-4 sm:px-6 py-16 sm:py-24" style={{ background: GROUND }}>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
+              Ils l&apos;utilisent déjà au cabinet
+            </h2>
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {REVIEWS.map((r) => (
+                <figure key={r.author} className="rounded-3xl bg-white p-6 sm:p-7 flex flex-col" style={{ border: "1px solid #d4ecea" }}>
+                  <div className="flex gap-1 mb-3" role="img" aria-label="5 étoiles sur 5">
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <Star key={i} className="size-4 fill-[#e8b04d] text-[#e8b04d]" aria-hidden />
+                    ))}
+                  </div>
+                  <blockquote className="text-[15px] text-[#0f172a] leading-relaxed flex-1">&ldquo;{r.quote}&rdquo;</blockquote>
+                  <figcaption className="mt-4 text-sm text-[#475569]">
+                    <strong className="font-semibold text-[#0f172a]">{r.author}</strong> · {r.location}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Questions + dernier bouton */}
+        <section className="px-4 sm:px-6 py-16 sm:py-24">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-center">Tes questions</h2>
+            <dl className="mt-10 divide-y divide-[#dcecef] border-y border-[#dcecef]">
+              {QUESTIONS.map((x) => (
+                <div key={x.q} className="py-5">
+                  <dt className="text-lg font-semibold text-[#0f172a]">{x.q}</dt>
+                  <dd className="mt-2 text-base text-[#475569] leading-relaxed">{x.a}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-6 text-sm text-[#475569] text-center">{COMPLIANCE_CLAIM}</p>
+            <div className="mt-10">
+              <Cta location="merci-bas" placesLeft={placesLeft} standard={standard} />
+            </div>
+
+            {/* Rappel mail, en bas : la vidéo passe d'abord */}
+            <div className="mt-16 rounded-2xl p-6 text-center" style={{ background: GROUND }}>
+              <p className="text-sm text-[#475569] leading-relaxed">
+                Ton guide est envoyé par <strong className="text-[#0f172a] font-semibold">sylvain@monassistantkine.fr</strong>.
+                Pas reçu ? Vérifie tes spams ou l&apos;onglet Promotions, et ajoute cette adresse à tes contacts.
+              </p>
+              <p className="mt-2 text-xs text-[#94a3b8]">
+                <a href={`mailto:${LEADMAGNET_CONTACT_EMAIL}`} className="underline hover:text-[#3899aa] transition-colors">
+                  Toujours rien après 10 minutes ? Écris-nous à {LEADMAGNET_CONTACT_EMAIL}
+                </a>
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="px-4 sm:px-6 py-6 bg-white" style={{ borderTop: "1px solid #d4ecea" }}>
