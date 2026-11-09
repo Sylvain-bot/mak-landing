@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
+import { notifyTelegram } from "@/lib/telegram";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const BREVO_TIMEOUT_MS = 8000;
@@ -115,6 +116,11 @@ export async function POST(req: NextRequest) {
 
     // 201 = création, 204 = mise à jour
     if (res.ok) {
+      const provenance = campaign ? `Pub : ${campaign}${ad ? ` (pub ${ad})` : ""}` : `Source : ${attributes.LM_SOURCE}`;
+      const dejaVu = res.status === 204 ? " (contact déjà connu)" : "";
+      after(() =>
+        notifyTelegram(`📘 Guide FAMI téléchargé${dejaVu}\nPrénom : ${prenom}\n${provenance}`)
+      );
       return NextResponse.json({ ok: true });
     }
 
