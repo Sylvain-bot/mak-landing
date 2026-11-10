@@ -159,7 +159,7 @@ export function ExitIntentPopup() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ton@email.fr"
-                  className="w-full h-11 px-4 rounded-xl text-sm text-[#0f172a] placeholder:text-[#94a3b8] outline-none transition-colors"
+                  className="w-full h-11 px-4 rounded-xl text-base sm:text-sm text-[#0f172a] placeholder:text-[#94a3b8] outline-none transition-colors"
                   style={{ border: "1.5px solid #d4ecea", background: "#f8fcfc" }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "#3899aa")}
                   onBlur={(e) => (e.currentTarget.style.borderColor = "#d4ecea")}

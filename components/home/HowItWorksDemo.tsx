@@ -147,7 +147,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
                 loop
                 playsInline
                 preload={reduced ? "none" : "metadata"}
-                poster="/images/demo-bilan-poster.webp"
+                poster="/_next/image?url=%2Fimages%2Fdemo-bilan-poster.webp&w=640&q=75"
                 aria-label="Démonstration : le téléphone enregistre la séance, puis le bilan rédigé s'affiche"
                 className="absolute inset-0 size-full object-cover"
               >
