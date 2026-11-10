@@ -11,7 +11,8 @@ import { PlayCircle, Volume2 } from "lucide-react";
 // Tant que `src` est vide, un cadre « Vidéo à venir » réserve la place.
 // Tant que le son n'est pas activé, la vidéo se met en pause quand elle sort de l'écran (elle ne distrait
 // pas pendant la lecture de l'offre, économise les données mobiles) et reprend quand elle revient.
-// Suivi PostHog (si consentement) : son activé, fin de lecture.
+// Suivi PostHog (si consentement) : son activé, progression (25/50/75 %, une fois par mode muet/avec son),
+// fin de lecture.
 export function MerciVideo({
   src,
   captions,
@@ -27,6 +28,7 @@ export function MerciVideo({
   const ref = useRef<HTMLVideoElement>(null);
   const [withSound, setWithSound] = useState(false);
   const soundOn = useRef(false);
+  const milestones = useRef(new Set<string>());
 
   useEffect(() => {
     const v = ref.current;
@@ -45,11 +47,24 @@ export function MerciVideo({
   const vertical = ratio === "9/16";
   const frame = `relative mx-auto w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#0f172a] ${vertical ? "max-w-[380px]" : ""}`;
   const frameStyle = { aspectRatio: ratio, boxShadow: "0 24px 60px rgba(15,23,42,0.25)" };
-  const capture = (event: string) => {
+  const capture = (event: string, props: Record<string, unknown> = {}) => {
     try {
-      if (posthog.__loaded) posthog.capture(event, { page: "guide-fami-merci" });
+      if (posthog.__loaded) posthog.capture(event, { page: "guide-fami-merci", ...props });
     } catch {}
   };
+
+  function onProgress(e: React.SyntheticEvent<HTMLVideoElement>) {
+    const v = e.currentTarget;
+    if (!v.duration || !isFinite(v.duration)) return;
+    const pct = (v.currentTime / v.duration) * 100;
+    for (const step of [25, 50, 75]) {
+      const key = `${soundOn.current ? "son" : "muet"}-${step}`;
+      if (pct >= step && !milestones.current.has(key)) {
+        milestones.current.add(key);
+        capture("merci_video_progress", { percent: step, sound: soundOn.current });
+      }
+    }
+  }
 
   if (!src) {
     return (
@@ -86,7 +101,8 @@ export function MerciVideo({
         preload="auto"
         poster={poster}
         controls={withSound}
-        onEnded={() => capture("merci_video_complete")}
+        onTimeUpdate={onProgress}
+        onEnded={() => capture("merci_video_complete", { sound: soundOn.current })}
       >
         <source src={src} type="video/mp4" />
         {captions && <track kind="subtitles" src={captions} srcLang="fr" label="Français" default />}

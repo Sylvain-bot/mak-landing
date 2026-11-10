@@ -30,10 +30,11 @@ function cleanSource(raw: unknown) {
   return source || "inconnu";
 }
 
-// Campagne ou id de pub : texte court, sans caractères spéciaux (les id de pub Meta sont numériques)
+// Campagne ou id de pub : texte court, sans caractères spéciaux (les id de pub Meta sont numériques).
+// Les tirets (dont « – ») sont gardés : les noms de campagne en contiennent.
 function cleanTag(raw: unknown) {
   return String(raw ?? "")
-    .replace(/[^\p{L}\p{N} _.\-|]/gu, "")
+    .replace(/[^\p{L}\p{N}\p{Pd} _.|]/gu, "")
     .trim()
     .slice(0, 100);
 }
