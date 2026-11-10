@@ -146,7 +146,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
                 muted
                 loop
                 playsInline
-                preload={reduced ? "none" : "metadata"}
+                preload="none"
                 poster="/_next/image?url=%2Fimages%2Fdemo-bilan-poster.webp&w=640&q=75"
                 aria-label="Démonstration : le téléphone enregistre la séance, puis le bilan rédigé s'affiche"
                 className="absolute inset-0 size-full object-cover"
@@ -179,7 +179,7 @@ export function HowItWorksDemo({ steps }: { steps: string[] }) {
                   transitionDelay: showBilan ? `${i === 0 ? 250 : 0}ms` : "0ms",
                 }}
               >
-                <Image src={src} alt={i === 1 ? "Page 1 du bilan kiné généré" : "Page 2 du bilan kiné généré"} width={594} height={838} className="w-full h-auto" />
+                <Image src={src} alt={i === 1 ? "Page 1 du bilan kiné généré" : "Page 2 du bilan kiné généré"} width={594} height={838} sizes="(min-width: 640px) 210px, 175px" className="w-full h-auto" />
               </div>
             ))}
           </div>
