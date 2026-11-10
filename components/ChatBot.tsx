@@ -295,7 +295,7 @@ export function ChatBot() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Pose ta question…"
-                  className="flex-1 text-sm outline-none bg-transparent text-[#0f172a] placeholder:text-[#94a3b8]"
+                  className="flex-1 text-base sm:text-sm outline-none bg-transparent text-[#0f172a] placeholder:text-[#94a3b8]"
                   disabled={loading}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }

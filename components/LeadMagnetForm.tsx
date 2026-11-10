@@ -13,7 +13,7 @@ import { PRIVACY_POLICY_URL } from "@/lib/claims";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const inputClass =
-  "w-full h-11 px-4 rounded-xl text-sm text-[#0f172a] placeholder:text-[#94a3b8] bg-[#f8fcfc] border-[1.5px] border-[#d4ecea] outline-none transition-colors focus:border-[#3899aa] focus-visible:ring-3 focus-visible:ring-[#3899aa]/25 aria-invalid:border-red-400 disabled:opacity-60";
+  "w-full h-11 px-4 rounded-xl text-base sm:text-sm text-[#0f172a] placeholder:text-[#94a3b8] bg-[#f8fcfc] border-[1.5px] border-[#d4ecea] outline-none transition-colors focus:border-[#3899aa] focus-visible:ring-3 focus-visible:ring-[#3899aa]/25 aria-invalid:border-red-400 disabled:opacity-60";
 
 type FieldErrors = { prenom?: string; email?: string };
 
