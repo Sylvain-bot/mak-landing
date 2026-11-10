@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { deleteCookiesByPrefix, getConsent, isTrackingHost } from "@/lib/consent";
 import { useConsent } from "@/lib/useConsent";
 
@@ -14,6 +15,21 @@ declare global {
 }
 
 let initialized = false;
+// Dernier chemin envoyé à Meta : le site est une application monopage, les changements de page
+// internes ne rechargent pas le pixel, on envoie donc un PageView à chaque nouveau chemin.
+let lastTrackedPath: string | null = null;
+
+// Pages qui déclenchent aussi un ViewContent. Meta masque le chemin des adresses pour ce site
+// (catégorie santé) : les audiences « a vu la page tarifs » reposent sur cet événement, pas sur l'URL.
+const VIEW_CONTENT_PAGES: Record<string, string> = { "/tarifs": "tarifs" };
+
+function trackPage(path: string) {
+  if (!window.fbq || path === lastTrackedPath) return;
+  lastTrackedPath = path;
+  window.fbq("track", "PageView");
+  const content = VIEW_CONTENT_PAGES[path];
+  if (content) window.fbq("track", "ViewContent", { content_name: content });
+}
 
 function loadPixel() {
   if (!window.fbq) {
@@ -40,13 +56,14 @@ function loadPixel() {
   window.fbq!("consent", "grant");
   if (!initialized) {
     window.fbq!("init", PIXEL_ID);
-    window.fbq!("track", "PageView");
     initialized = true;
   }
+  trackPage(window.location.pathname);
 }
 
 export function MetaPixel() {
   const consent = useConsent();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!isTrackingHost() || !consent) return;
@@ -59,6 +76,12 @@ export function MetaPixel() {
       deleteCookiesByPrefix("_fb");
     }
   }, [consent]);
+
+  // Changement de page interne : nouveau PageView (et ViewContent sur les pages listées)
+  useEffect(() => {
+    if (!isTrackingHost() || !consent?.ads || !initialized) return;
+    trackPage(pathname);
+  }, [pathname, consent]);
 
   return null;
 }
