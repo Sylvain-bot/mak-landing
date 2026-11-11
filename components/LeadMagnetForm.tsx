@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
@@ -9,6 +9,7 @@ import { getStoredUtmSource, getTrackingParams } from "@/lib/utm";
 import { LEADMAGNET_CONTACT_EMAIL } from "@/lib/guideFami";
 import { trackMetaEvent } from "@/components/MetaPixel";
 import { PRIVACY_POLICY_URL } from "@/lib/claims";
+import { anonStat, campagneDeLUrl } from "@/lib/anonStat";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -26,6 +27,30 @@ export function LeadMagnetForm({ source }: { source: string }) {
   const [loading, setLoading] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const started = useRef(false);
+
+  // Statistiques anonymes du formulaire (voir lib/anonStat.ts) : vu à l'écran, commencé, erreur, envoyé
+  useEffect(() => {
+    const f = formRef.current;
+    if (!f || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          anonStat("formulaire_vu", campagneDeLUrl());
+          io.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(f);
+    return () => io.disconnect();
+  }, []);
+  const onStart = () => {
+    if (started.current) return;
+    started.current = true;
+    anonStat("formulaire_commence", campagneDeLUrl());
+  };
 
   const prenomErrId = `${id}-prenom-err`;
   const emailErrId = `${id}-email-err`;
@@ -40,7 +65,10 @@ export function LeadMagnetForm({ source }: { source: string }) {
     if (!prenom.trim()) errors.prenom = "Indique ton prénom.";
     if (!EMAIL_RE.test(email.trim())) errors.email = "Cette adresse email ne semble pas valide.";
     setFieldErrors(errors);
-    if (errors.prenom || errors.email) return;
+    if (errors.prenom || errors.email) {
+      anonStat("formulaire_erreur", { erreur: errors.prenom && errors.email ? "prenom_email" : errors.prenom ? "prenom" : "email", ...campagneDeLUrl() });
+      return;
+    }
 
     const finalSource = getStoredUtmSource() || source;
     // Campagne et pub d'origine (utm_campaign / utm_content = id de la pub Meta) pour suivre le tunnel par pub
@@ -59,23 +87,26 @@ export function LeadMagnetForm({ source }: { source: string }) {
         try {
           if (posthog.__loaded) posthog.capture("leadmagnet_submit", { source: finalSource, leadmagnet: "fami-2027" });
         } catch {}
+        anonStat("formulaire_envoye", campagneDeLUrl());
         router.push("/guide-fami/merci");
         return;
       }
 
+      anonStat("formulaire_erreur", { erreur: res.status === 429 ? "trop_de_tentatives" : "serveur", ...campagneDeLUrl() });
       setFormError(
         res.status === 429
           ? "Trop de tentatives, réessaie dans quelques minutes."
           : "generic"
       );
     } catch {
+      anonStat("formulaire_erreur", { erreur: "reseau", ...campagneDeLUrl() });
       setFormError("generic");
     }
     setLoading(false);
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 w-full">
+    <form ref={formRef} onSubmit={handleSubmit} onFocusCapture={onStart} noValidate className="flex flex-col gap-3 w-full">
       <div className="flex flex-col gap-1.5">
         <label htmlFor={`${id}-prenom`} className="text-sm font-medium text-[#0f172a]">
           Prénom
