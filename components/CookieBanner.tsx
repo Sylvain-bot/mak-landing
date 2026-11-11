@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getConsent, saveConsent, OPEN_CONSENT_EVENT, type Consent } from "@/lib/consent";
 import { useConsentState } from "@/lib/useConsent";
 import { PRIVACY_POLICY_URL } from "@/lib/claims";
+import { anonStat, campagneDeLUrl } from "@/lib/anonStat";
 
 
 const choiceBtn =
@@ -71,9 +72,12 @@ export function CookieBanner() {
 
   useEffect(() => {
     if (view !== "hidden") titleRef.current?.focus({ preventScroll: true });
+    // Statistique anonyme : le bandeau s'affiche d'office (premier choix), pas quand on le rouvre soi-même
+    if (view === "simple") anonStat("bandeau_affiche", campagneDeLUrl());
   }, [view]);
 
-  function choose(c: Consent) {
+  function choose(c: Consent, choix: "tout_accepter" | "tout_refuser" | "personnalise") {
+    anonStat("bandeau_choix", { choix, mesure: c.analytics, publicite: c.ads, ...campagneDeLUrl() });
     saveConsent(c);
     setMode("auto");
   }
@@ -127,10 +131,10 @@ export function CookieBanner() {
       )}
 
       <div className="flex flex-wrap gap-2.5 mt-4">
-        <button type="button" className={choiceBtn} style={choiceStyle} onClick={() => choose({ analytics: false, ads: false })}>
+        <button type="button" className={choiceBtn} style={choiceStyle} onClick={() => choose({ analytics: false, ads: false }, "tout_refuser")}>
           Tout refuser
         </button>
-        <button type="button" className={choiceBtn} style={choiceStyle} onClick={() => choose({ analytics: true, ads: true })}>
+        <button type="button" className={choiceBtn} style={choiceStyle} onClick={() => choose({ analytics: true, ads: true }, "tout_accepter")}>
           Tout accepter
         </button>
       </div>
@@ -138,7 +142,7 @@ export function CookieBanner() {
       {view === "custom" ? (
         <button
           type="button"
-          onClick={() => choose(draft)}
+          onClick={() => choose(draft, "personnalise")}
           className="w-full h-10 mt-2.5 rounded-xl text-sm font-semibold text-[#2a7a8a] transition-colors hover:bg-[#f0f9fa] outline-none focus-visible:ring-3 focus-visible:ring-[#3899aa]/40"
           style={{ border: "1.5px solid #3899aa" }}
         >
