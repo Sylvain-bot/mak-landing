@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, CheckCircle2, CalendarClock, Users, MailCheck, ArrowRight, Gift, Crown, Star } from "lucide-react";
+import { Check, CheckCircle2, CalendarClock, MailCheck, ArrowRight, Gift, Crown, Star } from "lucide-react";
 import { ManageCookiesButton } from "@/components/ManageCookiesButton";
 import { TrackedSignupLink } from "@/components/TrackedSignupLink";
 import { MerciVideo } from "@/components/merci/MerciVideo";
@@ -58,18 +58,35 @@ const GROUND = "#f2f9fa";
 const eur = (n: number) =>
   new Intl.NumberFormat("fr-FR", { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }).format(n) + " €";
 
-// Ce que reçoit un Pionnier : un bénéfice concret par ligne, sans valeur en euros
-// (les modules ne sont pas vendus séparément : aucun prix de référence réel à afficher).
-const STACK: { name: string; detail: string; extra?: boolean }[] = [
-  { name: "Bilan dicté", detail: "Tu parles pendant la séance, ton bilan NGAP se rédige. Plus de bilans le soir." },
-  { name: "Copilote IA clinique", detail: "Un doute en séance ? Une réponse sourcée en quelques secondes, 60 000+ textes." },
-  { name: "Suivi patient et exercices", detail: "Le programme d'exercices sur WhatsApp, tes patients suivis entre les séances." },
-  { name: "Vidéotransmission sécurisée", detail: "Dédiée à la télésanté : c'est elle qui te rend éligible aux 350 € du FAMI." },
-  { name: "Gestion administrative", detail: "Courriers et relances rédigés depuis tes modèles." },
-  { name: "Contrats de remplacement", detail: "Rédigés, signés et déclarés à l'Ordre." },
-  { name: "Prix Pionnier bloqué à vie", detail: "Ton tarif ne bougera jamais, même quand les prix augmenteront.", extra: true },
-  { name: "Accès à la roadmap", detail: "Tu vois ce qui arrive et tu donnes ton avis sur les prochaines fonctionnalités.", extra: true },
-  { name: "Groupe privé Pionniers", detail: "Entraide entre kinés et échanges directs avec nous, les fondateurs.", extra: true },
+// Ce que fait l'app, rangé par moment de la journée du kiné (un prospect froid ne connaît pas les noms des modules).
+const DAY: { moment: string; items: { name: string; detail: string }[] }[] = [
+  {
+    moment: "Pendant la séance",
+    items: [
+      { name: "Ton bilan se rédige pendant que tu parles", detail: "Tu dictes, l'app structure le bilan. Plus de bilans à taper le soir." },
+      { name: "Une réponse clinique en quelques secondes", detail: "Un doute sur un cas ? L'app résume ce que dit la littérature (PubMed, PEDro), avec les sources." },
+    ],
+  },
+  {
+    moment: "Entre les séances",
+    items: [
+      { name: "Tes patients suivis sur WhatsApp", detail: "Leur programme d'exercices et des rappels, sans que tu aies à y penser." },
+    ],
+  },
+  {
+    moment: "À côté du soin",
+    items: [
+      { name: "Courriers, relances et contrats de remplacement", detail: "Rédigés depuis tes modèles ; les contrats sont signés et déclarés à l'Ordre." },
+      { name: "La vidéotransmission sécurisée", detail: `L'outil de télésanté qui te rend éligible aux ${FAMI_AMOUNT} € du FAMI, même si tu ne fais pas de télésoin.` },
+    ],
+  },
+];
+
+// Ce que l'offre Pionnier ajoute (les 100 premiers inscrits).
+const PIONNIER_EXTRAS: { name: string; detail: string }[] = [
+  { name: "Ton prix bloqué à vie", detail: "Il ne bougera jamais, même quand les tarifs augmenteront." },
+  { name: "Ton avis compte", detail: "Tu vois ce qui arrive et tu votes pour les prochaines fonctionnalités." },
+  { name: "Le groupe privé", detail: "Entraide entre kinés et échanges directs avec nous, les fondateurs." },
 ];
 const discounted = (annual: number) => Math.round(annual * (1 - FIRST_YEAR_DISCOUNT) * 100) / 100;
 const ANNUAL = Number(PRICE_PIONNIER_ANNUAL);
@@ -141,6 +158,14 @@ const REVIEWS = [
 ];
 
 const QUESTIONS = [
+  {
+    q: "Ça remplace mon logiciel de facturation ?",
+    a: "Non. Mon Assistant Kiné s'occupe de ce qui entoure le soin : bilans, suivi des patients, courriers, contrats. Tu gardes ton logiciel de facturation habituel. L'app fonctionne dans ton navigateur, sur ordinateur, tablette ou téléphone : rien à installer.",
+  },
+  {
+    q: "La vidéotransmission compte vraiment pour le FAMI ?",
+    a: `L'indicateur demande un outil de vidéotransmission dédié à la télésanté, avec abonnement : c'est ce qu'inclut l'app (Zoom, WhatsApp ou FaceTime ne comptent pas). Il porte sur l'équipement, pas sur la pratique : pas besoin de faire de télésoin. Le forfait de ${FAMI_AMOUNT} € se déclare sur amelipro et reste versé par ta CPAM, selon le cahier des charges de l'Assurance Maladie.`,
+  },
   {
     q: "Je vais être débité tout de suite ?",
     a: "Non. Les 14 jours d'essai sont complets et gratuits. La carte bancaire est demandée à l'inscription, mais tu n'es débité qu'à la fin de l'essai, si tu gardes l'abonnement.",
@@ -318,28 +343,29 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
               <br />
               <span className="text-[#236f7d]">Tu m&apos;offres 2 minutes ?</span>
             </h1>
+            {/* Ce qu'est le produit, dès le premier écran : le visiteur vient d'une pub FAMI et ne le connaît pas */}
             <p className="mt-5 text-lg text-[#475569] leading-relaxed text-balance">
-              Le guide t&apos;explique les règles du FAMI. Dans cette vidéo, je te montre comment toucher les{" "}
-              {FAMI_AMOUNT} € de la vidéotransmission avant le 31 décembre, et rentrer chez toi avec tes bilans déjà écrits.
+              Avec Valentin, on est deux kinés libéraux. On a créé <strong className="font-semibold text-[#0f172a]">Mon Assistant Kiné</strong>,
+              une application qui rédige tes bilans pendant la séance et inclut la vidéotransmission qui donne droit aux{" "}
+              {FAMI_AMOUNT} € du FAMI. Je te montre tout dans cette vidéo.
             </p>
-            {/* Le cadeau avec sa raison : il a pris le guide, il doit être équipé avant le 31/12 */}
-            <div
-              className="mt-6 mx-auto max-w-xl rounded-2xl px-5 py-4 text-left flex items-start gap-3"
-              style={{ background: "rgba(232,176,77,0.14)", border: "1px solid rgba(232,176,77,0.55)" }}
-            >
-              <Gift className="size-6 mt-0.5 shrink-0 text-[#9a6b12]" aria-hidden />
-              <p className="text-[15px] leading-relaxed text-[#5c4210]">
-                <strong className="font-bold">
-                  {`Ton cadeau pour avoir pris le guide : -${FIRST_YEAR_DISCOUNT * 100} % sur l'abonnement annuel.`}
-                </strong>{" "}
-                Pour t&apos;aider à être équipé avant le 31 décembre et ne pas perdre ton forfait. Uniquement depuis cette
-                page.
-              </p>
-            </div>
             <div className="mt-8 sm:mt-10">
               <MerciVideo key={offer} src={video.src} captions={VIDEO_CAPTIONS || undefined} poster={video.poster} ratio={VIDEO_RATIO} />
             </div>
-            <div className="mt-8 sm:mt-10">
+            {/* Le cadeau, juste avant le bouton : il ne vaut que pour un essai démarré depuis cette page */}
+            {!standard && (
+              <div
+                className="mt-8 mx-auto max-w-xl rounded-2xl px-5 py-4 text-left flex items-start gap-3"
+                style={{ background: "rgba(232,176,77,0.14)", border: "1px solid rgba(232,176,77,0.55)" }}
+              >
+                <Gift className="size-6 mt-0.5 shrink-0 text-[#9a6b12]" aria-hidden />
+                <p className="text-[15px] leading-relaxed text-[#5c4210]">
+                  <strong className="font-bold">{`Ton cadeau pour avoir pris le guide : -${FIRST_YEAR_DISCOUNT * 100} % sur ta première année.`}</strong>{" "}
+                  Seulement si tu démarres ton essai depuis cette page.
+                </p>
+              </div>
+            )}
+            <div className="mt-6 sm:mt-8">
               <Cta location="merci-video" placesLeft={placesLeft} standard={standard} />
             </div>
           </div>
@@ -369,39 +395,49 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
         ) : (
           <section className="px-4 sm:px-6 py-16 sm:py-24">
             <div className="max-w-3xl mx-auto">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">L&apos;offre Pionnier</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#475569] text-center">Concrètement</p>
               <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0f172a] leading-tight tracking-tight text-balance text-center">
-                Tout ce que tu as dès aujourd&apos;hui
+                Ce que l&apos;app fait pour toi
               </h2>
-              {/* Ce qu'il reçoit, ligne par ligne */}
-              <ul className="mt-10 rounded-3xl overflow-hidden divide-y divide-[#dcecef]" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
-                {STACK.filter((x) => !x.extra).map((x) => (
-                  <li key={x.name} className="flex items-start gap-3 px-5 sm:px-7 py-4">
-                    <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
-                    <span className="min-w-0">
-                      <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
-                      <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
-                    </span>
-                  </li>
+              <p className="mt-4 text-center text-[#475569] text-balance">
+                Dans ton navigateur, sur ordinateur, tablette ou téléphone. Rien à installer.
+              </p>
+              {/* Ce qu'elle fait, par moment de la journée */}
+              <div className="mt-10 grid gap-4">
+                {DAY.map((d) => (
+                  <div key={d.moment} className="rounded-3xl px-5 sm:px-7 py-5" style={{ background: GROUND, border: "1px solid #d4ecea" }}>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#236f7d]">{d.moment}</p>
+                    <ul className="mt-2 divide-y divide-[#dcecef]">
+                      {d.items.map((x) => (
+                        <li key={x.name} className="flex items-start gap-3 py-3">
+                          <Check className="size-5 mt-0.5 shrink-0 text-[#236f7d]" aria-hidden />
+                          <span className="min-w-0">
+                            <strong className="block font-semibold text-[#0f172a]">{x.name}</strong>
+                            <span className="block text-sm text-[#475569] mt-0.5">{x.detail}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
 
-              {/* Avantages réservés aux 100 premiers : mis à part, en or, pour qu'ils se voient */}
+              {/* L'offre Pionnier expliquée en une fois : qui y a droit, ce qu'elle ajoute, combien de places */}
               <div
-                className="relative mt-6 rounded-3xl px-5 sm:px-7 pt-8 pb-5"
+                className="relative mt-12 rounded-3xl px-5 sm:px-7 pt-8 pb-5"
                 style={{ background: "linear-gradient(180deg, rgba(232,176,77,0.14), rgba(232,176,77,0.05))", border: "1.5px solid rgba(232,176,77,0.6)" }}
               >
                 <span
                   className="absolute -top-3.5 left-5 sm:left-7 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white"
                   style={{ background: "linear-gradient(135deg, #c9932f, #a8761c)" }}
                 >
-                  <Crown className="size-3.5" aria-hidden /> Exclusif Pionniers
+                  <Crown className="size-3.5" aria-hidden /> L&apos;offre Pionnier
                 </span>
                 <p className="text-[15px] text-[#7a5410] font-medium">
-                  Réservé aux {`${PIONNIER_TOTAL_PLACES} premiers kinés`}, pour les remercier de leur confiance.
+                  {`Les ${PIONNIER_TOTAL_PLACES} premiers kinés inscrits sont nos « Pionniers ». En plus de tout ce qui précède, ils ont :`}
                 </p>
                 <ul className="mt-3 divide-y divide-[rgba(232,176,77,0.35)]">
-                  {STACK.filter((x) => x.extra).map((x) => (
+                  {PIONNIER_EXTRAS.map((x) => (
                     <li key={x.name} className="flex items-start gap-3 py-3.5">
                       <Star className="size-5 mt-0.5 shrink-0 fill-[#e8b04d] text-[#c9932f]" aria-hidden />
                       <span className="min-w-0">
@@ -411,6 +447,11 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                     </li>
                   ))}
                 </ul>
+                {placesLeft !== null && (
+                  <div className="pb-2">
+                    <PlacesCounter placesLeft={placesLeft} />
+                  </div>
+                )}
               </div>
 
               {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
@@ -422,9 +463,11 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                   <span className="text-lg font-semibold text-white">/an</span>
                 </p>
                 <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
-                  {`-${FIRST_YEAR_DISCOUNT * 100} % sur l'annuel la première année, réservé à cette page`}
+                  {`-${FIRST_YEAR_DISCOUNT * 100} % la première année, si tu démarres ton essai depuis cette page`}
                 </p>
-                <p className="mt-2 text-sm text-[#cbd5e1]">Ou {PRICE_PIONNIER} €/mois sans engagement (remise réservée à l&apos;annuel).</p>
+                <p className="mt-2 text-sm text-[#cbd5e1]">
+                  {`Ensuite ${eur(ANNUAL)}/an, ton prix Pionnier à vie. Ou ${PRICE_PIONNIER} €/mois sans engagement (remise réservée à l'annuel).`}
+                </p>
 
                 <div className="mt-7 pt-7 border-t border-white/10">
                   <p className="text-sm text-[#cbd5e1]">Et avec le forfait FAMI vidéotransmission :</p>
@@ -439,16 +482,21 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                     La première année. Si tu ne perçois pas déjà le forfait via un autre logiciel de vidéotransmission. Forfait
                     fixe à déclarer sur amelipro, versé par ta CPAM.
                   </p>
+                  {/* L'échéance réelle, au même endroit que le calcul qu'elle conditionne */}
+                  <p className="mt-5 inline-flex items-start gap-2 text-left text-sm font-semibold max-w-xl mx-auto" style={{ color: GOLD }}>
+                    <CalendarClock className="size-5 shrink-0" aria-hidden />
+                    Le FAMI est calculé sur ton équipement au 31 décembre : équipé en janvier, c&apos;est une année de forfait en moins.
+                  </p>
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        {/* 3. Les deux échéances */}
+        {/* 3. Échéance (version standard) + bouton */}
         <section className="px-4 sm:px-6 pb-16 sm:pb-24">
-          <div className={`mx-auto grid gap-4 ${standard ? "max-w-xl" : "max-w-3xl sm:grid-cols-2"}`}>
-            <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
+          {standard && (
+            <div className="mx-auto max-w-xl rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
               <CalendarClock className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
               <h3 className="mt-3 text-lg font-bold text-[#0f172a]">Le 31 décembre compte</h3>
               <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
@@ -456,18 +504,8 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                 en moins.
               </p>
             </div>
-            {!standard && (
-              <div className="rounded-3xl p-6 sm:p-7" style={{ background: "rgba(232,176,77,0.08)", border: "1.5px solid rgba(232,176,77,0.5)" }}>
-                <Users className="size-7" style={{ color: "#b07d1a" }} aria-hidden />
-                <h3 className="mt-3 text-lg font-bold text-[#0f172a]">100 places Pionnier</h3>
-                <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
-                  {`Le tarif Pionnier, bloqué à vie, est réservé aux ${PIONNIER_TOTAL_PLACES} premiers kinés. Ensuite, l'offre ferme.`}
-                </p>
-                {placesLeft !== null && <PlacesCounter placesLeft={placesLeft} />}
-              </div>
-            )}
-          </div>
-          <div className="mt-10">
+          )}
+          <div className={standard ? "mt-10" : ""}>
             <Cta location="merci-offre" placesLeft={placesLeft} standard={standard} />
           </div>
         </section>

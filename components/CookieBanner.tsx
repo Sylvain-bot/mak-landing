@@ -58,6 +58,7 @@ export function CookieBanner() {
   // "auto" : visible tant qu'il n'y a pas de choix valide ; "custom" : panneau détaillé ouvert
   const [mode, setMode] = useState<"auto" | "custom">("auto");
   const [draft, setDraft] = useState<Consent>({ analytics: false, ads: false });
+  const [details, setDetails] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const view = mode === "custom" ? "custom" : ready && !consent ? "simple" : "hidden";
 
@@ -100,7 +101,18 @@ export function CookieBanner() {
       >
         Cookies
       </h2>
-      <p className="text-[13px] text-[#475569] leading-relaxed">
+      {/* Sur mobile, le texte complet couvrait la moitié du premier écran : résumé d'abord, détail en un clic.
+          Le texte complet reste identique (validé RGPD), affiché d'office sur ordinateur et dans « Personnaliser ». */}
+      {view === "simple" && !details && (
+        <p className="sm:hidden text-[13px] text-[#475569] leading-relaxed">
+          Avec ton accord, on mesure l&apos;audience du site et l&apos;efficacité de nos publicités (PostHog, Google Analytics,
+          Meta). Rien n&apos;est activé sans ton accord.{" "}
+          <button type="button" onClick={() => setDetails(true)} className="underline text-[#2a7a8a]">
+            En savoir plus
+          </button>
+        </p>
+      )}
+      <p className={`text-[13px] text-[#475569] leading-relaxed ${view === "simple" && !details ? "hidden sm:block" : ""}`}>
         Avec ton accord, on mesure l&apos;audience de nos deux sites (PostHog sur www.monassistantkine.fr, Google
         Analytics sur app.monassistantkine.fr) et l&apos;efficacité de nos publicités Facebook et Instagram, et on peut
         te montrer nos publicités après ta visite du site (pixel Meta sur le site ; sur l&apos;application, envoi à Meta de ton inscription, du début de ton essai et de ton
