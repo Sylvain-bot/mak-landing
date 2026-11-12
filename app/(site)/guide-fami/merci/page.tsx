@@ -169,16 +169,18 @@ function Cta({ location, placesLeft, standard }: { location: string; placesLeft:
   }
   return (
     <div className="flex flex-col items-center gap-3">
+      {/* Test du 12/11/2026 : bouton « essai gratuit » au lieu de « Je profite des -10 % » (0 clic sur 35 visiteurs).
+          Le suffixe -essai dans location permet de comparer les deux versions dans PostHog. */}
       <TrackedSignupLink
-        location={location}
+        location={`${location}-essai`}
         href={MERCI_SIGNUP_URL}
-        className={`${primaryCtaClass} h-14 px-8 text-lg w-full sm:w-auto`}
+        className={`${primaryCtaClass} h-14 px-6 sm:px-8 text-base sm:text-lg w-full sm:w-auto`}
         style={primaryCtaStyle}
       >
-        Je profite des -{FIRST_YEAR_DISCOUNT * 100} % <ArrowRight className="size-5" aria-hidden />
+        Démarrer mes 14 jours gratuits <ArrowRight className="size-5 shrink-0" aria-hidden />
       </TrackedSignupLink>
       <p className="text-sm text-[#475569] text-center">
-        14 jours d&apos;essai, résiliable à tout moment
+        {`Puis -${FIRST_YEAR_DISCOUNT * 100} % sur ton année si tu continues · résiliable à tout moment`}
         {placesLeft !== null && (
           <>
             {" "}· <strong className="font-semibold text-[#9a6b12]">plus que {placesLeft} places Pionnier</strong>
