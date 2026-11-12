@@ -45,7 +45,7 @@ const VIDEOS = {
 const VIDEO_CAPTIONS = "";
 const VIDEO_RATIO: "16/9" | "9/16" = "16/9";
 
-// Offre réservée à cette page : -10 % sur l'annuel la première année, via des liens de paiement dédiés (Valentin).
+// Offre du guide FAMI : -10 % sur l'annuel la première année, valable jusqu'au 31 décembre (page merci et mails), via des liens de paiement dédiés (Valentin).
 // Tant qu'un lien est vide, le bouton mène à l'inscription standard.
 const MERCI_SIGNUP_URL = "https://app.monassistantkine.fr/signup/guide-fami10"; // version Pionnier (lien de Valentin, 9 nov. 2026)
 const PLAN_SIGNUP_URLS = { declic: "", pratique: "", expert: "" }; // version standard
@@ -352,7 +352,7 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
             <div className="mt-8 sm:mt-10">
               <MerciVideo key={offer} src={video.src} captions={VIDEO_CAPTIONS || undefined} poster={video.poster} ratio={VIDEO_RATIO} />
             </div>
-            {/* Le cadeau, juste avant le bouton : il ne vaut que pour un essai démarré depuis cette page */}
+            {/* Le cadeau, juste avant le bouton, avec la même échéance que le FAMI */}
             {!standard && (
               <div
                 className="mt-8 mx-auto max-w-xl rounded-2xl px-5 py-4 text-left flex items-start gap-3"
@@ -361,7 +361,7 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                 <Gift className="size-6 mt-0.5 shrink-0 text-[#9a6b12]" aria-hidden />
                 <p className="text-[15px] leading-relaxed text-[#5c4210]">
                   <strong className="font-bold">{`Ton cadeau pour avoir pris le guide : -${FIRST_YEAR_DISCOUNT * 100} % sur ta première année.`}</strong>{" "}
-                  Seulement si tu démarres ton essai depuis cette page.
+                  Pour tout essai démarré avant le 31 décembre, la date qui compte aussi pour ton forfait FAMI.
                 </p>
               </div>
             )}
@@ -454,7 +454,7 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                 )}
               </div>
 
-              {/* Le prix, la réduction de cette page, puis le calcul FAMI */}
+              {/* Le prix, la réduction du guide, puis le calcul FAMI */}
               <div className="mt-6 rounded-3xl px-6 py-8 sm:px-10 text-center" style={{ background: NAVY }}>
                 <p className="text-sm text-[#cbd5e1]">Ton prix Pionnier</p>
                 <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 tabular-nums">
@@ -463,7 +463,7 @@ export default async function GuideFamiMerciPage({ searchParams }: { searchParam
                   <span className="text-lg font-semibold text-white">/an</span>
                 </p>
                 <p className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-sm font-bold" style={{ background: "rgba(232,176,77,0.15)", color: GOLD }}>
-                  {`-${FIRST_YEAR_DISCOUNT * 100} % la première année, si tu démarres ton essai depuis cette page`}
+                  {`-${FIRST_YEAR_DISCOUNT * 100} % la première année, si tu démarres ton essai avant le 31 décembre`}
                 </p>
                 <p className="mt-2 text-sm text-[#cbd5e1]">
                   {`Ensuite ${eur(ANNUAL)}/an, ton prix Pionnier à vie. Ou ${PRICE_PIONNIER} €/mois sans engagement (remise réservée à l'annuel).`}
