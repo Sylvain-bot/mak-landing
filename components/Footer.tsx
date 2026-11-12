@@ -27,6 +27,7 @@ export function Footer() {
           <Link href="/replay" className={linkClass}>Replay de lancement</Link>
           <Link href="/comparatif-outils-ia-kine" className={linkClass}>Comparatif</Link>
           <Link href="/cgu" className={linkClass}>CGU</Link>
+          <a href="https://www.mak-sante.fr" className={linkClass}>MAK Santé, pour vos patients</a>
         </nav>
       </div>
     </footer>
